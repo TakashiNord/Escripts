@@ -31,6 +31,8 @@ EMA_LOGS1=(
 /opt/oracle/instantclient_11_2
 /etc/rabbitmq
 /var/log/rabbitmq
+# /var/ema/coredumps
+/var/log/mongodb
 );
 
 
@@ -76,6 +78,15 @@ EMA_LOGS2=(
 /usr/share/doc/isms/ReleaseNotesiSMS.txt
 /usr/lib/npreal2/driver/npreal2d.cf
 /etc/ld.so.conf.d/oracle.conf
+/opt/APC/PowerChute/group1/m11.cfg
+/opt/APC/PowerChute/group1/m11.bak
+/opt/APC/PowerChute/group1/pcnsconfig.ini
+/opt/APC/PowerChute/group1/pcnsconfig.ini.bak
+/opt/APC/PowerChute/group1/java.cfg
+/opt/APC/PowerChute/group1/comps.m11
+/opt/APC/PowerChute/group1/shutdownerlets.m11
+/opt/APC/PowerChute/group1/psaggregator.m11
+/etc/mongod.conf
 );
 
 
