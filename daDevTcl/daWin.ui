@@ -1,0 +1,380 @@
+WidGet file, version 1.1, created:  Tue Dec 08 18:00:02  2015
+Widget entry#3
+	geometry row 1
+	other error {}
+	other type entry
+	configure textvariable idLabel
+	other master {}
+	other pathname entry#3
+	other tags {}
+	other level {}
+	other help {}
+	other comments {}
+	geometry column 5
+	other tabbing {}
+	other item_name entry#3
+	geometry sticky nesw
+Widget button#1
+	geometry row 1
+	other error {}
+	other type button
+	other master {}
+	configure text {File Open}
+	other pathname button#1
+	other tags {}
+	other level {}
+	other help {}
+	other comments {}
+	geometry column 1
+	configure command fileOpen
+	other tabbing {}
+	other item_name button#1
+	geometry sticky nesw
+Widget radiobutton#2
+	configure variable radio
+	other error {}
+	other tags {}
+	other level {}
+	other help {}
+	configure value 0
+	other focus .widget.form.can.f.radiobutton#2,activebackground,entry
+	other master {}
+	other pathname radiobutton#2
+	geometry sticky nesw
+	other tabbing {}
+	other item_name radiobutton#2
+	geometry row 3
+	other type radiobutton
+	configure text ря
+	geometry column 8
+	other comments {}
+Widget radiobutton#3
+	configure variable radiotypes
+	other error {}
+	other tags {}
+	other level {}
+	other help {}
+	configure value 1
+	other master {}
+	other pathname radiobutton#3
+	other tabbing {}
+	other item_name radiobutton#3
+	geometry row 6
+	other type radiobutton
+	configure text {1 Analog Input}
+	other comments {}
+	geometry column 7
+Widget text#1
+	geometry columnspan 5
+	configure xscrollcommand {list .scrollbar#3 set}
+	configure cursor {}
+	other error {}
+	other tags {}
+	other level {}
+	other help {}
+	configure height 1
+	other master {}
+	other pathname text#1
+	configure font {MS Sans Serif,10}
+	geometry sticky nesw
+	configure yscrollcommand {list .scrollbar#1 set}
+	other tabbing {}
+	other item_name text1
+	geometry row 2
+	geometry rowspan 13
+	other type text
+	configure width 1
+	geometry column 1
+	other comments {}
+Widget button#2
+	geometry row 1
+	other error {}
+	other type button
+	other master {}
+	configure text {Get Sql File}
+	other pathname button#2
+	other tags {}
+	other level {}
+	other help {}
+	other comments {}
+	geometry column 7
+	configure command GetSqlFile
+	other tabbing {}
+	other item_name button#2
+	geometry sticky nesw
+Widget radiobutton#4
+	configure variable radiotypes
+	other error {}
+	other tags {}
+	other level {}
+	other help {}
+	configure value 3
+	other master {}
+	other pathname radiobutton#4
+	geometry sticky nesw
+	other tabbing {}
+	other item_name radiobutton#4
+	geometry row 7
+	other type radiobutton
+	configure text {3 Analog Output}
+	other comments {}
+	geometry column 7
+Widget button#3
+	geometry row 1
+	other error {}
+	other type button
+	other master {}
+	configure text {Insert to DB}
+	other pathname button#3
+	other tags {}
+	other level {}
+	other help {}
+	other comments {}
+	geometry column 8
+	configure command InsertToDB
+	other tabbing {}
+	other item_name button#3
+	geometry sticky nesw
+Widget radiobutton#5
+	configure variable radiotypes
+	other error {}
+	other tags {}
+	other level {}
+	other help {}
+	configure value 2
+	other master {}
+	other pathname radiobutton#5
+	geometry sticky nesw
+	other tabbing {}
+	other item_name radiobutton#5
+	geometry row 6
+	other type radiobutton
+	configure text {2 Discret Input}
+	other comments {}
+	geometry column 8
+Widget button#4
+	geometry row 1
+	other error {}
+	other type button
+	other master {}
+	configure text {Get List Id}
+	other pathname button#4
+	other tags {}
+	other level {}
+	other help {}
+	other comments {}
+	geometry column 3
+	configure command GetListId
+	other tabbing {}
+	other item_name button#4
+	geometry sticky nesw
+Widget radiobutton#6
+	configure variable radiotypes
+	other error {}
+	other tags {}
+	other level {}
+	other help {}
+	configure value 4
+	other master {}
+	other pathname radiobutton#6
+	geometry sticky nesw
+	other tabbing {}
+	other item_name radiobutton#6
+	geometry row 7
+	other type radiobutton
+	configure text {4 Discret Output}
+	other comments {}
+	geometry column 8
+Widget radiobutton#7
+	configure variable radiotypes
+	other error {}
+	other tags {}
+	other level {}
+	other help {}
+	configure value 405
+	other master {}
+	other pathname radiobutton#7
+	geometry sticky nesw
+	other tabbing {}
+	other item_name radiobutton#7
+	geometry row 8
+	other type radiobutton
+	configure text {405 Analog Base}
+	other comments {}
+	geometry column 7
+Widget radiobutton#8
+	configure variable radiotypes
+	other error {}
+	other tags {}
+	other level {}
+	other help {}
+	configure value 406
+	other master {}
+	other pathname radiobutton#8
+	geometry sticky nesw
+	other tabbing {}
+	other item_name radiobutton#8
+	geometry row 8
+	other type radiobutton
+	configure text {406  Bool  Base}
+	other comments {}
+	geometry column 8
+Widget f
+	other generic_options {button {
+		} canvas {
+		} checkbutton {
+		} entry {
+		} frame {
+		} label {
+		} listbox {
+		} menubutton {
+		} message {
+		} radiobutton {
+		} scale {
+		} scrollbar {
+		} text {
+		}
+	}
+	other panel {}
+	other resize_row {0 2 0 0 0 0 0 0 0 0 0 0 0 1 1}
+	other type frame
+	other code package\ require\ struct::tree\npackage\ require\ tclodbc\n\nglobal\ fileNameLabel\nglobal\ idLabel\nglobal\ radio\n\nset\ radio\ 1\ \;\n#--------------------\nproc\ InsertToDB\ \{\ \}\ \{\n#--------------------\n\ global\ fileNameLabel\n\ global\ idLabel\n\ global\ radio\n\n\ if\ \{0==\[file\ exists\ \$fileNameLabel\]\}\ \{\n\ \ \ tk_messageBox\ -message\ \"no\ file\"\ -type\ ok\n\ \ \ return\ 0\n\ \}\n\n\ if\ \{\$idLabel==\"\"\}\ \{\n\ \ \ tk_messageBox\ -message\ \"no\ ID\"\ -type\ ok\n\ \ \ return\ 0\n\ \}\n\ \n\ if\ \{\$radio==\"\"\}\ \{\n\ \ \ tk_messageBox\ -message\ \"no\ TI\\TC\"\ -type\ ok\n\ \ \ return\ 0\n\ \}\n\n\ doDev\ 2\n\ \n\ tk_messageBox\ -message\ \"\ InsertToDB\ -\ Ready\"\ -type\ ok\n\n\}\n#--------------------\nproc\ GetSqlFile\ \{\ \}\ \{\n#--------------------\n\ global\ fileNameLabel\n\ global\ idLabel\n\ global\ radio\n\n\ if\ \{0==\[file\ exists\ \$fileNameLabel\]\}\ \{\n\ \ \ tk_messageBox\ -message\ \"no\ file\"\ -type\ ok\n\ \ \ return\ 0\n\ \}\n\n\ if\ \{\$idLabel==\"\"\}\ \{\n\ \ \ tk_messageBox\ -message\ \"no\ ID\"\ -type\ ok\n\ \ \ return\ 0\n\ \}\n\ \n\ if\ \{\$radio==\"\"\}\ \{\n\ \ \ tk_messageBox\ -message\ \"no\ TI\\TC\"\ -type\ ok\n\ \ \ return\ 0\n\ \}\n\n\ doDev\ 1\n\ \n\ ##tk_messageBox\ -message\ \"GetSqlFile\ Ready\"\ -type\ ok\n\n\}\n\n#--------------------\nproc\ fileOpen\ \{\ \}\ \{\n#--------------------\n\ global\ fileNameLabel\n\ set\ types\ \{\n\ \ \ \ \{\{Text\ Files\}\ \ \ \ \ \ \ \{.csv\}\ \ \ \ \ \ \ \ \}\n\ \ \ \ \{\{All\ Files\}\ \ \ \ \ \ \ \ *\ \ \ \ \ \ \ \ \ \ \ \ \ \}\n\ \}\n\ set\ filename\ \[tk_getOpenFile\ -filetypes\ \$types\]\n\ if\ \{\$filename==\"\"\}\ \{\ return\ \;\ \}\n\ #\ Open\ the\ file\ ...\n\ set\ fileNameLabel\ \$filename\n\ update\n\ \n\}\n\n\n#=============================================\nproc\ da_dev1\ \{\ tns\ usr\ pwd\ crn\ CVS\ \}\ \{\n#=============================================\n#\ ??????????\ ??????,\ ????\ ?????\ ???\ ??????????\n\ \ upvar\ \$CVS\ lst\ \;\n\n#\ ?????????\n\ \ set\ zpr\ \"\ ,.'\\\"\"\ \;\ #\ ?????????\ ???????\ ?\ ????????\n\n#\ ?????????????\ ??????????\ ?\ ??\n\ \ database\ db\ \$tns\ \$usr\ \$pwd\n#db\ set\ autocommit\ off\n\n#\ ?????????????\ ????\n#\ ??\ ?????????\ =\ BASE_EXT_CONNECT_OIK\ CONNECT\ =>\ SBOR_STAND_READ\ =\ (SELECT\ =\ da_dev_desc\ )\ \ BASE_STAND_READ\n\ \ if\ \{\$usr!=\"rsduadmin\"\}\ \{\n\ \ \ \ db\ \"SET\ ROLE\ SBOR_STAND_READ\ ,\ BASE_STAND_READ\"\n\ \ \ \ db\ \"select\ *\ from\ session_roles\"\n\ \ \}\n\n\n\ \ set\ id\ 1\ \;\ #\ ?????????\ ???????\ ?????,\ ???\ ???\ ??????\ ?????????\ ?????\ ???????????.\n\n\ \ #\ ?????\ ??\ ??????\ ???????????\n\ \ set\ id_dev\ \ 1\n\ \ set\ name\ \ \"\"\n\ \ set\ str1\ \"select\ *\ from\ da_dev\ order\ by\ name\"\ \;\ #\ ??????\ ???????\n\ \ set\ str1\ \"select\ id_dev,\ name\ from\ da_dev_desc\ where\ nvl(id_parent,-1)=-1\ order\ by\ id_dev\"\ \;\ #\ ??????\ ???????\n\ \ foreach\ \{x\}\ \[\ db\ \$str1\ \]\ \{\n\ \ \ \ set\ sw\ \[string\ repeat\ \"-\"\ 50\ \]\n\ \ \ \ set\ lst\ \[linsert\ \$lst\ end\ \"\\n\$\{sw\}\\n\"\ \]\n\n\ \ \ \ #\ name\n\ \ \ \ set\ idName\ \ \[lindex\ \$x\ 1\]\n\ \ \ \ #\ id_dev\n\ \ \ \ set\ id_dev\ \ \[lindex\ \$x\ 0\]\n\n\ \ \ \ set\ sf\ \[\ format\ \"%s=%-40s\"\ \$id_dev\ \$idName\ \]\ \;\n\ \ \ \ set\ lst\ \[linsert\ \$lst\ end\ \"\$\{sf\}\"\ \]\ \;\n\n\ \ \ \ #\ ????????\ ?????????\ ??????\ ?????????\n\ \ \ \ ::struct::tree\ mytreeID\n\n\ \ \ \ #\ ??????\ ???????\ (??????)\n\ \ \ \ set\ str2\ \"select\ id,name,cvalif\ from\ da_dev_desc\ where\ id_dev=%ld\ and\ NVL(id_parent,\ -1)=-1\ order\ by\ id\"\n\ \ \ \ set\ fah2\ \[\ format\ \$str2\ \ \$id_dev\ \]\n\ \ \ \ foreach\ \{x1\}\ \[\ db\ \$fah2\ \]\ \{\ mytreeID\ insert\ root\ end\ \[lindex\ \$x1\ 0\]\ \;\ \}\n\ \ \ \ #\ ????????????\ -\ ??????\ (???????\ ???????????\ =\ 0\ ???????\ ??\ ????\ ??????))\n\ \ \ \ set\ ss\ 1\n\ \ \ \ while\ \{\$ss\}\ \{\n\ \ \ \ \ \ set\ ss\ 0\n\ \ \ \ \ \ foreach\ \{id\}\ \[\ mytreeID\ leaves\ \]\ \{\n\ \ \ \ \ \ \ \ if\ \{\$id==\"root\"\}\ \{\ continue\ \;\ \}\n\ \ \ \ \ \ \ \ set\ str3\ \"select\ id\ from\ da_dev_desc\ where\ id_dev=%ld\ and\ id_parent=%ld\ and\ NVL(id_gtopt,-1)=-1\ order\ by\ id\"\n\ \ \ \ \ \ \ \ set\ fah3\ \[\ format\ \$str3\ \$id_dev\ \$id\ \]\n\ \ \ \ \ \ \ \ set\ yl\ \[\ db\ \$fah3\ \]\n\ \ \ \ \ \ \ \ set\ ss\ \[\ expr\ \$ss\ +\ \[llength\ \$yl\]\ \]\n\ \ \ \ \ \ \ \ foreach\ \{y\}\ \$yl\ \{\n\ \ \ \ \ \ \ \ \ \ set\ v1\ \[lindex\ \$y\ 0\]\ \;\n\ \ \ \ \ \ \ \ \ \ mytreeID\ insert\ \$id\ end\ \$v1\ \;\n\ \ \ \ \ \ \ \ \}\n\ \ \ \ \ \ \}\n\ \ \ \ \}\n\n\ \ \ \ foreach\ \{id56\}\ \[\ mytreeID\ leaves\ \]\ \{\n\ \ \ \ \ \ \ \ if\ \{\$id56==\"root\"\}\ \{\ continue\ \;\ \}\n\ \ \ \ \ \ \ \ set\ str56\ \"select\ *\ from\ da_dev_desc\ where\ id_dev=%ld\ and\ id=%ld\ order\ by\ id\"\n\t\tset\ fah56\ \[\ format\ \$str56\ \$id_dev\ \$id56\ \]\n\ \ \ \ \ \ \ \ set\ y56\ \[\ db\ \$fah56\ \]\n\ \ \ \ \ \ \ \ foreach\ \{y\}\ \$y56\ \{\n\ \ \ \ \ \ \ \ \ \ set\ s0\ \[lindex\ \$y\ 0\]\ \;\n\t\t\ \ #set\ s1\ \[lindex\ \$y\ 1\]\ \;\n\t\t\ \ #set\ s2\ \[lindex\ \$y\ 2\]\ \;\n\t\t\ \ #set\ s3\ \[lindex\ \$y\ 3\]\ \;\n\t\t\ \ set\ s4\ \[lindex\ \$y\ 4\]\ \;\n\t\t\ \ set\ s5\ \[lindex\ \$y\ 5\]\ \;\n\t\t\ \ #set\ s6\ \[lindex\ \$y\ 6\]\ \;\n\t\t\ \ set\ lst\ \[linsert\ \$lst\ end\ \"\$\{s0\}=\$\{s4\}\ \"\ \]\ \;\n\ \ \ \ \ \ \ \ \}\n\t\}\n\n\ \ \ \ mytreeID\ destroy\n\ \ \}\n\n\n#\ ?????????\ ??????????\ ?\ ??\n#db\ commit\n\ \ db\ disconnect\n\n\ \ return\ 0\ \;\n\}\n\n#--------------------\nproc\ GetListId\ \{\ \}\ \{\n#--------------------\n\ \ catch\ \{\ .text1\ delete\ 1.0\ end\ \;\ \ \}\n\ \ .text1\ insert\ 0.0\ \"\\n\"\n\nglobal\ \ \ tcl_platform\n#============================\ ??????\ ?????????\n\ \ set\ tns\ \"rsdu2\"\n\ \ set\ usr\ \"rsduadmin\"\ \;\ #\ \ admin\ \ nov_ema\n\ \ set\ pwd\ \"passme\"\ \;\ #\ passme\ \ qwertyqaz\n\ \ set\ crn\ 1\ \;\ #\ 0\ -\ ???????\ ?????\ ???\ ?\ ??,\ ????\ -\ ??????\ ??\\??\n\ \ set\ saveFile\ 1\ \;\ #\ ??????\ ?\ ????\n\ \ set\ nameFile\ \"da_dev1.txt\"\ \;\ #\ ???\ ?????\ ???\ ??????????\ ??????????\n#=============================================\n\n\ \ set\ t1\ \[\ clock\ format\ \[\ clock\ seconds\ \]\ -format\ \"%T\"\ \]\n\ \ puts\ \"\\nstart\ =\ \$t1\\n\"\n\n\ \ set\ ls\ \{\}\;\n\ \ set\ ret\ \[\ da_dev1\ \$tns\ \$usr\ \$pwd\ \$crn\ ls\ \]\n\n\ \ if\ \{\$saveFile\ ==\ 1\}\ \{\n\ \ \ \ #\ ?????????\ ????????\ ?????\n\ \ \ \ set\ path\ \[info\ script\]\n\ \ \ \ set\ path\ \[\ file\ normalize\ \$path\ \]\n\ \ \ \ set\ dirname\ \[\ file\ dirname\ \$path\ \]\n\ \ \ \ set\ f0\ \[file\ join\ \$dirname\ \$nameFile\ \]\n\ \ \ \ set\ f\ \[\ file\ nativename\ \$f0\ \]\n\ \ \ \ #\ ?????????\ ??\ ??????????\ ?\ ????\n\ \ \ \ set\ fd\ \[\ open\ \$f\ \"w+\"\]\n\ \ \ \ \ \ for\ \{set\ ind\ 0\}\ \{\$ind<\[llength\ \$ls\]\}\ \{incr\ ind\}\ \{\n\ \ \ \ \ \ \ \ puts\ \$fd\ \[lindex\ \$ls\ \$ind\ \]\ \;\n\t\t.text1\ insert\ end\ \"\[lindex\ \$ls\ \$ind\ \]\\n\"\ \;\n\ \ \ \ \ \ \}\n\ \ \ \ \ \ flush\ \$fd\n\ \ \ \ \ \ close\ \$fd\n\ \ \ \ \ \ if\ \{\ \[file\ exists\ \$f\]\ ==\ 1\}\ \{\n\ \ \ \ \ \ \ \ \ puts\ \"\\n\ File\ \$f\ created!\"\ \;\n\ \ \ \ \ \ \}\n\ \ \}\ else\ \{\n\ \ \ \ for\ \{set\ ind\ 0\}\ \{\$ind<\[llength\ \$ls\]\}\ \{incr\ ind\}\ \{\n\ \ \ \ \ \ puts\ \[lindex\ \$ls\ \$ind\ \]\ \;\n\ \ \ \ \}\n\ \ \}\n\n\ \ set\ t1\ \[\ clock\ format\ \[\ clock\ seconds\ \]\ -format\ \"%T\"\ \]\n\ \ puts\ \"\\nend\ =\ \$t1\"\n\n\ .text1\ mark\ set\ insert\ 0.0\n\n\ update\;\n\n\n\}\n\n\n#=============================================\nproc\ da_dev2\ \{\ tns\ usr\ pwd\ fsql\ CVS\ id_parent\ saveFile\ radiots\ \}\ \{\n#=============================================\n#\ ??????????\ ??????,\ ????\ ?????\ ???\ ??????????\n\ \ upvar\ \$CVS\ lst\ \;\n\n#\ ?????????????\ ??????????\ ?\ ??\n\ \ database\ db\ \$tns\ \$usr\ \$pwd\n#db\ set\ autocommit\ off\n\n#\ ?????????????\ ????\n#\ ??\ ?????????\ =\ BASE_EXT_CONNECT_OIK\ CONNECT\ =>\ SBOR_STAND_READ\ =\ (SELECT\ =\ da_dev_desc\ )\ \ BASE_STAND_READ\n\ \ if\ \{\$usr!=\"rsduadmin\"\}\ \{\n\ \ \ \ db\ \"SET\ ROLE\ SBOR_STAND_READ\ ,\ BASE_STAND_READ\"\n\ \ \ \ db\ \"select\ *\ from\ session_roles\"\n\ \ \}\n\n#\ ????????\ id_proto_point\ +\ id_dev\ \ \n\ \ set\ id_proto_point\ -1\ \;\n\ \ set\ id_dev\ -1\ \;\n\ \ set\ str2\ \"select\ *\ from\ da_dev_desc\ where\ id=%ld\ order\ by\ id\"\n\ \ set\ res2\ \[\ format\ \$str2\ \$id_parent\ \]\n\ \ set\ y2\ \[\ db\ \$res2\ \]\n\ \ foreach\ \{y\}\ \$y2\ \{\n\ \ \ \ set\ id_proto_point\ \[lindex\ \$y\ 1\]\ \;\n\tset\ id_dev\ \[lindex\ \$y\ 2\]\ \;\n\ \ \}\ \ \n\ \ \n\ \ if\ \{\$id_dev<0\}\ \{\ \ puts\ \"\ \\n\\n\ id_dev====\$id_dev\ \\n\\n\"\ \;\ \ return\ -1\;\ \}\n\ \ if\ \{\$id_proto_point<0\}\ \{\ \ puts\ \"\ \\n\\n\ id_proto_point====\$id_proto_point\ \\n\\n\"\ \;\ \ return\ -1\;\ \}\n\n#\ ????????\ id_proto_point\n\ \ set\ str3\ \"select\ id\ from\ da_proto_desc\ where\ id_parent=\$id_proto_point\"\ \;\ #\ where\ id_parent=%ld\n\ \ set\ y3\ \[\ db\ \$str3\ \]\n\ \ foreach\ \{y\}\ \$y3\ \{\n\ \ \ \ set\ id_proto_point\ \[lindex\ \$y\ 0\]\ \;\n\ \ \}\ \n\ \ \n#\ ????????\ max\ ID\n\ \ set\ maxId\ 0\n\ \ set\ str1\ \"select\ max(id)\ from\ da_dev_desc\"\ \;\ #\n\ \ set\ y1\ \[\ db\ \$str1\ \]\n\ \ foreach\ \{y\}\ \$y1\ \{\n\ \ \ \ set\ maxId\ \[lindex\ \$y\ 0\]\ \;\n\ \ \}\ \ \n\ \ puts\ \"\ \\n\ max(Id)=\$maxId\ \\n\"\ \;\n\ \ \n\ \ if\ \{\$saveFile==1\}\ \{\ set\ df\ \[\ open\ \$fsql\ \"w+\"\]\ \;\ \}\n\ \ \n#\ ?????????\ ??????\ ???\ ???????\n\ \ for\ \{set\ ind\ 0\}\ \{\$ind<\[llength\ \$lst\]\}\ \{incr\ ind\}\ \{\n\ \ \n\ \ \ \ set\ maxId\ \[\ expr\ \$maxId+1\ \]\ \n\ \ \n\ \ \ \ set\ s0\ \[lindex\ \$lst\ \$ind\ \]\ \;\n\ \ \ \ set\ pl\ \[\ split\ \$s0\ \"\;\"\ \]\n\tif\ \{\[llength\ \$pl\]<2\}\ \{\ continue\ \;\ \}\n\tset\ name\ \[lindex\ \$pl\ 0\ \]\ \;\n\tset\ cvalif\ \[lindex\ \$pl\ 1\ \]\ \;\n\tset\ tcode\ \"\"\ \;\n\tcatch\ \{\ set\ tcode\ \[lindex\ \$pl\ 2\ \]\ \;\ \}\ err\n\n\t#\ ID_GTOPT\ =\ sys_gtopt.id\n\t#\ 1\ =\ ??????????\ ??????????\n\t#\ 8\ =\ ??????????\ ???????\n\tset\ ID_GTOPT\ 1\n\tif\ \{0==\[string\ compare\ \$tcode\ \"??\"\]\}\ \{\ set\ ID_GTOPT\ 8\ \;\ \}\n\tif\ \{0==\[string\ compare\ \$tcode\ \"??\"\]\}\ \{\ set\ ID_GTOPT\ 8\ \;\ \}\n\tif\ \{0==\[string\ compare\ \$tcode\ \"??\"\]\}\ \{\ set\ ID_GTOPT\ 8\ \;\ \}\n\tif\ \{0==\[string\ compare\ \$tcode\ \"??\"\]\}\ \{\ set\ ID_GTOPT\ 8\ \;\ \}\n\n\tif\ \{\$radiots==0\}\ \{\ set\ ID_GTOPT\ 8\ \;\ \}\n\n\t\n\t#\ ID_TYPE\ =\ sys_dtype.id\n\t#\ 405\ -\ ???????\ ??????????\n\t#\ 7\ -\ ??????????\n\t#\ 5\ -\ ???\n\t#\ 6\ -\ ??????????\ ????????\ Q\n\t#\ 8\ -\ ????????\ ????????\ P\n\t#\ --------------------------\n\t#\ 406\ -\ ???????\ ???????\n\t#\ \n\t#\ \n\tset\ ID_TYPE\ 0\n\tif\ \{\$ID_GTOPT==1\}\ \{\n\t\ \ \ set\ ID_TYPE\ 405\n\t\ \ \ if\ \{\[regexp\ \"Ia\"\ \$name\]\}\ \{\ set\ ID_TYPE\ 5\ \}\n\t\ \ \ if\ \{\[regexp\ \"Ib\"\ \$name\]\}\ \{\ set\ ID_TYPE\ 5\ \}\n\t\ \ \ if\ \{\[regexp\ \"Ic\"\ \$name\]\}\ \{\ set\ ID_TYPE\ 5\ \}\n\t\ \ \ if\ \{\[regexp\ \"Ua\"\ \$name\]\}\ \{\ set\ ID_TYPE\ 7\ \}\n\t\ \ \ if\ \{\[regexp\ \"Ub\"\ \$name\]\}\ \{\ set\ ID_TYPE\ 7\ \}\n\t\ \ \ if\ \{\[regexp\ \"Uc\"\ \$name\]\}\ \{\ set\ ID_TYPE\ 7\ \}\n\t\ \ \ if\ \{\[regexp\ \"Uab\"\ \$name\]\}\ \{\ set\ ID_TYPE\ 7\ \}\n\t\ \ \ if\ \{\[regexp\ \"Ubc\"\ \$name\]\}\ \{\ set\ ID_TYPE\ 7\ \}\n\t\ \ \ if\ \{\[regexp\ \"Uca\"\ \$name\]\}\ \{\ set\ ID_TYPE\ 7\ \}\n\t\ \ \ if\ \{\[regexp\ \"P\"\ \$name\]\}\ \{\ set\ ID_TYPE\ 8\ \}\n\t\ \ \ if\ \{\[regexp\ \"Q\"\ \$name\]\}\ \{\ set\ ID_TYPE\ 6\ \}\n\t\}\n\ \ \ \ if\ \{\$ID_GTOPT==8\}\ \{\n\t\ \ \ set\ ID_TYPE\ 406\n\ \ \ \ \}\t\n\n\tset\ strSQL\ \"Insert\ into\ DA_DEV_DESC\ (ID,\ ID_PROTO_POINT,\ ID_DEV,\ ID_PARENT,\ NAME,\ CVALIF,\ ID_TYPE,\ ID_GTOPT,\ ATTR_NAME)\ \\\n\ \ \ \ \ \ \ \ Values\ \ (\$\{maxId\},\ \$\{id_proto_point\},\ \$\{id_dev\},\ \$\{id_parent\},\ '\$\{name\}',\ \$\{cvalif\},\ \$\{ID_TYPE\},\ \$\{ID_GTOPT\},\ NULL)\;\"\n\tif\ \{\$saveFile==1\}\ \{\ puts\ \$df\ \$strSQL\ \;\ \}\ \n\tif\ \{\$saveFile>1\}\ \{\ db\ \$strSQL\ \;\ \}\n\tputs\ \"\$\{strSQL\}\"\n\t\n\ \ \}\ \ \n\ \n\ \ if\ \{\$saveFile==1\}\ \{\ \ flush\ \$df\ \;\ close\ \$df\ \ \;\ \}\n\ #\ ?????????\ ??????????\ ?\ ??\n\ \ if\ \{\$saveFile>1\}\ \{\ \ db\ commit\ \;\ \}\n\ \ db\ disconnect\n\n\ \ if\ \{\$saveFile==1\}\ \{\ \ \n\ \ \ \ catch\ \{\ \[exec\ --\ notepad\ \$fsql\ &\ \]\}\ err\ \;\n\ \ \}\n\n\ \ return\ 0\ \;\n\}\n\n\n\n#--------------------\nproc\ doDev\ \{\ flag\ \}\ \{\n#--------------------\n\ global\ fileNameLabel\n\ global\ idLabel\n\ global\ radio\n\nglobal\ \ \ tcl_platform\n#============================\ ??????\ ?????????\n\ \ set\ tns\ \"rsdu2\"\n\ \ set\ usr\ \"rsduadmin\"\ \;\ #\ \ admin\ \ nov_ema\n\ \ set\ pwd\ \"passme\"\ \;\ #\ passme\ \ qwertyqaz\n\ \ set\ nameFile\ \"da_dev2.sql\"\ \;\ #\ ???\ ?????\ ???\ ??????????\ ??????????\n\ \ set\ nameFileCSV\ \"?????1.csv\"\ \;\ #\ ???\ ?????\ ???\ ??????????\ ??????????\n\ \ set\ saveFile\ 1\ \;\ #\ 1-??????\ ?\ ????-sql.\ ???\ 2-commit\ ?\ ????\ \;\ 0-\ ??????\n#=============================================\n\n\ \ set\ t1\ \[\ clock\ format\ \[\ clock\ seconds\ \]\ -format\ \"%T\"\ \]\n\ \ puts\ \"\\nstart\ =\ \$t1\\n\"\n\n\ \ set\ ls\ \{\}\ \;\ #\[\ list\ \]\n\ \ \n\ \ #\ ?????????\ ????????\ ?????\n\ \ set\ path\ \[info\ script\]\n\ \ set\ path\ \[\ file\ normalize\ \$path\ \]\n\ \ set\ dirname\ \[\ file\ dirname\ \$path\ \]\n\ \ set\ fsql\ \[file\ join\ \$dirname\ \$nameFile\ \]\n\ \ #set\ f0\ \[file\ join\ \$dirname\ \$nameFileCSV\ \]\n\ \ set\ f0\ \$fileNameLabel\n\ \ set\ f\ \[\ file\ nativename\ \$f0\ \]\n\ \ #\ ?????????\ ??\ ??????????\ ?\ ????\n\ \ set\ fd\ \[\ open\ \$f\ \"r\"\]\n\ \ while\ \{!\[eof\ \$fd\]\}\ \{\n\t\ gets\ \$fd\ data\n\t\ set\ ls\ \[linsert\ \$ls\ end\ \"\$\{data\}\"\ \]\ \;\n\ \ \}\n\ \ close\ \$fd\n\ \ \n\ \ set\ id_parent\ \$idLabel\ \ \n\ \ set\ ret\ \[\ da_dev2\ \$tns\ \$usr\ \$pwd\ \$fsql\ ls\ \$id_parent\ \$flag\ \$radio\]\n\n\ \ set\ t1\ \[\ clock\ format\ \[\ clock\ seconds\ \]\ -format\ \"%T\"\ \]\n\ \ puts\ \"\\nend\ =\ \$t1\"\n\n\ \ return\ 0\ \;\n\n\}\n\n\n\n\ update\n\n\n\n\n\n\n\n
+	other min_row {28 30 30 30 30 30 30 30 30 30 30 30 30 30 2}
+	other master {}
+	other pathname f
+	other resize_column {1 0 0 0 0 0 1 1}
+	other tags {}
+	other level 0
+	configure background #e9e9e9
+	other min_column {53 229 75 50 35 10 14 91}
+	other help {}
+	other Colors {black white bisque grey red green blue magenta yellow SystemButtonFace}
+	other comments {}
+	other item_name f
+	other tabbing {}
+Widget scrollbar#1
+	geometry row 2
+	configure orient v
+	geometry rowspan 13
+	other error {}
+	other type scrollbar
+	other master {}
+	other pathname scrollbar#1
+	other tags {}
+	other level {}
+	other help {}
+	other comments {}
+	geometry column 6
+	configure command {list .text yview}
+	other tabbing {}
+	other item_name scrollbar1
+	geometry sticky ns
+Widget scrollbar#3
+	geometry columnspan 5
+	geometry row 15
+	configure orient h
+	other error {}
+	other type scrollbar
+	other master {}
+	other pathname scrollbar#3
+	other tags {}
+	other level {}
+	other help {}
+	other comments {}
+	geometry column 1
+	other item_name scrollbar3
+	other tabbing {}
+	geometry sticky ew
+Widget label#1
+	geometry row 1
+	other type label
+	other master {}
+	configure text Id=
+	other pathname label#1
+	other tags {}
+	other level {}
+	other help {}
+	other comments {}
+	geometry column 4
+	other tabbing {}
+	other item_name label#1
+	geometry sticky nesw
+Widget label#2
+	geometry row 2
+	other type label
+	other master {}
+	configure text TI
+	other pathname label#2
+	other tags {}
+	other level {}
+	other help {}
+	other comments {}
+	geometry column 7
+	other tabbing {}
+	other item_name label#2
+	geometry sticky nesw
+Widget label#3
+	other focus .widget.form.can.f.label#3,anchor,entry
+	geometry row 2
+	other type label
+	other master {}
+	configure text TC
+	other pathname label#3
+	other tags {}
+	other level {}
+	other help {}
+	other comments {}
+	geometry column 8
+	other tabbing {}
+	other item_name label#3
+	geometry sticky nesw
+Widget label#4
+	geometry columnspan 2
+	geometry row 5
+	other type label
+	other master {}
+	configure text Types
+	other pathname label#4
+	other tags {}
+	other level {}
+	other help {}
+	geometry column 7
+	other comments {}
+	geometry sticky nesw
+	other item_name label#4
+	other tabbing {}
+Widget radiobutton#1
+	configure variable radio
+	other error {}
+	other tags {}
+	other level {}
+	other help {}
+	configure value 1
+	other focus .widget.form.can.f.radiobutton#1,activebackground,entry
+	other master {}
+	other pathname radiobutton#1
+	geometry sticky nesw
+	other tabbing {}
+	other item_name radiobutton#1
+	geometry row 3
+	other type radiobutton
+	configure text TI
+	geometry column 7
+	other comments {}
+Widget entry#2
+	other focus .widget.form.can.f.entry#2,background,entry
+	geometry row 1
+	other error {}
+	other type entry
+	configure textvariable fileNameLabel
+	other master {}
+	other pathname entry#2
+	other tags {}
+	other level {}
+	other help {}
+	other comments {}
+	geometry column 2
+	other tabbing {}
+	other item_name entry#2
+	geometry sticky nesw
+
