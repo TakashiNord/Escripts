@@ -1,0 +1,28 @@
+SET DEFINE OFF;
+--
+--SQL Statement which produced this data:
+--  SELECT 
+--     ROWID, M.ID, M.ID_TEMPLATE, M.NAME, 
+--     M.ALIAS, M.ARG_POSITION, M.IS_STATIC
+--  FROM RSDUADMIN.MEAS_FUNCTION_ARGUMENT M
+--  ORDER BY 2 DESC NULLS LAST
+--
+
+
+Insert into RSDUADMIN.MEAS_FUNCTION_ARGUMENT
+   (ID, ID_TEMPLATE, NAME, ALIAS, ARG_POSITION, IS_STATIC)
+ Values
+   (204, 283, 'Делимое', 'x', 1, 1);
+
+Insert into RSDUADMIN.MEAS_FUNCTION_ARGUMENT
+   (ID, ID_TEMPLATE, NAME, ALIAS, ARG_POSITION, IS_STATIC)
+ Values
+   (205, 283, 'Делитель', 'y', 2, 1);
+   
+Insert into RSDUADMIN.MEAS_FUNCTION_ARGUMENT
+   (ID, ID_TEMPLATE, NAME, ALIAS, ARG_POSITION, IS_STATIC)
+ Values
+   (206, 284, 'Значение для усечения', 'x', 1, 1);   
+   
+   
+COMMIT;
