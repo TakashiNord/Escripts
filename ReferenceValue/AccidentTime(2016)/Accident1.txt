@@ -1,0 +1,437 @@
+//
+//
+// Accident1($4003748) ;
+//
+//
+REG_VAL Accident1(REG_BASE *pCurVal ) 
+{
+    ELRSRV_ENV    *pEnv = NULL;
+    REG_SET       *pRegBase = NULL;
+    REG_VAL        RegVal;
+    int            last_index, current_index ;
+    uint32_t       j ;
+    uint32_t       ELRF ;
+    uint32_t  hyst_period ;
+    uint32_t  firstbegintime ;
+
+
+    pEnv = pCurVal->pEnv;
+
+    current_index = (*pEnv).ret_index;  /*      Текущий цикл    */
+    last_index = (*pEnv).cur_index;  /* Предыдущий цикл */
+
+    //RegVal.vl = (*pCurVal).rv[current_index].vl;
+    //RegVal.ft = (*pCurVal).rv[current_index].ft;    
+
+    firstbegintime = -1 ;
+    /* Цикл по всем уровням уставок j для текущего параметра */
+    for (j = 0; j < (*pCurVal).set_level_number; j++)
+    {
+        firstbegintime = (*(*pCurVal).set)[j].begintime ; //firstbegintime
+        hyst_period  = (*(*pCurVal).set)[j].hyst_period ;
+    }
+
+    ELRF = ELRF_DERATING;
+
+    if (firstbegintime<=0) {
+       firstbegintime = RSDURTGUtils_Time70(); // (*pCurVal).last_change_time
+       ELRF = ELRF_ALLCORRECT;
+    } 
+    
+  
+    RegVal.vl = firstbegintime; 
+    RegVal.ft = ELRF;      
+    
+    return RegVal;
+}  
+
+
+
+            ct = RSDURTGUtils_Time70();
+            c_ind = (*Env).cur_index;
+            p_ind = c_ind - 1;
+            if (p_ind < 0)
+                p_ind = RETRO_WIDTH - 1;
+				
+                else                                                                   /* иначе контролируем мнгновенные значения */
+                {
+                    cval.vl = (*ppRegBase)[i].rv[c_ind].vl;
+                    cval.ft = (*ppRegBase)[i].rv[c_ind].ft;
+                }				
+
+
+/* ************************************************* */
+/*      Constants for sets monitoring definition     */    
+/* ************************************************* */
+#define EOR_SETS_MON_NOT_RANGE          (uint32_t)0x00000001  контроль в диапазоне
+#define EOR_SETS_MON_NOT_HIGH           (uint32_t)0x00000002  контрль на первышение
+#define EOR_SETS_MON_NOT_LOWER          (uint32_t)0x00000003       на понижение
+#define EOR_SETS_MON_DEPENDED_NOT_RANGE (uint32_t)0x00000004   зависимый в диапазоне     cr min max
+#define EOR_SETS_MON_DEPENDED_NOT_HIGH  (uint32_t)0x00000005   на превышение             cr max
+#define EOR_SETS_MON_DEPENDED_NOT_LOWER (uint32_t)0x00000006			на понижение	 cr min
+				
+typedef struct REG_TUNE
+{
+    uint32_t  my_id;    /*  ID своего параметра  */
+    uint32_t  src_tbl;  /*  ID таблицы-списка источника, на параметр которой выполнена настройка */
+    uint32_t  src_id;    /*  ID источника  */
+    uint32_t  id_srci;  /*  ID канала настройки для выбранного источника */
+    uint16_t  query;    /*  Текущая или нет настройка*/
+    POINT_PROP  *pOwnPoint;  /*  Ссылка на свой параметр  */
+    uint32_t  priority;  /*  Приоритет канала, наивысшим является приоритет с номером 0 */
+    double    coeff;    /*  Коэфициент масштабирования параметра - источника  */
+    uint32_t  index_val; /* Порядок следования аргументов */
+} REG_TUNE;
+
+                        switch((*pRegSet).sets_type)
+                        {
+                        case EOR_SETS_MON_NOT_RANGE:
+                        case EOR_SETS_MON_DEPENDED_NOT_RANGE:
+                            (*pRegSet).max_val += (*pRegTune).coeff * (*ad).value;
+                            (*pRegSet).min_val += (*pRegTune).coeff * (*ad).value;
+                            break;
+                        case EOR_SETS_MON_NOT_HIGH:
+                        case EOR_SETS_MON_DEPENDED_NOT_HIGH:
+                            (*pRegSet).max_val += (*pRegTune).coeff * (*ad).value;
+                            (*pRegSet).min_val = MIN_PARAM_VALUE;
+                            break;
+                        case EOR_SETS_MON_NOT_LOWER:
+                        case EOR_SETS_MON_DEPENDED_NOT_LOWER:
+                            (*pRegSet).max_val = MAX_PARAM_VALUE;
+                            (*pRegSet).min_val += (*pRegTune).coeff * (*ad).value;
+                            break;
+                        default:
+                            (*pRegSet).max_val += (*pRegTune).coeff * (*ad).value;
+                            (*pRegSet).min_val += (*pRegTune).coeff * (*ad).value;
+                            break;
+                        }
+
+
+				
+/*
+
+#define ELRF_VALUENOCORRECT      OIC_DST_VALUENOCORRECT /* Данные не достоверны */
+#define ELRF_SRCNOPRESENT        OIC_DST_NOPRESENT      /* Источник данных отсутствует */
+#define ELRF_DERATING            OIC_DST_DERATING       /* Нарушены уставки */
+#define ELRF_ADERATING           OIC_DST_ADERATING      /* Нарушение аварийных уставок */
+#define ELRF_HYST_PERIOD         OIC_DST_HYST_PERIOD    /* Выход за уставки по диапазону но не по времени для уставок с заданным HYST_PERIOD */
+#define ELRF_NOSCANNED           OIC_DST_NOSCANNED      /* Значение не было опрошено источником например по причине того что параметр выведен из работы */
+
+#define ELRF_ALLCORRECT          (~(ELRF_VALUENOCORRECT | ELRF_SRCNOPRESENT | ELRF_DERATING | ELRF_ADERATING))
+#define check_valid(ft)          (ft & (ELRF_VALUENOCORRECT | ELRF_SRCNOPRESENT))
+
+*/
+
+// =====================================================================
+/*
+typedef struct REG_BASE
+{
+    uint32_t    id;
+    uint32_t    id_node;
+    uint32_t    cur_src;        /* Текущий источник значений */
+    uint32_t    cur_srci;       /* Текущий канал источника значений */
+    uint32_t    c_ft;           /* Current parameter state and feature */
+    uint32_t    c_state;        /* Calculate state */
+    uint32_t    state;          /* Parameter main feature */
+    uint32_t    novalid;        /* 0 - значение параметра корректно, 1 - некорректно (изменено на ноль в силу возникшего математического исключения) */
+    uint32_t    set_level_number;   /* Number of set level */
+    uint32_t    last_change_time;   /* Last value change time */
+    uint32_t    last_valid_value_time;
+    double      last_valid_value;   /* No comment */
+    double      c_disper;       /* Calculate accuracy */
+    double      disper;         /* Current parameter accuracy */
+    EXTREME_VALUE   extreme_value[RETRO_EXTREME_WIDTH]; /* Экстремальные значения параметров */
+    REG_VAL     rv[RETRO_WIDTH];
+    ListType    ivl;   /* Список ListType рассчитываемых интегральных значений REG_INT, отсортировано по интервалу */
+    ListType    avr;   /* Список ListType рассчитываемых средних значений REG_AVR, отсортировано по интервалу */
+    REG_MVL     mvl;
+    REG_SET   (*set)[];
+    struct ELRSRV_ENV *pEnv;
+}REG_BASE;
+*/
+
+/*
+typedef struct REG_SET
+{
+    uint32_t    id;
+    uint32_t    id_param;
+    uint32_t    id_level;
+    uint32_t    id_src;
+    uint32_t    id_srci;
+    uint32_t    notify_period;
+    uint32_t    hyst_period;    /* Временной гистерезис для срабатывания уставки*/
+    uint32_t    firstbegintime; /* Время первоначального обнаружения выхода за уставки */
+    uint32_t    priority;
+    uint32_t    start_signal_id;
+    uint32_t    cont_signal_id;
+    uint32_t    sets_type;
+    /*    double              m_min_val;*/      /* Значение уставки по ручному вводу */
+    /*    double              m_max_val;  */
+    double      min_val;        /* Значение уставки, полученное от источника */
+    double      max_val;
+    double      min_val_final;  /* Окончательно вычисленное значение уставки, используемое для контроля (например, для косвенных уставок) */
+    double      max_val_final;
+    uint32_t    val_is_get;     /* Значение уставки было получено от источника (и)*/
+    uint32_t    begintime;      /* Время обнаружения выхода за уставки  */
+    double      extrem;         /* Экстремальное значение параметра при выходе его за уставки */
+    uint32_t    user_id;
+    uint32_t    time1970;
+} REG_SET;
+*/
+
+
+     
+    /* Никакого значения еще не приходило  */
+/*    if (ISZERO((*pCurVal).rv[current_index].vl))       
+    {
+        RegVal.vl = (*pCurVal).rv[current_index].vl;
+        RegVal.ft = (*pCurVal).rv[current_index].ft;
+    } else {
+       RegVal.vl = (*pRelVal).last_valid_value;
+       RegVal.ft |= (*pCurVal).rv[current_index].ft | ELRF_VALUENOCORRECT;
+        RegVal.vl = (*pCurVal).rv[current_index].vl;
+        RegVal.ft = (*pCurVal).rv[current_index].ft;
+    }
+    */
+
+	
+	
+	
+	
+	
+	
+	/*****************************************************************/
+/* 24.02.2005 Яковлев А.В.
+Структуры данных для косвенных уставок (зависимого контроля уставок)
+*/
+typedef struct SET_DEPEND_VALUE
+{
+    double      cr_value;       /* Значение критерия-уставки */
+    double      value_max;      /* Значение верхней границы уставки при данном значении критерия */
+    double      value_min;      /* Значение нижней границы уставки при данном значении критерия */
+} SET_DEPEND_VALUE;
+
+typedef struct SET_DEPEND
+{
+    uint32_t    id_set;         /* ID уставки */
+    ListType    values;         /* Список соответствий значений уставки значениям критерия */
+} SET_DEPEND;
+
+/* Структура для выборки значений из БД с целью дальнейшего разбора */
+typedef struct SET_DEPEND_VALUE_DB
+{
+    uint32_t    id;             /* ID */
+    uint32_t    id_set;         /* ID уставки */
+    double      cr_value;       /* Значение критерия-уставки */
+    double      value_max;      /* Значение верхней границы уставки при данном значении критерия */
+    double      value_min;      /* Значение нижней границы уставки при данном значении критерия */
+} SET_DEPEND_VALUE_DB;
+/*****************************************************************/
+
+/* в структуру добавлены поля DCP_CurUser, DCP_CurPass 30.01.2004 Кранчев Д.Ф. */
+typedef struct ELRSRV_ENV
+{
+    uint32_t        UserID;         /* My uid*/
+    uint32_t        GroupID;        /* My gid*/
+    uint32_t        MyServerID;     /* My server ID from table ac_serv */
+    uint32_t        MySignalServiceUserID;      /* My signal subsystem uid*/
+    uint32_t        MyLstTableID;               /* My list table id on sys_tbl*/
+    uint32_t        MyDirTableID;               /* My directory table id on sys_tbl*/
+    unsigned char   UserAlias[MAX_LOGIN_LEN];   /* My login name */
+    unsigned char   password[MAX_PASSWD_LEN];   /* My password */
+    char            LogFilePath[MAX_PATH_LEN];  /* Full path for .log file */
+    char            LogFileName[MAX_PATH_LEN];  /* Full path for .log file */
+    unsigned char   MyLstTableName[MAX_ALIAS_FIELD_LEN];      /* Имя таблицы-списка, которую обслуживает сервер */
+    unsigned char   MyDirTableName[MAX_ALIAS_FIELD_LEN];      /* Имя таблицы-каталога, которую обслуживает сервер */
+    ListType        ServicesList;               /* List of database services */
+    uint32_t        DCP_UserID;                 /* Current user */
+    unsigned char   DCP_CurUser[MAX_LOGIN_LEN]; /* логин текущего пользователя - человека */
+    unsigned char   DCP_CurPass[MAX_PASSWD_LEN];/* пароль для доступа к базе данных*/
+    uint32_t        WaitTime;       /* The wait time in min */
+    uint32_t        DebugMode;      /* Debug mask for task */
+    uint32_t        CheckTime;      /* The boxes check time in sek */
+    unsigned char   M_TaskPriority; /* server main task priority */
+    unsigned char   C_TaskPriority; /* server control task priority */
+    unsigned char   T_TaskPriority; /* technologi task's priority */
+    unsigned char   A_TaskPriority; /* accses task's priority */
+    REM_ADDR        RetServicePort; /*  */
+    ACC_POINT_INFO *AccessPoints;   /* Точки доступа сервера */
+    uint16_t        AccessPointsNum;/* Число точек доступа сервера */
+    ACC_POINT_INFO *pCurrentPoint;  /* Точка доступа стартующая */
+    int             UpdateMBox;     /* For DB update */
+    int             TechMBox;       /* For tech task */
+    sem_t          *TechSem;        /* For cient task synchronization */
+    sem_t          *par_reg;        /* For data acces synchronization */
+    sem_t          *src_sets_sem;   /* For sets control task */
+    sem_t          *sets_sem;       /* For sets control task */
+    sem_t          *sets_depend_sem;/* For sets control task - to share access to SetsDependenceList*/
+    sem_t          *mv_sem;         /* For mvl task */
+    sem_t          *mv_ready;       /* For mvl task */
+    sem_t          *ret_sem;        /* For retro task */
+    sem_t          *dbint_sem;      /**/
+    sem_t          *SyncSem;
+    sem_t          *TaskSem;
+    sem_t          *ClnSyncSem;
+    int32_t         DataMBox;       /* Для чтения и записи часовых значений параметров в БДТИ */
+    uint32_t        db_last_update_time;    /* Время последнего обновления БДТИ на момент инициализации задач*/
+    uint32_t        db_last_relink_time;    /* Время последнего обновления БДТИ на момент инициализации задач, требующего сборки исполняемого модуля*/
+    uint32_t        db_last_relink_status;  /* Статус контроля целостности, требующего сборки исполняемого модуля: 1 - вкл; 0 - откл */
+    uint32_t        db_sets_depend_last_update_time;/* Время последнего обновления таблицы соответвствия косвенных уставок БДТИ */
+    uint32_t        system_node;        /* Идентификатор узла системы - либо кластера, либо отдельной машины, к которой принадлежит данный сервер */
+    uint32_t        set_src_query_num;  /**/
+    uint32_t        index_plus;         /**/
+    uint32_t        cur_index;          /**/
+    uint32_t        ret_index;          /**/
+    uint32_t        mvl_index;          /**/
+    uint32_t        mvl_task_num;       /* Номер задачи записи архивов */
+    uint32_t        p_number;           /**/
+    REG_TIME        (*c_time)[RETRO_WIDTH]; /**/
+    struct timeval  (*c_timetick)[RETRO_WIDTH]; /**/
+    ListType        RegBaseList;        /* base */
+    ListType        DataSrcList;        /* список зарегистрированных источников данных */
+    ListType        SetsSrcList;        /**/
+    ListType        ManualSrcList;      /* Список структур REG_MAN, отсортированный по id_srci */
+    ListType        SetsList;           /**/
+    ListType        Sets_ManualSrcList; /* Список структур SET_MANUAL, отсортированный по id_set, id_srci */
+    ListType        Sets_OwnList;       /* Список структур SET_OWN, отсортированный по id_set, id_srci */
+    uint32_t        Sets_OnwSrcId;      /* Идентификатор собственного источника (id_source) */
+    REG_SET       **ppReg_Set;
+    sem_t          *usr_reg;            /* Region for user info access */
+    ListType        UsersList;          /**/
+    ListType        SetsDependenceList; /* Таблица соответствий значений уставок значениям критерия */
+    uint32_t        CalcCorrect;
+    int32_t         FormuleNumber;
+    int32_t         ArgumentNumber;
+    CALC_STR        (*all_fn)[];
+    REG_BASE        (*ppRegBase)[];
+    REG_BASE      **ppRegBaseFormule;
+    uint32_t        CurFormuleNumber;
+    CALC_STR      **cur_fn;
+    char            FullPathName[MAX_PATH_LEN];
+    int             ExitMbx;
+    pthread_t       pthrd[13];
+    long            ExitMsgType;
+    int32_t         AbortFlag;
+    int32_t         mode;
+    uint32_t        id_ginfo_march;
+    uint32_t        id_ginfo_mmarch;
+    uint32_t        id_ginfo_hmarch;
+    uint32_t        id_ginfo_imarch;
+    uint32_t        arch_port;
+    char            arch_ip[64];
+    uint32_t        arch_host_node;
+    ListType        IntProfiles;        /* Список профилей архивов интегральных значений */
+    ListType        AvrProfiles;        /* Список профилей архивов усредненных значений */
+    ARC_PROFILE     InstantProfile;     /* Профиль мгновенных архивов  */
+    RSDU_INFO      *regRsduInfo;
+} ELRSRV_ENV;
+
+
+
+
+
+/* Функция рассчета значений для косвенных уставок */
+int32_t get_depend_sets_value(ELRSRV_ENV *Env, LOG_HEADER*  lfp, uint32_t id_set, double cr_value, double *value_max, double *value_min)
+{
+    SET_DEPEND        *pSetDepend = NULL, **ppSetDepend = NULL;
+    int32_t            i = 0, isFind = 0;
+    SET_DEPEND_VALUE   SetDependValueX1, SetDependValueX2;
+    int32_t            ret = 0;
+    uint16_t           status = E_OK;
+
+    if(Env->SetsDependenceList == NULL || ListNumItems(Env->SetsDependenceList) == 0)
+        ret = -4;
+    else
+    {
+        /* Ждем семафора на доступ к таблице соответствия для косвенных уставок */
+        RSDURTGUtils_ReceiveUnits((void*)&Env->sets_depend_sem, (uint16_t)1, ELR_COMMON_WAIT, &status);
+        RSDURTGUtils_ErrCheck(lfp, ERR_RMX, __LINE__, __FILE__, (int32_t)status, ERR_CONTINUE, "get_depend_sets_value(): rq_receive_units on sets_depend_sem ");
+
+        ppSetDepend = (SET_DEPEND**)bsearch(&id_set,
+            ListGetDataPtr((*Env).SetsDependenceList),
+            (size_t)ListNumItems((*Env).SetsDependenceList),
+            sizeof(SET_DEPEND *),
+            set_id_depend_comp);
+        /*
+        RSDURTGUtils_UnilogMessage(LOG_DEBUG, lfp, "-----ppSetDepend=%p ",
+        ppSetDepend);
+
+        */
+
+        if (ppSetDepend != NULL)
+        {
+            pSetDepend = *ppSetDepend;
+            /*
+            RSDURTGUtils_UnilogMessage(LOG_DEBUG, lfp, "Num(pSetDepend->values) =%d  id_set=%d cr_value=%d ",ListNumItems(pSetDepend->values),id_set,cr_value);
+
+            */
+            if (pSetDepend->values == NULL)
+                ret = -2;
+            else
+                if (ListNumItems(pSetDepend->values) == 0)
+                    ret = -3;
+                else
+                    if (ListNumItems(pSetDepend->values) == 1)
+                    {
+                        SetDependValueX1 = *(SET_DEPEND_VALUE *)ListGetPtrToItem(pSetDepend->values, (int32_t)1);
+                        *value_max = SetDependValueX1.value_max;
+                        *value_min = SetDependValueX1.value_min;
+                    }
+                    else
+                    {
+                        i = 0;
+                        while (i < ListNumItems(pSetDepend->values)-1 && isFind == 0)
+                        {
+                            SetDependValueX1 = *(SET_DEPEND_VALUE *)ListGetPtrToItem(pSetDepend->values, (int32_t)(i+1));
+                            SetDependValueX2 = *(SET_DEPEND_VALUE *)ListGetPtrToItem(pSetDepend->values, (int32_t)(i+2));
+                            /*
+                            RSDURTGUtils_UnilogMessage(LOG_DEBUG, lfp, "-----SetDependValueX1.value_max=%lf, min=%lf SetDependValueX2.value_max=%lf min=%lf ",
+                            SetDependValueX1.value_max,SetDependValueX1.value_min, SetDependValueX2.value_max,SetDependValueX2.value_min);
+
+                            */
+                            if (cr_value <= SetDependValueX1.cr_value && i == 0)
+                            {
+                                *value_max = SetDependValueX1.value_max;
+                                *value_min = SetDependValueX1.value_min;
+                                isFind = 1;
+                            }
+                            else
+                                if (cr_value >= SetDependValueX2.cr_value && i == ListNumItems(pSetDepend->values)-2)
+                                {
+                                    *value_max = SetDependValueX2.value_max;
+                                    *value_min = SetDependValueX2.value_min;
+                                    isFind = 1;
+                                }
+                                else
+                                    if (cr_value >= SetDependValueX1.cr_value && cr_value <= SetDependValueX2.cr_value)
+                                    {
+                                        if (fabs(SetDependValueX1.cr_value - SetDependValueX2.cr_value) < EPS_VAL)
+                                        {
+                                            *value_max = SetDependValueX1.value_max;
+                                            *value_min = SetDependValueX1.value_min;
+                                        }
+                                        else
+                                        {
+                                            /* y=(x-x1)(y2-y1)/(x2-x1)+y1 - линейная интерполяция */
+                                            *value_max = (cr_value-SetDependValueX1.cr_value)*(SetDependValueX2.value_max-SetDependValueX1.value_max)/
+                                                (SetDependValueX2.cr_value-SetDependValueX1.cr_value)+SetDependValueX1.value_max;
+                                            *value_min = (cr_value-SetDependValueX1.cr_value)*(SetDependValueX2.value_min-SetDependValueX1.value_min)/
+                                                (SetDependValueX2.cr_value-SetDependValueX1.cr_value)+SetDependValueX1.value_min;
+                                        }
+                                        isFind = 1;
+                                    }
+                                    i++;
+                        }/* while (i < ListNumItems(pSetDepend->values)-1 && isFind == 0) */
+                    }/* else */
+        }/* if (pSetDepend != NULL) */
+        else
+            ret = -1;
+
+        /* Освобождаем семафор на доступ к таблице соответствия для косвенных уставок */
+        RSDURTGUtils_SendUnits((void*)&Env->sets_depend_sem, (uint16_t)1, &status);
+        RSDURTGUtils_ErrCheck(lfp, ERR_RMX, __LINE__, __FILE__, (int32_t)status, ERR_CONTINUE, "get_depend_sets_value(): rq_send_units on sets_depend_sem ");
+    }/* else */
+
+    return ret;
+}
+
