@@ -1,0 +1,5 @@
+
+set p="%cd%"
+C:\Python27\python.exe %p%\eweather.py > %p%\0.txt
+
+pause
