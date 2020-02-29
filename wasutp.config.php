@@ -1,8 +1,21 @@
 <?php
-return array(
+
+$t1 = time() ;
+
+$filename = '/home/www-data/www/htdocs/WASUTP/config/stat.txt';
+$ip1='10.51.1.50';
+$ip2='10.51.1.55';
+
+$sa="replace(replace(i.host_addr,'10.51.5.','10.51.1.'),'$ip1','$ip2')" ;
+if (file_exists($filename)) {
+   $sa="replace(replace(i.host_addr,'10.51.5.','10.51.1.'),'$ip2','$ip1')" ;
+}
+clearstatcache();
+
+$ar= array(
 
     //Конфиг подключения к субд ORACLE
-'driver' => 'oci',
+    'driver' => 'oci',
     'user' => 'rsduadmin',
     'password' => 'passme',
     'tns' => "(DESCRIPTION =
@@ -34,8 +47,10 @@ return array(
 
     //подмена ip-адреса, используемого rtquery
     //'replaceIp' => "replace(i.host_addr, i.host_addr,'127.0.0.1')",
-    'replaceIp' => "replace(replace(i.host_addr,'10.51.5.','10.51.1.'),'10.51.1.50','10.51.1.55')",
-// 'replaceIp' => "10.51.1.55",
+    //'replaceIp' => "replace(replace(i.host_addr,'10.51.5.','10.51.1.'),'10.51.1.50','10.51.1.55')",
+     'replaceIp' => "$sa",
+    // 'replaceIp' => 'i.host_addr',
+
     //Тайтл в окне браузера
     'desktopTitle' => "iSMS",
 
@@ -132,3 +147,6 @@ return array(
 
     'enableSldiagramIndex' => true,
 );
+
+
+return ($ar);
