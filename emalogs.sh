@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# ver 20/07/2018
+# ver 18/03/2020
 
 # folders
 EMA_LOGS1=(
@@ -17,6 +17,8 @@ EMA_LOGS1=(
 /etc/php5
 /etc/mysql
 /etc/apache2
+/etc/nginx
+/usr/lib64/nginx/modules
 /etc/ntp
 /etc/vmware
 /etc/sysconfig
@@ -31,8 +33,10 @@ EMA_LOGS1=(
 /opt/oracle/instantclient_11_2
 /etc/rabbitmq
 /var/log/rabbitmq
-# /var/ema/coredumps
+/var/ema/coredumps
 /var/log/mongodb
+/var/www/hde.conf
+/var/www/hde.app/log
 );
 
 
@@ -41,7 +45,8 @@ EMA_LOGS2=(
 /etc/init.d/ema_autoload
 /etc/ftpusers
 /etc/fstab
-/etc/HOSTNAME
+#/etc/HOSTNAME
+/etc/hostname
 /etc/hosts
 /etc/modprobe.conf
 /etc/modprobe.d/unsupported-modules
@@ -61,6 +66,7 @@ EMA_LOGS2=(
 /etc/conf.d/local.start
 /etc/xinetd.d/nrpe
 /etc/logrotate.d/ema
+/etc/ld.so.conf
 /var/log/mail
 /var/log/ntp
 /var/log/auth.log
@@ -74,6 +80,7 @@ EMA_LOGS2=(
 /var/log/syslog
 /var/log/syslog.1
 /var/log/auth.log
+/var/log/boot.log
 /root/LinuxRT/trunk/rsdu.config
 /usr/share/doc/isms/ReleaseNotesiSMS.txt
 /usr/lib/npreal2/driver/npreal2d.cf
@@ -87,6 +94,7 @@ EMA_LOGS2=(
 /opt/APC/PowerChute/group1/shutdownerlets.m11
 /opt/APC/PowerChute/group1/psaggregator.m11
 /etc/mongod.conf
+/var/www/hde.conf/nginx.conf
 );
 
 
