@@ -6,13 +6,25 @@ import binascii
 import socket
 import struct
 
+# sysmon udp:2003
 addr1 = ('10.100.1.20', 2003)
 addr2 = ('10.100.1.30', 2003)
 addr3 = ('10.100.1.100', 2003)
 
+# acrsvd udp:2013
+addr1 = ('10.100.1.20', 2013)
+addr2 = ('10.100.1.30', 2013)
+addr3 = ('10.100.1.100', 2013)
+
 def get_global_state(addr0) :
     """
-    --
+    /*Команды серверам данных*/
+    #define GCMD_GLOBAL_STATE_STOPPED       (uint16_t)0xf00f      /* Текущее состояние - остановлен */
+    #define GCMD_GET_GLOBAL_STATE           (uint16_t)0xf008      /* Получить статус сервера (SYSTEMMASTER или SYSTEMSLAVE) */
+    #define GCMD_GLOBAL_STATE_MASTER        (uint16_t)0xf009      /* Ответ сервера SYSTEMMASTER */
+    #define GCMD_GLOBAL_STATE_SLAVE         (uint16_t)0xf00a      /* Ответ сервера SYSTEMSLAVE */
+    #define GCMD_SET_GLOBAL_STATE_MASTER    (uint16_t)0xf00b      /* Set SYSTEMMASTER */
+    #define GCMD_SET_GLOBAL_STATE_SLAVE     (uint16_t)0xf00c      /* Set SYSTEMSLAVE */
     """
     ret='NONE'
 
@@ -65,11 +77,6 @@ def get_global_state(addr0) :
         # Send data
         #print ('sending "%s" ' % packed_data) # binascii.hexlify(packed_data)
         s.sendall(packed_data)
-        #print ('send')
-        # receive data
-        #while True:
-        #    data = s.recvfrom(2048) # (data, addr)
-        #    if not data: break
         data = s.recvfrom(2048)
         #print ('recvfrom')
     except Exception as e:
@@ -83,24 +90,25 @@ def get_global_state(addr0) :
     addr = data[1]
     #print ('Server reply=' + str(reply) +'=')
     l2=len(reply)
-    #print('l2(reply)=',len(reply))
-    if l2==struct.calcsize('!' + fm ) :
-        fm1='!' + fm
-        bo='big'
+    if l2>0 :
+        #print('l2(reply)=',len(reply))
+        if l2==struct.calcsize('!' + fm ) :
+            fm1='!' + fm
+            bo='big'
 
-    fd=struct.unpack(fm1,reply)
-    #print(fd)
-    v=fd[0]
-    if bo=='big' :
-        s=struct.pack('>I',v)
-        fdt=struct.unpack('<I',s)
-        #print(fdt)
-        v=fdt[0]
+        fd=struct.unpack(fm1,reply)
+        #print(fd)
+        v=fd[0]
+        if bo=='big' :
+            s=struct.pack('>I',v)
+            fdt=struct.unpack('<I',s)
+            #print(fdt)
+            v=fdt[0]
 
-    # 61449=master  61450=slave
-    if v==61448 : ret='NONE'
-    if v==61449 : ret='MASTER'
-    if v==61450 : ret='SLAVE'
+        if v==61448 : ret='STATE'
+        if v==61449 : ret='MASTER'
+        if v==61450 : ret='SLAVE'
+        if v==61455 : ret='STOPPED'
     return(ret)
 
 

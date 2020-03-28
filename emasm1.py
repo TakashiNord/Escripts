@@ -9,7 +9,13 @@ import struct
 
 def get_global_state(addr0) :
     """
-    --
+    /*Команды серверам данных*/
+    #define GCMD_GLOBAL_STATE_STOPPED       (uint16_t)0xf00f      /* Текущее состояние - остановлен */
+    #define GCMD_GET_GLOBAL_STATE           (uint16_t)0xf008      /* Получить статус сервера (SYSTEMMASTER или SYSTEMSLAVE) */
+    #define GCMD_GLOBAL_STATE_MASTER        (uint16_t)0xf009      /* Ответ сервера SYSTEMMASTER */
+    #define GCMD_GLOBAL_STATE_SLAVE         (uint16_t)0xf00a      /* Ответ сервера SYSTEMSLAVE */
+    #define GCMD_SET_GLOBAL_STATE_MASTER    (uint16_t)0xf00b      /* Set SYSTEMMASTER */
+    #define GCMD_SET_GLOBAL_STATE_SLAVE     (uint16_t)0xf00c      /* Set SYSTEMSLAVE */
     """
     ret='NONE'
 
@@ -64,9 +70,6 @@ def get_global_state(addr0) :
         s.sendall(packed_data)
         #print ('send')
         # receive data
-        #while True:
-        #    data = s.recvfrom(2048) # (data, addr)
-        #    if not data: break
         data = s.recvfrom(2048)
         #print ('recvfrom')
     except Exception as e:
@@ -81,6 +84,8 @@ def get_global_state(addr0) :
     #print ('Server reply=' + str(reply) +'=')
     l2=len(reply)
     #print('l2(reply)=',len(reply))
+    if l2<=0 : return(ret)
+
     if l2==struct.calcsize('!' + fm ) :
         fm1='!' + fm
         bo='big'
@@ -94,18 +99,20 @@ def get_global_state(addr0) :
         #print(fdt)
         v=fdt[0]
 
-    # 61449=master  61450=slave
-    if v==61448 : ret='NONE'
+    if v==61448 : ret='STATE'
     if v==61449 : ret='MASTER'
     if v==61450 : ret='SLAVE'
+    if v==61455 : ret='STOPPED'
     return(ret)
 
 
 def filestate() :
+    # sysmon udp:2003 , acrsvd udp:2013
     addr1 = ('10.51.1.50', 2003)
     addr2 = ('10.51.1.55', 2003)
     myfile = '/home/www-data/www/htdocs/WASUTP/config/stat.txt';
     str=get_global_state(addr1)
+    #print(ret)
     if str=='MASTER' :
         if not os.path.isfile(myfile):
             open(myfile, 'a').close()
@@ -118,8 +125,4 @@ def filestate() :
 
 if __name__ == '__main__':
     filestate()
-    #addr1 = ('10.51.1.50', 2003)
-    #addr2 = ('10.51.1.55', 2003)
-    #ret=get_global_state(addr1)
-    #print(ret)
     pass
