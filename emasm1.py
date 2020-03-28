@@ -107,7 +107,7 @@ def get_global_state(addr0) :
 
 
 def filestate() :
-    # sysmon udp:2003 , acrsvd udp:2013
+    # sysmon udp:2003 , acrsvd udp:2005
     addr1 = ('10.51.1.50', 2003)
     addr2 = ('10.51.1.55', 2003)
     myfile = '/home/www-data/www/htdocs/WASUTP/config/stat.txt';
