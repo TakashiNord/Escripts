@@ -1,0 +1,1 @@
+sqlcmd -i C:\RsduSql\ktc.sql -o C:\RsduSql\ktc.log -U eng6 -P eng6 -S 10.100.230.26
