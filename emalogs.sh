@@ -95,6 +95,9 @@ EMA_LOGS2=(
 /opt/APC/PowerChute/group1/psaggregator.m11
 /etc/mongod.conf
 /var/www/hde.conf/nginx.conf
+/etc/logrotate.d/rabbitmq-server
+/etc/logrotate.d/ema
+/etc/cron.d/ema_time
 );
 
 
