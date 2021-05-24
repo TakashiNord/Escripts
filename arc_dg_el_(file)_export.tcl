@@ -3,11 +3,8 @@
 # и связанных с ними таблиц Технологического режима EL(29)
 #
 # Период = От текущей даты - 7 дней.
+# используется ID_GTOPT=4
 #
-#
-
-
-
 package require tclodbc
 package require sqlite3
 
@@ -55,18 +52,18 @@ puts "-- Start --"
     puts " $RETFNAME1 = $cnt"
 
     if {$cnt>0} {
-     set ph1 [file rootname $ph]_$RETFNAME1.sql
-     set rf [ open $ph1 "w+"  ]
-     set strSQL3 "SELECT TIME1970, VAL, STATE  FROM %s WHERE from_dt1970(TIME1970)>(SYSDATE-7) ORDER BY TIME1970 DESC"
-     set strSQL3 [ format $strSQL3 $RETFNAME1 ]
-     foreach {r3} [ db2 $strSQL3 ] {
-        set TIME19701 [ lindex $r3 0 ]
-        set VAL1 [ lindex $r3 1 ]
-        set STATE1 [ lindex $r3 2 ]
+        set ph1 [file rootname $ph]_$RETFNAME1.sql
+        set rf [ open $ph1 "w+"  ]
+        set strSQL3 "SELECT TIME1970, VAL, STATE  FROM %s WHERE from_dt1970(TIME1970)>(SYSDATE-7) ORDER BY TIME1970 DESC"
+        set strSQL3 [ format $strSQL3 $RETFNAME1 ]
+        foreach {r3} [ db2 $strSQL3 ] {
+            set TIME19701 [ lindex $r3 0 ]
+            set VAL1 [ lindex $r3 1 ]
+            set STATE1 [ lindex $r3 2 ]
 
-        set sinsert "INSERT INTO ${RETFNAME1} (TIME1970, VAL, STATE) VALUES (${TIME19701},${VAL1},${STATE1}) ; "
+            set sinsert "INSERT INTO ${RETFNAME1} (TIME1970, VAL, STATE) VALUES (${TIME19701},${VAL1},${STATE1}) ; "
 
-        set smerge " MERGE INTO ${RETFNAME1} A USING \
+            set smerge " MERGE INTO ${RETFNAME1} A USING \
  (SELECT ${TIME19701} as \"TIME1970\", ${VAL1} as \"VAL\", ${STATE1} as \"STATE\" FROM DUAL) B \
 ON (A.TIME1970 = B.TIME1970) \
 WHEN NOT MATCHED THEN \
@@ -74,12 +71,12 @@ INSERT ( TIME1970, VAL, STATE) VALUES ( B.TIME1970, B.VAL, B.STATE) \
 WHEN MATCHED THEN \
 UPDATE SET A.VAL = B.VAL, A.STATE = B.STATE ; "
 
-        #puts $rf $smerge
-        puts $rf $sinsert
+             puts $rf $smerge
+             #puts $rf $sinsert
+        }
+        flush $rf
+        close $rf
      }
-     flush $rf
-     close $rf
-    }
   }
 
 
