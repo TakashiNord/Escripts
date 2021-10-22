@@ -1,0 +1,1654 @@
+-- DA_SRC_CHANNEL = 6102241
+-- DA_SRC_CHANNEL_TUNE = 6102240
+--  1
+--  6106143  Т4 - Ub  6100001  1002  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102075, 6106143, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102076, 6106143, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102077, 6106143, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102078, 6106143, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106143,DECODE(6102075, 0, NULL, 6102075)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6102075,6102075,54,6105140) ;
+--  2
+--  6106144  Т4 - Uc  6100001  1003  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102071, 6106144, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102072, 6106144, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102073, 6106144, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102074, 6106144, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106144,DECODE(6102071, 0, NULL, 6102071)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6102071,6102071,54,6105142) ;
+--  3
+--  6106145  Т4 - Uab  6100001  1004  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102067, 6106145, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102068, 6106145, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102069, 6106145, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102070, 6106145, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106145,DECODE(6102067, 0, NULL, 6102067)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6102067,6102067,54,6105139) ;
+--  4
+--  6106146  Т4 - Ubc  6100001  1005  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102063, 6106146, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102064, 6106146, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102065, 6106146, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102066, 6106146, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106146,DECODE(6102063, 0, NULL, 6102063)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6102063,6102063,54,6105141) ;
+--  5
+--  6106147  Т4 - Uca  6100001  1006  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102059, 6106147, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102060, 6106147, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102061, 6106147, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102062, 6106147, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106147,DECODE(6102059, 0, NULL, 6102059)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6102059,6102059,54,6105143) ;
+--  6
+--  6106148  Т4 - Ia  6100001  1007  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102055, 6106148, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102056, 6106148, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102057, 6106148, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102058, 6106148, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106148,DECODE(6102055, 0, NULL, 6102055)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6102055,6102055,54,6105122) ;
+--  7
+--  6106149  Т4 - Ib  6100001  1008  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102051, 6106149, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102052, 6106149, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102053, 6106149, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102054, 6106149, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106149,DECODE(6102051, 0, NULL, 6102051)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6102051,6102051,54,6105123) ;
+--  8
+--  6106150  Т4 - Ic  6100001  1009  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102047, 6106150, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102048, 6106150, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102049, 6106150, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102050, 6106150, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106150,DECODE(6102047, 0, NULL, 6102047)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6102047,6102047,54,6105124) ;
+--  9
+--  6106151  Т4 - Pa  6100001  1010  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102043, 6106151, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102044, 6106151, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102045, 6106151, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102046, 6106151, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106151,DECODE(6102043, 0, NULL, 6102043)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6102043,6102043,54,6105127) ;
+--  10
+--  6106152  Т4 - Pb  6100001  1011  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102039, 6106152, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102040, 6106152, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102041, 6106152, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102042, 6106152, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106152,DECODE(6102039, 0, NULL, 6102039)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6102039,6102039,54,6105128) ;
+--  11
+--  6106153  Т4 - Pc  6100001  1012  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102035, 6106153, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102036, 6106153, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102037, 6106153, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102038, 6106153, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106153,DECODE(6102035, 0, NULL, 6102035)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6102035,6102035,54,6105129) ;
+--  12
+--  6106154  Т4 - Pсум  6100001  1013  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102031, 6106154, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102032, 6106154, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102033, 6106154, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102034, 6106154, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106154,DECODE(6102031, 0, NULL, 6102031)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6102031,6102031,54,6105130) ;
+--  13
+--  6106155  Т4 - Qa  6100001  1014  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102027, 6106155, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102028, 6106155, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102029, 6106155, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102030, 6106155, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106155,DECODE(6102027, 0, NULL, 6102027)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6102027,6102027,54,6105131) ;
+--  14
+--  6106156  Т4 - Qb  6100001  1015  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102023, 6106156, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102024, 6106156, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102025, 6106156, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102026, 6106156, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106156,DECODE(6102023, 0, NULL, 6102023)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6102023,6102023,54,6105132) ;
+--  15
+--  6106157  Т4 - Qc  6100001  1016  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102019, 6106157, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102020, 6106157, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102021, 6106157, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102022, 6106157, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106157,DECODE(6102019, 0, NULL, 6102019)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6102019,6102019,54,6105133) ;
+--  16
+--  6106158  Т4 - Qсум  6100001  1017  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102015, 6106158, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102016, 6106158, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102017, 6106158, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102018, 6106158, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106158,DECODE(6102015, 0, NULL, 6102015)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6102015,6102015,54,6105134) ;
+--  17
+--  6106159  Т4 - Sa  6100001  1018  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102011, 6106159, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102012, 6106159, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102013, 6106159, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102014, 6106159, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106159,DECODE(6102011, 0, NULL, 6102011)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6102011,6102011,54,6105135) ;
+--  18
+--  6106160  Т4 - Sb  6100001  1019  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102007, 6106160, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102008, 6106160, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102009, 6106160, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102010, 6106160, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106160,DECODE(6102007, 0, NULL, 6102007)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6102007,6102007,54,6105136) ;
+--  19
+--  6106161  Т4 - Sc  6100001  1020  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102003, 6106161, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102004, 6106161, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102005, 6106161, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102006, 6106161, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106161,DECODE(6102003, 0, NULL, 6102003)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6102003,6102003,54,6105137) ;
+--  20
+--  6106162  Т4 - Sсум  6100001  1021  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101999, 6106162, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102000, 6106162, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102001, 6106162, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102002, 6106162, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106162,DECODE(6101999, 0, NULL, 6101999)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101999,6101999,54,6105138) ;
+--  21
+--  6106163  Т4 - cos a  6100001  1022  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101995, 6106163, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101996, 6106163, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101997, 6106163, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101998, 6106163, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106163,DECODE(6101995, 0, NULL, 6101995)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101995,6101995,54,6105118) ;
+--  22
+--  6106164  Т4 - cos b  6100001  1023  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101991, 6106164, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101992, 6106164, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101993, 6106164, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101994, 6106164, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106164,DECODE(6101991, 0, NULL, 6101991)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101991,6101991,54,6105119) ;
+--  23
+--  6106165  Т4 - cos c  6100001  1024  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101987, 6106165, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101988, 6106165, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101989, 6106165, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101990, 6106165, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106165,DECODE(6101987, 0, NULL, 6101987)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101987,6101987,54,6105120) ;
+--  24
+--  6106166  Т4 - Uo  6100001  1025  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101983, 6106166, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101984, 6106166, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101985, 6106166, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101986, 6106166, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106166,DECODE(6101983, 0, NULL, 6101983)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101983,6101983,54,6105144) ;
+--  25
+--  6106167  Т4 - Io  6100001  1026  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101979, 6106167, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101980, 6106167, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101981, 6106167, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101982, 6106167, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106167,DECODE(6101979, 0, NULL, 6101979)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101979,6101979,54,6105125) ;
+--  26
+--  6106168  Т4 - F  6100001  1027  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101975, 6106168, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101976, 6106168, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101977, 6106168, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101978, 6106168, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106168,DECODE(6101975, 0, NULL, 6101975)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101975,6101975,54,6105121) ;
+--  27
+--  6106169  Т4 - Uср.ф  6100001  1028  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101971, 6106169, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101972, 6106169, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101973, 6106169, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101974, 6106169, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106169,DECODE(6101971, 0, NULL, 6101971)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101971,6101971,54,6105146) ;
+--  28
+--  6106170  Т4 - Uср.л  6100001  1029  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101967, 6106170, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101968, 6106170, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101969, 6106170, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101970, 6106170, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106170,DECODE(6101967, 0, NULL, 6101967)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101967,6101967,54,6105145) ;
+--  29
+--  6106171  Т4 - Iср  6100001  1030  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101963, 6106171, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101964, 6106171, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101965, 6106171, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101966, 6106171, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106171,DECODE(6101963, 0, NULL, 6101963)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101963,6101963,54,6105126) ;
+--  30
+--  6106172  ЭГРУ-10,5кВ Г4 - Ua  6100001  1031  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101959, 6106172, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101960, 6106172, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101961, 6106172, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101962, 6106172, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106172,DECODE(6101959, 0, NULL, 6101959)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101959,6101959,54,6105168) ;
+--  31
+--  6106173  ЭГРУ-10,5кВ Г4 - Ub  6100001  1032  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101955, 6106173, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101956, 6106173, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101957, 6106173, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101958, 6106173, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106173,DECODE(6101955, 0, NULL, 6101955)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101955,6101955,54,6105170) ;
+--  32
+--  6106174  ЭГРУ-10,5кВ Г4 - Uc  6100001  1033  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101951, 6106174, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101952, 6106174, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101953, 6106174, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101954, 6106174, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106174,DECODE(6101951, 0, NULL, 6101951)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101951,6101951,54,6105172) ;
+--  33
+--  6106175  ЭГРУ-10,5кВ Г4 - Uab  6100001  1034  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101947, 6106175, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101948, 6106175, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101949, 6106175, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101950, 6106175, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106175,DECODE(6101947, 0, NULL, 6101947)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101947,6101947,54,6105169) ;
+--  34
+--  6106176  ЭГРУ-10,5кВ Г4 - Ubc  6100001  1035  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101943, 6106176, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101944, 6106176, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101945, 6106176, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101946, 6106176, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106176,DECODE(6101943, 0, NULL, 6101943)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101943,6101943,54,6105171) ;
+--  35
+--  6106177  ЭГРУ-10,5кВ Г4 - Uca  6100001  1036  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101939, 6106177, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101940, 6106177, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101941, 6106177, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101942, 6106177, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106177,DECODE(6101939, 0, NULL, 6101939)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101939,6101939,54,6105173) ;
+--  36
+--  6106178  ЭГРУ-10,5кВ Г4 - Ia  6100001  1037  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101935, 6106178, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101936, 6106178, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101937, 6106178, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101938, 6106178, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106178,DECODE(6101935, 0, NULL, 6101935)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101935,6101935,54,6105151) ;
+--  37
+--  6106179  ЭГРУ-10,5кВ Г4 - Ib  6100001  1038  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101931, 6106179, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101932, 6106179, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101933, 6106179, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101934, 6106179, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106179,DECODE(6101931, 0, NULL, 6101931)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101931,6101931,54,6105973) ;
+--  38
+--  6106180  ЭГРУ-10,5кВ Г4 - Ic  6100001  1039  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101927, 6106180, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101928, 6106180, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101929, 6106180, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101930, 6106180, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106180,DECODE(6101927, 0, NULL, 6101927)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101927,6101927,54,6105153) ;
+--  39
+--  6106181  ЭГРУ-10,5кВ Г4 - Pa  6100001  1040  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101923, 6106181, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101924, 6106181, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101925, 6106181, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101926, 6106181, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106181,DECODE(6101923, 0, NULL, 6101923)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101923,6101923,54,6105156) ;
+--  40
+--  6106182  ЭГРУ-10,5кВ Г4 - Pb  6100001  1041  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101919, 6106182, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101920, 6106182, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101921, 6106182, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101922, 6106182, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106182,DECODE(6101919, 0, NULL, 6101919)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101919,6101919,54,6105157) ;
+--  41
+--  6106183  ЭГРУ-10,5кВ Г4 - Pc  6100001  1042  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101915, 6106183, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101916, 6106183, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101917, 6106183, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101918, 6106183, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106183,DECODE(6101915, 0, NULL, 6101915)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101915,6101915,54,6105158) ;
+--  42
+--  6106184  ЭГРУ-10,5кВ Г4 - Pсум  6100001  1043  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101911, 6106184, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101912, 6106184, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101913, 6106184, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101914, 6106184, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106184,DECODE(6101911, 0, NULL, 6101911)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101911,6101911,54,6105159) ;
+--  43
+--  6106185  ЭГРУ-10,5кВ Г4 - Qa  6100001  1044  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101907, 6106185, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101908, 6106185, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101909, 6106185, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101910, 6106185, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106185,DECODE(6101907, 0, NULL, 6101907)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101907,6101907,54,6105160) ;
+--  44
+--  6106186  ЭГРУ-10,5кВ Г4 - Qb  6100001  1045  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101903, 6106186, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101904, 6106186, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101905, 6106186, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101906, 6106186, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106186,DECODE(6101903, 0, NULL, 6101903)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101903,6101903,54,6105161) ;
+--  45
+--  6106187  ЭГРУ-10,5кВ Г4 - Qc  6100001  1046  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101899, 6106187, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101900, 6106187, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101901, 6106187, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101902, 6106187, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106187,DECODE(6101899, 0, NULL, 6101899)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101899,6101899,54,6105162) ;
+--  46
+--  6106142  Т4 - Ua  6100001  1001  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101895, 6106142, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101896, 6106142, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101897, 6106142, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101898, 6106142, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106142,DECODE(6101895, 0, NULL, 6101895)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101895,6101895,54,6105064) ;
+--  47
+--  6106188  ЭГРУ-10,5кВ Г4 - Qсум  6100001  1047  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101891, 6106188, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101892, 6106188, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101893, 6106188, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101894, 6106188, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106188,DECODE(6101891, 0, NULL, 6101891)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101891,6101891,54,6105163) ;
+--  48
+--  6106189  ЭГРУ-10,5кВ Г4 - Sa  6100001  1048  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101887, 6106189, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101888, 6106189, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101889, 6106189, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101890, 6106189, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106189,DECODE(6101887, 0, NULL, 6101887)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101887,6101887,54,6105164) ;
+--  49
+--  6106190  ЭГРУ-10,5кВ Г4 - Sb  6100001  1049  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101883, 6106190, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101884, 6106190, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101885, 6106190, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101886, 6106190, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106190,DECODE(6101883, 0, NULL, 6101883)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101883,6101883,54,6105165) ;
+--  50
+--  6106191  ЭГРУ-10,5кВ Г4 - Sc  6100001  1050  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101879, 6106191, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101880, 6106191, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101881, 6106191, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101882, 6106191, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106191,DECODE(6101879, 0, NULL, 6101879)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101879,6101879,54,6105166) ;
+--  51
+--  6106192  ЭГРУ-10,5кВ Г4 - Sсум  6100001  1051  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101875, 6106192, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101876, 6106192, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101877, 6106192, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101878, 6106192, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106192,DECODE(6101875, 0, NULL, 6101875)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101875,6101875,54,6105167) ;
+--  52
+--  6106193  ЭГРУ-10,5кВ Г4 - cos a  6100001  1052  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101871, 6106193, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101872, 6106193, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101873, 6106193, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101874, 6106193, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106193,DECODE(6101871, 0, NULL, 6101871)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101871,6101871,54,6105147) ;
+--  53
+--  6106194  ЭГРУ-10,5кВ Г4 - cos b  6100001  1053  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101867, 6106194, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101868, 6106194, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101869, 6106194, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101870, 6106194, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106194,DECODE(6101867, 0, NULL, 6101867)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101867,6101867,54,6105148) ;
+--  54
+--  6106195  ЭГРУ-10,5кВ Г4 - cos c  6100001  1054  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101863, 6106195, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101864, 6106195, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101865, 6106195, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101866, 6106195, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106195,DECODE(6101863, 0, NULL, 6101863)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101863,6101863,54,6105149) ;
+--  55
+--  6106196  ЭГРУ-10,5кВ Г4 - Uo  6100001  1055  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101859, 6106196, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101860, 6106196, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101861, 6106196, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101862, 6106196, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106196,DECODE(6101859, 0, NULL, 6101859)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101859,6101859,54,6105174) ;
+--  56
+--  6106197  ЭГРУ-10,5кВ Г4 - Io  6100001  1056  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101855, 6106197, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101856, 6106197, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101857, 6106197, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101858, 6106197, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106197,DECODE(6101855, 0, NULL, 6101855)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101855,6101855,54,6105154) ;
+--  57
+--  6106198  ЭГРУ-10,5кВ Г4 - F  6100001  1057  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101851, 6106198, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101852, 6106198, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101853, 6106198, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101854, 6106198, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106198,DECODE(6101851, 0, NULL, 6101851)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101851,6101851,54,6105150) ;
+--  58
+--  6106199  ЭГРУ-10,5кВ Г4 - Uср.ф  6100001  1058  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101847, 6106199, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101848, 6106199, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101849, 6106199, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101850, 6106199, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106199,DECODE(6101847, 0, NULL, 6101847)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101847,6101847,54,6105176) ;
+--  59
+--  6106200  ЭГРУ-10,5кВ Г4 - Uср.л  6100001  1059  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101843, 6106200, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101844, 6106200, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101845, 6106200, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101846, 6106200, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106200,DECODE(6101843, 0, NULL, 6101843)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101843,6101843,54,6105175) ;
+--  60
+--  6106201  ЭГРУ-10,5кВ Г4 - Iср  6100001  1060  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101839, 6106201, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101840, 6106201, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101841, 6106201, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101842, 6106201, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106201,DECODE(6101839, 0, NULL, 6101839)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101839,6101839,54,6105155) ;
+--  61
+--  6106202  4ВТ - Ua  6100001  1061  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101835, 6106202, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101836, 6106202, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101837, 6106202, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101838, 6106202, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106202,DECODE(6101835, 0, NULL, 6101835)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101835,6101835,54,6105198) ;
+--  62
+--  6106203  4ВТ - Ub  6100001  1062  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101831, 6106203, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101832, 6106203, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101833, 6106203, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101834, 6106203, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106203,DECODE(6101831, 0, NULL, 6101831)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101830,6101831,54,6105200) ;
+--  63
+--  6106204  4ВТ - Uc  6100001  1063  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101827, 6106204, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101828, 6106204, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101829, 6106204, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101830, 6106204, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106204,DECODE(6101827, 0, NULL, 6101827)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101826,6101827,54,6105202) ;
+--  64
+--  6106205  4ВТ - Uab  6100001  1064  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101823, 6106205, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101824, 6106205, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101825, 6106205, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101826, 6106205, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106205,DECODE(6101823, 0, NULL, 6101823)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101822,6101823,54,6105199) ;
+--  65
+--  6106206  4ВТ - Ubc  6100001  1065  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101819, 6106206, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101820, 6106206, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101821, 6106206, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101822, 6106206, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106206,DECODE(6101819, 0, NULL, 6101819)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101818,6101819,54,6105201) ;
+--  66
+--  6106207  4ВТ - Uca  6100001  1066  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101814, 6106207, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101815, 6106207, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101816, 6106207, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101817, 6106207, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106207,DECODE(6101814, 0, NULL, 6101814)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101813,6101814,54,6105203) ;
+--  67
+--  6106208  4ВТ - Ia  6100001  1067  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101810, 6106208, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101811, 6106208, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101812, 6106208, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101813, 6106208, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106208,DECODE(6101810, 0, NULL, 6101810)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101809,6101810,54,6105181) ;
+--  68
+--  6106209  4ВТ - Ib  6100001  1068  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101806, 6106209, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101807, 6106209, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101808, 6106209, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101809, 6106209, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106209,DECODE(6101806, 0, NULL, 6101806)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101805,6101806,54,6105182) ;
+--  69
+--  6106210  4ВТ - Ic  6100001  1069  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101802, 6106210, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101803, 6106210, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101804, 6106210, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101805, 6106210, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106210,DECODE(6101802, 0, NULL, 6101802)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101801,6101802,54,6105183) ;
+--  70
+--  6106211  4ВТ - Pa  6100001  1070  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101798, 6106211, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101799, 6106211, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101800, 6106211, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101801, 6106211, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106211,DECODE(6101798, 0, NULL, 6101798)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101797,6101798,54,6105186) ;
+--  71
+--  6106212  4ВТ - Pb  6100001  1071  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101794, 6106212, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101795, 6106212, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101796, 6106212, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101797, 6106212, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106212,DECODE(6101794, 0, NULL, 6101794)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101793,6101794,54,6105187) ;
+--  72
+--  6106213  4ВТ - Pc  6100001  1072  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101790, 6106213, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101791, 6106213, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101792, 6106213, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101793, 6106213, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106213,DECODE(6101790, 0, NULL, 6101790)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101789,6101790,54,6105188) ;
+--  73
+--  6106214  4ВТ - Pсум  6100001  1073  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101786, 6106214, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101787, 6106214, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101788, 6106214, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101789, 6106214, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106214,DECODE(6101786, 0, NULL, 6101786)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101785,6101786,54,6105189) ;
+--  74
+--  6106215  4ВТ - Qa  6100001  1074  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101782, 6106215, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101783, 6106215, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101784, 6106215, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101785, 6106215, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106215,DECODE(6101782, 0, NULL, 6101782)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101781,6101782,54,6105190) ;
+--  75
+--  6106216  4ВТ - Qb  6100001  1075  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101778, 6106216, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101779, 6106216, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101780, 6106216, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101781, 6106216, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106216,DECODE(6101778, 0, NULL, 6101778)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101777,6101778,54,6105191) ;
+--  76
+--  6106217  4ВТ - Qc  6100001  1076  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101774, 6106217, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101775, 6106217, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101776, 6106217, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101777, 6106217, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106217,DECODE(6101774, 0, NULL, 6101774)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101773,6101774,54,6105192) ;
+--  77
+--  6106218  4ВТ - Qсум  6100001  1077  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101770, 6106218, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101771, 6106218, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101772, 6106218, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101773, 6106218, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106218,DECODE(6101770, 0, NULL, 6101770)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101769,6101770,54,6105193) ;
+--  78
+--  6106219  4ВТ - Sa  6100001  1078  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101766, 6106219, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101767, 6106219, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101768, 6106219, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101769, 6106219, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106219,DECODE(6101766, 0, NULL, 6101766)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101765,6101766,54,6105194) ;
+--  79
+--  6106220  4ВТ - Sb  6100001  1079  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101762, 6106220, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101763, 6106220, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101764, 6106220, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101765, 6106220, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106220,DECODE(6101762, 0, NULL, 6101762)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101761,6101762,54,6105195) ;
+--  80
+--  6106221  4ВТ - Sc  6100001  1080  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101758, 6106221, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101759, 6106221, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101760, 6106221, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101761, 6106221, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106221,DECODE(6101758, 0, NULL, 6101758)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101757,6101758,54,6105196) ;
+--  81
+--  6106222  4ВТ - Sсум  6100001  1081  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101754, 6106222, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101755, 6106222, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101756, 6106222, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101757, 6106222, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106222,DECODE(6101754, 0, NULL, 6101754)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101753,6101754,54,6105197) ;
+--  82
+--  6106223  4ВТ - cos a  6100001  1082  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101750, 6106223, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101751, 6106223, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101752, 6106223, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101753, 6106223, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106223,DECODE(6101750, 0, NULL, 6101750)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101749,6101750,54,6105177) ;
+--  83
+--  6106224  4ВТ - cos b  6100001  1083  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101746, 6106224, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101747, 6106224, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101748, 6106224, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101749, 6106224, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106224,DECODE(6101746, 0, NULL, 6101746)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101745,6101746,54,6105178) ;
+--  84
+--  6106225  4ВТ - cos c  6100001  1084  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101742, 6106225, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101743, 6106225, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101744, 6106225, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101745, 6106225, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106225,DECODE(6101742, 0, NULL, 6101742)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101741,6101742,54,6105179) ;
+--  85
+--  6106226  4ВТ - Uo  6100001  1085  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101738, 6106226, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101739, 6106226, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101740, 6106226, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101741, 6106226, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106226,DECODE(6101738, 0, NULL, 6101738)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101737,6101738,54,6105204) ;
+--  86
+--  6106227  4ВТ - Io  6100001  1086  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101734, 6106227, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101735, 6106227, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101736, 6106227, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101737, 6106227, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106227,DECODE(6101734, 0, NULL, 6101734)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101733,6101734,54,6105184) ;
+--  87
+--  6106228  4ВТ - F  6100001  1087  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101730, 6106228, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101731, 6106228, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101732, 6106228, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101733, 6106228, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106228,DECODE(6101730, 0, NULL, 6101730)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101729,6101730,54,6105180) ;
+--  88
+--  6106229  4ВТ - Uср.ф  6100001  1088  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101726, 6106229, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101727, 6106229, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101728, 6106229, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101729, 6106229, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106229,DECODE(6101726, 0, NULL, 6101726)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101725,6101726,54,6105206) ;
+--  89
+--  6106230  4ВТ - Uср.л  6100001  1089  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101722, 6106230, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101723, 6106230, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101724, 6106230, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101725, 6106230, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106230,DECODE(6101722, 0, NULL, 6101722)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101721,6101722,54,6105205) ;
+--  90
+--  6106231  4ВТ - Iср  6100001  1090  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101718, 6106231, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101719, 6106231, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101720, 6106231, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101721, 6106231, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106231,DECODE(6101718, 0, NULL, 6101718)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101717,6101718,54,6105185) ;
+--  91
+--  6106232  В1-4ВТ - Ua  6100001  1091  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101714, 6106232, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101715, 6106232, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101716, 6106232, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101717, 6106232, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106232,DECODE(6101714, 0, NULL, 6101714)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101713,6101714,54,6105084) ;
+--  92
+--  6106233  В1-4ВТ - Ub  6100001  1092  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101710, 6106233, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101711, 6106233, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101712, 6106233, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101713, 6106233, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106233,DECODE(6101710, 0, NULL, 6101710)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101709,6101710,54,6105086) ;
+--  93
+--  6106234  В1-4ВТ - Uc  6100001  1093  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101706, 6106234, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101707, 6106234, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101708, 6106234, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101709, 6106234, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106234,DECODE(6101706, 0, NULL, 6101706)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101705,6101706,54,6105088) ;
+--  94
+--  6106235  В1-4ВТ - Uab  6100001  1094  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101702, 6106235, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101703, 6106235, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101704, 6106235, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101705, 6106235, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106235,DECODE(6101702, 0, NULL, 6101702)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101701,6101702,54,6105085) ;
+--  95
+--  6106236  В1-4ВТ - Ubc  6100001  1095  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101698, 6106236, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101699, 6106236, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101700, 6106236, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101701, 6106236, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106236,DECODE(6101698, 0, NULL, 6101698)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101697,6101698,54,6105087) ;
+--  96
+--  6106237  В1-4ВТ - Uca  6100001  1096  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101694, 6106237, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101695, 6106237, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101696, 6106237, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101697, 6106237, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106237,DECODE(6101694, 0, NULL, 6101694)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101693,6101694,54,6105089) ;
+--  97
+--  6106238  В1-4ВТ - Ia  6100001  1097  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101690, 6106238, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101691, 6106238, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101692, 6106238, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101693, 6106238, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106238,DECODE(6101690, 0, NULL, 6101690)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101689,6101690,54,6105068) ;
+--  98
+--  6106239  В1-4ВТ - Ib  6100001  1098  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101686, 6106239, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101687, 6106239, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101688, 6106239, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101689, 6106239, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106239,DECODE(6101686, 0, NULL, 6101686)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101685,6101686,54,6105069) ;
+--  99
+--  6106240  В1-4ВТ - Ic  6100001  1099  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101682, 6106240, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101683, 6106240, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101684, 6106240, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101685, 6106240, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106240,DECODE(6101682, 0, NULL, 6101682)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101681,6101682,54,6105070) ;
+--  100
+--  6106241  В1-4ВТ - Pa  6100001  1100  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101678, 6106241, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101679, 6106241, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101680, 6106241, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101681, 6106241, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106241,DECODE(6101678, 0, NULL, 6101678)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101677,6101678,54,6105072) ;
+--  101
+--  6106242  В1-4ВТ - Pb  6100001  1101  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101674, 6106242, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101675, 6106242, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101676, 6106242, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101677, 6106242, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106242,DECODE(6101674, 0, NULL, 6101674)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101673,6101674,54,6105073) ;
+--  102
+--  6106243  В1-4ВТ - Pc  6100001  1102  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101670, 6106243, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101671, 6106243, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101672, 6106243, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101673, 6106243, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106243,DECODE(6101670, 0, NULL, 6101670)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101669,6101670,54,6105074) ;
+--  103
+--  6106244  В1-4ВТ - Pсум  6100001  1103  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101666, 6106244, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101667, 6106244, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101668, 6106244, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101669, 6106244, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106244,DECODE(6101666, 0, NULL, 6101666)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101665,6101666,54,6105075) ;
+--  104
+--  6106245  В1-4ВТ - Qa  6100001  1104  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101662, 6106245, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101663, 6106245, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101664, 6106245, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101665, 6106245, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106245,DECODE(6101662, 0, NULL, 6101662)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101661,6101662,54,6105076) ;
+--  105
+--  6106246  В1-4ВТ - Qb  6100001  1105  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101658, 6106246, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101659, 6106246, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101660, 6106246, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101661, 6106246, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106246,DECODE(6101658, 0, NULL, 6101658)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101657,6101658,54,6105077) ;
+--  106
+--  6106247  В1-4ВТ - Qc  6100001  1106  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101654, 6106247, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101655, 6106247, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101656, 6106247, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101657, 6106247, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106247,DECODE(6101654, 0, NULL, 6101654)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101653,6101654,54,6105078) ;
+--  107
+--  6106248  В1-4ВТ - Qсум  6100001  1107  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101650, 6106248, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101651, 6106248, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101652, 6106248, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101653, 6106248, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106248,DECODE(6101650, 0, NULL, 6101650)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101649,6101650,54,6105079) ;
+--  108
+--  6106249  В1-4ВТ - Sa  6100001  1108  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101646, 6106249, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101647, 6106249, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101648, 6106249, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101649, 6106249, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106249,DECODE(6101646, 0, NULL, 6101646)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101645,6101646,54,6105080) ;
+--  109
+--  6106250  В1-4ВТ - Sb  6100001  1109  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101642, 6106250, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101643, 6106250, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101644, 6106250, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101645, 6106250, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106250,DECODE(6101642, 0, NULL, 6101642)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101641,6101642,54,6105081) ;
+--  110
+--  6106251  В1-4ВТ - Sc  6100001  1110  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101638, 6106251, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101639, 6106251, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101640, 6106251, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101641, 6106251, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106251,DECODE(6101638, 0, NULL, 6101638)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101637,6101638,54,6105082) ;
+--  111
+--  6106252  В1-4ВТ - Sсум  6100001  1111  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101634, 6106252, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101635, 6106252, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101636, 6106252, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101637, 6106252, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106252,DECODE(6101634, 0, NULL, 6101634)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101633,6101634,54,6105083) ;
+--  112
+--  6106253  В1-4ВТ - F  6100001  1112  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101630, 6106253, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101631, 6106253, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101632, 6106253, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101633, 6106253, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106253,DECODE(6101630, 0, NULL, 6101630)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101629,6101630,54,6105067) ;
+--  113
+--  6106254  В1-4ВТ - Uср.ф  6100001  1113  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101626, 6106254, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101627, 6106254, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101628, 6106254, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101629, 6106254, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106254,DECODE(6101626, 0, NULL, 6101626)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101625,6101626,54,6105091) ;
+--  114
+--  6106255  В1-4ВТ - Uср.л  6100001  1114  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101622, 6106255, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101623, 6106255, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101624, 6106255, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101625, 6106255, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106255,DECODE(6101622, 0, NULL, 6101622)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101621,6101622,54,6105090) ;
+--  115
+--  6106256  В1-4ВТ - Iср  6100001  1115  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101618, 6106256, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101619, 6106256, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101620, 6106256, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101621, 6106256, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106256,DECODE(6101618, 0, NULL, 6101618)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101617,6101618,54,6105071) ;
+--  116
+--  6106257  В2-4ВТ - Ua  6100001  1116  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101614, 6106257, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101615, 6106257, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101616, 6106257, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101617, 6106257, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106257,DECODE(6101614, 0, NULL, 6101614)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101613,6101614,54,6105109) ;
+--  117
+--  6106258  В2-4ВТ - Ub  6100001  1117  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101610, 6106258, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101611, 6106258, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101612, 6106258, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101613, 6106258, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106258,DECODE(6101610, 0, NULL, 6101610)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101609,6101610,54,6105111) ;
+--  118
+--  6106259  В2-4ВТ - Uc  6100001  1118  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101606, 6106259, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101607, 6106259, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101608, 6106259, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101609, 6106259, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106259,DECODE(6101606, 0, NULL, 6101606)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101605,6101606,54,6105113) ;
+--  119
+--  6106260  В2-4ВТ - Uab  6100001  1119  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101602, 6106260, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101603, 6106260, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101604, 6106260, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101605, 6106260, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106260,DECODE(6101602, 0, NULL, 6101602)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101601,6101602,54,6105110) ;
+--  120
+--  6106261  В2-4ВТ - Ubc  6100001  1120  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101598, 6106261, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101599, 6106261, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101600, 6106261, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101601, 6106261, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106261,DECODE(6101598, 0, NULL, 6101598)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101597,6101598,54,6105112) ;
+--  121
+--  6106262  В2-4ВТ - Uca  6100001  1121  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101594, 6106262, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101595, 6106262, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101596, 6106262, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101597, 6106262, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106262,DECODE(6101594, 0, NULL, 6101594)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101593,6101594,54,6105114) ;
+--  122
+--  6106263  В2-4ВТ - Ia  6100001  1122  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101590, 6106263, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101591, 6106263, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101592, 6106263, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101593, 6106263, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106263,DECODE(6101590, 0, NULL, 6101590)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101589,6101590,54,6105093) ;
+--  123
+--  6106264  В2-4ВТ - Ib  6100001  1123  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101586, 6106264, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101587, 6106264, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101588, 6106264, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101589, 6106264, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106264,DECODE(6101586, 0, NULL, 6101586)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101585,6101586,54,6105094) ;
+--  124
+--  6106265  В2-4ВТ - Ic  6100001  1124  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101582, 6106265, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101583, 6106265, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101584, 6106265, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101585, 6106265, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106265,DECODE(6101582, 0, NULL, 6101582)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101581,6101582,54,6105095) ;
+--  125
+--  6106266  В2-4ВТ - Pa  6100001  1125  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101578, 6106266, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101579, 6106266, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101580, 6106266, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101581, 6106266, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106266,DECODE(6101578, 0, NULL, 6101578)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101577,6101578,54,6105097) ;
+--  126
+--  6106267  В2-4ВТ - Pb  6100001  1126  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101574, 6106267, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101575, 6106267, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101576, 6106267, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101577, 6106267, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106267,DECODE(6101574, 0, NULL, 6101574)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101573,6101574,54,6105098) ;
+--  127
+--  6106268  В2-4ВТ - Pc  6100001  1127  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101570, 6106268, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101571, 6106268, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101572, 6106268, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101573, 6106268, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106268,DECODE(6101570, 0, NULL, 6101570)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101569,6101570,54,6105099) ;
+--  128
+--  6106269  В2-4ВТ - Pсум  6100001  1128  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101566, 6106269, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101567, 6106269, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101568, 6106269, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101569, 6106269, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106269,DECODE(6101566, 0, NULL, 6101566)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101565,6101566,54,6105100) ;
+--  129
+--  6106270  В2-4ВТ - Qa  6100001  1129  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101562, 6106270, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101563, 6106270, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101564, 6106270, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101565, 6106270, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106270,DECODE(6101562, 0, NULL, 6101562)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101561,6101562,54,6105101) ;
+--  130
+--  6106271  В2-4ВТ - Qb  6100001  1130  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101558, 6106271, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101559, 6106271, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101560, 6106271, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101561, 6106271, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106271,DECODE(6101558, 0, NULL, 6101558)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101557,6101558,54,6105102) ;
+--  131
+--  6106272  В2-4ВТ - Qc  6100001  1131  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101554, 6106272, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101555, 6106272, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101556, 6106272, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101557, 6106272, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106272,DECODE(6101554, 0, NULL, 6101554)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101553,6101554,54,6105103) ;
+--  132
+--  6106273  В2-4ВТ - Qсум  6100001  1132  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101550, 6106273, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101551, 6106273, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101552, 6106273, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101553, 6106273, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106273,DECODE(6101550, 0, NULL, 6101550)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101549,6101550,54,6105104) ;
+--  133
+--  6106274  В2-4ВТ - Sa  6100001  1133  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101546, 6106274, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101547, 6106274, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101548, 6106274, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101549, 6106274, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106274,DECODE(6101546, 0, NULL, 6101546)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101545,6101546,54,6105105) ;
+--  134
+--  6106275  В2-4ВТ - Sb  6100001  1134  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101542, 6106275, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101543, 6106275, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101544, 6106275, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101545, 6106275, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106275,DECODE(6101542, 0, NULL, 6101542)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101541,6101542,54,6105106) ;
+--  135
+--  6106276  В2-4ВТ - Sc  6100001  1135  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101538, 6106276, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101539, 6106276, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101540, 6106276, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101541, 6106276, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106276,DECODE(6101538, 0, NULL, 6101538)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101537,6101538,54,6105107) ;
+--  136
+--  6106277  В2-4ВТ - Sсум  6100001  1136  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101534, 6106277, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101535, 6106277, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101536, 6106277, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101537, 6106277, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106277,DECODE(6101534, 0, NULL, 6101534)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101533,6101534,54,6105108) ;
+--  137
+--  6106278  В2-4ВТ - F  6100001  1137  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101530, 6106278, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101531, 6106278, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101532, 6106278, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101533, 6106278, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106278,DECODE(6101530, 0, NULL, 6101530)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101529,6101530,54,6105092) ;
+--  138
+--  6106279  В2-4ВТ - Uср.ф  6100001  1138  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101526, 6106279, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101527, 6106279, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101528, 6106279, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101529, 6106279, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106279,DECODE(6101526, 0, NULL, 6101526)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101525,6101526,54,6105116) ;
+--  139
+--  6106280  В2-4ВТ - Uср.л  6100001  1139  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101522, 6106280, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101523, 6106280, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101524, 6106280, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101525, 6106280, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106280,DECODE(6101522, 0, NULL, 6101522)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101521,6101522,54,6105115) ;
+--  140
+--  6106281  В2-4ВТ - Iср  6100001  1140  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101518, 6106281, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101519, 6106281, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101520, 6106281, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101521, 6106281, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106281,DECODE(6101518, 0, NULL, 6101518)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101517,6101518,54,6105096) ;
+--  141
+--  6106282  Положение РПН 4ВТ  6100001  1141  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101514, 6106282, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101515, 6106282, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101516, 6106282, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101517, 6106282, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106282,DECODE(6101514, 0, NULL, 6101514)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101513,6101514,54,6105117) ;
+--  142
+--  6106283  В1-4ВТ - Uo  6100001  1142  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101407, 6106283, 8, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101510, 6106283, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101511, 6106283, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101512, 6106283, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101513, 6106283, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106283,DECODE(6101510, 0, NULL, 6101510)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101509,6101510,54,6105285) ;
+--  143
+--  6106284  В1-4ВТ - Io  6100001  1143  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101505, 6106284, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101506, 6106284, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101507, 6106284, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101508, 6106284, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106284,DECODE(6101505, 0, NULL, 6101505)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101505,6101505,54,6105284) ;
+--  144
+--  6106285  В2-4ВТ - Uo  6100001  1144  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101501, 6106285, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101502, 6106285, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101503, 6106285, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101504, 6106285, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106285,DECODE(6101501, 0, NULL, 6101501)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101501,6101501,54,6105287) ;
+--  145
+--  6106286  В2-4ВТ - Io  6100001  1145  GLOBAL_TYPE_ANALOG 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101497, 6106286, 11, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101498, 6106286, 12, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101499, 6106286, 13, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101500, 6106286, 14, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106286,DECODE(6101497, 0, NULL, 6101497)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101497,6101497,54,6105286) ;
+--  146
+--  6106288  Помещение шкафов РЗА (отм.12). П.1Р (43ASR01) Генератор Г4. Основные защиты  6100001  2  GLOBAL_TYPE_BOOL 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102233, 6106288, 15, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102234, 6106288, 16, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102235, 6106288, 17, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102236, 6106288, 18, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106288,DECODE(6102233, 0, NULL, 6102233)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6102232,6102233,54,6105222) ;
+--  147
+--  6106327  ЭГРУ-10,5кВ В-Г4  6100001  11  GLOBAL_TYPE_BOOL 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101411, 6106327, 16, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101410, 6106327, 15, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101412, 6106327, 17, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101413, 6106327, 18, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106327,DECODE(6101410, 0, NULL, 6101410)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101411,6101410,54,6105066) ;
+--  148
+--  6106290  Помещение шкафов РЗА (отм.12). П.1Р (43ASR01) Генератор Г4. Резервные защиты  6100001  4  GLOBAL_TYPE_BOOL 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102225, 6106290, 15, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102226, 6106290, 16, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102227, 6106290, 17, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102228, 6106290, 18, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106290,DECODE(6102225, 0, NULL, 6102225)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6102224,6102225,54,6105224) ;
+--  149
+--  6106291  Помещение шкафов РЗА (отм.12). П.2Р (43ASR02) Трансформаторы Т4 4ВТ. Основные защиты  6100001  5  GLOBAL_TYPE_BOOL 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102221, 6106291, 15, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102222, 6106291, 16, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102223, 6106291, 17, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102224, 6106291, 18, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106291,DECODE(6102221, 0, NULL, 6102221)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6102220,6102221,54,6105226) ;
+--  150
+--  6106292  Помещение шкафов РЗА (отм.12). П.2Р (43ASR02) Трансформаторы Т4 4ВТ. Основные защиты  6100001  6  GLOBAL_TYPE_BOOL 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102217, 6106292, 15, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102218, 6106292, 16, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102219, 6106292, 17, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102220, 6106292, 18, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106292,DECODE(6102217, 0, NULL, 6102217)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6102216,6102217,54,6105225) ;
+--  151
+--  6106293  Помещение шкафов РЗА (отм.12). П.3Р (43ASR03) Трансформаторы Т4 4ВТ. Резервные защиты  6100001  7  GLOBAL_TYPE_BOOL 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102213, 6106293, 15, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102214, 6106293, 16, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102215, 6106293, 17, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102216, 6106293, 18, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106293,DECODE(6102213, 0, NULL, 6102213)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6102212,6102213,54,6105227) ;
+--  152
+--  6106294  Помещение шкафов РЗА (отм.12). П.3Р (43ASR03) Трансформаторы Т4 4ВТ. Резервные защиты  6100001  8  GLOBAL_TYPE_BOOL 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102209, 6106294, 15, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102210, 6106294, 16, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102211, 6106294, 17, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102212, 6106294, 18, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106294,DECODE(6102209, 0, NULL, 6102209)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6102207,6102209,54,6105228) ;
+--  153
+--  6106295  ЗРП панель 36Р АУВ В-Т4 ШЭ 2607 019  6100001  9  GLOBAL_TYPE_BOOL 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102205, 6106295, 15, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102206, 6106295, 16, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102207, 6106295, 17, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102208, 6106295, 18, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106295,DECODE(6102205, 0, NULL, 6102205)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6102203,6102205,54,6105065) ;
+--  154
+--  6106296  ЗРП панель 36Р АУВ В-Т4 ШЭ 2607 019  6100001  10  GLOBAL_TYPE_BOOL 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102200, 6106296, 15, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102201, 6106296, 15, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102202, 6106296, 16, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102203, 6106296, 17, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102204, 6106296, 18, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106296,DECODE(6102201, 0, NULL, 6102201)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6102199,6102201,54,6105215) ;
+--  155
+--  6106328  ЭГРУ-10,5кВ Р-Г4  6100001  12  GLOBAL_TYPE_BOOL 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101493, 6106328, 15, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101494, 6106328, 16, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101495, 6106328, 17, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101496, 6106328, 18, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106328,DECODE(6101493, 0, NULL, 6101493)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101493,6101493,54,6105265) ;
+--  156
+--  6106329  ЭГРУ-10,5кВ ЗН-Г4  6100001  13  GLOBAL_TYPE_BOOL 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101489, 6106329, 15, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101490, 6106329, 16, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101491, 6106329, 17, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101492, 6106329, 18, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106329,DECODE(6101489, 0, NULL, 6101489)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101489,6101489,54,6105264) ;
+--  157
+--  6106330  ЭГРУ-10,5кВ ЗН-ГТ4  6100001  14  GLOBAL_TYPE_BOOL 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101485, 6106330, 15, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101486, 6106330, 16, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101487, 6106330, 17, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101488, 6106330, 18, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106330,DECODE(6101485, 0, NULL, 6101485)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101485,6101485,54,6105263) ;
+--  158
+--  6106331  РУСН 6кВ Секция 40BBA (6Р). ячейка 3 В1-4ВТ  6100001  15  GLOBAL_TYPE_BOOL 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101481, 6106331, 15, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101482, 6106331, 16, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101483, 6106331, 17, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101484, 6106331, 18, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106331,DECODE(6101481, 0, NULL, 6101481)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101481,6101481,54,6105258) ;
+--  159
+--  6106332  РУСН 6кВ Секция 40BBA (6Р). ячейка 3 ЗН1-4ВТ  6100001  16  GLOBAL_TYPE_BOOL 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101477, 6106332, 15, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101478, 6106332, 16, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101479, 6106332, 17, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101480, 6106332, 18, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106332,DECODE(6101477, 0, NULL, 6101477)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101477,6101477,54,6105259) ;
+--  160
+--  6106333  РУСН 6кВ Секция 40BBA (6Р). ячейка 15 ЗН-6Р  6100001  17  GLOBAL_TYPE_BOOL 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101473, 6106333, 15, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101474, 6106333, 16, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101475, 6106333, 17, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101476, 6106333, 18, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106333,DECODE(6101473, 0, NULL, 6101473)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101473,6101473,54,6105257) ;
+--  161
+--  6106334  РУСН 6кВ Секция 40BBВ (7Р). ячейка 2 В2-4ВТ  6100001  18  GLOBAL_TYPE_BOOL 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101469, 6106334, 15, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101470, 6106334, 16, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101471, 6106334, 17, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101472, 6106334, 18, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106334,DECODE(6101469, 0, NULL, 6101469)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101469,6101469,54,6105260) ;
+--  162
+--  6106335  РУСН 6кВ Секция 40BBВ (7Р). ячейка 2 ЗН2-4ВТ  6100001  19  GLOBAL_TYPE_BOOL 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101465, 6106335, 16, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101466, 6106335, 15, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101467, 6106335, 17, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101468, 6106335, 18, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106335,DECODE(6101466, 0, NULL, 6101466)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101465,6101466,54,6105261) ;
+--  163
+--  6106336  РУСН 6кВ Секция 40BBВ (7Р). ячейка 9 ЗН-7Р  6100001  20  GLOBAL_TYPE_BOOL 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101460, 6106336, 15, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101461, 6106336, 16, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101462, 6106336, 17, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101463, 6106336, 18, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106336,DECODE(6101460, 0, NULL, 6101460)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101460,6101460,54,6105262) ;
+--  164
+--  6106337  ОРУ 110кВ ячейка 14 В-Т4  6100001  21  GLOBAL_TYPE_BOOL 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101456, 6106337, 15, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101457, 6106337, 16, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101458, 6106337, 17, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101459, 6106337, 18, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106337,DECODE(6101456, 0, NULL, 6101456)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101456,6101456,54,6105246) ;
+--  165
+--  6106338  ОРУ 110кВ ячейка 14 ШР1-Т4  6100001  22  GLOBAL_TYPE_BOOL 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101450, 6106338, 15, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101451, 6106338, 16, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101452, 6106338, 17, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101453, 6106338, 18, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106338,DECODE(6101450, 0, NULL, 6101450)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101451,6101450,54,6105255) ;
+--  166
+--  6106339  ОРУ 110кВ ячейка 14 ЗН1-Т4  6100001  23  GLOBAL_TYPE_BOOL 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101446, 6106339, 15, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101447, 6106339, 16, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101448, 6106339, 17, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101449, 6106339, 18, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106339,DECODE(6101446, 0, NULL, 6101446)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101447,6101446,54,6105250) ;
+--  167
+--  6106340  ОРУ 110кВ ячейка 14 ШР2-Т4  6100001  24  GLOBAL_TYPE_BOOL 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101442, 6106340, 15, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101443, 6106340, 16, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101444, 6106340, 17, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101445, 6106340, 18, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106340,DECODE(6101442, 0, NULL, 6101442)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101443,6101442,54,6105256) ;
+--  168
+--  6106341  ОРУ 110кВ ячейка 14 ЗН2-Т4  6100001  25  GLOBAL_TYPE_BOOL 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101438, 6106341, 15, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101439, 6106341, 16, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101440, 6106341, 17, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101441, 6106341, 18, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106341,DECODE(6101438, 0, NULL, 6101438)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101439,6101438,54,6105251) ;
+--  169
+--  6106342  ОРУ 110кВ ячейка 14 ЛР-Т4  6100001  26  GLOBAL_TYPE_BOOL 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101434, 6106342, 15, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101435, 6106342, 16, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101436, 6106342, 17, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101437, 6106342, 18, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106342,DECODE(6101434, 0, NULL, 6101434)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101435,6101434,54,6105253) ;
+--  170
+--  6106343  ОРУ 110кВ ячейка 14 ЗН-Т4  6100001  27  GLOBAL_TYPE_BOOL 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101430, 6106343, 16, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101431, 6106343, 15, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101432, 6106343, 17, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101433, 6106343, 18, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106343,DECODE(6101430, 0, NULL, 6101430)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101431,6101430,54,6105249) ;
+--  171
+--  6106344  ОРУ 110кВ ячейка 14 ЗНЗ-Т4  6100001  28  GLOBAL_TYPE_BOOL 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101409, 6106344, 15, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101426, 6106344, 15, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101427, 6106344, 16, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101428, 6106344, 17, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101429, 6106344, 18, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106344,DECODE(6101426, 0, NULL, 6101426)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101427,6101426,54,6105247) ;
+--  172
+--  6106345  ОРУ 110кВ ячейка 14 ОР-Т4  6100001  29  GLOBAL_TYPE_BOOL 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101422, 6106345, 15, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101423, 6106345, 16, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101424, 6106345, 17, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101425, 6106345, 18, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106345,DECODE(6101422, 0, NULL, 6101422)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101423,6101422,54,6105254) ;
+--  173
+--  6106346  ОРУ 110кВ ячейка 14 ЗНО-Т4  6100001  30  GLOBAL_TYPE_BOOL 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101418, 6106346, 15, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101419, 6106346, 16, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101420, 6106346, 17, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101421, 6106346, 18, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106346,DECODE(6101418, 0, NULL, 6101418)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101419,6101418,54,6105248) ;
+--  174
+--  6106347  ОРУ 110кВ ячейка 14 ЗОН-Т4  6100001  31  GLOBAL_TYPE_BOOL 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101414, 6106347, 15, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101415, 6106347, 16, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101416, 6106347, 17, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6101417, 6106347, 18, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106347,DECODE(6101414, 0, NULL, 6101414)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6101415,6101414,54,6105252) ;
+--  175
+--  6106297  Состояние синхронизации времени ARIS C303 №1 КРП  6100001  32  GLOBAL_TYPE_BOOL 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102196, 6106297, 15, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102197, 6106297, 16, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102198, 6106297, 17, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102199, 6106297, 18, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106297,DECODE(6102196, 0, NULL, 6102196)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6102195,6102196,54,6105243) ;
+--  176
+--  6106298  Ключ на  ARIS C303 №1 КРП в положение - Местное управление  6100001  33  GLOBAL_TYPE_BOOL 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102192, 6106298, 15, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102193, 6106298, 16, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102194, 6106298, 17, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102195, 6106298, 18, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106298,DECODE(6102192, 0, NULL, 6102192)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6102191,6102192,54,6105217) ;
+--  177
+--  6106299  Ключ на  ARIS C303 №1 КРП в положение - Дистанционное управление  6100001  34  GLOBAL_TYPE_BOOL 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102188, 6106299, 15, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102189, 6106299, 16, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102190, 6106299, 17, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102191, 6106299, 18, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106299,DECODE(6102188, 0, NULL, 6102188)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6102187,6102188,54,6105216) ;
+--  178
+--  6106300  Ключ на  ARIS C303 №1 КРП в положение - Управление запрещено  6100001  35  GLOBAL_TYPE_BOOL 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102184, 6106300, 15, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102185, 6106300, 16, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102186, 6106300, 17, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102187, 6106300, 18, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106300,DECODE(6102184, 0, NULL, 6102184)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6102183,6102184,54,6105218) ;
+--  179
+--  6106301  ARIS C303 №1 КРП: Модуль 2 DI220 (A1-E4)  6100001  36  GLOBAL_TYPE_BOOL 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102180, 6106301, 15, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102181, 6106301, 16, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102182, 6106301, 17, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102183, 6106301, 18, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106301,DECODE(6102180, 0, NULL, 6102180)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6102179,6102180,54,6105209) ;
+--  180
+--  6106302  ARIS C303 №1 КРП: Модуль 3 DI220 (A1-E5)  6100001  37  GLOBAL_TYPE_BOOL 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102176, 6106302, 15, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102177, 6106302, 16, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102178, 6106302, 17, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102179, 6106302, 18, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106302,DECODE(6102176, 0, NULL, 6102176)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6102175,6102176,54,6105210) ;
+--  181
+--  6106303  ARIS C303 №1 КРП: Модуль 11 DM (A1-E13)  6100001  38  GLOBAL_TYPE_BOOL 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102172, 6106303, 15, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102173, 6106303, 16, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102174, 6106303, 17, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102175, 6106303, 18, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106303,DECODE(6102172, 0, NULL, 6102172)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6102171,6102172,54,6105207) ;
+--  182
+--  6106304  ARIS C303 №1 КРП: Модуль 12 DM (A1-E14)  6100001  39  GLOBAL_TYPE_BOOL 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102168, 6106304, 15, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102169, 6106304, 16, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102170, 6106304, 17, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102171, 6106304, 18, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106304,DECODE(6102168, 0, NULL, 6102168)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6102167,6102168,54,6105208) ;
+--  183
+--  6106305  Состояние синхронизации времени ARIS C303 №2 ЗРП-110кВ  6100001  40  GLOBAL_TYPE_BOOL 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102164, 6106305, 15, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102165, 6106305, 16, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102166, 6106305, 17, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102167, 6106305, 18, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106305,DECODE(6102164, 0, NULL, 6102164)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6102163,6102164,54,6105244) ;
+--  184
+--  6106306  Ключ на  ARIS C303 №2 ЗРП-110кВ в положение - Местное управление  6100001  41  GLOBAL_TYPE_BOOL 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102160, 6106306, 15, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102161, 6106306, 16, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102162, 6106306, 17, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102163, 6106306, 18, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106306,DECODE(6102160, 0, NULL, 6102160)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6102159,6102160,54,6105220) ;
+--  185
+--  6106307  Ключ на  ARIS C303 №2 ЗРП-110кВ в положение - Дистанционное управление  6100001  42  GLOBAL_TYPE_BOOL 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102156, 6106307, 15, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102157, 6106307, 16, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102158, 6106307, 17, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102159, 6106307, 18, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106307,DECODE(6102156, 0, NULL, 6102156)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6102155,6102156,54,6105219) ;
+--  186
+--  6106308  Ключ на  ARIS C303 №2 ЗРП-110кВ в положение - Управление запрещено  6100001  43  GLOBAL_TYPE_BOOL 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102152, 6106308, 15, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102153, 6106308, 16, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102154, 6106308, 17, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102155, 6106308, 18, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106308,DECODE(6102152, 0, NULL, 6102152)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6102151,6102152,54,6105221) ;
+--  187
+--  6106309  ARIS C303 №2 ЗРП-110кВ: Модуль 1 DI220 (A2-E3)  6100001  44  GLOBAL_TYPE_BOOL 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102148, 6106309, 15, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102149, 6106309, 16, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102150, 6106309, 17, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102151, 6106309, 18, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106309,DECODE(6102148, 0, NULL, 6102148)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6102147,6102148,54,6105211) ;
+--  188
+--  6106310  ARIS C303 №2 ЗРП-110кВ: Модуль 2 DI220 (A2-E4)  6100001  45  GLOBAL_TYPE_BOOL 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102144, 6106310, 15, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102145, 6106310, 16, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102146, 6106310, 17, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102147, 6106310, 18, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106310,DECODE(6102144, 0, NULL, 6102144)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6102143,6102144,54,6105213) ;
+--  189
+--  6106311  ARIS C303 №2 ЗРП-110кВ: Модуль 3 DI220 (A2-E5)  6100001  46  GLOBAL_TYPE_BOOL 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102140, 6106311, 15, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102141, 6106311, 16, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102142, 6106311, 17, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102143, 6106311, 18, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106311,DECODE(6102140, 0, NULL, 6102140)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6102139,6102140,54,6105214) ;
+--  190
+--  6106312  ARIS C303 №2 ЗРП-110кВ: Модуль 14 DM (A2-E16)  6100001  47  GLOBAL_TYPE_BOOL 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102136, 6106312, 15, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102137, 6106312, 16, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102138, 6106312, 17, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102139, 6106312, 18, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106312,DECODE(6102136, 0, NULL, 6102136)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6102135,6102136,54,6106106) ;
+--  191
+--  6106313  Связь c ARIS  C303 №1 КРП с AET411 яч3 секция 6Р (40BBA)  6100001  48  GLOBAL_TYPE_BOOL 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102132, 6106313, 15, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102133, 6106313, 16, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102134, 6106313, 17, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102135, 6106313, 18, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106313,DECODE(6102132, 0, NULL, 6102132)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6102131,6102132,54,6105230) ;
+--  192
+--  6106314  Связь c ARIS  C303 №1 КРП с AET411 яч2 секция 7Р (40BBB)  6100001  49  GLOBAL_TYPE_BOOL 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102128, 6106314, 15, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102129, 6106314, 16, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102130, 6106314, 17, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102131, 6106314, 18, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106314,DECODE(6102128, 0, NULL, 6102128)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6102127,6102128,54,6105229) ;
+--  193
+--  6106315  Связь Сервер СОТИАССО (ARIS CS-1) Основной c ARIS  C303 №1 КРП  6100001  50  GLOBAL_TYPE_BOOL 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102124, 6106315, 15, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102125, 6106315, 16, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102126, 6106315, 17, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102127, 6106315, 18, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106315,DECODE(6102124, 0, NULL, 6102124)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6102123,6102124,54,6105231) ;
+--  194
+--  6106316  Связь Сервер СОТИАССО (ARIS CS-1) Основной c ARIS  C303 №2 ЗРП-110кВ  6100001  51  GLOBAL_TYPE_BOOL 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102120, 6106316, 15, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102121, 6106316, 16, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102122, 6106316, 17, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102123, 6106316, 18, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106316,DECODE(6102120, 0, NULL, 6102120)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6102119,6102120,54,6105232) ;
+--  195
+--  6106317  Связь Сервер СОТИАССО (ARIS CS-2) Резервный c ARIS  C303 №1 КРП  6100001  52  GLOBAL_TYPE_BOOL 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102116, 6106317, 15, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102117, 6106317, 16, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102118, 6106317, 17, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102119, 6106317, 18, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106317,DECODE(6102116, 0, NULL, 6102116)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6102115,6102116,54,6105237) ;
+--  196
+--  6106318  Связь Сервер СОТИАССО (ARIS CS-2) Резервный c ARIS  C303 №2 ЗРП-110кВ  6100001  53  GLOBAL_TYPE_BOOL 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102112, 6106318, 15, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102113, 6106318, 16, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102114, 6106318, 17, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102115, 6106318, 18, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106318,DECODE(6102112, 0, NULL, 6102112)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6102111,6102112,54,6105232) ;
+--  197
+--  6106319  Связь Сервер СОТИАССО (ARIS CS-1) Основной с Основным ЦППС Амурского РДУ  6100001  54  GLOBAL_TYPE_BOOL 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102108, 6106319, 15, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102109, 6106319, 16, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102110, 6106319, 17, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102111, 6106319, 18, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106319,DECODE(6102108, 0, NULL, 6102108)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6102107,6102108,54,6105234) ;
+--  198
+--  6106320  Связь Сервер СОТИАССО (ARIS CS-1) Основной с Резервным ЦППС Амурского РДУ  6100001  55  GLOBAL_TYPE_BOOL 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102104, 6106320, 15, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102105, 6106320, 16, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102106, 6106320, 17, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102107, 6106320, 18, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106320,DECODE(6102104, 0, NULL, 6102104)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6102103,6102104,54,6105236) ;
+--  199
+--  6106321  Связь Сервер СОТИАССО (ARIS CS-1) Основной с Основным CK-Proxy Амурского РДУ  6100001  56  GLOBAL_TYPE_BOOL 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102100, 6106321, 15, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102101, 6106321, 16, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102102, 6106321, 17, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102103, 6106321, 18, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106321,DECODE(6102100, 0, NULL, 6102100)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6102099,6102100,54,6105233) ;
+--  200
+--  6106322  Связь Сервер СОТИАССО (ARIS CS-1) Основной с Резервным CK-Proxy Амурского РДУ  6100001  57  GLOBAL_TYPE_BOOL 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102096, 6106322, 15, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102097, 6106322, 16, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102098, 6106322, 17, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102099, 6106322, 18, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106322,DECODE(6102096, 0, NULL, 6102096)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6102095,6102096,54,6105235) ;
+--  201
+--  6106323  Связь Сервер СОТИАССО (ARIS CS-2) Резервный с Основным ЦППС Амурского РДУ  6100001  58  GLOBAL_TYPE_BOOL 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102092, 6106323, 15, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102093, 6106323, 16, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102094, 6106323, 17, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102095, 6106323, 18, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106323,DECODE(6102092, 0, NULL, 6102092)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6102091,6102092,54,6105240) ;
+--  202
+--  6106324  Связь Сервер СОТИАССО (ARIS CS-2) Резервный с Резервным ЦППС Амурского РДУ  6100001  59  GLOBAL_TYPE_BOOL 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102088, 6106324, 15, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102089, 6106324, 16, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102090, 6106324, 17, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102091, 6106324, 18, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106324,DECODE(6102088, 0, NULL, 6102088)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6102087,6102088,54,6105242) ;
+--  203
+--  6106325  Связь Сервер СОТИАССО (ARIS CS-2) Резервный с Основным CK-Proxy Амурского РДУ  6100001  60  GLOBAL_TYPE_BOOL 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102084, 6106325, 15, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102085, 6106325, 16, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102086, 6106325, 17, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102087, 6106325, 18, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106325,DECODE(6102084, 0, NULL, 6102084)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6102083,6102084,54,6105239) ;
+--  204
+--  6106326  Связь Сервер СОТИАССО (ARIS CS-2) Резервный с Резервным CK-Proxy Амурского РДУ  6100001  61  GLOBAL_TYPE_BOOL 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102080, 6106326, 15, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102081, 6106326, 16, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102082, 6106326, 17, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102083, 6106326, 18, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106326,DECODE(6102080, 0, NULL, 6102080)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6102079,6102080,54,6105241) ;
+--  205
+--  6106287  Помещение шкафов РЗА (отм.12). П.1P (43ASR01) Генератор Г4. Основные защиты  6100001  1  GLOBAL_TYPE_BOOL 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102079, 6106287, 15, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102238, 6106287, 15, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102239, 6106287, 16, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102240, 6106287, 17, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102241, 6106287, 18, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106287,DECODE(6102239, 0, NULL, 6102239)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6102238,6102239,54,6105669) ;
+--  206
+--  6106289  Помещение шкафов РЗА (отм.12). П.1Р (43ASR01) Генератор Г4. Резервные защиты  6100001  3  GLOBAL_TYPE_BOOL 
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102229, 6106289, 15, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102230, 6106289, 16, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102231, 6106289, 17, 'Канал', 0) ;
+-- insert into DA_SRC_CHANNEL (id, id_ownlst, id_source, alias, priority) values(6102232, 6106289, 18, 'Канал', 0) ;
+-- insert into DA_VAL (id_param,ID_CUR_CHANNEL_SRC) values(6106289,DECODE(6102229, 0, NULL, 6102229)) ;
+-- insert into DA_SRC_CHANNEL_TUNE (id, ID_CHANNEL,id_srctbl,id_srclst) VALUES(6102228,6102229,54,6105223) ;

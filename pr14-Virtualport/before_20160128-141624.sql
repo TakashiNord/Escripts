@@ -1,0 +1,999 @@
+--  ----1
+-- ----26802  'В-35 Т-1 F'  180  1921  GLOBAL_TYPE_ANALOG
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4194 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4193 ;
+--
+--  ----2
+-- ----37665  'ТСН-1 Ia'  180  135  GLOBAL_TYPE_ANALOG
+--
+--  ----3
+-- ----37674  'ТСН-2 Ia'  180  136  GLOBAL_TYPE_ANALOG
+--
+--  ----4
+-- ----26828  'В-6 Т-1 Ра'  180  899  GLOBAL_TYPE_ANALOG
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4289 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4290 ;
+--
+--  ----5
+-- ----26826  'В-35 Т-1 Ра'  180  897  GLOBAL_TYPE_ANALOG
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4243 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4244 ;
+--
+--  ----6
+-- ----26827  'В-35 Т-2 Ра'  180  898  GLOBAL_TYPE_ANALOG
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4291 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4292 ;
+--
+--  ----7
+-- ----37647  'ВФ-8 Ia'  180  138  GLOBAL_TYPE_ANALOG
+--
+--  ----8
+-- ----37629  'ВФ-6 Ia'  180  137  GLOBAL_TYPE_ANALOG
+--
+--  ----9
+-- ----37656  'ВФ-9 Ia'  180  139  GLOBAL_TYPE_ANALOG
+--
+--  ----10
+-- ----37539  'ВФ-10 Ia'  180  140  GLOBAL_TYPE_ANALOG
+--
+--  ----11
+-- ----37548  'ВФ-11 Ia'  180  141  GLOBAL_TYPE_ANALOG
+--
+--  ----12
+-- ----37566  'ВФ-17 Ia'  180  142  GLOBAL_TYPE_ANALOG
+--
+--  ----13
+-- ----37638  'ВФ-7 Ia'  180  143  GLOBAL_TYPE_ANALOG
+--
+--  ----14
+-- ----37611  'ВФ-4 Ia'  180  144  GLOBAL_TYPE_ANALOG
+--
+--  ----15
+-- ----37602  'ВФ-3 Ia'  180  145  GLOBAL_TYPE_ANALOG
+--
+--  ----16
+-- ----37584  'ВФ-21 Ia'  180  146  GLOBAL_TYPE_ANALOG
+--
+--  ----17
+-- ----37593  'ВФ-22 Ia'  180  147  GLOBAL_TYPE_ANALOG
+--
+--  ----18
+-- ----37620  'ВФ-5 Ia'  180  148  GLOBAL_TYPE_ANALOG
+--
+--  ----19
+-- ----37557  'ВФ-12 Ia'  180  149  GLOBAL_TYPE_ANALOG
+--
+--  ----20
+-- ----37575  'ВФ-18 Ia'  180  150  GLOBAL_TYPE_ANALOG
+--
+--  ----21
+-- ----26799  'B-35 T-2 Q'  180  1794  GLOBAL_TYPE_ANALOG
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4169 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4170 ;
+--
+--  ----22
+-- ----26800  'B-6 T-1 Q'  180  1795  GLOBAL_TYPE_ANALOG
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4179 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4180 ;
+--
+--  ----23
+-- ----26801  'B-6 T-2 Q'  180  1796  GLOBAL_TYPE_ANALOG
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4188 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4191 ;
+--
+--  ----24
+-- ----26831  'В-35 Т-2 Рb'  180  1026  GLOBAL_TYPE_ANALOG
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4287 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4288 ;
+--
+--  ----25
+-- ----26832  'В-6 Т-1 Рb'  180  1027  GLOBAL_TYPE_ANALOG
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4284 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4285 ;
+--
+--  ----26
+-- ----26833  'В-6 Т-2 Рb'  180  1028  GLOBAL_TYPE_ANALOG
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4282 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4283 ;
+--
+--  ----27
+-- ----26834  'В-35 Т-1 Рc'  180  1153  GLOBAL_TYPE_ANALOG
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4238 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4241 ;
+--
+--  ----28
+-- ----26835  'В-35 Т-2 Рc'  180  1154  GLOBAL_TYPE_ANALOG
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4280 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4281 ;
+--
+--  ----29
+-- ----26836  'В-6 Т-1 Рc'  180  1155  GLOBAL_TYPE_ANALOG
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4278 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4279 ;
+--
+--  ----30
+-- ----26837  'В-6 Т-2 Рc'  180  1156  GLOBAL_TYPE_ANALOG
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4260 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4261 ;
+--
+--  ----31
+-- ----26838  'В-35 Т-1 Qa'  180  1281  GLOBAL_TYPE_ANALOG
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4204 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4206 ;
+--
+--  ----32
+-- ----26839  'В-35 Т-2 Qa'  180  1282  GLOBAL_TYPE_ANALOG
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4276 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4277 ;
+--
+--  ----33
+-- ----26840  'В-6 Т-1 Qa'  180  1283  GLOBAL_TYPE_ANALOG
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4274 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4275 ;
+--
+--  ----34
+-- ----26841  'В-6 Т-2 Qa'  180  1284  GLOBAL_TYPE_ANALOG
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4272 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4273 ;
+--
+--  ----35
+-- ----26842  'В-35 Т-1 Qb'  180  1409  GLOBAL_TYPE_ANALOG
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4209 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4211 ;
+--
+--  ----36
+-- ----26843  'В-35 Т-2 Qb'  180  1410  GLOBAL_TYPE_ANALOG
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4270 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4271 ;
+--
+--  ----37
+-- ----26844  'В-6 Т-1 Qb'  180  1411  GLOBAL_TYPE_ANALOG
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4268 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4269 ;
+--
+--  ----38
+-- ----26845  'В-6 Т-2 Qb'  180  1412  GLOBAL_TYPE_ANALOG
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4266 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4267 ;
+--
+--  ----39
+-- ----26846  'В-35 Т-1 Qc'  180  1537  GLOBAL_TYPE_ANALOG
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4214 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4216 ;
+--
+--  ----40
+-- ----26790  'B-35 T-1 Ic'  180  385  GLOBAL_TYPE_ANALOG
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4158 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4160 ;
+--
+--  ----41
+-- ----26791  'B-35 T-2 Ic'  180  386  GLOBAL_TYPE_ANALOG
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4166 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=10125 ;
+--
+--  ----42
+-- ----26792  'B-6 T-1 Ic'  180  387  GLOBAL_TYPE_ANALOG
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4171 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4172 ;
+--
+--  ----43
+-- ----26793  'B-6 T-2 Ic'  180  388  GLOBAL_TYPE_ANALOG
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4181 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4183 ;
+--
+--  ----44
+-- ----26794  'B-35 T-1 P'  180  1665  GLOBAL_TYPE_ANALOG
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4162 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4161 ;
+--
+--  ----45
+-- ----26795  'B-35 T-2 P'  180  1666  GLOBAL_TYPE_ANALOG
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4167 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4168 ;
+--
+--  ----46
+-- ----26796  'B-6 T-1 P'  180  1667  GLOBAL_TYPE_ANALOG
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4173 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4174 ;
+--
+--  ----47
+-- ----26797  'B-6 T-2 P'  180  1668  GLOBAL_TYPE_ANALOG
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4185 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4186 ;
+--
+--  ----48
+-- ----26798  'B-35 T-1 Q'  180  1793  GLOBAL_TYPE_ANALOG
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4163 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4164 ;
+--
+--  ----49
+-- ----26829  'В-6 Т-2 Ра'  180  900  GLOBAL_TYPE_ANALOG
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4258 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4259 ;
+--
+--  ----50
+-- ----26803  'В-6 Т-1 F'  180  1923  GLOBAL_TYPE_ANALOG
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4323 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4324 ;
+--
+--  ----51
+-- ----26804  'В-6 Т-2 F'  180  1924  GLOBAL_TYPE_ANALOG
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4321 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4322 ;
+--
+--  ----52
+-- ----26805  'В-35 Т-1 Ua'  180  513  GLOBAL_TYPE_ANALOG
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4219 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4220 ;
+--
+--  ----53
+-- ----26806  'В-35 Т-2 Ua'  180  514  GLOBAL_TYPE_ANALOG
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4297 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4301 ;
+--
+--  ----54
+-- ----26807  'В-6 Т-1 Ua'  180  515  GLOBAL_TYPE_ANALOG
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4319 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4320 ;
+--
+--  ----55
+-- ----26808  'В-6 Т-2 Ua'  180  516  GLOBAL_TYPE_ANALOG
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4317 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4318 ;
+--
+--  ----56
+-- ----26809  'В-35 Т-1 Ub'  180  641  GLOBAL_TYPE_ANALOG
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4223 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4225 ;
+--
+--  ----57
+-- ----26810  'В-35 Т-2 Ub'  180  642  GLOBAL_TYPE_ANALOG
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4304 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4307 ;
+--
+--  ----58
+-- ----26811  'В-6 Т-1 Ub'  180  643  GLOBAL_TYPE_ANALOG
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4315 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4316 ;
+--
+--  ----59
+-- ----26812  'В-6 Т-2 Ub'  180  644  GLOBAL_TYPE_ANALOG
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4313 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4314 ;
+--
+--  ----60
+-- ----26813  'В-35 Т-1 Uc'  180  769  GLOBAL_TYPE_ANALOG
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4228 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4230 ;
+--
+--  ----61
+-- ----26814  'В-35 Т-2 Uc'  180  770  GLOBAL_TYPE_ANALOG
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4309 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4312 ;
+--
+--  ----62
+-- ----26815  'В-6 Т-1 Uc'  180  771  GLOBAL_TYPE_ANALOG
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4306 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4308 ;
+--
+--  ----63
+-- ----26816  'В-6 Т-2 Uc'  180  772  GLOBAL_TYPE_ANALOG
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4303 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4305 ;
+--
+--  ----64
+-- ----26817  'В-35 Т-1 Ia'  180  129  GLOBAL_TYPE_ANALOG
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4197 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4198 ;
+--
+--  ----65
+-- ----26818  'В-35 Т-2 Ia'  180  130  GLOBAL_TYPE_ANALOG
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4253 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4254 ;
+--
+--  ----66
+-- ----26819  'В-6 Т-1 Ia'  180  131  GLOBAL_TYPE_ANALOG
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4300 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4302 ;
+--
+--  ----67
+-- ----26820  'В-6 Т-2 Ia'  180  132  GLOBAL_TYPE_ANALOG
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4298 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4299 ;
+--
+--  ----68
+-- ----26821  'В-35 Т-1 Ib'  180  257  GLOBAL_TYPE_ANALOG
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4200 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4202 ;
+--
+--  ----69
+-- ----26822  'В-35 Т-2 Ib'  180  258  GLOBAL_TYPE_ANALOG
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4255 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4286 ;
+--
+--  ----70
+-- ----26823  'В-6 Т-1 Ib'  180  259  GLOBAL_TYPE_ANALOG
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4295 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4296 ;
+--
+--  ----71
+-- ----26824  'В-6 Т-2 Ib'  180  260  GLOBAL_TYPE_ANALOG
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4293 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4294 ;
+--
+--  ----72
+-- ----26825  'В-35 Т-2 F'  180  1922  GLOBAL_TYPE_ANALOG
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4251 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4252 ;
+--
+--  ----73
+-- ----26830  'В-35 Т-1 Рb'  180  1025  GLOBAL_TYPE_ANALOG
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4232 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4235 ;
+--
+--  ----74
+-- ----26848  'В-6 Т-1 Qc'  180  1539  GLOBAL_TYPE_ANALOG
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4262 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4263 ;
+--
+--  ----75
+-- ----26849  'В-6 Т-2 Qc'  180  1540  GLOBAL_TYPE_ANALOG
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4256 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4257 ;
+--
+--  ----76
+-- ----26847  'В-35 Т-2 Qc'  180  1538  GLOBAL_TYPE_ANALOG
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4264 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4265 ;
+--
+--  ----77
+-- ----37666  'ТСН-1 Ib'  180  263  GLOBAL_TYPE_ANALOG
+--
+--  ----78
+-- ----37675  'ТСН-2 Ib'  180  264  GLOBAL_TYPE_ANALOG
+--
+--  ----79
+-- ----37630  'ВФ-6 Ib'  180  265  GLOBAL_TYPE_ANALOG
+--
+--  ----80
+-- ----37648  'ВФ-8 Ib'  180  266  GLOBAL_TYPE_ANALOG
+--
+--  ----81
+-- ----37657  'ВФ-9 Ib'  180  267  GLOBAL_TYPE_ANALOG
+--
+--  ----82
+-- ----37540  'ВФ-10 Ib'  180  268  GLOBAL_TYPE_ANALOG
+--
+--  ----83
+-- ----37549  'ВФ-11 Ib'  180  269  GLOBAL_TYPE_ANALOG
+--
+--  ----84
+-- ----37567  'ВФ-17 Ib'  180  270  GLOBAL_TYPE_ANALOG
+--
+--  ----85
+-- ----37639  'ВФ-7 Ib'  180  271  GLOBAL_TYPE_ANALOG
+--
+--  ----86
+-- ----37612  'ВФ-4 Ib'  180  272  GLOBAL_TYPE_ANALOG
+--
+--  ----87
+-- ----37603  'ВФ-3 Ib'  180  273  GLOBAL_TYPE_ANALOG
+--
+--  ----88
+-- ----37585  'ВФ-21 Ib'  180  274  GLOBAL_TYPE_ANALOG
+--
+--  ----89
+-- ----37594  'ВФ-22 Ib'  180  275  GLOBAL_TYPE_ANALOG
+--
+--  ----90
+-- ----37621  'ВФ-5 Ib'  180  276  GLOBAL_TYPE_ANALOG
+--
+--  ----91
+-- ----37558  'ВФ-12 Ib'  180  277  GLOBAL_TYPE_ANALOG
+--
+--  ----92
+-- ----37576  'ВФ-18 Ib'  180  278  GLOBAL_TYPE_ANALOG
+--
+--  ----93
+-- ----37667  'ТСН-1 Ic'  180  391  GLOBAL_TYPE_ANALOG
+--
+--  ----94
+-- ----37676  'ТСН-2 Ic'  180  392  GLOBAL_TYPE_ANALOG
+--
+--  ----95
+-- ----37631  'ВФ-6 Ic'  180  393  GLOBAL_TYPE_ANALOG
+--
+--  ----96
+-- ----37649  'ВФ-8 Ic'  180  394  GLOBAL_TYPE_ANALOG
+--
+--  ----97
+-- ----37658  'ВФ-9 Ic'  180  395  GLOBAL_TYPE_ANALOG
+--
+--  ----98
+-- ----37541  'ВФ-10 Ic'  180  396  GLOBAL_TYPE_ANALOG
+--
+--  ----99
+-- ----37550  'ВФ-11 Ic'  180  397  GLOBAL_TYPE_ANALOG
+--
+--  ----100
+-- ----37568  'ВФ-17 Ic'  180  398  GLOBAL_TYPE_ANALOG
+--
+--  ----101
+-- ----37640  'ВФ-7 Ic'  180  399  GLOBAL_TYPE_ANALOG
+--
+--  ----102
+-- ----37613  'ВФ-4 Ic'  180  400  GLOBAL_TYPE_ANALOG
+--
+--  ----103
+-- ----37604  'ВФ-3 Ic'  180  401  GLOBAL_TYPE_ANALOG
+--
+--  ----104
+-- ----37586  'ВФ-21 Ic'  180  402  GLOBAL_TYPE_ANALOG
+--
+--  ----105
+-- ----37595  'ВФ-22 Ic'  180  403  GLOBAL_TYPE_ANALOG
+--
+--  ----106
+-- ----37622  'ВФ-5 Ic'  180  404  GLOBAL_TYPE_ANALOG
+--
+--  ----107
+-- ----37559  'ВФ-12 Ic'  180  405  GLOBAL_TYPE_ANALOG
+--
+--  ----108
+-- ----37577  'ВФ-18 Ic'  180  406  GLOBAL_TYPE_ANALOG
+--
+--  ----109
+-- ----37670  'ТСН-1 Ua'  180  519  GLOBAL_TYPE_ANALOG
+--
+--  ----110
+-- ----37679  'ТСН-2 Ua'  180  520  GLOBAL_TYPE_ANALOG
+--
+--  ----111
+-- ----37634  'ВФ-6 Uab'  180  521  GLOBAL_TYPE_ANALOG
+--
+--  ----112
+-- ----37652  'ВФ-8 Uab'  180  522  GLOBAL_TYPE_ANALOG
+--
+--  ----113
+-- ----37661  'ВФ-9 Uab'  180  523  GLOBAL_TYPE_ANALOG
+--
+--  ----114
+-- ----37544  'ВФ-10 Uab'  180  524  GLOBAL_TYPE_ANALOG
+--
+--  ----115
+-- ----37553  'ВФ-11 Uab'  180  525  GLOBAL_TYPE_ANALOG
+--
+--  ----116
+-- ----37571  'ВФ-17 Uab'  180  526  GLOBAL_TYPE_ANALOG
+--
+--  ----117
+-- ----37643  'ВФ-7 Uab'  180  527  GLOBAL_TYPE_ANALOG
+--
+--  ----118
+-- ----37616  'ВФ-4 Uab'  180  528  GLOBAL_TYPE_ANALOG
+--
+--  ----119
+-- ----37607  'ВФ-3 Uab'  180  529  GLOBAL_TYPE_ANALOG
+--
+--  ----120
+-- ----37589  'ВФ-21 Uab'  180  530  GLOBAL_TYPE_ANALOG
+--
+--  ----121
+-- ----37598  'ВФ-22 Uab'  180  531  GLOBAL_TYPE_ANALOG
+--
+--  ----122
+-- ----37625  'ВФ-5 Uab'  180  532  GLOBAL_TYPE_ANALOG
+--
+--  ----123
+-- ----37562  'ВФ-12 Uab'  180  533  GLOBAL_TYPE_ANALOG
+--
+--  ----124
+-- ----37580  'ВФ-18 Uab'  180  534  GLOBAL_TYPE_ANALOG
+--
+--  ----125
+-- ----37671  'ТСН-1 Ub'  180  647  GLOBAL_TYPE_ANALOG
+--
+--  ----126
+-- ----37680  'ТСН-2 Ub'  180  648  GLOBAL_TYPE_ANALOG
+--
+--  ----127
+-- ----37635  'ВФ-6 Ubc'  180  649  GLOBAL_TYPE_ANALOG
+--
+--  ----128
+-- ----37653  'ВФ-8 Ubc'  180  650  GLOBAL_TYPE_ANALOG
+--
+--  ----129
+-- ----37662  'ВФ-9 Ubc'  180  651  GLOBAL_TYPE_ANALOG
+--
+--  ----130
+-- ----37545  'ВФ-10 Ubc'  180  652  GLOBAL_TYPE_ANALOG
+--
+--  ----131
+-- ----37554  'ВФ-11 Ubc'  180  653  GLOBAL_TYPE_ANALOG
+--
+--  ----132
+-- ----37572  'ВФ-17 Ubc'  180  654  GLOBAL_TYPE_ANALOG
+--
+--  ----133
+-- ----37644  'ВФ-7 Ubc'  180  655  GLOBAL_TYPE_ANALOG
+--
+--  ----134
+-- ----37617  'ВФ-4 Ubc'  180  656  GLOBAL_TYPE_ANALOG
+--
+--  ----135
+-- ----37608  'ВФ-3 Ubc'  180  657  GLOBAL_TYPE_ANALOG
+--
+--  ----136
+-- ----37590  'ВФ-21 Ubc'  180  658  GLOBAL_TYPE_ANALOG
+--
+--  ----137
+-- ----37599  'ВФ-22 Ubc'  180  659  GLOBAL_TYPE_ANALOG
+--
+--  ----138
+-- ----37626  'ВФ-5 Ubc'  180  660  GLOBAL_TYPE_ANALOG
+--
+--  ----139
+-- ----37563  'ВФ-12 Ubc'  180  661  GLOBAL_TYPE_ANALOG
+--
+--  ----140
+-- ----37581  'ВФ-18 Ubc'  180  662  GLOBAL_TYPE_ANALOG
+--
+--  ----141
+-- ----37672  'ТСН-1 Uc'  180  775  GLOBAL_TYPE_ANALOG
+--
+--  ----142
+-- ----37681  'ТСН-2 Uc'  180  776  GLOBAL_TYPE_ANALOG
+--
+--  ----143
+-- ----37636  'ВФ-6 Uca'  180  777  GLOBAL_TYPE_ANALOG
+--
+--  ----144
+-- ----37654  'ВФ-8 Uca'  180  778  GLOBAL_TYPE_ANALOG
+--
+--  ----145
+-- ----37663  'ВФ-9 Uca'  180  779  GLOBAL_TYPE_ANALOG
+--
+--  ----146
+-- ----37546  'ВФ-10 Uca'  180  780  GLOBAL_TYPE_ANALOG
+--
+--  ----147
+-- ----37555  'ВФ-11 Uca'  180  781  GLOBAL_TYPE_ANALOG
+--
+--  ----148
+-- ----37573  'ВФ-17 Uca'  180  782  GLOBAL_TYPE_ANALOG
+--
+--  ----149
+-- ----37645  'ВФ-7 Uca'  180  783  GLOBAL_TYPE_ANALOG
+--
+--  ----150
+-- ----37618  'ВФ-4 Uca'  180  784  GLOBAL_TYPE_ANALOG
+--
+--  ----151
+-- ----37609  'ВФ-3 Uca'  180  785  GLOBAL_TYPE_ANALOG
+--
+--  ----152
+-- ----37591  'ВФ-21 Uca'  180  786  GLOBAL_TYPE_ANALOG
+--
+--  ----153
+-- ----37600  'ВФ-22 Uca'  180  787  GLOBAL_TYPE_ANALOG
+--
+--  ----154
+-- ----37627  'ВФ-5 Uca'  180  788  GLOBAL_TYPE_ANALOG
+--
+--  ----155
+-- ----37564  'ВФ-12 Uca'  180  789  GLOBAL_TYPE_ANALOG
+--
+--  ----156
+-- ----37582  'ВФ-18 Uca'  180  790  GLOBAL_TYPE_ANALOG
+--
+--  ----157
+-- ----37668  'ТСН-1 P'  180  1671  GLOBAL_TYPE_ANALOG
+--
+--  ----158
+-- ----37677  'ТСН-2 P'  180  1672  GLOBAL_TYPE_ANALOG
+--
+--  ----159
+-- ----37632  'ВФ-6 P'  180  1673  GLOBAL_TYPE_ANALOG
+--
+--  ----160
+-- ----37650  'ВФ-8 P'  180  1674  GLOBAL_TYPE_ANALOG
+--
+--  ----161
+-- ----37659  'ВФ-9 P'  180  1675  GLOBAL_TYPE_ANALOG
+--
+--  ----162
+-- ----37542  'ВФ-10 P'  180  1676  GLOBAL_TYPE_ANALOG
+--
+--  ----163
+-- ----37551  'ВФ-11 P'  180  1677  GLOBAL_TYPE_ANALOG
+--
+--  ----164
+-- ----37569  'ВФ-17 P'  180  1678  GLOBAL_TYPE_ANALOG
+--
+--  ----165
+-- ----37641  'ВФ-7 P'  180  1679  GLOBAL_TYPE_ANALOG
+--
+--  ----166
+-- ----37614  'ВФ-4 P'  180  1680  GLOBAL_TYPE_ANALOG
+--
+--  ----167
+-- ----37605  'ВФ-3 P'  180  1681  GLOBAL_TYPE_ANALOG
+--
+--  ----168
+-- ----37587  'ВФ-21 P'  180  1682  GLOBAL_TYPE_ANALOG
+--
+--  ----169
+-- ----37596  'ВФ-22 P'  180  1683  GLOBAL_TYPE_ANALOG
+--
+--  ----170
+-- ----37623  'ВФ-5 P'  180  1684  GLOBAL_TYPE_ANALOG
+--
+--  ----171
+-- ----37560  'ВФ-12 P'  180  1685  GLOBAL_TYPE_ANALOG
+--
+--  ----172
+-- ----37578  'ВФ-18 P'  180  1686  GLOBAL_TYPE_ANALOG
+--
+--  ----173
+-- ----37669  'ТСН-1 Q'  180  1799  GLOBAL_TYPE_ANALOG
+--
+--  ----174
+-- ----37678  'ТСН-2 Q'  180  1800  GLOBAL_TYPE_ANALOG
+--
+--  ----175
+-- ----37633  'ВФ-6 Q'  180  1801  GLOBAL_TYPE_ANALOG
+--
+--  ----176
+-- ----37651  'ВФ-8 Q'  180  1802  GLOBAL_TYPE_ANALOG
+--
+--  ----177
+-- ----37660  'ВФ-9 Q'  180  1803  GLOBAL_TYPE_ANALOG
+--
+--  ----178
+-- ----37543  'ВФ-10 Q'  180  1804  GLOBAL_TYPE_ANALOG
+--
+--  ----179
+-- ----37552  'ВФ-11 Q'  180  1805  GLOBAL_TYPE_ANALOG
+--
+--  ----180
+-- ----37570  'ВФ-17 Q'  180  1806  GLOBAL_TYPE_ANALOG
+--
+--  ----181
+-- ----37642  'ВФ-7 Q'  180  1807  GLOBAL_TYPE_ANALOG
+--
+--  ----182
+-- ----37615  'ВФ-4 Q'  180  1808  GLOBAL_TYPE_ANALOG
+--
+--  ----183
+-- ----37606  'ВФ-3 Q'  180  1809  GLOBAL_TYPE_ANALOG
+--
+--  ----184
+-- ----37588  'ВФ-21 Q'  180  1810  GLOBAL_TYPE_ANALOG
+--
+--  ----185
+-- ----37597  'ВФ-22 Q'  180  1811  GLOBAL_TYPE_ANALOG
+--
+--  ----186
+-- ----37624  'ВФ-5 Q'  180  1812  GLOBAL_TYPE_ANALOG
+--
+--  ----187
+-- ----37561  'ВФ-12 Q'  180  1813  GLOBAL_TYPE_ANALOG
+--
+--  ----188
+-- ----37579  'ВФ-18 Q'  180  1814  GLOBAL_TYPE_ANALOG
+--
+--  ----189
+-- ----37664  'ТСН-1 F'  180  1927  GLOBAL_TYPE_ANALOG
+--
+--  ----190
+-- ----37673  'ТСН-2 F'  180  1928  GLOBAL_TYPE_ANALOG
+--
+--  ----191
+-- ----37628  'ВФ-6 F'  180  1929  GLOBAL_TYPE_ANALOG
+--
+--  ----192
+-- ----37646  'ВФ-8 F'  180  1930  GLOBAL_TYPE_ANALOG
+--
+--  ----193
+-- ----37655  'ВФ-9 F'  180  1931  GLOBAL_TYPE_ANALOG
+--
+--  ----194
+-- ----37538  'ВФ-10 F'  180  1932  GLOBAL_TYPE_ANALOG
+--
+--  ----195
+-- ----37547  'ВФ-11 F'  180  1933  GLOBAL_TYPE_ANALOG
+--
+--  ----196
+-- ----37565  'ВФ-17 F'  180  1934  GLOBAL_TYPE_ANALOG
+--
+--  ----197
+-- ----37637  'ВФ-7 F'  180  1935  GLOBAL_TYPE_ANALOG
+--
+--  ----198
+-- ----37610  'ВФ-4 F'  180  1936  GLOBAL_TYPE_ANALOG
+--
+--  ----199
+-- ----37601  'ВФ-3 F'  180  1937  GLOBAL_TYPE_ANALOG
+--
+--  ----200
+-- ----37583  'ВФ-21 F'  180  1938  GLOBAL_TYPE_ANALOG
+--
+--  ----201
+-- ----37592  'ВФ-22 F'  180  1939  GLOBAL_TYPE_ANALOG
+--
+--  ----202
+-- ----37619  'ВФ-5 F'  180  1940  GLOBAL_TYPE_ANALOG
+--
+--  ----203
+-- ----37556  'ВФ-12 F'  180  1941  GLOBAL_TYPE_ANALOG
+--
+--  ----204
+-- ----37574  'ВФ-18 F'  180  1942  GLOBAL_TYPE_ANALOG
+--
+--  ----205
+-- ----26867  'В-6 Т-2'  180  25  GLOBAL_TYPE_BOOL
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4190 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4192 ;
+--
+--  ----206
+-- ----37237  'Потеря связи с А-1800 ВФ-18'  180  2070  GLOBAL_TYPE_BOOL
+--
+--  ----207
+-- ----26868  'ВМ-101'  180  14  GLOBAL_TYPE_BOOL
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4182 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4184 ;
+--
+--  ----208
+-- ----26869  'Потеря связи с ЭНИП В-6 Т-2'  180  2052  GLOBAL_TYPE_BOOL
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4177 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4178 ;
+--
+--  ----209
+-- ----43354  'Неисправность СН ТМ'  180  33  GLOBAL_TYPE_BOOL
+--
+--  ----210
+-- ----43355  'Резерв ТС 34'  180  34  GLOBAL_TYPE_BOOL
+--
+--  ----211
+-- ----43356  'Резерв ТС 35'  180  35  GLOBAL_TYPE_BOOL
+--
+--  ----212
+-- ----43357  'Резерв ТС 36'  180  36  GLOBAL_TYPE_BOOL
+--
+--  ----213
+-- ----43358  'Резерв ТС 37'  180  37  GLOBAL_TYPE_BOOL
+--
+--  ----214
+-- ----43359  'Резерв ТС 38'  180  38  GLOBAL_TYPE_BOOL
+--
+--  ----215
+-- ----43360  'Резерв ТС 39'  180  39  GLOBAL_TYPE_BOOL
+--
+--  ----216
+-- ----43361  'Резерв ТС 40'  180  40  GLOBAL_TYPE_BOOL
+--
+--  ----217
+-- ----43362  'Резерв ТС 41'  180  41  GLOBAL_TYPE_BOOL
+--
+--  ----218
+-- ----43363  'Резерв ТС 42'  180  42  GLOBAL_TYPE_BOOL
+--
+--  ----219
+-- ----43364  'Резерв ТС 43'  180  43  GLOBAL_TYPE_BOOL
+--
+--  ----220
+-- ----43365  'Резерв ТС 44'  180  44  GLOBAL_TYPE_BOOL
+--
+--  ----221
+-- ----26850  'В-35 Т-1'  180  1  GLOBAL_TYPE_BOOL
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4249 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4250 ;
+--
+--  ----222
+-- ----26851  'ОД Т-1(150кВ)'  180  2  GLOBAL_TYPE_BOOL
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4247 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4248 ;
+--
+--  ----223
+-- ----26852  'ВС-35'  180  3  GLOBAL_TYPE_BOOL
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4245 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4246 ;
+--
+--  ----224
+-- ----26853  'ВМ-63'  180  4  GLOBAL_TYPE_BOOL
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4240 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4242 ;
+--
+--  ----225
+-- ----26854  'ВМ-73'  180  5  GLOBAL_TYPE_BOOL
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4237 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4239 ;
+--
+--  ----226
+-- ----26855  'Потеря связи с ЭНИП В-35 Т-2'  180  2050  GLOBAL_TYPE_BOOL
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4234 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4236 ;
+--
+--  ----227
+-- ----26857  'ОД Т-2(150 кВ)'  180  10  GLOBAL_TYPE_BOOL
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4227 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4229 ;
+--
+--  ----228
+-- ----26856  'В-35 Т-2'  180  9  GLOBAL_TYPE_BOOL
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4231 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4233 ;
+--
+--  ----229
+-- ----26858  'ВМ-56'  180  13  GLOBAL_TYPE_BOOL
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4224 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4226 ;
+--
+--  ----230
+-- ----26859  'ВМ-68'  180  11  GLOBAL_TYPE_BOOL
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4221 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4222 ;
+--
+--  ----231
+-- ----26860  'ВМ-74'  180  12  GLOBAL_TYPE_BOOL
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4217 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4218 ;
+--
+--  ----232
+-- ----26861  'Потеря связи с ЭНИП В-6 Т-1'  180  2051  GLOBAL_TYPE_BOOL
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4213 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4215 ;
+--
+--  ----233
+-- ----26862  'В-6 Т-1'  180  17  GLOBAL_TYPE_BOOL
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4210 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4212 ;
+--
+--  ----234
+-- ----26863  'ВС-6'  180  18  GLOBAL_TYPE_BOOL
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4207 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4208 ;
+--
+--  ----235
+-- ----26864  'Авария'  180  6  GLOBAL_TYPE_BOOL
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4203 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4205 ;
+--
+--  ----236
+-- ----26865  'Предупредительный'  180  7  GLOBAL_TYPE_BOOL
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4199 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4201 ;
+--
+--  ----237
+-- ----26999  'ВФ-22'  180  8  GLOBAL_TYPE_BOOL
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4360 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4361 ;
+--
+--  ----238
+-- ----26997  'ВФ-18'  180  15  GLOBAL_TYPE_BOOL
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4364 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4365 ;
+--
+--  ----239
+-- ----26996  'ВФ-12'  180  16  GLOBAL_TYPE_BOOL
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4366 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4367 ;
+--
+--  ----240
+-- ----26995  'ВФ-10'  180  20  GLOBAL_TYPE_BOOL
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4368 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4369 ;
+--
+--  ----241
+-- ----26994  'ВФ-8'  180  21  GLOBAL_TYPE_BOOL
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4370 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4371 ;
+--
+--  ----242
+-- ----26993  'ВФ-6'  180  22  GLOBAL_TYPE_BOOL
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4372 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4373 ;
+--
+--  ----243
+-- ----26992  'ВФ-4'  180  23  GLOBAL_TYPE_BOOL
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4374 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4375 ;
+--
+--  ----244
+-- ----26991  'ВФ-3'  180  24  GLOBAL_TYPE_BOOL
+--
+--  ----245
+-- ----26990  'ВФ-9'  180  28  GLOBAL_TYPE_BOOL
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4378 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4379 ;
+--
+--  ----246
+-- ----26989  'ВФ-5'  180  26  GLOBAL_TYPE_BOOL
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4380 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4381 ;
+--
+--  ----247
+-- ----26988  'ВФ-7'  180  27  GLOBAL_TYPE_BOOL
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4382 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4383 ;
+--
+--  ----248
+-- ----26987  'ВФ-11'  180  29  GLOBAL_TYPE_BOOL
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4384 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4385 ;
+--
+--  ----249
+-- ----26986  'ВФ-17'  180  31  GLOBAL_TYPE_BOOL
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4386 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4387 ;
+--
+--  ----250
+-- ----26985  'ВФ-21'  180  32  GLOBAL_TYPE_BOOL
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4388 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4389 ;
+--
+--  ----251
+-- ----27000  'В-6 ТСН-1'  180  19  GLOBAL_TYPE_BOOL
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4358 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4359 ;
+--
+--  ----252
+-- ----26984  'В-6 ТСН-2'  180  30  GLOBAL_TYPE_BOOL
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4390 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4391 ;
+--
+--  ----253
+-- ----37222  'Потеря связи с А-1800 ТСН-1'  180  2055  GLOBAL_TYPE_BOOL
+--
+--  ----254
+-- ----37223  'Потеря связи с А-1800 ТСН-2'  180  2056  GLOBAL_TYPE_BOOL
+--
+--  ----255
+-- ----37224  'Потеря связи с А-1800 ВФ-6'  180  2057  GLOBAL_TYPE_BOOL
+--
+--  ----256
+-- ----37225  'Потеря связи с А-1800 ВФ-8'  180  2058  GLOBAL_TYPE_BOOL
+--
+--  ----257
+-- ----37226  'Потеря связи с А-1800 ВФ-9'  180  2059  GLOBAL_TYPE_BOOL
+--
+--  ----258
+-- ----37227  'Потеря связи с А-1800 ВФ-10'  180  2060  GLOBAL_TYPE_BOOL
+--
+--  ----259
+-- ----37228  'Потеря связи с А-1800 ВФ-11'  180  2061  GLOBAL_TYPE_BOOL
+--
+--  ----260
+-- ----37229  'Потеря связи с А-1800 ВФ-17'  180  2062  GLOBAL_TYPE_BOOL
+--
+--  ----261
+-- ----37230  'Потеря связи с А-1800 ВФ-7'  180  2063  GLOBAL_TYPE_BOOL
+--
+--  ----262
+-- ----37231  'Потеря связи с А-1800 ВФ-4'  180  2064  GLOBAL_TYPE_BOOL
+--
+--  ----263
+-- ----37232  'Потеря связи с А-1800 ВФ-3'  180  2065  GLOBAL_TYPE_BOOL
+--
+--  ----264
+-- ----37233  'Потеря связи с А-1800 ВФ-21'  180  2066  GLOBAL_TYPE_BOOL
+--
+--  ----265
+-- ----37234  'Потеря связи с А-1800 ВФ-22'  180  2067  GLOBAL_TYPE_BOOL
+--
+--  ----266
+-- ----37235  'Потеря связи с А-1800 ВФ-5'  180  2068  GLOBAL_TYPE_BOOL
+--
+--  ----267
+-- ----37236  'Потеря связи с А-1800 ВФ-12'  180  2069  GLOBAL_TYPE_BOOL
+--
+--  ----268
+-- ----26866  'Потеря связи с ЭНИП В-35 Т-1'  180  2049  GLOBAL_TYPE_BOOL
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4195 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4196 ;
+--
+--  ----269
+-- ----26870  'Команда синхронизации времени'  180  1  GLOBAL_TYPE_COMMAND
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4338 ;
+ update DA_SRC_CHANNEL SET priority=0 WHERE id=4339 ;
+--

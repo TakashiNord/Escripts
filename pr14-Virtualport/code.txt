@@ -1,0 +1,273 @@
+
+DeleteItem
+-------------
+DELETE FROM %s WHERE id_param=%u               DA_VAL,item_id
+DELETE FROM %s WHERE ID_SRC_CHANNEL_TUNE in (select ID from %s where ID_CHANNEL in (SELECT id FROM %s WHERE id_ownlst=%u)) 
+		TBL_SRC_CHAN_PAR_IND, DA_SRC_CHANNEL_TUNE, DA_SRC_CHANNEL, item_id
+DELETE FROM %s WHERE ID_SRC_CHANNEL_TUNE in (select ID from %s where ID_CHANNEL in (SELECT id FROM %s WHERE id_ownlst=%u)) 
+		TBL_SRC_CHAN_PAR_KOEF, DA_SRC_CHANNEL_TUNE, DA_SRC_CHANNEL, item_id
+DELETE FROM %s WHERE ID_CHANNEL in (SELECT id FROM %s WHERE id_ownlst=%u)
+                   DA_SRC_CHANNEL_TUNE,DA_SRC_CHANNEL,item_id
+DELETE FROM %s WHERE id_ownlst=%u",DA_SRC_CHANNEL,item_id
+
+UINT ID_FILEWAV = 0;
+SELECT NVL(ID_FILEWAV,0) FROM %s WHERE ID = %d", TLSTTBL, item_id
+		
+//Грохаем архивнst таблицs из БД
+theApp.DropTable(item_id);
+   "{?=call da_arh_pkg.drop_arh(?, ?)}"
+   "{? = call RAISE_RSDU_ERROR('da_arh_pkg.drop_arh', %d)}"
+	//Удаляем записи из da_arc
+   delete from %s where id_param = %lu      TBLARC, item_id);
+
+	
+DELETE FROM %s WHERE ID = %lu",TLSTTBL, item_id
+
+if ( ID_FILEWAV != 0 )
+{
+DELETE FROM sys_wave WHERE ID = %u", ID_FILEWAV);
+}
+
+
+
+
+
+	case 0://Подредактировали или оставили в покое
+
+UPDATE %s SET KOEFF_VAL=%f WHERE ID_SRC_CHANNEL_TUNE=%lu
+				TBL_SRC_CHAN_PAR_KOEF,ptrSrctDescript[i].koeff,ptrSrctDescript[i].id);
+			
+UPDATE %s SET ID_SRCTBL=%lu,ID_SRCLST=%lu WHERE ID=%lu
+						TBL_SRC_CHANNEL_TUNE,
+						ptrSrctDescript[i].id_srctbl,
+						ptrSrctDescript[i].id_srclst,
+						ptrSrctDescript[i].id);
+
+			break;
+
+		case 1://Добавили
+
+	ULONG iNextSrcId = 1;
+
+SELECT %s_s.nextval FROM dual          ,TBL_SRC_CHANNEL_TUNE
+
+INSERT INTO %s (ID,ID_CHANNEL,ID_SRCTBL,ID_SRCLST) \
+					VALUES (%lu,%lu,%lu,%lu)", TBL_SRC_CHANNEL_TUNE,
+					iNextSrcId, src_d.id,ptrSrctDescript[i].id_srctbl,ptrSrctDescript[i].id_srclst);
+
+INSERT INTO %s (ID_SRC_CHANNEL_TUNE,KOEFF_VAL) VALUES (%lu,%f)",
+					TBL_SRC_CHAN_PAR_KOEF,iNextSrcId,ptrSrctDescript[i].koeff);
+
+			break;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+void CExtSrc::OnOK() 
+{
+	UpdateData(TRUE);
+	if ( m_strName.IsEmpty() )
+	{
+		MessageBox("Наименование не задано","Сообщение", MB_OK|MB_ICONEXCLAMATION);
+		return;
+	}
+	if (m_strName.GetLength() > 255)
+	{
+		MessageBox("Наименование не должно быть больше 255 символов", "Сообщение", MB_OK|MB_ICONEXCLAMATION);
+		return;
+	}
+
+	CString strSQL;
+
+	strSQL.Format("update %s set ALIAS='%s' where ID=%lu",
+		TBL_SRC_CHANNEL, m_strName, src_d.id);
+	if ( RSDUWinUtils_ExecDMLQuery(strSQL, RSDU_ERROR_EVENTLOG)!=RSDU_ERR_OK )
+		return;
+
+	src_d.alias.Format("%s", m_strName);
+
+	long status;
+	HSTMT hStmt;
+	RETCODE retcode;
+
+	if ( RSDUWinUtils_InitHSTMT(&hStmt)!=RSDU_ERR_OK )
+		return;
+
+	::SendNotifyMessage( AdjWnd, idRsduServUnReg, (WPARAM) src_d.tree_node, (LPARAM) m_hWnd );
+
+	for(int i=0; i<ptrSrctDescript.GetSize(); i++)
+	{
+		switch(ptrSrctDescript[i].state)
+		{
+		case 0://Подредактировали или оставили в покое
+
+			strSQL.Format("UPDATE %s SET KOEFF_VAL=%f WHERE ID_SRC_CHANNEL_TUNE=%lu", 
+				TBL_SRC_CHAN_PAR_KOEF,ptrSrctDescript[i].koeff,ptrSrctDescript[i].id);
+			
+			if ( RSDUWinUtils_ExecDMLQuery(strSQL, RSDU_ERROR_EVENTLOG)!=RSDU_ERR_OK )
+				return;
+
+			strSQL.Format("UPDATE %s SET ID_SRCTBL=%lu,ID_SRCLST=%lu WHERE ID=%lu",
+						TBL_SRC_CHANNEL_TUNE,
+						ptrSrctDescript[i].id_srctbl,
+						ptrSrctDescript[i].id_srclst,
+						ptrSrctDescript[i].id);
+			if ( RSDUWinUtils_ExecDMLQuery(strSQL, RSDU_ERROR_EVENTLOG)!=RSDU_ERR_OK )
+				return;
+			break;
+		case 1://Добавили
+			{
+				ULONG iNextSrcId = 1;
+
+				strSQL.Format("SELECT %s_s.nextval FROM dual",TBL_SRC_CHANNEL_TUNE);
+				if ( RSDUWinUtils_ExecHSTMT(&hStmt, strSQL, RSDU_ERROR_EVENTLOG)!=RSDU_ERR_OK )
+					return;
+
+				SQLBindCol(hStmt, 1, SQL_C_SLONG, &iNextSrcId, 0, &status);
+				do 
+				{
+					retcode = SQLFetch(hStmt);
+				}
+				while(retcode != SQL_NO_DATA);
+				
+				SQLFreeStmt(hStmt, SQL_UNBIND);
+				SQLFreeStmt(hStmt, SQL_CLOSE);
+
+				strSQL.Format("INSERT INTO %s (ID,ID_CHANNEL,ID_SRCTBL,ID_SRCLST) \
+					VALUES (%lu,%lu,%lu,%lu)", TBL_SRC_CHANNEL_TUNE,
+					iNextSrcId, src_d.id,ptrSrctDescript[i].id_srctbl,ptrSrctDescript[i].id_srclst);
+
+				if ( RSDUWinUtils_ExecDMLQuery(strSQL, RSDU_ERROR_EVENTLOG)!=RSDU_ERR_OK )
+					return;
+
+				strSQL.Format("INSERT INTO %s (ID_SRC_CHANNEL_TUNE,KOEFF_VAL) VALUES (%lu,%f)",
+					TBL_SRC_CHAN_PAR_KOEF,iNextSrcId,ptrSrctDescript[i].koeff);
+				if ( RSDUWinUtils_ExecDMLQuery(strSQL, RSDU_ERROR_EVENTLOG)!=RSDU_ERR_OK )
+					return;
+			}
+			break;
+		case 2://Удалили
+			strSQL.Format("DELETE FROM %s WHERE ID_SRC_CHANNEL_TUNE=%lu", 
+				TBL_SRC_CHAN_PAR_KOEF, ptrSrctDescript[i].id);
+			
+			if ( RSDUWinUtils_ExecDMLQuery(strSQL, RSDU_ERROR_EVENTLOG)!=RSDU_ERR_OK )
+				return;
+
+			strSQL.Format("DELETE FROM %s WHERE ID=%lu", TBL_SRC_CHANNEL_TUNE, ptrSrctDescript[i].id);
+			if ( RSDUWinUtils_ExecDMLQuery(strSQL, RSDU_ERROR_EVENTLOG)!=RSDU_ERR_OK )
+				return;
+
+			break;
+		}
+	}
+
+	if ( RSDUWinUtils_FreeHSTMT(&hStmt)!=RSDU_ERR_OK )
+		return;
+
+	CDialog::OnOK();
+
+
+
+
+
+int CDBDaApp::DeleteItem(unsigned long item_id)
+{
+    CString strSQL;
+	//CRecordset rs(p_db);
+	//CDBVariant m_Var;
+	HSTMT hStmt;
+	long status;
+
+	strSQL.Format("DELETE FROM %s WHERE id_param=%u",DA_VAL,item_id);
+
+	if ( RSDUWinUtils_ExecDMLQuery(strSQL, RSDU_ERROR_SHOW|RSDU_ERROR_EVENTLOG)!=RSDU_ERR_OK )
+		return IDCANCEL;
+	
+	strSQL.Format("DELETE FROM %s WHERE ID_SRC_CHANNEL_TUNE in "
+		"(select ID from %s where ID_CHANNEL in (SELECT id FROM %s WHERE id_ownlst=%u))", 
+		TBL_SRC_CHAN_PAR_IND, DA_SRC_CHANNEL_TUNE, DA_SRC_CHANNEL, item_id);
+
+	if (RSDUWinUtils_ExecDMLQuery(strSQL, RSDU_ERROR_SHOW | RSDU_ERROR_EVENTLOG) != RSDU_ERR_OK)
+		return 0;
+
+	strSQL.Format("DELETE FROM %s WHERE ID_SRC_CHANNEL_TUNE in "
+		"(select ID from %s where ID_CHANNEL in (SELECT id FROM %s WHERE id_ownlst=%u))", 
+		TBL_SRC_CHAN_PAR_KOEF, DA_SRC_CHANNEL_TUNE, DA_SRC_CHANNEL, item_id);
+
+	if (RSDUWinUtils_ExecDMLQuery(strSQL, RSDU_ERROR_SHOW | RSDU_ERROR_EVENTLOG) != RSDU_ERR_OK)
+		return 0;
+
+	strSQL.Format("DELETE FROM %s WHERE ID_CHANNEL in \
+		(SELECT id FROM %s WHERE id_ownlst=%u)",DA_SRC_CHANNEL_TUNE,DA_SRC_CHANNEL,item_id);
+
+	if ( RSDUWinUtils_ExecDMLQuery(strSQL, RSDU_ERROR_SHOW|RSDU_ERROR_EVENTLOG)!=RSDU_ERR_OK )
+		return IDCANCEL;
+	
+	strSQL.Format("DELETE FROM %s WHERE id_ownlst=%u",DA_SRC_CHANNEL,item_id);
+
+	if ( RSDUWinUtils_ExecDMLQuery(strSQL, RSDU_ERROR_SHOW|RSDU_ERROR_EVENTLOG)!=RSDU_ERR_OK )
+		return IDCANCEL;
+
+
+	UINT ID_FILEWAV = 0;
+	strSQL.Format("SELECT NVL(ID_FILEWAV,0) FROM %s WHERE ID = %d", TLSTTBL, item_id);
+
+	RETCODE retcode	= SQLAllocStmt(m_hdbc, &hStmt);
+	if ((retcode!=SQL_SUCCESS) && (retcode!=SQL_SUCCESS_WITH_INFO)) {
+		MessageBox(NULL,
+				"Ошибка при работе с БД: невозможно создать оператор!\n(CDBDaApp::Delete_Node)",
+				SZAPPL_NAME,
+				MB_ICONERROR);
+		return IDCANCEL;
+	}
+		
+	retcode = SQLExecDirect(hStmt, (unsigned char* )(LPCTSTR )strSQL, SQL_NTS);
+	if ( SQL_SUCCEEDED(retcode) )
+	{
+		SQLBindCol(hStmt, 1, SQL_C_ULONG, &ID_FILEWAV, 0, &status);
+		SQLFetch(hStmt);
+	}
+	else {
+		MessageBox(NULL, strSQL, "Ошибка при выполнении запроса", MB_ICONERROR);
+	}
+	SQLFreeStmt(hStmt, SQL_UNBIND);
+	SQLFreeStmt(hStmt, SQL_CLOSE);
+
+	//Грохаем архивнst таблицs из БД
+	theApp.DropTable(item_id);
+	
+
+	strSQL.Format("DELETE FROM %s WHERE ID = %lu",TLSTTBL, item_id);
+	retcode = SQLExecDirect(hStmt, (unsigned char* )(LPCTSTR )strSQL, SQL_NTS);
+	if ( !SQL_SUCCEEDED(retcode) ) 
+	{
+		MessageBox(NULL, strSQL, "Ошибка при выполнении запроса", MB_ICONERROR);
+	}
+	if ( ID_FILEWAV != 0 )
+	{
+		strSQL.Format("DELETE FROM sys_wave WHERE ID = %u", ID_FILEWAV);
+		retcode = SQLExecDirect(hStmt, (unsigned char* )(LPCTSTR )strSQL, SQL_NTS);
+		if ( !SQL_SUCCEEDED(retcode) )	{
+			MessageBox(NULL, strSQL, "Ошибка при выполнении запроса", MB_ICONERROR);
+		}
+	}
+	SQLFreeStmt(hStmt,  SQL_DROP);
+    return 0;
+}
+
