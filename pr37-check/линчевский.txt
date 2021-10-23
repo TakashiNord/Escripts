@@ -1,0 +1,134 @@
+1) Прописать в сборе архивы ТС (по изменению), если их ещё нет.
+Сделать отчёт(ы) по данным архивам.
+2) Настроить коммутационные аппараты на эти параметры сбора. Эти ТС пойдут в журнал переключений.
+Взять за основу стандартную процедуру и отчёт по переключениям и сделать фильтр (выборку) только по данным параметрам
+ 
+Логика отчета должна быть такая: значение параметра = 1 значит форсунка открыта, если 0 - закрыта.
+Нужно выбрать все интервалы за заданный период, где форсунка включена и рассчитать расход по формуле
+((коэффициент\60)\60)*секунды открытой форсунки
+
+Параметры сбора и коэффициенты в таблице:
+
+Сбор ИИС (РАС Блок №1):
+ТС_144 (2.6) ТС_145 (2.1) ТС_146 (2.1) ТС_147 (2.2) ТС_148 (1.9) ТС_149 (2.3) ТС_150 (1.8) ТС_151 (2.25)
+6507746        6507747        6507748        6507749       6507750        6507751       6507752        6507753
+
+Сбор ИИС (РАС Блок №2):
+ТС_144 (2.15) ТС_145 (2.1) ТС_146 (2.1) ТС_147 (2) ТС_148 (2.2) ТС_149 (2.15) ТС_150 (2.15) ТС_151 (1.95)
+6507361        6507362         6507363        6507364     6507365       6507366          6507367          6507368
+
+Сбор ИИС (РАС Блок №3):
+ТС_144 (1.8) ТС_145 (1.95) ТС_146 (2.2) ТС_147 (2.2) ТС_148 (2.4) ТС_149 (2.35) ТС_150 (2.4) ТС_151 (2.3)
+6508362        6508363         6508364        6508365        6508366       6508367          6508368       6508369
+
+Сбор ИИС (РАС Блок №1) для КВТК-1:
+ТС_160 (2) ТС_161 (2) ТС_162 (2) ТС_163 (2) ТС_164 (2) ТС_165 (2)
+6507762
+
+Сбор ИИС (РАС Блок №1) для КВТК-2:
+ТС_166 (2) ТС_167 (2) ТС_168 (2) ТС_169 (2) ТС_170 (2) ТС_171 (2)
+
+Сбор ИИС (РАС Блок №1) для КВТК-3:
+ТС_172 (2) ТС_173 (2) ТС_174 (2) ТС_175 (2) ТС_176 (2) ТС_177 (2)
+                                                                                       6507779
+
+SET SERVEROUTPUT ON 
+DECLARE 
+-- 
+  t1 NUMBER;
+  fl NUMBER;
+  ds NUMBER;
+  tstart NUMBER;
+  tend NUMBER;
+  tu NUMBER;
+  str VARCHAR2(255);
+BEGIN 
+  dbms_output.ENABLE (100000);
+  dbms_output.put_line ('  ');
+  fl:=0;
+  tstart:=10;
+  tend:=18;
+  tu:=tend;
+  ds:=0;
+FOR rec IN (
+select dt, val  
+from  rsduadmin.t 
+where dt between tstart and tend 
+order by dt desc
+      ) LOOP
+      BEGIN 
+        IF rec.val=1 THEN 
+          fl:=fl+1;
+          t1:=rec.dt;
+          ds:=ds+ (tu-t1);
+          dbms_output.put_line('1='||ds||' ' ||tu||'  ' ||t1);
+          tu:=t1;
+        END IF;
+        IF rec.val=0 THEN 
+          tu:=rec.dt;
+          fl:=0;
+          dbms_output.put_line('0='||ds);
+        END IF;
+      EXCEPTION WHEN OTHERS THEN NULL;
+      END;
+   END LOOP;
+    str := ' ds = ' || ds;
+   dbms_output.put_line(' ' ||str);
+END;
+/
+
+
+SET SERVEROUTPUT ON 
+DECLARE 
+-- 
+  t1 NUMBER;
+  fl NUMBER;
+  ds NUMBER;
+  tstart NUMBER;
+  tend NUMBER;
+  tu NUMBER;
+  str VARCHAR2(255);
+BEGIN 
+  dbms_output.ENABLE (100000);
+  dbms_output.put_line ('  ');
+  fl:=0;
+  tstart:=1506017325;
+  tend:=1509363217;
+  tu:=tend;
+  ds:=0;
+FOR rec IN (
+SELECT J.DT1970 as dt, J.VALUE as val
+FROM RSDUADMIN.J_PWSW J
+where J.ID_SWITCH=6511628
+and J.DT1970 between tstart and tend 
+ORDER BY 1 DESC
+      ) LOOP
+      BEGIN 
+        IF rec.val=1 THEN 
+          fl:=fl+1;
+          t1:=rec.dt;
+          ds:=ds+ (tu-t1);
+          dbms_output.put_line('1='||ds||' ' ||tu||'  ' ||t1);
+          tu:=t1;
+        END IF;
+        IF rec.val=0 THEN 
+          tu:=rec.dt;
+          fl:=0;
+          dbms_output.put_line('0='||ds);
+        END IF;
+      EXCEPTION WHEN OTHERS THEN NULL;
+      END;
+   END LOOP;
+    str := ' ds = ' || ds;
+   dbms_output.put_line(' ' ||str);
+END;
+/
+
+1=0 1509363217  1509363217
+0=0
+1=9 1507402445  1507402436
+0=9
+1=90 1507363906  1507363825
+0=90
+  ds = 90
+
