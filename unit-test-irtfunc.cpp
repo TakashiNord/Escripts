@@ -1,4 +1,4 @@
-// ConsoleApplication5.cpp: определяет точку входа для консольного приложения.
+// ConsoleApplication5.cpp: РѕРїСЂРµРґРµР»СЏРµС‚ С‚РѕС‡РєСѓ РІС…РѕРґР° РґР»СЏ РєРѕРЅСЃРѕР»СЊРЅРѕРіРѕ РїСЂРёР»РѕР¶РµРЅРёСЏ.
 //
 
 #define _CRT_SECURE_NO_WARNINGS  1
@@ -51,17 +51,17 @@ typedef unsigned long int uint64_t;
 #define IRT_CR          0x0D /* <CR> */
 
 #define IRT_CMD_TYPE    0
-#define IRT_CMD_READ    
+#define IRT_CMD_READ    1
 
 
 
-uint16_t 
+uint16_t
  IRT_check_sum(char *msg, int32_t len) {
   int i, l;
-  uint16_t 
+  uint16_t
 	 sum;
 
-  printf("\nlen=%d\n",len);
+  printf("\nIRT_check_sum len=%d\n",len);
 
   sum = 65535;
   for (i = 1; i < len; i++) {
@@ -75,9 +75,9 @@ uint16_t
 	  }
   }
 
-  printf("\nsum=%d\n",sum);
+  printf("\nIRT_check_sum sum=%d\n",sum);
 
-  printf("\nmsg=%s\n",msg);
+  printf("\nIRT_check_sum msg=%s\n",msg);
 
   return sum;
 }
@@ -85,19 +85,19 @@ uint16_t
 
 
 char* IRT_check_buf1(char * dest,  const char *buf) {
-    while (*buf) { //Пробегаем указателем по строке
-      if (isalnum(*buf)) { //Если символ является буквой или цифрой
-        *dest++ = *buf; //Накапливаем строку в новом указателе
+    while (*buf) { //РџСЂРѕР±РµРіР°РµРј СѓРєР°Р·Р°С‚РµР»РµРј РїРѕ СЃС‚СЂРѕРєРµ
+      if (isalnum(*buf)) { //Р•СЃР»Рё СЃРёРјРІРѕР» СЏРІР»СЏРµС‚СЃСЏ Р±СѓРєРІРѕР№ РёР»Рё С†РёС„СЂРѕР№
+        *dest++ = *buf; //РќР°РєР°РїР»РёРІР°РµРј СЃС‚СЂРѕРєСѓ РІ РЅРѕРІРѕРј СѓРєР°Р·Р°С‚РµР»Рµ
       } else {
-	    if (*buf==IRT_CN || 
+	    if (*buf==IRT_CN ||
 		    *buf==IRT_SN ||
 		    *buf==IRT_EM ||
 		    *buf==IRT_DH ||
 		    *buf==IRT_PT ||
 		    *buf==IRT_DL ||
-		    *buf==IRT_CR ) *dest++ = *buf; //Накапливаем строку в новом указателе
+		    *buf==IRT_CR ) *dest++ = *buf; //РќР°РєР°РїР»РёРІР°РµРј СЃС‚СЂРѕРєСѓ РІ РЅРѕРІРѕРј СѓРєР°Р·Р°С‚РµР»Рµ
 	  }
-		  
+
       ++buf;
     }
     *dest = '\0';
@@ -108,13 +108,13 @@ char* IRT_check_buf1(char * dest,  const char *buf) {
 char* IRT_check_buf2(char *buf) {
    char *p ;
    for (p = buf; *p; p++) {
-    if (*p==IRT_CN || 
+    if (*p==IRT_CN ||
 	    *p==IRT_SN ||
 	    *p==IRT_EM ||
 	    *p==IRT_PT ||
 	    *p==IRT_DL ||
 		*p==IRT_CR ) { ; }
-		 else if (!isalnum(*p)) *p = ' '; 
+		 else if (!isalnum(*p)) *p = ' ';
    }
    return buf;
 }
@@ -127,7 +127,7 @@ int IRT_get_value(char * msg, char * buf,  int size, char * value) {
 	uint16_t          check;
 	double fval ;
 
-	int32_t p=0; // указатель
+	int32_t p=0; // СѓРєР°Р·Р°С‚РµР»СЊ
 
 	if (buf == NULL)
 		return -1;
@@ -136,11 +136,11 @@ int IRT_get_value(char * msg, char * buf,  int size, char * value) {
 	buf_PTR=&buf[0];
 
 	for (; *buf_PTR != IRT_EM; buf_PTR++,p++) {
-		if ((buf_PTR - buf) >= size) return -2; // если IRT_EM - нет 
+		if ((buf_PTR - buf) >= size) return -2; // РµСЃР»Рё IRT_EM - РЅРµС‚
 	}
 
 	buf_PTR++;
-	if ((buf_PTR - buf) >= size) return -2; // если IRT_EM - нет
+	if ((buf_PTR - buf) >= size) return -2; // РµСЃР»Рё IRT_EM - РЅРµС‚
 
 
 	printf("\n buf_PTR=%s \n",buf_PTR);
@@ -151,11 +151,11 @@ int IRT_get_value(char * msg, char * buf,  int size, char * value) {
 
 
 	for (buf_PTR = buf; *buf_PTR != IRT_CR; buf_PTR++) {
-		if ((buf + size) == buf_PTR)  return -3; // если IRT_CR - нет
+		if ((buf + size) == buf_PTR)  return -3; // РµСЃР»Рё IRT_CR - РЅРµС‚
 	}
 
 	for (; *buf_PTR != IRT_SN; buf_PTR--) {
-		if ((buf + size) == buf_PTR) return -4; // если IRT_SN - нет
+		if ((buf + size) == buf_PTR) return -4; // РµСЃР»Рё IRT_SN - РЅРµС‚
 	}
 
 	int ls2 = strlen(buf + p);
@@ -173,40 +173,73 @@ int IRT_get_value(char * msg, char * buf,  int size, char * value) {
 int IRT_get_value2(char * msg, char * buf,  int size, char * value) {
 	char            * buf_PTR = buf;
 	char            * p_IRT_EM;
+	char            * buf_NEW;
+
 	int          addr, chk;
 	uint16_t          check;
 	double fval ;
 
-	int32_t p=0; // указатель
+	buf_NEW = new char[size+1]();
+
+//	buf_NEW = new (std::nothrow) char[size+1]();
+//if (!buf_NEW) // РѕР±СЂР°Р±Р°С‚С‹РІР°РµРј СЃР»СѓС‡Р°Р№, РєРѕРіРґР° new РІРѕР·РІСЂР°С‰Р°РµС‚ null (С‚.Рµ. РїР°РјСЏС‚СЊ РЅРµ РІС‹РґРµР»СЏРµС‚СЃСЏ)
+//{
+    // РћР±СЂР°Р±РѕС‚РєР° СЌС‚РѕРіРѕ СЃР»СѓС‡Р°СЏ
+//    std::cout << "Could not allocate memory";
+//}
+
+
+	int32_t p=0; // СѓРєР°Р·Р°С‚РµР»СЊ
 
 	if (buf == NULL)
 		return -1;
 
 
+	int i = 0 ;
+    while (*buf_PTR) { //РџСЂРѕР±РµРіР°РµРј СѓРєР°Р·Р°С‚РµР»РµРј РїРѕ СЃС‚СЂРѕРєРµ
+      if (isalnum(*buf_PTR)) { //Р•СЃР»Рё СЃРёРјРІРѕР» СЏРІР»СЏРµС‚СЃСЏ Р±СѓРєРІРѕР№ РёР»Рё С†РёС„СЂРѕР№
+        buf_NEW[i++] = *buf_PTR; //РќР°РєР°РїР»РёРІР°РµРј СЃС‚СЂРѕРєСѓ РІ РЅРѕРІРѕРј СѓРєР°Р·Р°С‚РµР»Рµ
+      } else {
+	    if (*buf_PTR==IRT_CN ||
+		    *buf_PTR==IRT_SN ||
+		    *buf_PTR==IRT_EM ||
+		    *buf_PTR==IRT_DH ||
+		    *buf_PTR==IRT_PT ||
+		    *buf_PTR==IRT_DL ||
+		    *buf_PTR==IRT_CR ) buf_NEW[i++] = *buf_PTR; //РќР°РєР°РїР»РёРІР°РµРј СЃС‚СЂРѕРєСѓ РІ РЅРѕРІРѕРј СѓРєР°Р·Р°С‚РµР»Рµ
+	  }
+
+      ++buf_PTR;
+    }
+    buf_NEW[i++] = '\0';
+
+	printf("\n buf_NEW=%s \n",buf_NEW);
+
+
 	buf_PTR=&buf[0];
 
 	for (; *buf_PTR != IRT_EM; buf_PTR++,p++) {
-		if ((buf_PTR - buf) >= size) return -2; // если IRT_EM - нет 
+		if ((buf_PTR - buf) >= size) return -2; // РµСЃР»Рё IRT_EM - РЅРµС‚
 	}
 
 
     p_IRT_EM = buf_PTR;
 
 	buf_PTR++;
-	if ((buf_PTR - buf) >= size) return -2; // если IRT_EM - нет
+	if ((buf_PTR - buf) >= size) return -2; // РµСЃР»Рё IRT_EM - РЅРµС‚
 
 	printf("\n p_IRT_EM=%s \n",p_IRT_EM);
 
 	sscanf(buf_PTR, "%d;%lf;%d", &addr, &fval, &chk);
 
 	printf( "\n=%d=%lf=%d=\n", addr, fval, chk);
-	
+
 	for (buf_PTR = buf; *buf_PTR != IRT_CR; buf_PTR++) {
-		if ((buf + size) == buf_PTR)  return -3; // если IRT_CR - нет
+		if ((buf + size) == buf_PTR)  return -3; // РµСЃР»Рё IRT_CR - РЅРµС‚
 	}
 
 	for (; *buf_PTR != IRT_SN; buf_PTR--) {
-		if ((buf + size) == buf_PTR) return -4; // если IRT_SN - нет
+		if ((buf + size) == buf_PTR) return -4; // РµСЃР»Рё IRT_SN - РЅРµС‚
 	}
 
 	int ls2 = strlen(buf + p);
@@ -237,7 +270,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	int ret = IRT_get_value2(NULL, buf1,  size1, value) ;
 	printf("\n ret=%d \n",ret);
-	
+
 	return 0;
 }
 
