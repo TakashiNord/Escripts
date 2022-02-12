@@ -1,0 +1,61 @@
+
+таблица
+ Enterprise (
+    EnterpriseId       INTEGER        PRIMARY KEY AUTOINCREMENT
+                                      NOT NULL,
+    Ident              NVARCHAR (50)  NOT NULL
+                                      COLLATE NOCASE,
+    ParentEnterpriseId INTEGER,
+    OrderNumber        INTEGER,
+    Name               NVARCHAR (150) NOT NULL
+                                      COLLATE NOCASE,
+    UID                NVARCHAR (38)  COLLATE NOCASE,
+    IsDC               INTEGER        NOT NULL,
+    FOREIGN KEY (
+        ParentEnterpriseId
+    )
+    REFERENCES Enterprise (EnterpriseId) 
+);
+
+строим структуру 
+
+
+    /**
+     * Возвращает текстовую строку, полный путь до корневого каталога от заднонного узла
+     *
+     * @param $uiIdNode
+     * @return string
+     */
+
+        $strSQL  = 'SELECT NAME FROM OBJECTS_INP CONNECT BY PRIOR id_parent = ID START WITH  ID = ? ORDER BY LEVEL DESC';
+
+
+    * Установить связь с объектом
+     *
+     * @param string $strObjRef Идентификатор объекта подсистемы
+     * @param integer $uiIdInpObj Идентификатор объекта ИП
+     * @param integer $uiIdSbs Идентификатор подсистемы
+     * @param string $strObjName Наименование объекта
+     * @param string $strObjAlias Краткое наименование объекта
+     * @param string $stype Тип объекта в подсистеме
+     * @return bool
+     */
+    public function SetLinkForObject($strObjRef, $uiIdInpObj, $uiIdSbs, $strObjName, $strObjAlias, $stype = '')
+
+
+        if (isset($stype) and $stype != '') {
+            $strUpdateSQL = 'UPDATE objects_link SET obj_ref = ?, name = ?, alias = ? WHERE id_obj = ? AND id_sbs = ? AND id_type = ' . $stype;
+            $strInsertSQL = 'INSERT INTO objects_link (obj_ref, name, alias, id_obj, id_sbs, id_type) VALUES (?,?,?,?,?,' . $stype . ')';
+        }
+        else {
+            $strUpdateSQL = 'UPDATE objects_link SET obj_ref = ?, name = ?, alias = ? WHERE id_obj = ? AND id_sbs = ?';
+            $strInsertSQL = 'INSERT INTO objects_link (obj_ref, name, alias, id_obj, id_sbs) VALUES (?,?,?,?,?)';
+        }
+
+
+            $strSQL = "select count(*) RC from OBJECTS_INP " . $strConditionParent . " and " . $strConditionType;
+            //$this->logger->info(var_export($strSQL,true));
+            $rowCount = $this->db->fetchOne($strSQL);
+
+            $strSQL = "SELECT * FROM (select ROWNUM RN, ID1 ID,NAME,ALIAS, (select count(*) from OBJECTS_INP CH where CH.ID_PARENT = ID1 ) ISFOLDER, ID_PARENT CPID from ( select ID ID1,NAME,ALIAS,ID_PARENT from OBJECTS_INP " . $strConditionParent . " and " . $strConditionType . $strConditionSort . "))" . $strConditionLimit;
+            //$this->logger->info(var_export($strSQL,true));
