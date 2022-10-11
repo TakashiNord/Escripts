@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# ver 18/03/2020
+# ver 11/10/2022
 
 # folders
 EMA_LOGS1=(
@@ -33,8 +33,8 @@ EMA_LOGS1=(
 /opt/oracle/instantclient_11_2
 /etc/rabbitmq
 /var/log/rabbitmq
-/var/ema/coredumps
 /var/log/mongodb
+# /var/ema/coredumps
 /var/www/hde.conf
 /var/www/hde.app/log
 );
@@ -292,7 +292,11 @@ EMA_logs_stat ()
   echo -e  "\n$cmd1" >> $n
   $cmd1 >> $n
 
-  cmd1="ntpq -np"
+  cmd1="service ntpd status"
+  echo -e  "\n$cmd1" >> $n
+  $cmd1 >> $n
+
+  cmd1="ntpq -np -4"
   echo -e  "\n$cmd1" >> $n
   $cmd1 >> $n
 
