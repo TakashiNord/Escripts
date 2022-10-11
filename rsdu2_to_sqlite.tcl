@@ -267,44 +267,59 @@ proc  main { } {
   CreateTables $s1 $owner
 
   # scheme
+  set owner "INP"
+  set s1 [ format $strSQL01 $owner ]
+  CreateTables $s1 $owner    
+  
+  # scheme
   set owner "RSDU2CLARH"
   set s1 [ format $strSQL01 $owner ]
-  CreateTables $s1 $owner  
+  #CreateTables $s1 $owner  
   
   # scheme
   set owner "RSDU2DAARH"
   set s1 [ format $strSQL01 $owner ]
-  CreateTables $s1 $owner 
+  #CreateTables $s1 $owner 
   
   # scheme
   set owner "RSDU2DGARH"
   set s1 [ format $strSQL01 $owner ]
-  CreateTables $s1 $owner
+  #CreateTables $s1 $owner
   
   # scheme
   set owner "RSDU2EAARH"
   set s1 [ format $strSQL01 $owner ]
-  CreateTables $s1 $owner  
+  #CreateTables $s1 $owner  
 
   # scheme
   set owner "RSDU2ELARH"
   set s1 [ format $strSQL01 $owner ]
-  CreateTables $s1 $owner
+  #CreateTables $s1 $owner
   
   # scheme
   set owner "RSDU2PHARH"
   set s1 [ format $strSQL01 $owner ]
-  CreateTables $s1 $owner
+  #CreateTables $s1 $owner
 
   # scheme
   set owner "RSDU2PSARH"
   set s1 [ format $strSQL01 $owner ]
-  CreateTables $s1 $owner
+  #CreateTables $s1 $owner
 
   # scheme
   set owner "RSDUJOB"
   set s1 [ format $strSQL01 $owner ]
   CreateTables $s1 $owner
+  
+  # scheme
+  set owner "RSDU_FMON"
+  set s1 [ format $strSQL01 $owner ]
+  CreateTables $s1 $owner    
+  
+  # scheme
+  set owner "RSDU2EXARH"
+  set s1 [ format $strSQL01 $owner ]
+  #CreateTables $s1 $owner  
 
   db1 close
 
