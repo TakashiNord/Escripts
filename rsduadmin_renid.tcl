@@ -61,9 +61,12 @@ proc checkTable { rf db2 tblname col } {
 # ==============================================================================================================
 
 # --
-proc AA1 { rf db2 } {
+proc BASE1 { rf db2 } {
 
-  set TABLE_LIST [ list OBJ_MODEL_MEAS DA_SLAVE RSDU_UPDATE RSDU_ERROR ]
+  set TABLE_LIST [ list OBJ_MODEL_MEAS RSDU_UPDATE RSDU_ERROR \
+ DA_SLAVE DA_MASTER DA_DEV_OPT DA_PC DA_PORT \
+ MEAS_EL_DEPENDENT_SVAL ]
+
 
   foreach TABLE_NAME $TABLE_LIST {
 
@@ -85,7 +88,9 @@ proc AA1 { rf db2 } {
       set id_old [lindex $r1 $i ]
       if {$id_old!=$j} {
 
-         set strSQL3 "UPDATE $TABLE_NAME SET ID=$j WHERE ID=$id_old"
+        LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
+		
+		set strSQL3 "UPDATE $TABLE_NAME SET ID=$j WHERE ID=$id_old"
         $db2 $strSQL3
         $db2 commit
 
@@ -140,6 +145,8 @@ proc VP_GROUP { rf db2 } {
       set j [ expr $i+1 ]
       set id_old [lindex $r1 $i ]
       if {$id_old!=$j} {
+	  
+	   LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
 
        #--VP_GROUP
        $db2 "UPDATE VP_GROUP SET ID_PARENT=$maxID WHERE ID_PARENT=$id_old"
@@ -213,6 +220,8 @@ proc VP_PANEL { rf db2 } {
       set j [ expr $i+1 ]
       set id_old [lindex $r1 $i ]
       if {$id_old!=$j} {
+	  
+	   LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
 
        #--VP_CTRL
        $db2 "UPDATE VP_CTRL SET ID_PANEL=$maxID WHERE ID_PANEL=$id_old"
@@ -314,6 +323,8 @@ proc VS_GROUP { rf db2 } {
       set j [ expr $i+1 ]
       set id_old [lindex $r1 $i ]
       if {$id_old!=$j} {
+	  
+	   LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
 
        #--VS_GROUP
        $db2 "UPDATE VS_GROUP SET ID_PARENT=$maxID WHERE ID_PARENT=$id_old"
@@ -386,6 +397,8 @@ proc VS_FORM { rf db2 } {
       set j [ expr $i+1 ]
       set id_old [lindex $r1 $i ]
       if {$id_old!=$j} {
+	  
+	   LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
 
        #--VS_COMP
        $db2 "UPDATE VS_COMP SET ID_FORM=$maxID WHERE ID_FORM=$id_old"
@@ -499,6 +512,8 @@ proc RPT_DIR { rf db2 } {
       set j [ expr $i+1 ]
       set id_old [lindex $r1 $i ]
       if {$id_old!=$j} {
+	  
+	   LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
 
        #--RPT_DIR
        $db2 "UPDATE RPT_DIR SET ID_PARENT=$maxID WHERE ID_PARENT=$id_old"
@@ -572,6 +587,8 @@ proc RPT_LST { rf db2 } {
       set j [ expr $i+1 ]
       set id_old [lindex $r1 $i ]
       if {$id_old!=$j} {
+	  
+	   LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
 
        #--RPT_PARAMS
        $db2 "UPDATE RPT_PARAMS SET ID_REPORT=$maxID WHERE ID_REPORT=$id_old"
@@ -666,6 +683,8 @@ proc ARC1 { rf db2 } {
       set j [ expr $i+1 ]
       set id_old [lindex $r1 $i ]
       if {$id_old!=$j} {
+	  
+	   LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
 
        #--ARC_SERVICES_TUNE
        $db2 "UPDATE ARC_SERVICES_TUNE SET ID_SPROFILE=$maxID WHERE ID_SPROFILE=$id_old"
@@ -736,6 +755,9 @@ proc AA2 { rf db2 } {
       set j [ expr $i+1 ]
       set id_old [lindex $r1 $i ]
       if {$id_old!=$j} {
+	  
+	    LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
+		
         set strSQL3 "UPDATE $TABLE_NAME SET ID=$j WHERE ID=$id_old"
         $db2 $strSQL3
         $db2 commit
@@ -795,6 +817,9 @@ proc DA_DEV { rf db2 } {
       set j [ expr $i+1 ]
       set id_old [lindex $r1 $i ]
       if {$id_old!=$j} {
+	  
+	   LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
+	  
        #--DA_SLAVE  ID_DEV
        $db2 "UPDATE DA_SLAVE SET ID_DEV=$maxID WHERE ID_DEV=$id_old"
        $db2 commit
@@ -872,6 +897,8 @@ proc DA_DEV_DESC { rf db2 } {
       set j [ expr $i+1 ]
       set id_old [lindex $r1 $i ]
       if {$id_old!=$j} {
+	  
+	    LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
 
         #--DA_PARAM  ID_POINT
         $db2 "UPDATE DA_PARAM SET ID_POINT=$maxID WHERE ID_POINT=$id_old"
@@ -893,6 +920,163 @@ proc DA_DEV_DESC { rf db2 } {
         #--DA_PARAM  ID_POINT
         $db2 "UPDATE DA_PARAM SET ID_POINT=$j WHERE ID_POINT=$maxID"
         $db2 commit
+
+      }
+    }
+
+    $db2 "DELETE FROM $TABLE_NAME WHERE NAME LIKE '%TEXTRENAMETEXT%' "
+    $db2 commit
+
+    set strSQL3 "SELECT ${TABLE_NAME}_S.nextval FROM dual"
+    set r3 [ $db2 $strSQL3 ]
+    set l3 [ llength $r3 ]
+    if {$l3>0} {
+     set increment_old [lindex $r3 0 ]
+     set increment_old [ expr (1-int($increment_old)) ]
+     set str2 [ format "alter sequence %s_S increment by %d" $TABLE_NAME $increment_old ]
+     $db2 $str2
+     $db2 $strSQL3
+     $db2 "alter sequence ${TABLE_NAME}_S increment by 1"
+    }
+
+
+ return 0 ;
+}
+
+
+# ==============================================================================================================
+
+# -- DA_CAT -- отключать ssbsd + перестроить view da_v_cat_XXX     с новыми id
+proc DA_CAT { rf db2 } {
+
+    set TABLE_NAME "DA_CAT"
+
+    set strSQL1 "SELECT max(ID), min(ID), count(*) FROM $TABLE_NAME"
+
+    set maxID 0 ; set minID 0 ; set cntID 0 ;
+    foreach {r1} [ $db2 $strSQL1 ] {
+      set maxID [ lindex $r1 0 ]
+      set minID [ lindex $r1 1 ]
+      set cntID [ lindex $r1 2 ]
+      set s1 "\n$TABLE_NAME = max=$maxID min=$minID cnt=$cntID \n"
+      puts $s1
+    }
+
+
+    set strSQL1 "SELECT * FROM $TABLE_NAME ORDER BY ID ASC"
+    foreach {r1} [ $db2 $strSQL1 ] {
+      set s0 "$r1"
+      LogWrite "$r1"
+    }
+	
+	LogWrite "----------\n"
+	#return ;
+
+    set maxID [ expr int($maxID)+1 ]
+    set strSQL0 "INSERT INTO $TABLE_NAME (ID,ID_TYPE,ID_PARENT,NAME,ALIAS,ID_RESERVE,ID_FILEWAV) VALUES ($maxID,1,NULL,'TEXTRENAMETEXT','',NULL,NULL) "
+    $db2 $strSQL0
+    $db2 commit
+
+    set strSQL2 "SELECT ID FROM $TABLE_NAME ORDER BY ID ASC"
+    set r1 [ $db2 $strSQL2 ]
+    for {set i 0} {$i < $cntID} {incr i} {
+      set j [ expr $i+1 ]
+      set id_old [lindex $r1 $i ]
+      if {$id_old!=$j} {
+	  
+	   LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
+	  
+       #--DA_DEV_OPT  ID_NODE
+       $db2 "UPDATE DA_DEV_OPT SET ID_NODE=$maxID WHERE ID_NODE=$id_old"
+       $db2 commit
+       #--DA_EQUALIFIER  ID_NODE
+       $db2 "UPDATE DA_EQUALIFIER SET ID_NODE=$maxID WHERE ID_NODE=$id_old"
+       $db2 commit 
+       #--DA_FAILURE_JRNL  ID_NODE
+       $db2 "UPDATE DA_FAILURE_JRNL SET ID_NODE=$maxID WHERE ID_NODE=$id_old"
+       $db2 commit 
+       #--DA_KTSUSD  ID_NODE
+       $db2 "UPDATE DA_KTSUSD SET ID_NODE=$maxID WHERE ID_NODE=$id_old"
+       $db2 commit 
+       #--DA_MASTER  ID_NODE
+       $db2 "UPDATE DA_MASTER SET ID_NODE=$maxID WHERE ID_NODE=$id_old"
+       $db2 commit 	   
+       #--DA_PARAM  ID_NODE
+       $db2 "UPDATE DA_PARAM SET ID_NODE=$maxID WHERE ID_NODE=$id_old"
+       $db2 commit 
+       #--DA_PC  ID_NODE
+       $db2 "UPDATE DA_PC SET ID_NODE=$maxID WHERE ID_NODE=$id_old"
+       $db2 commit 
+       #--DA_PORT  ID_NODE
+       $db2 "UPDATE DA_PORT SET ID_NODE=$maxID WHERE ID_NODE=$id_old"
+       $db2 commit
+       #--DA_SLAVE  ID_NODE
+       $db2 "UPDATE DA_SLAVE SET ID_NODE=$maxID WHERE ID_NODE=$id_old"
+       $db2 commit 
+
+       #--J_DADV  ID_DEVICE
+       $db2 "UPDATE J_DADV SET ID_DEVICE=$maxID WHERE ID_DEVICE=$id_old"
+       $db2 commit 
+       #--J_DAPARAMSTATE  ID_DEVICE
+       $db2 "UPDATE J_DAPARAMSTATE SET ID_DEVICE=$maxID WHERE ID_DEVICE=$id_old"
+       $db2 commit 
+	   
+
+
+       #--DA_CAT  ID_RESERVE
+       $db2 "UPDATE $TABLE_NAME SET ID_RESERVE=$maxID WHERE ID_RESERVE=$id_old"
+       $db2 commit 
+       #--DA_CAT  ID_PARENT
+       $db2 "UPDATE $TABLE_NAME SET ID_PARENT=$maxID WHERE ID_PARENT=$id_old"
+       $db2 commit
+	   
+       set strSQL3 "UPDATE $TABLE_NAME SET ID=$j WHERE ID=$id_old"
+       $db2 $strSQL3
+       $db2 commit
+       
+	   #--DA_CAT  ID_RESERVE
+       $db2 "UPDATE $TABLE_NAME SET ID_RESERVE=$j WHERE ID_RESERVE=$maxID"
+       $db2 commit 
+       #--DA_CAT  ID_PARENT
+       $db2 "UPDATE $TABLE_NAME SET ID_PARENT=$j WHERE ID_PARENT=$maxID"
+       $db2 commit
+
+
+
+       #--DA_DEV_OPT  ID_NODE
+       $db2 "UPDATE DA_DEV_OPT SET ID_NODE=$j WHERE ID_NODE=$maxID"
+       $db2 commit
+       #--DA_EQUALIFIER  ID_NODE
+       $db2 "UPDATE DA_EQUALIFIER SET ID_NODE=$j WHERE ID_NODE=$maxID"
+       $db2 commit 
+       #--DA_FAILURE_JRNL  ID_NODE
+       $db2 "UPDATE DA_FAILURE_JRNL SET ID_NODE=$j WHERE ID_NODE=$maxID"
+       $db2 commit 
+       #--DA_KTSUSD  ID_NODE
+       $db2 "UPDATE DA_KTSUSD SET ID_NODE=$j WHERE ID_NODE=$maxID"
+       $db2 commit 
+       #--DA_MASTER  ID_NODE
+       $db2 "UPDATE DA_MASTER SET ID_NODE=$j WHERE ID_NODE=$maxID"
+       $db2 commit 	   
+       #--DA_PARAM  ID_NODE
+       $db2 "UPDATE DA_PARAM SET ID_NODE=$j WHERE ID_NODE=$maxID"
+       $db2 commit 
+       #--DA_PC  ID_NODE
+       $db2 "UPDATE DA_PC SET ID_NODE=$j WHERE ID_NODE=$maxID"
+       $db2 commit 
+       #--DA_PORT  ID_NODE
+       $db2 "UPDATE DA_PORT SET ID_NODE=$j WHERE ID_NODE=$maxID"
+       $db2 commit
+       #--DA_SLAVE  ID_NODE
+       $db2 "UPDATE DA_SLAVE SET ID_NODE=$j WHERE ID_NODE=$maxID"
+       $db2 commit 
+
+       #--J_DADV  ID_DEVICE
+       $db2 "UPDATE J_DADV SET ID_DEVICE=$j WHERE ID_DEVICE=$maxID"
+       $db2 commit 
+       #--J_DAPARAMSTATE  ID_DEVICE
+       $db2 "UPDATE J_DAPARAMSTATE SET ID_DEVICE=$j WHERE ID_DEVICE=$maxID"
+       $db2 commit 
 
       }
     }
@@ -960,6 +1144,7 @@ proc CCC0 { rf db2 ind1 ind2 } {
           $db2 commit
         }
 
+
         #--J_ELSET ID_OBJECT
         if {[checkTable $rf $db2 "J_ELSET" "ID_OBJECT"]} {
           #LOCK TABLE J_ELSET IN SHARE ROW EXCLUSIVE MODE;
@@ -971,12 +1156,18 @@ proc CCC0 { rf db2 ind1 ind2 } {
           $db2 "UPDATE J_PHSET SET ID_OBJECT=$ind1 WHERE ID_OBJECT=$ind2"
           $db2 commit
         }
-
         #--J_TELEREG  ID_OBJECT
         if {[checkTable $rf $db2 "J_TELEREG" "ID_OBJECT"]} {
           $db2 "UPDATE J_TELEREG SET ID_OBJECT=$ind1 WHERE ID_OBJECT=$ind2"
           $db2 commit
         }
+
+        #--J_TELEREG  ID_OBJECT
+        #if {[checkTable $rf $db2 "J_TELEREG" "ID_OBJECT"]} {
+        #  $db2 "UPDATE J_TELEREG SET ID_OBJECT=$ind1 WHERE ID_OBJECT=$ind2"
+        #  $db2 commit
+        #}
+
 
         #--OBJ_CNT  ID_OBJ
         if {[checkTable $rf $db2 "OBJ_CNT" "ID_OBJ"]} {
@@ -1026,10 +1217,8 @@ proc CCC0 { rf db2 ind1 ind2 } {
 
 
 
-# -- OBJ_TREE
+# -- OBJ_TREE -- !необходимо! гасить модули elregd, phregd, ?ssbsd?
 proc OBJ_TREE { rf db2 } {
-
-    # !необходимо! гасить модули elregd, phregd, ?ssbsd?
 
     set shiftID 0 ; # смещение id - нет , нельзя
 
@@ -1058,6 +1247,8 @@ proc OBJ_TREE { rf db2 } {
       set j [ expr $i+1 + $shiftID ]
       set id_old [lindex $r1 $i ]
       if {$id_old!=$j} {
+	  
+		LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
 
         CCC0 $rf $db2 $maxID $id_old
 
@@ -1102,34 +1293,28 @@ proc OBJ_TREE { rf db2 } {
 
 
 # -- одиночные таблицы
-#AA1 $rf db2
-
+#BASE1 $rf db2
 
 # -- RPT_DIR
 #RPT_DIR $rf db2
 # -- RPT_LST
 #RPT_LST $rf db2
 
-
 # -- VS_GROUP
 #VS_GROUP $rf db2
 # -- VS_FORM
 #VS_FORM $rf db2
-
 
 # -- VP_GROUP
 #VP_GROUP $rf db2
 # -- VP_PANEL
 #VP_PANEL $rf db2
 
-
 # -- ARC_SUBSYST_PROFILE
 #ARC1 $rf db2
 
-
-# -- журналы
+# -- журналы -- отключать ssbsd
 # AA2 $rf db2
-
 
 # -- DA_DEV
 #DA_DEV $rf db2
@@ -1137,9 +1322,12 @@ proc OBJ_TREE { rf db2 } {
 # -- DA_DEV_DESC
 #DA_DEV_DESC $rf db2
 
+# -- DA_CAT -- отключать ssbsd + перестроить view с новыми id
+#DA_CAT $rf db2
 
-# -- OBJ_TREE
-# #########OBJ_TREE $rf db2
+
+# -- OBJ_TREE -- отключать ssbsd + контроль Сигнальной системы  -- !необходимо! гасить модули elregd, phregd, ?ssbsd?
+# #OBJ_TREE $rf db2
 
 
 # ==============================================================================================================
