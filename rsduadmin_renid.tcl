@@ -929,10 +929,28 @@ proc AA2 { rf db2 } {
 # -- DA_PARAM
 proc DA_PARAM { rf db2 } {
 
+	set da_list [ list ]
+	LogWrite "====DA_SUBSYST==="
+	set strSQL11 "select id,id_parent, name, id_lsttbl \
+from sys_tree21 \
+where id_parent in ( \
+select distinct id_parent from sys_tree21 where id_lsttbl in \
+(select id from sys_tbllst where id_type in \
+(select id from sys_otyp where define_alias like 'LST') \
+and id_node in \
+(select id from sys_db_part where id_parent in \
+(select id from sys_db_part where define_alias like 'DA_SUBSYST' ))))"
+    foreach {r11} [ $db2 $strSQL11 ] {
+      LogWrite $r11
+	  set id_lsttbl [ lindex $r11 3 ]
+	  lappend da_list $id_lsttbl
+    }
+	LogWrite "============"
+
+
     set TABLE_NAME "DA_PARAM"
 
     set strSQL1 "SELECT max(ID), min(ID), count(*) FROM $TABLE_NAME"
-
     set maxID 0 ; set minID 0 ; set cntID 0 ;
     foreach {r1} [ $db2 $strSQL1 ] {
       set maxID [ lindex $r1 0 ]
@@ -942,7 +960,7 @@ proc DA_PARAM { rf db2 } {
       puts $s1
     }
 
-	LogWrite "============"
+	LogWrite "======DA_PARAM======"
 	set strSQL11 "SELECT * FROM $TABLE_NAME"
     foreach {r11} [ $db2 $strSQL11 ] {
       LogWrite $r11
@@ -962,15 +980,69 @@ proc DA_PARAM { rf db2 } {
       if {$id_old!=$j} {
 	  
 	   LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
-	   # DA_ARC
-	   # DA_PARGROUP_TUNE
-	   # DA_PROFILE
-	   # DA_SRC_CHANNEL
-	   # DA_VAL
-	   # J_MAILDISP
+
+       #--DA_ARC  ID_PARAM
+       $db2 "UPDATE DA_ARC SET ID_PARAM=$maxID WHERE ID_PARAM=$id_old"
+       $db2 commit
+       #--DA_PARGROUP_TUNE  ID_PARAM
+       $db2 "UPDATE DA_PARGROUP_TUNE SET ID_PARAM=$maxID WHERE ID_PARAM=$id_old"
+       $db2 commit
+       #--DA_PROFILE  ID_PARAM
+       $db2 "UPDATE DA_PROFILE SET ID_PARAM=$maxID WHERE ID_PARAM=$id_old"
+       $db2 commit
+       #--DA_SRC_CHANNEL  ID_OWNLST
+       $db2 "UPDATE DA_SRC_CHANNEL SET ID_OWNLST=$maxID WHERE ID_OWNLST=$id_old"
+       $db2 commit
+       #--DA_VAL  ID_PARAM
+       $db2 "UPDATE DA_VAL SET ID_PARAM=$maxID WHERE ID_PARAM=$id_old"
+       $db2 commit
+       #--J_MAILDISP  ID_DIRECTORY
+       $db2 "UPDATE J_MAILDISP SET ID_DIRECTORY=$maxID WHERE ID_DIRECTORY=$id_old"
+       $db2 commit
+
+       foreach ID_TABLE $da_list {
+         #set ID_TABLE 54
+	     #--VP_PARAMS  ID_PARAM ID_TABLE=54 - SYS_TBLLST(DA_V_LST_1_LST)
+         $db2 "UPDATE VP_PARAMS SET ID_PARAM=$maxID WHERE ID_PARAM=$id_old AND ID_TABLE=$ID_TABLE"
+         $db2 commit
+         #--VS_REGIM_TUNE  ID_PARAM ID_TABLE=54 - SYS_TBLLST(DA_V_LST_1_LST)
+         $db2 "UPDATE VS_REGIM_TUNE SET ID_PARAM=$maxID WHERE ID_PARAM=$id_old AND ID_TABLE=$ID_TABLE"
+         $db2 commit
+	   }
+
+
+       $db2 "UPDATE $TABLE_NAME SET ID=$j WHERE ID=$id_old"
+       $db2 commit
 	   
-	   # VP_PARAMS ID_TABLE ID_PARAM
-	   # VS_REGIM_TUNE ID_TABLE ID_PARAM
+
+       #--DA_ARC  ID_PARAM
+       $db2 "UPDATE DA_ARC SET ID_PARAM=$j WHERE ID_PARAM=$maxID"
+       $db2 commit
+       #--DA_PARGROUP_TUNE  ID_PARAM
+       $db2 "UPDATE DA_PARGROUP_TUNE SET ID_PARAM=$j WHERE ID_PARAM=$maxID"
+       $db2 commit
+       #--DA_PROFILE  ID_PARAM
+       $db2 "UPDATE DA_PROFILE SET ID_PARAM=$j WHERE ID_PARAM=$maxID"
+       $db2 commit
+       #--DA_SRC_CHANNEL  ID_OWNLST
+       $db2 "UPDATE DA_SRC_CHANNEL SET ID_OWNLST=$j WHERE ID_OWNLST=$maxID"
+       $db2 commit
+       #--DA_VAL  ID_PARAM
+       $db2 "UPDATE DA_VAL SET ID_PARAM=$j WHERE ID_PARAM=$maxID"
+       $db2 commit
+       #--J_MAILDISP  ID_DIRECTORY
+       $db2 "UPDATE J_MAILDISP SET ID_DIRECTORY=$j WHERE ID_DIRECTORY=$maxID"
+       $db2 commit
+
+       foreach ID_TABLE $da_list {
+         #set ID_TABLE 54
+	     #--VP_PARAMS  ID_PARAM ID_TABLE=54 - SYS_TBLLST(DA_V_LST_1_LST)
+         $db2 "UPDATE VP_PARAMS SET ID_PARAM=$j WHERE ID_PARAM=$maxID AND ID_TABLE=$ID_TABLE"
+         $db2 commit
+         #--VS_REGIM_TUNE  ID_PARAM ID_TABLE=54 - SYS_TBLLST(DA_V_LST_1_LST)
+         $db2 "UPDATE VS_REGIM_TUNE SET ID_PARAM=$j WHERE ID_PARAM=$maxID AND ID_TABLE=$ID_TABLE"
+         $db2 commit
+	   }
 	  
       }
     }
@@ -992,6 +1064,19 @@ proc DA_PARAM { rf db2 } {
 
 
  return 0 ;
+}
+
+
+# -- DA_ARC - correction
+proc DA_ARC_correction { rf db2 } {
+
+ #alter table OLD_TABLE rename to NEW_TABLE;
+ #rename OLD_TABLE TO NEW_TABLE;
+ 
+ #RENAME myview TO otherview;
+ 
+ #alter index owner.index_name rename to new_name;
+
 }
 
 # ==============================================================================================================
@@ -1510,13 +1595,13 @@ proc OBJ_TREE { rf db2 } {
 
 # -- RPT_DIR
 #RPT_DIR $rf db2
-# -- RPT_LST   - необходимо проверить ID_TABLE=71 - RPT_LST , ID_APPL=964 - клиент просмотра отчетов
+# -- RPT_LST  - необходимо проверить ID_TABLE=71 - RPT_LST , ID_APPL=964 - клиент просмотра отчетов
 #RPT_LST $rf db2 71 964
 
 
 # -- VS_GROUP
 #VS_GROUP $rf db2
-# -- VS_FORM  -  - необходимо проверить ID_TABLE=43 - VS_FORM_LST , ID_APPL=1232 - schemeviewer.exe
+# -- VS_FORM  - необходимо проверить ID_TABLE=43 - VS_FORM_LST , ID_APPL=1232 - schemeviewer.exe
 #VS_FORM $rf db2 43 1232
 
 
@@ -1534,8 +1619,8 @@ proc OBJ_TREE { rf db2 } {
 # AA2 $rf db2
 
 
-# -- DA_PARAM
-#DA_PARAM $rf db2
+# -- DA_PARAM - запускать очень осторожно, если нет привязки к отчетам - нет переименовывания таблиц\view
+# #DA_PARAM $rf db2
 
 # -- DA_DEV
 #DA_DEV $rf db2
