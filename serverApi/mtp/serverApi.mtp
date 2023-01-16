@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MYTCL>
+  <VERSION value="1.0"/>
+  <CREATION value="01/13/2023 10:35:48"/>
+  <NAME value="serverApi"/>
+  <PROPERTIES>
+    <BUILD>
+      <OUTPUTFILE value="serverApi.exe"/>
+      <LOCATION/>
+      <ENCODING/>
+      <ICON value=""/>
+      <CLEANTMP/>
+      <COPYDEPFILES/>
+    </BUILD>
+    <VFS>
+      <lib value="">
+        <tcl8.5 value="">
+          <encoding value=""/>
+        </tcl8.5>
+        <app-unknown value=""/>
+        <app-serverApi value=""/>
+      </lib>
+    </VFS>
+    <RUN>
+      <DEBUGPORTNUMBER/>
+      <ARGS/>
+    </RUN>
+    <PACKAGES require="tcllib 1.13;tdom 0.8.3;"/>
+  </PROPERTIES>
+  <TYPE value="Window Application"/>
+  <SOURCES value="serverApi.tcl;" main="serverApi.tcl"/>
+  <BREAKPOINTS value=""/>
+  <BOOKMARKS value=""/>
+  <WATCHVARIABLE/>
+</MYTCL>
