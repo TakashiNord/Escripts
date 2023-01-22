@@ -361,7 +361,7 @@ proc get_equipments_state { equipments_state } {
     }
   } ; # for
 
-  OUTtext "\nAll elements=$li  |  Isolated=$sI  UnderVoltage=$sUV  Damaged=$sD  Other=$sOther\n"  set li [llength $ll ]
+  OUTtext "\nAll elements=$li  |  Isolated=$sI  UnderVoltage=$sUV  Damaged=$sD  Other=$sOther\n"
 
   foreach {item} $equipments_state {
     set state [dict get $item "State"]
