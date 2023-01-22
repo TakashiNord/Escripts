@@ -1,4 +1,4 @@
-WidGet file, version 1.1, created:  Fri Jan 13 10:41:30  2023
+WidGet file, version 1.1, created:  Sun Jan 22 15:21:32  2023
 Widget button#10
 	geometry row 6
 	other error {}
@@ -11,9 +11,9 @@ Widget button#10
 	other help {}
 	other comments {}
 	geometry column 2
-	configure command SaveFile
-	other tabbing {}
 	other item_name button#10
+	other tabbing {}
+	configure command SaveFile
 	geometry sticky nesw
 Widget label#5
 	geometry row 2
@@ -26,8 +26,8 @@ Widget label#5
 	other help {}
 	other comments {}
 	geometry column 1
-	other item_name label#5
 	other tabbing {}
+	other item_name label#5
 	geometry sticky nesw
 Widget button#1
 	geometry row 6
@@ -41,9 +41,9 @@ Widget button#1
 	other help {}
 	other comments {}
 	geometry column 6
-	other tabbing {}
-	other item_name button#1
 	configure command OKbut
+	other item_name button#1
+	other tabbing {}
 	geometry sticky nesw
 Widget entry#3
 	geometry row 1
@@ -57,8 +57,8 @@ Widget entry#3
 	other help {}
 	other comments {}
 	geometry column 6
-	other tabbing {}
 	other item_name entry_pass
+	other tabbing {}
 	geometry sticky nesw
 Widget label#6
 	geometry row 4
@@ -71,8 +71,8 @@ Widget label#6
 	other help {}
 	other comments {}
 	geometry column 1
-	other item_name label#6
 	other tabbing {}
+	other item_name label#6
 	geometry sticky nesw
 Widget text#1
 	geometry columnspan 6
@@ -108,9 +108,9 @@ Widget button#3
 	other help {}
 	other comments {}
 	geometry column 2
-	configure command TOPOtemp
-	other tabbing {}
 	other item_name button#3
+	other tabbing {}
+	configure command TOPOtemp
 	geometry sticky nesw
 Widget button#4
 	geometry row 3
@@ -124,9 +124,9 @@ Widget button#4
 	other help {}
 	other comments {}
 	geometry column 3
-	configure command TOPOgraph
-	other tabbing {}
 	other item_name button#4
+	other tabbing {}
+	configure command TOPOgraph
 	geometry sticky nesw
 Widget button#5
 	geometry row 3
@@ -140,38 +140,41 @@ Widget button#5
 	other help {}
 	other comments {}
 	geometry column 4
-	configure command TOPOraw
-	other tabbing {}
 	other item_name button#5
+	other tabbing {}
+	configure command TOPOraw
 	geometry sticky nesw
 Widget button#6
 	geometry row 3
 	other error {}
 	other type button
 	other master {}
-	configure text {raw/network/state + broken}
+	configure text raw/network/state
 	other pathname button#6
 	other tags {}
 	other level {}
 	other help {}
 	other comments {}
 	geometry column 5
-	configure command TOPOraw_network_state
-	other tabbing {}
 	other item_name button#6
+	other tabbing {}
+	configure command TOPOraw_network_state
 	geometry sticky nesw
 Widget button#7
 	geometry row 3
+	other error {}
 	other type button
 	other master {}
+	configure text {/../state/ ?broken?}
 	other pathname button#7
 	other tags {}
 	other level {}
 	other help {}
 	other comments {}
 	geometry column 6
-	other tabbing {}
+	configure command TOPOraw_network_state_broken
 	other item_name button#7
+	other tabbing {}
 	geometry sticky nesw
 Widget f
 	other generic_options {button {
@@ -192,11 +195,11 @@ Widget f
 	other panel {}
 	other resize_row {1 1 1 0 3 1}
 	other type frame
-	other code \ \;##\n\ package\ require\ Tk\n\ \;##package\ require\ http\n\ package\ require\ rest\ \;\ #?1.0.1?\n\ package\ require\ json\n\n#=======================================\nproc\ Init\ \{\ \}\ \{\n#=======================================\n\ global\ user\ pass\ server_host\n\ set\ user\ admin\ \ \;\ #\ admin\ nov_ema\n\ set\ pass\ passme\ \;\ #passme\ \ qwertyqaz\n\ set\ server_host\ \"192.168.101.144:8080\"\ \;\ #\ \"10.100.6.33:8080\"\ \"127.0.0.1:8080\"\n\}\n#=======================================\nproc\ OKbut\ \{\ \}\ \{\n#=======================================\n\ exit\ \;\n\}\n#=======================================\nproc\ DELlogs\ \{\ \}\ \{\n#=======================================\n\ .textoutput\ delete\ 1.0\ end\;\n\}\n#=======================================\nproc\ SaveFile\ \{\ \}\ \{\n#=======================================\n\ \ \ set\ file\ \[tk_getSaveFile\ -title\ \"Save\ File\"\ -parent\ .\]\n\ \ \ if\ \{\ \$file\ ==\ \"\"\ \}\ \{\n\ \ \ \ \ \ \ \ return\;\ #\ they\ clicked\ cancel\n\ \ \ \}\n\ \ \ set\ x\ \[catch\ \{set\ fid\ \[open\ \$file\ w+\]\}\]\n\ \ \ set\ y\ \[catch\ \{puts\ \$fid\ \[.textoutput\ get\ 1.0\ end-1c\]\}\]\n\ \ \ set\ z\ \[catch\ \{close\ \$fid\}\]\n\ \ \ if\ \{\ \$x\ ||\ \$y\ ||\ \$z\ ||\ !\[file\ exists\ \$file\]\ ||\ !\[file\ isfile\ \$file\]\ ||\ !\[file\ readable\ \$file\]\ \}\ \{\n\ \ \ \ \ \ \ tk_messageBox\ -parent\ .\ -icon\ error\ \\\n\ \ \ \ \ \ \ \ \ \ \ \ -message\ \"An\ error\ occurred\ while\ saving\ to\ \\\"\$file\\\"\"\n\ \ \ \}\ else\ \{\n\ \ \ \ \ \ \ tk_messageBox\ -parent\ .\ -icon\ info\ -message\ \"Save\ successful\"\n\ \ \ \}\n\ return\ 0\ \;\n\}\n#=======================================\nproc\ OUTtext\ \{\ msg\ \}\ \{\n#=======================================\n\ .textoutput\ insert\ end\ \"\$msg\\n\"\n\}\n#=======================================\nproc\ TOPOraw\ \{\ \}\ \{\n#=======================================\n\ global\ user\ pass\ server_host\n\ OUTtext\ \"Get\ RAW\ ...\"\n\ OUTtext\ \"Server:\ \$server_host\ ,\ u=\$user\ ,\ p=\$pass\"\n\n\ set\ err\ \"\"\n\ catch\ \{\n\ \ \ set\ server(api)\ \{\n\ \ \ \ method\ get\n\ \ \ \ auth\ basic\n\ \ \ \ format\ json\n\ \ \ \}\n\ \ \ dict\ append\ server(api)\ url\ \"http://\$\{server_host\}/rsdu/scada/api/app/topology/raw\"\n\n\ \ \ rest::create_interface\ server\n\ \ \ server::basic_auth\ \$user\ \$pass\n\ \ \ set\ res\ \[\ server::api\ \]\n\n\ \ \ set\ ernull\ \"\"\n\ \}\ err\n\n\ if\ \{\$err==\"\"\}\ \{\n\ \ \ TOPOgraph_output\ \$res\n\ \}\ else\ \{\n\ \ \ OUTtext\ \"\\n\$err\"\n\ \}\n\n\}\n\n#=======================================\nproc\ TOPOgraph_output\ \{\ ll\ \}\ \{\n#=======================================\n\ \ set\ li\ \[llength\ \$ll\ \]\n\ \ OUTtext\ \"\\nElements=\$li\"\n\ \ foreach\ x\ \$ll\ \{\n\ \ \ \ set\ li\ \[llength\ \$x\ \]\n\ \ \ \ OUTtext\ \"\\nGroup()=\$li\"\n\ \ \ \ foreach\ y\ \$x\ \{\n\ \ \ \ \ \ OUTtext\ \"\ \ \$y\"\n\ \ \ \ \}\n\ \ \}\n\ \ OUTtext\ \"\"\n\}\n#=======================================\nproc\ TOPOgraph\ \{\ \}\ \{\n#=======================================\n\ global\ user\ pass\ server_host\n\ OUTtext\ \"Get\ GRAPH\ ...\"\n\ OUTtext\ \"Server:\ \$server_host\ ,\ u=\$user\ ,\ p=\$pass\"\n\n\ set\ err\ \"\"\n\ catch\ \{\n\ \ \ set\ server(api)\ \{\n\ \ \ \ \ method\ get\n\ \ \ \ \ auth\ basic\n\ \ \ \ \ format\ json\n\ \ \ \ \ result\ json\n\ \ \ \}\n\ \ \ dict\ append\ server(api)\ url\ \"http://\$\{server_host\}/rsdu/scada/api/app/topology/graph\"\n\n\ \ \ rest::create_interface\ server\n\ \ \ server::basic_auth\ \$user\ \$pass\n\ \ \ set\ res\ \ \[\ server::api\ \]\n\n\ \ \ set\ ernull\ \"\"\n\ \}\ err\n\n\ if\ \{\$err==\"\"\}\ \{\n\ \ \ TOPOgraph_output\ \$res\n\ \}\ else\ \{\n\ \ \ OUTtext\ \"\\n\$err\"\n\ \}\n\n\}\n#=======================================\nproc\ TOPOtemp\ \{\ \}\ \{\n#=======================================\n\ global\ user\ pass\ server_host\n\ OUTtext\ \"Get\ tempobjets\ ...\"\n\ OUTtext\ \"Server:\ \$server_host\ ,\ u=\$user\ ,\ p=\$pass\"\n\n\ set\ err\ \"\"\n\ catch\ \{\n\ \ \ set\ server(api)\ \{\n\ \ \ \ \ method\ get\n\ \ \ \ \ auth\ basic\n\ \ \ \ \ format\ json\n\ \ \ \}\n\ \ \ dict\ append\ server(api)\ url\ \"http://\$\{server_host\}/rsdu/scada/api/app/topology/tempobjects\"\n\n\ \ \ rest::create_interface\ server\n\ \ \ server::basic_auth\ \$user\ \$pass\n\ \ \ set\ res\ \[\ server::api\ \]\n\n\ \ \ set\ ernull\ \"\"\n\ \}\ err\n\n\ if\ \{\$err==\"\"\}\ \{\n\ \ \ TOPOgraph_output\ \$res\n\ \}\ else\ \{\n\ \ \ OUTtext\ \"\\n\$err\"\n\ \}\n\n\}\n\n#=======================================\nproc\ get_equipment_by_guid\ \{\ guid\ \}\ \{\n#=======================================\n\ global\ user\ pass\ server_host\n\n\ set\ err\ \"\"\n\ catch\ \{\n\ \ \ set\ cfg\ \{\n\ \ \ \ \ \ method\ get\n\ \ \ \ \ \ format\ json\n\ \ \ \}\n\ \ \ dict\ append\ cfg\ auth\ \"basic\ \$user\ \$pass\"\n\n\ \ \ set\ qw\ \{\}\n\n\ \ \ set\ jsonStr\ \[rest::get\ \"http://\$\{server_host\}/rsdu/scada/api/model/objstruct/objects/\$\{guid\}\"\ \$qw\ \$cfg\ \]\n\ \ \ #set\ su\ \[encoding\ convertfrom\ utf-8\ \$jsonStr\ \]\n\ \ \ #OUTtext\ \$su\n\ \ \ set\ equipdict\ \[json::json2dict\ \$jsonStr\]\n\ \ \ #set\ su\ \[encoding\ convertfrom\ utf-8\ \$equipdict\ \]\n\ \ \ #OUTtext\ \$su\n\n\ \ \ set\ ernull\ \"\"\n\ \}\ err\n\n\ if\ \{\$err==\"\"\}\ \{\n\ \ \ return\ \$equipdict\n\ \}\ else\ \{\n\ \ \ return\ \"\{\}\"\n\ \}\n\}\n\n#=======================================\nproc\ get_equipments_state\ \{\ equipments_state\ \}\ \{\n#=======================================\n\ \ set\ li\ \[llength\ \$equipments_state\ \]\n\ \ if\ \{\$li<=0\}\ \{\ return\ \"\"\ \;\ \}\n\n\ \ foreach\ \{item\}\ \$equipments_state\ \{\n\ \ \ \ set\ state\ \[dict\ get\ \$item\ \"State\"\]\n\ \ \ \ if\ \{\$state\ ==\ \"Damaged\"\}\ \{\n\ \ \ \ \ \ set\ guid\ \[dict\ get\ \$item\ \"ObjectId\"\]\n\ \ \ \ \ \ set\ find\ 1\n\ \ \ \ \ \ set\ idx\ 0\n\ \ \ \ \ \ while\ \$find\ \{\n\ \ \ \ \ \ \ \ set\ equipment_dict\ \[\ get_equipment_by_guid\ \$guid\ \]\n\n\ \ \ \ \ \ \ \ set\ parent_uid\ \"\"\n\ \ \ \ \ \ \ \ if\ \{\[dict\ exists\ \$equipment_dict\ \"ParentUid\"\]\}\ \{\ set\ parent_uid\ \[dict\ get\ \$equipment_dict\ \"ParentUid\"\]\ \}\n\ \ \ \ \ \ \ \ set\ equipment_type\ \{\}\n\ \ \ \ \ \ \ \ if\ \{\[dict\ exists\ \$equipment_dict\ \"Type\"\]\}\ \{\ set\ equipment_type\ \[dict\ get\ \$equipment_dict\ \"Type\"\]\ \}\n\n\ \ \ \ \ \ \ \ if\ \{\$equipment_type==\{\}\}\ \{\ break\ \;\ \}\n\n\ \ \ \ \ \ \ \ set\ equipment_type_alias\ \[dict\ get\ \$equipment_type\ \"DefineAlias\"\]\n\n\ \ \ \ \ \ \ \ if\ \{\$parent_uid==\"\"\ ||\ \$equipment_type_alias\ ==\ \"OTYP_SUBSTATION\"\ \}\ \{\ set\ find\ 0\ \}\n\n\ \ \ \ \ \ \ \ set\ name\ \[dict\ get\ \$equipment_dict\ \"Name\"\]\n\ \ \ \ \ \ \ \ set\ equipment_type_name\ \[dict\ get\ \$equipment_type\ \"Name\"\]\n\n\ \ \ \ \ \ \ \ if\ \{\$idx==0\}\ \{\n\ \ \ \ \ \ \ \ \ \ set\ su\ \"\$\{equipment_type_name\}:\$\{name\}\ GUID:\$\{guid\}\"\n\ \ \ \ \ \ \ \ \ \ set\ su\ \[encoding\ convertfrom\ utf-8\ \$su\ \]\n\ \ \ \ \ \ \ \ \ \ OUTtext\ \"+\ \$\{su\}\"\n\ \ \ \ \ \ \ \ \}\ else\ \{\n\ \ \ \ \ \ \ \ \ \ set\ su\ \"\$\{equipment_type_name\}:\$\{name\}\ GUID:\$\{guid\}\"\n\ \ \ \ \ \ \ \ \ \ set\ su\ \[encoding\ convertfrom\ utf-8\ \$su\ \]\n\ \ \ \ \ \ \ \ \ \ set\ s0\ \[string\ repeat\ \"\ \"\ \$idx\]\n\ \ \ \ \ \ \ \ \ \ OUTtext\ \"\$\{s0\}\ -\ \$\{su\}\"\n\ \ \ \ \ \ \ \ \}\n\n\ \ \ \ \ \ \ \ incr\ idx\ 1\n\ \ \ \ \ \ \ \ #break\n\ \ \ \ \ \ \ \ set\ guid\ \$parent_uid\n\ \ \ \ \ \ \}\n\ \ \ \ \}\n\ \ \}\n\n\}\n\n#=======================================\nproc\ TOPOgraph_outputstate\ \{\ ll\ \}\ \{\n#=======================================\n\ \ set\ li\ \[llength\ \$ll\ \]\n\n\ \ set\ sD\ 0\ \;\ set\ sUV\ 0\ \;\ set\ sI\ 0\ \;\n\ \ foreach\ x\ \$ll\ \{\n\ \ \ \ set\ state\ \[dict\ get\ \$x\ \"State\"\]\n\ \ \ \ if\ \{\$state==\"Isolated\"\}\ \{\ incr\ sI\ \;\ \}\n\ \ \ \ if\ \{\$state==\"UnderVoltage\"\}\ \{\ incr\ sUV\ \;\ \}\n\ \ \ \ if\ \{\$state==\"Damaged\"\}\ \{\ incr\ sD\ \;\ \}\n\ \ \}\n\n\ \ OUTtext\ \"\\nAll\ elements=\$li\ \ |\ \ Isolated=\$sI\ \ UnderVoltage=\$sUV\ \ Damaged=\$sD\\n\"\n\n\ \ set\ i\ 1\n\ \ foreach\ x\ \$ll\ \{\n\ \ \ \ set\ fr\ \[\ format\ \"%-06d\"\ \$i\ \]\n\ \ \ \ #OUTtext\ \"\$fr\ |\ \$x\"\n\ \ \ \ OUTtext\ \"\$x\"\n\ \ \ \ incr\ i\n\ \ \}\n\ \ OUTtext\ \"\"\n\}\n#=======================================\nproc\ TOPOraw_network_state\ \{\ \}\ \{\n#=======================================\n\ global\ user\ pass\ server_host\n\ OUTtext\ \"Get\ raw/network/state\ ...\"\n\ OUTtext\ \"Server:\ \$server_host\ ,\ u=\$user\ ,\ p=\$pass\"\n\n\ set\ err\ \"\"\n\ catch\ \{\n\ \ \ set\ cfg\ \{\n\ \ \ \ \ \ method\ get\n\ \ \ \ \ \ format\ json\n\ \ \ \ \ \ headers\ \{\n\ \ \ \ \ \ \ \ Content-Type\ \"application/json\;\ charset=utf-8\"\n\ \ \ \ \ \ \ \ Accept\ \"application/json\;\ charset=utf-8\"\n\ \ \ \ \ \ \}\n\ \ \ \}\n\ \ \ dict\ append\ cfg\ auth\ \"basic\ \$user\ \$pass\"\n\n\ \ \ set\ qw\ \{\}\n\ \ \ #dict\ append\ qw\ ObjectTypes\ \"OTYP_GROUNDER\ OTYP_GROUND_SWITCH\ OTYP_SHORTING_SWITCH\"\n\n\ \ \ set\ jsonStr\ \[rest::get\ \"http://\$\{server_host\}/rsdu/scada/api/app/topology/raw/network/state\"\ \$qw\ \$cfg\ \]\n\n\ \ \ set\ dj\ \[json::json2dict\ \$jsonStr\]\ \;\ #\ ????????\ ??????\ ???????\n\n\ \ \ set\ ernull\ \"\"\n\ \}\ err\n\n\ if\ \{\$err==\"\"\}\ \{\n\ \ \ TOPOgraph_outputstate\ \$dj\n\ \ \ OUTtext\ \"--------------------------\"\n\n#\ for\ Debug:\n\;#set\ djt\ \[list\ \{ObjectId\ 000db6c1-8254-4596-87da-4c88c41c6717\ State\ Isolated\}\ \n\;#\{ObjectId\ 002472e5-469a-ff47-ba1d-5f0faabf97db\ State\ UnderVoltage\}\ \n\;#\{ObjectId\ 00fdfa42-66ac-4267-ab7d-857f61706e9a\ State\ Damaged\}\]\n\n\ \ \ get_equipments_state\ \$dj\n\ \ \ OUTtext\ \"--------------------------\"\n\ \}\ else\ \{\n\ \ \ OUTtext\ \ \"\\n\$err\"\n\ \}\n\n\}\n#=======================================\nproc\ INFO\ \{\ \}\ \{\n#=======================================\n\ global\ user\ pass\ server_host\n\ OUTtext\ \"Get\ info\ ...\"\n\ OUTtext\ \"Server:\ \$server_host\ ,\ u=\$user\ ,\ p=\$pass\"\n\n\ set\ err\ \"\"\n\ catch\ \{\n\ \ \ \ set\ cfg\ \{\n\ \ \ \ \ \ \ \ method\ get\n\ \ \ \ \ \ \ \ format\ json\n\ \ \ \ \ \ \ \ headers\ \{\n\ \ \ \ \ \ \ \ \ \ Content-Type\ \"application/json\;\ charset=utf-8\"\n\ \ \ \ \ \ \ \ \ \ Accept\ \"application/json\;\ charset=utf-8\"\n\ \ \ \ \ \ \ \ \}\n\ \ \ \}\n\ \ \ dict\ append\ cfg\ auth\ \"basic\ \$user\ \$pass\"\n\n\ \ \ set\ res\ \[rest::simple\ http://\$\{server_host\}/rsdu/scada/api/app/info\ \{\}\ \$cfg\ \]\n\ \ \ set\ res\ \[encoding\ convertfrom\ utf-8\ \$res\ \]\n\n\ \ \ set\ ernull\ \"\"\n\ \}\ err\n\n\ if\ \{\$err==\"\"\}\ \{\n\ \ \ OUTtext\ \"\\n\$res\"\n\ \}\ else\ \{\n\ \ \ OUTtext\ \"\\n\$err\"\n\ \}\n\n\}\n\n#=======================================\n#\ \ \ \ \ catch\ \{destroy\ \$w\}\n#\ \ \ \ \ toplevel\ \$w\n\$base.textoutput\ configure\ -yscrollcommand\ \[list\ \$base.scrolly\ set\]\n\$base.scrolly\ configure\ \ -command\ \[list\ \$base.textoutput\ yview\]\n\$base.textoutput\ delete\ 1.0\ end\n\nInit\n\nset\ t1\ \[\ clock\ format\ \[\ clock\ seconds\ \]\ -format\ \"%Y-%m-%d\ %H:%M:%S\"\ \]\nOUTtext\ \"\\nTime\ =\ \$t1\\n\"\n\nencoding\ system\ \"utf-8\"\n\n#=======================================\n\n
+	other code \ \;##\n\ package\ require\ Tk\n\ \;##package\ require\ http\n\ package\ require\ rest\ \;\ #?1.0.1?\n\ package\ require\ json\n\n#=======================================\nproc\ Init\ \{\ \}\ \{\n#=======================================\n\ global\ user\ pass\ server_host\n\ set\ user\ admin\ \ \;\ #\ admin\ nov_ema\n\ set\ pass\ passme\ \;\ #passme\ \ qwertyqaz\n\ set\ server_host\ \"192.168.101.144:8080\"\ \;\ #\ \"10.100.6.33:8080\"\ \"127.0.0.1:8080\"\n\}\n#=======================================\nproc\ OKbut\ \{\ \}\ \{\n#=======================================\n\ exit\ \;\n\}\n#=======================================\nproc\ DELlogs\ \{\ \}\ \{\n#=======================================\n\ .textoutput\ delete\ 1.0\ end\;\n\}\n#=======================================\nproc\ SaveFile\ \{\ \}\ \{\n#=======================================\n\ \ \ set\ file\ \[tk_getSaveFile\ -title\ \"Save\ File\"\ -parent\ .\]\n\ \ \ if\ \{\ \$file\ ==\ \"\"\ \}\ \{\n\ \ \ \ \ \ \ \ return\;\ #\ they\ clicked\ cancel\n\ \ \ \}\n\ \ \ set\ x\ \[catch\ \{set\ fid\ \[open\ \$file\ w+\]\}\]\n\ \ \ set\ y\ \[catch\ \{puts\ \$fid\ \[.textoutput\ get\ 1.0\ end-1c\]\}\]\n\ \ \ set\ z\ \[catch\ \{close\ \$fid\}\]\n\ \ \ if\ \{\ \$x\ ||\ \$y\ ||\ \$z\ ||\ !\[file\ exists\ \$file\]\ ||\ !\[file\ isfile\ \$file\]\ ||\ !\[file\ readable\ \$file\]\ \}\ \{\n\ \ \ \ \ \ \ tk_messageBox\ -parent\ .\ -icon\ error\ \\\n\ \ \ \ \ \ \ \ \ \ \ \ -message\ \"An\ error\ occurred\ while\ saving\ to\ \\\"\$file\\\"\"\n\ \ \ \}\ else\ \{\n\ \ \ \ \ \ \ tk_messageBox\ -parent\ .\ -icon\ info\ -message\ \"Save\ successful\"\n\ \ \ \}\n\ return\ 0\ \;\n\}\n#=======================================\nproc\ OUTtext\ \{\ msg\ \}\ \{\n#=======================================\n\ .textoutput\ insert\ end\ \"\$msg\\n\"\n\}\n#=======================================\nproc\ TOPOraw\ \{\ \}\ \{\n#=======================================\n\ global\ user\ pass\ server_host\n\ OUTtext\ \"Get\ RAW\ ...\"\n\ OUTtext\ \"Server:\ \$server_host\ ,\ u=\$user\ ,\ p=\$pass\"\n\n\ set\ err\ \"\"\n\ catch\ \{\n\ \ \ set\ server(api)\ \{\n\ \ \ \ method\ get\n\ \ \ \ auth\ basic\n\ \ \ \ format\ json\n\ \ \ \}\n\ \ \ dict\ append\ server(api)\ url\ \"http://\$\{server_host\}/rsdu/scada/api/app/topology/raw\"\n\n\ \ \ rest::create_interface\ server\n\ \ \ server::basic_auth\ \$user\ \$pass\n\ \ \ set\ res\ \[\ server::api\ \]\n\n\ \ \ set\ ernull\ \"\"\n\ \}\ err\n\n\ if\ \{\$err==\"\"\}\ \{\n\ \ \ TOPOgraph_output\ \$res\n\ \}\ else\ \{\n\ \ \ OUTtext\ \"\\n\$err\"\n\ \}\n\n\}\n\n#=======================================\nproc\ TOPOgraph_output\ \{\ ll\ \}\ \{\n#=======================================\n\ \ set\ li\ \[llength\ \$ll\ \]\n\ \ OUTtext\ \"\\nElements=\$li\"\n\ \ foreach\ x\ \$ll\ \{\n\ \ \ \ set\ li\ \[llength\ \$x\ \]\n\ \ \ \ OUTtext\ \"\\nGroup()=\$li\"\n\ \ \ \ foreach\ y\ \$x\ \{\n\ \ \ \ \ \ OUTtext\ \"\ \ \$y\"\n\ \ \ \ \}\n\ \ \}\n\ \ OUTtext\ \"\"\n\}\n#=======================================\nproc\ TOPOgraph\ \{\ \}\ \{\n#=======================================\n\ global\ user\ pass\ server_host\n\ OUTtext\ \"Get\ GRAPH\ ...\"\n\ OUTtext\ \"Server:\ \$server_host\ ,\ u=\$user\ ,\ p=\$pass\"\n\n\ set\ err\ \"\"\n\ catch\ \{\n\ \ \ set\ server(api)\ \{\n\ \ \ \ \ method\ get\n\ \ \ \ \ auth\ basic\n\ \ \ \ \ format\ json\n\ \ \ \ \ result\ json\n\ \ \ \}\n\ \ \ dict\ append\ server(api)\ url\ \"http://\$\{server_host\}/rsdu/scada/api/app/topology/graph\"\n\n\ \ \ rest::create_interface\ server\n\ \ \ server::basic_auth\ \$user\ \$pass\n\ \ \ set\ res\ \ \[\ server::api\ \]\n\n\ \ \ set\ ernull\ \"\"\n\ \}\ err\n\n\ if\ \{\$err==\"\"\}\ \{\n\ \ \ TOPOgraph_output\ \$res\n\ \}\ else\ \{\n\ \ \ OUTtext\ \"\\n\$err\"\n\ \}\n\n\}\n#=======================================\nproc\ TOPOtemp\ \{\ \}\ \{\n#=======================================\n\ global\ user\ pass\ server_host\n\ OUTtext\ \"Get\ tempobjets\ ...\"\n\ OUTtext\ \"Server:\ \$server_host\ ,\ u=\$user\ ,\ p=\$pass\"\n\n\ set\ err\ \"\"\n\ catch\ \{\n\ \ \ set\ server(api)\ \{\n\ \ \ \ \ method\ get\n\ \ \ \ \ auth\ basic\n\ \ \ \ \ format\ json\n\ \ \ \}\n\ \ \ dict\ append\ server(api)\ url\ \"http://\$\{server_host\}/rsdu/scada/api/app/topology/tempobjects\"\n\n\ \ \ rest::create_interface\ server\n\ \ \ server::basic_auth\ \$user\ \$pass\n\ \ \ set\ res\ \[\ server::api\ \]\n\n\ \ \ set\ ernull\ \"\"\n\ \}\ err\n\n\ if\ \{\$err==\"\"\}\ \{\n\ \ \ TOPOgraph_output\ \$res\n\ \}\ else\ \{\n\ \ \ OUTtext\ \"\\n\$err\"\n\ \}\n\n\}\n\n#=======================================\nproc\ get_equipment_by_guid\ \{\ guid\ \}\ \{\n#=======================================\n\ global\ user\ pass\ server_host\n\n\ set\ err\ \"\"\n\ catch\ \{\n\ \ \ set\ cfg\ \{\n\ \ \ \ \ \ method\ get\n\ \ \ \ \ \ format\ json\n\ \ \ \}\n\ \ \ dict\ append\ cfg\ auth\ \"basic\ \$user\ \$pass\"\n\n\ \ \ set\ qw\ \{\}\n\n\ \ \ set\ jsonStr\ \[rest::get\ \"http://\$\{server_host\}/rsdu/scada/api/model/objstruct/objects/\$\{guid\}\"\ \$qw\ \$cfg\ \]\n\ \ \ #set\ su\ \[encoding\ convertfrom\ utf-8\ \$jsonStr\ \]\n\ \ \ #OUTtext\ \$su\n\ \ \ set\ equipdict\ \[json::json2dict\ \$jsonStr\]\n\ \ \ #set\ su\ \[encoding\ convertfrom\ utf-8\ \$equipdict\ \]\n\ \ \ #OUTtext\ \$su\n\n\ \ \ set\ ernull\ \"\"\n\ \}\ err\n\n\ if\ \{\$err==\"\"\}\ \{\n\ \ \ return\ \$equipdict\n\ \}\ else\ \{\n\ \ \ return\ \"\{\}\"\n\ \}\n\}\n\n#=======================================\nproc\ get_equipments_state\ \{\ equipments_state\ \}\ \{\n#=======================================\n\ \ set\ li\ \[llength\ \$equipments_state\ \]\n\ \ if\ \{\$li<=0\}\ \{\ return\ \"\"\ \;\ \}\n\n\ \ set\ sD\ 0\ \;\ set\ sUV\ 0\ \;\ set\ sI\ 0\ \;\ set\ sOther\ 0\ \;\n\ \ foreach\ x\ \$equipments_state\ \{\n\ \ \ \ set\ state\ \[dict\ get\ \$x\ \"State\"\]\n\ \ \ \ switch\ --\ \$state\ \{\n\ \ \ \ \ \ Isolated\ \{\n\ \ \ \ \ \ \ \ incr\ sI\ \;\n\ \ \ \ \ \ \}\n\ \ \ \ \ \ UnderVoltage\ \{\n\ \ \ \ \ \ \ \ incr\ sUV\ \;\n\ \ \ \ \ \ \}\n\ \ \ \ \ \ Damaged\ \{\n\ \ \ \ \ \ \ \ incr\ sD\ \;\n\ \ \ \ \ \ \}\n\ \ \ \ \ \ default\ \{\n\ \ \ \ \ \ \ \ incr\ sOther\;\n\ \ \ \ \ \ \}\n\ \ \ \ \}\n\ \ \}\ \;\ #\ for\n\n\ \ OUTtext\ \"\\nAll\ elements=\$li\ \ |\ \ Isolated=\$sI\ \ UnderVoltage=\$sUV\ \ Damaged=\$sD\ \ Other=\$sOther\\n\"\ \ set\ li\ \[llength\ \$ll\ \]\n\n\ \ foreach\ \{item\}\ \$equipments_state\ \{\n\ \ \ \ set\ state\ \[dict\ get\ \$item\ \"State\"\]\n\ \ \ \ if\ \{\$state\ ==\ \"Damaged\"\}\ \{\n\ \ \ \ \ \ set\ guid\ \[dict\ get\ \$item\ \"ObjectId\"\]\n\ \ \ \ \ \ set\ find\ 1\n\ \ \ \ \ \ set\ idx\ 0\n\ \ \ \ \ \ while\ \$find\ \{\n\ \ \ \ \ \ \ \ set\ equipment_dict\ \[\ get_equipment_by_guid\ \$guid\ \]\n\n\ \ \ \ \ \ \ \ set\ parent_uid\ \"\"\n\ \ \ \ \ \ \ \ if\ \{\[dict\ exists\ \$equipment_dict\ \"ParentUid\"\]\}\ \{\ set\ parent_uid\ \[dict\ get\ \$equipment_dict\ \"ParentUid\"\]\ \}\n\ \ \ \ \ \ \ \ set\ equipment_type\ \{\}\n\ \ \ \ \ \ \ \ if\ \{\[dict\ exists\ \$equipment_dict\ \"Type\"\]\}\ \{\ set\ equipment_type\ \[dict\ get\ \$equipment_dict\ \"Type\"\]\ \}\n\n\ \ \ \ \ \ \ \ if\ \{\$equipment_type==\{\}\}\ \{\ break\ \;\ \}\n\n\ \ \ \ \ \ \ \ set\ equipment_type_alias\ \[dict\ get\ \$equipment_type\ \"DefineAlias\"\]\n\n\ \ \ \ \ \ \ \ if\ \{\$parent_uid==\"\"\ ||\ \$equipment_type_alias\ ==\ \"OTYP_SUBSTATION\"\ \}\ \{\ set\ find\ 0\ \}\n\n\ \ \ \ \ \ \ \ set\ name\ \[dict\ get\ \$equipment_dict\ \"Name\"\]\n\ \ \ \ \ \ \ \ set\ equipment_type_name\ \[dict\ get\ \$equipment_type\ \"Name\"\]\n\n\ \ \ \ \ \ \ \ if\ \{\$idx==0\}\ \{\n\ \ \ \ \ \ \ \ \ \ set\ su\ \"\$\{equipment_type_name\}:\$\{name\}\ GUID:\$\{guid\}\"\n\ \ \ \ \ \ \ \ \ \ set\ su\ \[encoding\ convertfrom\ utf-8\ \$su\ \]\n\ \ \ \ \ \ \ \ \ \ OUTtext\ \"+\ \$\{su\}\"\n\ \ \ \ \ \ \ \ \}\ else\ \{\n\ \ \ \ \ \ \ \ \ \ set\ su\ \"\$\{equipment_type_name\}:\$\{name\}\ GUID:\$\{guid\}\"\n\ \ \ \ \ \ \ \ \ \ set\ su\ \[encoding\ convertfrom\ utf-8\ \$su\ \]\n\ \ \ \ \ \ \ \ \ \ set\ s0\ \[string\ repeat\ \"\ \"\ \$idx\]\n\ \ \ \ \ \ \ \ \ \ OUTtext\ \"\$\{s0\}\ -\ \$\{su\}\"\n\ \ \ \ \ \ \ \ \}\n\n\ \ \ \ \ \ \ \ incr\ idx\ 1\n\ \ \ \ \ \ \ \ #break\n\ \ \ \ \ \ \ \ set\ guid\ \$parent_uid\n\ \ \ \ \ \ \}\n\ \ \ \ \}\n\ \ \}\n\n\}\n\n#=======================================\nproc\ TOPOgraph_outputstate\ \{\ ll\ \}\ \{\n#=======================================\n\ \ set\ li\ \[llength\ \$ll\ \]\n\n\ \ set\ sD\ 0\ \;\ set\ sUV\ 0\ \;\ set\ sI\ 0\ \;\ set\ sOther\ 0\ \;\n\ \ foreach\ x\ \$ll\ \{\n\ \ \ \ set\ state\ \[dict\ get\ \$x\ \"State\"\]\n\ \ \ \ if\ \{\$state==\"Isolated\"\}\ \{\ \n\ \ \ \ \ \ incr\ sI\ \;\ \n\ \ \ \ \}\ else\ \{\n\ \ \ \ \ \ if\ \{\$state==\"UnderVoltage\"\}\ \{\ \n\ \ \ \ \ \ \ \ incr\ sUV\ \;\ \n\ \ \ \ \ \ \}\ else\ \{\n\ \ \ \ \ \ \ \ \ if\ \{\$state==\"Damaged\"\}\ \{\ \n\ \ \ \ \ \ \ \ \ \ \ incr\ sD\ \;\ \n\ \ \ \ \ \ \ \ \ \}\ else\ \{\n\ \ \ \ \ \ \ \ \ \ \ incr\ sOther\;\n\ \ \ \ \ \ \ \ \ \}\n\ \ \ \ \ \ \}\n\ \ \ \ \}\n\ \ \}\ \;\ #\ for\n\n\ \ OUTtext\ \"\\nAll\ elements=\$li\ \ |\ \ Isolated=\$sI\ \ UnderVoltage=\$sUV\ \ Damaged=\$sD\ \ Other=\$sOther\\n\"\n\n\ \ set\ i\ 1\n\ \ foreach\ x\ \$ll\ \{\n\ \ \ \ set\ fr\ \[\ format\ \"%-06d\"\ \$i\ \]\n\ \ \ \ #OUTtext\ \"\$fr\ |\ \$x\"\n\ \ \ \ OUTtext\ \"\$x\"\n\ \ \ \ incr\ i\n\ \ \}\n\ \ OUTtext\ \"\"\n\}\n#=======================================\nproc\ TOPOraw_network_state\ \{\ \}\ \{\n#=======================================\n\ global\ user\ pass\ server_host\n\ OUTtext\ \"Get\ raw/network/state\ ...\"\n\ OUTtext\ \"Server:\ \$server_host\ ,\ u=\$user\ ,\ p=\$pass\"\n\n\ set\ err\ \"\"\n\ catch\ \{\n\ \ \ set\ cfg\ \{\n\ \ \ \ \ \ method\ get\n\ \ \ \ \ \ format\ json\n\ \ \ \ \ \ headers\ \{\n\ \ \ \ \ \ \ \ Content-Type\ \"application/json\;\ charset=utf-8\"\n\ \ \ \ \ \ \ \ Accept\ \"application/json\;\ charset=utf-8\"\n\ \ \ \ \ \ \}\n\ \ \ \}\n\ \ \ dict\ append\ cfg\ auth\ \"basic\ \$user\ \$pass\"\n\n\ \ \ set\ qw\ \{\}\n\ \ \ set\ jsonStr\ \[rest::get\ \"http://\$\{server_host\}/rsdu/scada/api/app/topology/raw/network/state\"\ \$qw\ \$cfg\ \]\n\ \ \ set\ dj\ \[json::json2dict\ \$jsonStr\]\ \;\ #\n\n\ \ \ set\ ernull\ \"\"\n\ \}\ err\n\n\ if\ \{\$err==\"\"\}\ \{\n\ \ \ TOPOgraph_outputstate\ \$dj\n\ \}\ else\ \{\n\ \ \ OUTtext\ \ \"\\n\$err\"\n\ \}\n\n\}\n#=======================================\nproc\ TOPOraw_network_state_broken\ \{\ \}\ \{\n#=======================================\n\ global\ user\ pass\ server_host\n\ OUTtext\ \"Get\ raw/network/state/broken\ ...\"\n\ OUTtext\ \"Server:\ \$server_host\ ,\ u=\$user\ ,\ p=\$pass\"\n\n\ set\ err\ \"\"\n\ catch\ \{\n\ \ \ set\ cfg\ \{\n\ \ \ \ \ \ method\ get\n\ \ \ \ \ \ format\ json\n\ \ \ \ \ \ headers\ \{\n\ \ \ \ \ \ \ \ Content-Type\ \"application/json\;\ charset=utf-8\"\n\ \ \ \ \ \ \ \ Accept\ \"application/json\;\ charset=utf-8\"\n\ \ \ \ \ \ \}\n\ \ \ \}\n\ \ \ dict\ append\ cfg\ auth\ \"basic\ \$user\ \$pass\"\n\n\ \ \ set\ qw\ \{\}\n\ \ \ #dict\ append\ qw\ ObjectTypes\ \"OTYP_GROUNDER\ OTYP_GROUND_SWITCH\ OTYP_SHORTING_SWITCH\"\n\ \ \ #set\ qw\ \ \"js=\\\{ObjectTypes:\\\[\ OTYP_GROUNDER\ OTYP_GROUND_SWITCH\ OTYP_SHORTING_SWITCH\ \\\]\ \\\}\"\n\n\ \ \ set\ jsonStr\ \[rest::get\ \"http://\$\{server_host\}/rsdu/scada/api/app/topology/raw/network/state\"\ \$qw\ \$cfg\ \]\n\ \ \ set\ dj\ \[json::json2dict\ \$jsonStr\]\ \;\ #\n\n\ \ \ set\ ernull\ \"\"\n\ \}\ err\n\n\ if\ \{\$err==\"\"\}\ \{\n#\ for\ Debug:\n\;#set\ djt\ \[list\ \{ObjectId\ 000db6c1-8254-4596-87da-4c88c41c6717\ State\ Isolated\}\ \n\;#\{ObjectId\ 002472e5-469a-ff47-ba1d-5f0faabf97db\ State\ UnderVoltage\}\ \n\;#\{ObjectId\ 00fdfa42-66ac-4267-ab7d-857f61706e9a\ State\ Damaged\}\]\n\n\ \ \ get_equipments_state\ \$dj\n\n\ \}\ else\ \{\n\ \ \ OUTtext\ \ \"\\n\$err\"\n\ \}\n\n\}\n#=======================================\nproc\ INFO\ \{\ \}\ \{\n#=======================================\n\ global\ user\ pass\ server_host\n\ OUTtext\ \"Get\ info\ ...\"\n\ OUTtext\ \"Server:\ \$server_host\ ,\ u=\$user\ ,\ p=\$pass\"\n\n\ set\ err\ \"\"\n\ catch\ \{\n\ \ \ \ set\ cfg\ \{\n\ \ \ \ \ \ \ \ method\ get\n\ \ \ \ \ \ \ \ format\ json\n\ \ \ \ \ \ \ \ headers\ \{\n\ \ \ \ \ \ \ \ \ \ Content-Type\ \"application/json\;\ charset=utf-8\"\n\ \ \ \ \ \ \ \ \ \ Accept\ \"application/json\;\ charset=utf-8\"\n\ \ \ \ \ \ \ \ \}\n\ \ \ \}\n\ \ \ dict\ append\ cfg\ auth\ \"basic\ \$user\ \$pass\"\n\n\ \ \ set\ res\ \[rest::simple\ http://\$\{server_host\}/rsdu/scada/api/app/info\ \{\}\ \$cfg\ \]\n\ \ \ set\ res\ \[encoding\ convertfrom\ utf-8\ \$res\ \]\n\n\ \ \ set\ ernull\ \"\"\n\ \}\ err\n\n\ if\ \{\$err==\"\"\}\ \{\n\ \ \ OUTtext\ \"\\n\$res\"\n\ \}\ else\ \{\n\ \ \ OUTtext\ \"\\n\$err\"\n\ \}\n\n\}\n\n#=======================================\n#\ \ \ \ \ catch\ \{destroy\ \$w\}\n#\ \ \ \ \ toplevel\ \$w\n\$base.textoutput\ configure\ -yscrollcommand\ \[list\ \$base.scrolly\ set\]\n\$base.scrolly\ configure\ \ -command\ \[list\ \$base.textoutput\ yview\]\n\$base.textoutput\ delete\ 1.0\ end\n\nInit\n\nset\ t1\ \[\ clock\ format\ \[\ clock\ seconds\ \]\ -format\ \"%Y-%m-%d\ %H:%M:%S\"\ \]\nOUTtext\ \"\\nTime\ =\ \$t1\\n\"\n\nencoding\ system\ \"utf-8\"\n\n#=======================================\n\n\n\n
 	other min_row {18 30 30 30 636 41}
 	other master {}
 	other pathname f
-	other resize_column {3 3 3 3 3 3 0}
+	other resize_column {3 3 3 3 3 3 1}
 	other tags {}
 	other level 0
 	configure background #e9e9e9
@@ -218,24 +221,9 @@ Widget button#8
 	other help {}
 	other comments {}
 	geometry column 2
-	other item_name button#8
-	other tabbing {}
 	configure command INFO
-	geometry sticky nesw
-Widget scrollbar#1
-	geometry row 5
-	configure orient v
-	other error {}
-	other type scrollbar
-	other master {}
-	other pathname scrollbar#1
-	other tags {}
-	other level {}
-	other help {}
-	other comments {}
-	geometry column 7
-	other item_name scrolly
 	other tabbing {}
+	other item_name button#8
 	geometry sticky nesw
 Widget button#9
 	geometry row 6
@@ -249,9 +237,24 @@ Widget button#9
 	other help {}
 	other comments {}
 	geometry column 1
-	configure command DELlogs
-	other tabbing {}
 	other item_name button#9
+	other tabbing {}
+	configure command DELlogs
+	geometry sticky nesw
+Widget scrollbar#1
+	geometry row 5
+	configure orient v
+	other error {}
+	other type scrollbar
+	other master {}
+	other pathname scrollbar#1
+	other tags {}
+	other level {}
+	other help {}
+	other comments {}
+	geometry column 7
+	other tabbing {}
+	other item_name scrolly
 	geometry sticky nesw
 Widget label#1
 	geometry row 1
@@ -264,8 +267,8 @@ Widget label#1
 	other help {}
 	other comments {}
 	geometry column 1
-	other tabbing {}
 	other item_name label#1
+	other tabbing {}
 	geometry sticky nes
 Widget label#2
 	geometry row 1
@@ -278,22 +281,8 @@ Widget label#2
 	other help {}
 	other comments {}
 	geometry column 3
-	other tabbing {}
 	other item_name label#2
-	geometry sticky nes
-Widget label#3
-	geometry row 1
-	other type label
-	other master {}
-	configure text password=
-	other pathname label#3
-	other tags {}
-	other level {}
-	other help {}
-	other comments {}
-	geometry column 5
 	other tabbing {}
-	other item_name label#3
 	geometry sticky nes
 Widget entry#1
 	geometry row 1
@@ -307,23 +296,23 @@ Widget entry#1
 	other help {}
 	other comments {}
 	geometry column 2
-	other tabbing {}
 	other item_name entry_server_host
+	other tabbing {}
 	geometry sticky nesw
-Widget label#4
-	geometry row 3
+Widget label#3
+	geometry row 1
 	other type label
 	other master {}
-	configure text topology
-	other pathname label#4
+	configure text password=
+	other pathname label#3
 	other tags {}
 	other level {}
 	other help {}
 	other comments {}
-	geometry column 1
-	other item_name label#4
+	geometry column 5
+	other item_name label#3
 	other tabbing {}
-	geometry sticky nesw
+	geometry sticky nes
 Widget entry#2
 	geometry row 1
 	other error {}
@@ -336,7 +325,21 @@ Widget entry#2
 	other help {}
 	other comments {}
 	geometry column 4
-	other tabbing {}
 	other item_name entry_user
+	other tabbing {}
+	geometry sticky nesw
+Widget label#4
+	geometry row 3
+	other type label
+	other master {}
+	configure text topology
+	other pathname label#4
+	other tags {}
+	other level {}
+	other help {}
+	other comments {}
+	geometry column 1
+	other tabbing {}
+	other item_name label#4
 	geometry sticky nesw
 
