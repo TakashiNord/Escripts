@@ -269,7 +269,12 @@ proc  main { } {
   # scheme
   set owner "INP"
   set s1 [ format $strSQL01 $owner ]
-  CreateTables $s1 $owner    
+  #CreateTables $s1 $owner    
+
+  # scheme
+  set owner "RSDU2AUARH"
+  set s1 [ format $strSQL01 $owner ]
+  #CreateTables $s1 $owner  
   
   # scheme
   set owner "RSDU2CLARH"
@@ -309,12 +314,12 @@ proc  main { } {
   # scheme
   set owner "RSDUJOB"
   set s1 [ format $strSQL01 $owner ]
-  CreateTables $s1 $owner
+  #CreateTables $s1 $owner
   
   # scheme
   set owner "RSDU_FMON"
   set s1 [ format $strSQL01 $owner ]
-  CreateTables $s1 $owner    
+  #CreateTables $s1 $owner    
   
   # scheme
   set owner "RSDU2EXARH"
