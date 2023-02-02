@@ -74,6 +74,7 @@ proc BASE1 { rf db2 } {
  DBE_DESTINATION \
  R_PSETS \
  SYS_APP_SERV_LST SYS_APP_SERVICES SYS_APP_SSYST SYS_APP_INI \
+ SYS_TBLREF SYS_TBLLNK \
  US_ZONE US_VARS US_SIGN_PROP US_SIGN_GROUP US_SIG US_MSGLOG ]
 
 
@@ -123,6 +124,205 @@ proc BASE1 { rf db2 } {
  return 0 ;
 }
 
+
+# ==============================================================================================================
+
+
+proc SYS_TREE21 { rf db2 } {
+
+  set TABLE_LIST [ list SYS_TREE21 ]
+
+  foreach TABLE_NAME $TABLE_LIST {
+
+    set strSQL1 "SELECT max(ID), min(ID), count(*) FROM $TABLE_NAME"
+
+    set maxID 0 ; set minID 0 ; set cntID 0 ;
+    foreach {r1} [ $db2 $strSQL1 ] {
+      set maxID [ lindex $r1 0 ]
+      set minID [ lindex $r1 1 ]
+      set cntID [ lindex $r1 2 ]
+      set s1 "\n$TABLE_NAME = max=$maxID min=$minID cnt=$cntID \n"
+      puts $s1
+    }
+
+    set maxID [ expr int($maxID)+1 ]
+    set strSQL0 "INSERT INTO $TABLE_NAME (ID,ID_ICON,NAME) VALUES ($maxID,NULL,'TEXTRENAMETEXT') "
+    $db2 $strSQL0
+    $db2 commit
+
+    set strSQL2 "SELECT ID FROM $TABLE_NAME ORDER BY ID ASC"
+    set r1 [ $db2 $strSQL2 ]
+    for {set i 0} {$i < $cntID} {incr i} {
+      set j [ expr $i+1 ]
+      set id_old [lindex $r1 $i ]
+      if {$id_old!=$j} {
+	  
+	   LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
+
+       #--$TABLE_NAME
+       $db2 "UPDATE $TABLE_NAME SET ID_PARENT=$maxID WHERE ID_PARENT=$id_old"
+       $db2 commit
+
+       set strSQL3 "UPDATE $TABLE_NAME SET ID=$j WHERE ID=$id_old"
+       $db2 $strSQL3
+       $db2 commit
+
+       #--$TABLE_NAME
+       $db2 "UPDATE $TABLE_NAME SET ID_PARENT=$j WHERE ID_PARENT=$maxID"
+       $db2 commit
+
+      }
+    }
+
+    $db2 "DELETE FROM $TABLE_NAME WHERE NAME LIKE '%TEXTRENAMETEXT%' "
+    $db2 commit
+
+    set strSQL3 "SELECT ${TABLE_NAME}_S.nextval FROM dual"
+    set r3 [ $db2 $strSQL3 ]
+    set l3 [ llength $r3 ]
+    if {$l3>0} {
+     set increment_old [lindex $r3 0 ]
+     set increment_old [ expr (1-int($increment_old)) ]
+     set str2 [ format "alter sequence %s_S increment by %d" $TABLE_NAME $increment_old ]
+     $db2 $str2
+     $db2 $strSQL3
+     $db2 "alter sequence ${TABLE_NAME}_S increment by 1"
+    }
+
+  }
+
+ return 0 ;
+}
+
+
+# ==============================================================================================================
+
+# -- US_BUTTON_DESC
+proc US_BUTTON_DESC { rf db2 } {
+
+  set TABLE_LIST [ list US_BUTTON_DESC ]
+
+  foreach TABLE_NAME $TABLE_LIST {
+
+    set strSQL1 "SELECT max(ID), min(ID), count(*) FROM $TABLE_NAME"
+
+    set maxID 0 ; set minID 0 ; set cntID 0 ;
+    foreach {r1} [ $db2 $strSQL1 ] {
+      set maxID [ lindex $r1 0 ]
+      set minID [ lindex $r1 1 ]
+      set cntID [ lindex $r1 2 ]
+      set s1 "\n$TABLE_NAME = max=$maxID min=$minID cnt=$cntID \n"
+      puts $s1
+    }
+
+    set maxID [ expr int($maxID)+1 ]
+    set strSQL0 "INSERT INTO $TABLE_NAME (ID,ID_TABLE,DEFINE_ALIAS,NAME,DESCRIPTION) VALUES ($maxID,7,'TEXTRENAMETEXT','TEXTRENAMETEXT','TEXTRENAMETEXT') "
+    $db2 $strSQL0
+    $db2 commit
+
+
+    set strSQL2 "SELECT ID FROM $TABLE_NAME ORDER BY ID ASC"
+    set r1 [ $db2 $strSQL2 ]
+    for {set i 0} {$i < $cntID} {incr i} {
+      set j [ expr $i+1 ]
+      set id_old [lindex $r1 $i ]
+      if {$id_old!=$j} {
+	  
+	   LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
+
+       #--US_MENU
+       $db2 "UPDATE US_MENU SET ID_BUTTON=$maxID WHERE ID_BUTTON=$id_old"
+       $db2 commit
+
+       set strSQL3 "UPDATE $TABLE_NAME SET ID=$j WHERE ID=$id_old"
+       $db2 $strSQL3
+       $db2 commit
+
+       #--US_MENU
+       $db2 "UPDATE US_MENU SET ID_BUTTON=$j WHERE ID_BUTTON=$maxID"
+       $db2 commit
+
+      }
+    }
+
+    $db2 "DELETE FROM $TABLE_NAME WHERE NAME LIKE '%TEXTRENAMETEXT%' "
+    $db2 commit
+
+  }
+
+ return 0 ;
+}
+
+# -- US_MENU
+proc US_MENU { rf db2 } {
+
+  set TABLE_LIST [ list US_MENU ]
+
+  foreach TABLE_NAME $TABLE_LIST {
+
+    set strSQL1 "SELECT max(ID), min(ID), count(*) FROM $TABLE_NAME"
+	
+    set strSQL0 "DELETE FROM $TABLE_NAME WHERE ID_USER is null "
+    $db2 $strSQL0
+    $db2 commit	
+
+    set maxID 0 ; set minID 0 ; set cntID 0 ;
+    foreach {r1} [ $db2 $strSQL1 ] {
+      set maxID [ lindex $r1 0 ]
+      set minID [ lindex $r1 1 ]
+      set cntID [ lindex $r1 2 ]
+      set s1 "\n$TABLE_NAME = max=$maxID min=$minID cnt=$cntID \n"
+      puts $s1
+    }
+
+    set maxID [ expr int($maxID)+1 ]
+    set strSQL0 "INSERT INTO $TABLE_NAME (ID,ID_BUTTON,NAME) VALUES ($maxID,1,'TEXTRENAMETEXT') "
+    $db2 $strSQL0
+    $db2 commit
+
+    set strSQL2 "SELECT ID FROM $TABLE_NAME ORDER BY ID ASC"
+    set r1 [ $db2 $strSQL2 ]
+    for {set i 0} {$i < $cntID} {incr i} {
+      set j [ expr $i+1 ]
+      set id_old [lindex $r1 $i ]
+      if {$id_old!=$j} {
+	  
+	   LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
+
+       #--$TABLE_NAME
+       $db2 "UPDATE $TABLE_NAME SET ID_PARENT=$maxID WHERE ID_PARENT=$id_old"
+       $db2 commit
+
+       set strSQL3 "UPDATE $TABLE_NAME SET ID=$j WHERE ID=$id_old"
+       $db2 $strSQL3
+       $db2 commit
+
+       #--$TABLE_NAME
+       $db2 "UPDATE $TABLE_NAME SET ID_PARENT=$j WHERE ID_PARENT=$maxID"
+       $db2 commit
+
+      }
+    }
+
+    $db2 "DELETE FROM $TABLE_NAME WHERE NAME LIKE '%TEXTRENAMETEXT%' "
+    $db2 commit
+
+    set strSQL3 "SELECT ${TABLE_NAME}_S.nextval FROM dual"
+    set r3 [ $db2 $strSQL3 ]
+    set l3 [ llength $r3 ]
+    if {$l3>0} {
+     set increment_old [lindex $r3 0 ]
+     set increment_old [ expr (1-int($increment_old)) ]
+     set str2 [ format "alter sequence %s_S increment by %d" $TABLE_NAME $increment_old ]
+     $db2 $str2
+     $db2 $strSQL3
+     $db2 "alter sequence ${TABLE_NAME}_S increment by 1"
+    }
+
+  }
+
+ return 0 ;
+}
 
 
 # ==============================================================================================================
@@ -1973,7 +2173,7 @@ proc OBJ_TREE { rf db2 } {
         CCC0 $rf $db2 $maxID $id_old
 
         if {[checkTable $rf $db2 $TABLE_NAME "ID" ]} {
-          #-------  ID_PARENT
+          #--- ID_PARENT
           $db2 "UPDATE $TABLE_NAME SET ID_PARENT=$maxID WHERE ID_PARENT=$id_old"
           $db2 commit
           $db2 "UPDATE $TABLE_NAME SET ID=$j WHERE ID=$id_old"
@@ -2016,9 +2216,19 @@ proc OBJ_TREE { rf db2 } {
 #BASE1 $rf db2
 
 
+# -- SYS_TREE21
+#SYS_TREE21  $rf db2
+
+
+# -- US_BUTTON_DESC
+#US_BUTTON_DESC  $rf db2
+# -- US_MENU -- предварительно запускать US_BUTTON_DESC
+# ###US_MENU  $rf db2 пока не запускать
+
+
 # -- SYS_APD
 #SYS_APD  $rf db2
-#
+# -- не запускать
 # ###SYS_APPL
 
 
