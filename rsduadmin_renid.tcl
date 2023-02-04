@@ -275,8 +275,9 @@ proc US_MENU { rf db2 } {
       puts $s1
     }
 
-    set maxID [ expr int($maxID)+1 ]
-    set strSQL0 "INSERT INTO $TABLE_NAME (ID,ID_BUTTON,NAME) VALUES ($maxID,1,'TEXTRENAMETEXT') "
+    # ---------------------------------------- ID_BUTTON
+	set maxID [ expr int($maxID)+1 ]
+    set strSQL0 "INSERT INTO $TABLE_NAME (ID,ID_BUTTON,NAME) VALUES ($maxID,37006,'TEXTRENAMETEXT') "
     $db2 $strSQL0
     $db2 commit
 
@@ -2216,14 +2217,14 @@ proc OBJ_TREE { rf db2 } {
 #BASE1 $rf db2
 
 
-# -- SYS_TREE21
+# -- SYS_TREE21 -- ?ломаетс€ структура?
 #SYS_TREE21  $rf db2
 
 
-# -- US_BUTTON_DESC
-#US_BUTTON_DESC  $rf db2
-# -- US_MENU -- предварительно запускать US_BUTTON_DESC
-# ###US_MENU  $rf db2 пока не запускать
+# -- US_BUTTON_DESC -- запускать Ќ≈Ћ№«я, потому что id жестко забиты в appbar-e
+# ###US_BUTTON_DESC  $rf db2
+# -- US_MENU -- уточн€ть id ID_BUTTON
+#US_MENU  $rf db2
 
 
 # -- SYS_APD
