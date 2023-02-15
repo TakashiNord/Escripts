@@ -73,6 +73,7 @@ proc BASE1 { rf db2 } {
  AD_SINFO_INI \
  DBE_DESTINATION \
  R_PSETS \
+ OBJ_GENERATOR_PQ \
  SYS_APP_SERV_LST SYS_APP_SERVICES SYS_APP_SSYST SYS_APP_INI \
  SYS_TBLREF SYS_TBLLNK \
  US_ZONE US_VARS US_SIGN_PROP US_SIGN_GROUP US_SIG US_MSGLOG ]
@@ -2094,7 +2095,7 @@ proc CCC0 { rf db2 ind1 ind2 } {
         if {[checkTable $rf $db2 "OBJ_CNT" "ID_OBJ"]} {
           $db2 "UPDATE OBJ_CNT SET ID_OBJ=$ind1 WHERE ID_OBJ=$ind2"
           $db2 commit
-            }
+        }
         #--OBJ_EL_PIN  ID_OBJ
         if {[checkTable $rf $db2 "OBJ_EL_PIN" "ID_OBJ"]} {
           $db2 "UPDATE OBJ_EL_PIN SET ID_OBJ=$ind1 WHERE ID_OBJ=$ind2"
