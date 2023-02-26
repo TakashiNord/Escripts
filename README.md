@@ -1,7 +1,7 @@
 # Escripts (Garbage\Мусор)
 methods: tcl\tk, bash, python, sql, c, php, lua,  
 
- ** BASH **
+### **BASH**
 
 + esztab.sh
 + eups.sh
@@ -13,25 +13,25 @@ methods: tcl\tk, bash, python, sql, c, php, lua,
 + emview.sh \ emview.sql
 + sp.sh
 
- ** CMD **
+### **CMD**
 
 + apc2.cmd
 + apc92.cmd \ apc92.txt
 
- ** Python **
+### **Python**
 
 + pr38-cid2profile\
 + ema_time.sh
- + ema_time4.sh
- + ema_time_p.sh
- + ema_time_v1.sh
- + ema_time_v2.sh
+  + ema_time4.sh
+  + ema_time_p.sh
+  + ema_time_v1.sh
+  + ema_time_v2.sh
 + ema_autoload_rename.png \ ema_autoload_rename.py
 + emasm1.py
 + emasmget.py
 + eweat1.json \ eweat2.json \ eweather.py \ eweather.txt
 
- ** Tcl\Tk **
+### **Tcl\Tk**
 
 zvkdgk\
 serverApi\
@@ -66,16 +66,16 @@ e_rsdu2-output_sqlite-1.tcl
 emalogs1.tcl
 emalogsOracle1.tcl
 
- ** Lua **
+### **Lua**
 
 + ereadfile_to_rsdu.lua \ ereadfile_to_rsdu_out_u_g.txt
 + lua cgk-3.txt
 
- ** Php **
+### **Php**
 
 + wasutp.config.php
 
- ** SQL **
+### **SQL**
 
 + VirtPribor1.sql
 + 2x_positonTC.sql
@@ -92,7 +92,7 @@ emalogsOracle1.tcl
 + RsduSql\
 + Dorachet\
  
- ** С ** 
+### **С** 
 
 + ReferenceValue\
  
