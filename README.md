@@ -3,41 +3,33 @@ methods: tcl\tk, bash, python, sql, c, php, lua,
 
  ** BASH **
 
-esztab.sh
-eups.sh
-ewasutp.sh
-edfcheck.sh
-ema
-ema.service
-ema.timer
-emahlpdsk.sh
-emalogs.sh
-emview.sh
-emview.sql
-sp.sh
++ esztab.sh
++ eups.sh
++ ewasutp.sh
++ edfcheck.sh
++ ema \ ema.service \ ema.timer
++ emahlpdsk.sh
++ emalogs.sh
++ emview.sh \ emview.sql
++ sp.sh
 
  ** CMD **
 
-apc2.cmd
-apc92.cmd
-apc92.txt
++ apc2.cmd
++ apc92.cmd \ apc92.txt
 
  ** Python **
 
-pr38-cid2profile\
-ema_time.sh
-ema_time4.sh
-ema_time_p.sh
-ema_time_v1.sh
-ema_time_v2.sh
-ema_autoload_rename.png
-ema_autoload_rename.py
-emasm1.py
-emasmget.py
-eweat1.json
-eweat2.json
-eweather.py
-eweather.txt
++ pr38-cid2profile\
++ ema_time.sh
+ + ema_time4.sh
+ + ema_time_p.sh
+ + ema_time_v1.sh
+ + ema_time_v2.sh
++ ema_autoload_rename.png \ ema_autoload_rename.py
++ emasm1.py
++ emasmget.py
++ eweat1.json \ eweat2.json \ eweather.py \ eweather.txt
 
  ** Tcl\Tk **
 
@@ -76,34 +68,33 @@ emalogsOracle1.tcl
 
  ** Lua **
 
-ereadfile_to_rsdu.lua
-ereadfile_to_rsdu_out_u_g.txt
-lua cgk-3.txt
++ ereadfile_to_rsdu.lua \ ereadfile_to_rsdu_out_u_g.txt
++ lua cgk-3.txt
 
  ** Php **
 
-wasutp.config.php
++ wasutp.config.php
 
  ** SQL **
 
-VirtPribor1.sql
-2x_positonTC.sql
-2x_positonTC2.sql
-Create_Arh_EL_INT30.sql
-Create_DA_arch_TS.sql
-MEASARC_ADD1-Интегральные 1 мин\
-MEASARC_ADD1-Усредненные на границе 10 секунд\
-MEASARC_ADD2-Усредненные на границе 1 минуты\
-MEASARC_ADD-Мгн. на границе 5 секунд - 2 мес\
-DA_ARC_ADD\
-2022_11_00_DORASCHET_MINMAX\
-pr37-check\
-RsduSql\
-Dorachet\
++ VirtPribor1.sql
++ 2x_positonTC.sql
++ 2x_positonTC2.sql
++ Create_Arh_EL_INT30.sql
++ Create_DA_arch_TS.sql
++ MEASARC_ADD1-Интегральные 1 мин\
++ MEASARC_ADD1-Усредненные на границе 10 секунд\
++ MEASARC_ADD2-Усредненные на границе 1 минуты\
++ MEASARC_ADD-Мгн. на границе 5 секунд - 2 мес\
++ DA_ARC_ADD\
++ 2022_11_00_DORASCHET_MINMAX\
++ pr37-check\
++ RsduSql\
++ Dorachet\
  
  ** С ** 
 
-ReferenceValue\
++ ReferenceValue\
  
 
 
