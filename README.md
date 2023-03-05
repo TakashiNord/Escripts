@@ -5,7 +5,6 @@ methods: tcl\tk, bash, python, sql, c, php, lua,
 
 + esztab.sh
 + eups.sh
-+ ewasutp.sh
 + edfcheck.sh
 + ema \ ema.service \ ema.timer
 + emahlpdsk.sh
@@ -73,28 +72,28 @@ emalogsOracle1.tcl
 
 ### **Php**
 
-+ wasutp.config.php
++ wasutp.config.php \ ewasutp.sh  - установка сервера в Web-iSMS (конфиг файл, скрипт для cron) 
 
 ### **SQL**
 
-+ VirtPribor1.sql
-+ 2x_positonTC.sql
-+ 2x_positonTC2.sql
-+ Create_Arh_EL_INT30.sql
-+ Create_DA_arch_TS.sql
-+ MEASARC_ADD1-Интегральные 1 мин\
-+ MEASARC_ADD1-Усредненные на границе 10 секунд\
-+ MEASARC_ADD2-Усредненные на границе 1 минуты\
-+ MEASARC_ADD-Мгн. на границе 5 секунд - 2 мес\
-+ DA_ARC_ADD\
-+ 2022_11_00_DORASCHET_MINMAX\
-+ pr37-check\
-+ RsduSql\
-+ Dorachet\
++ VirtPribor1.sql - создание Виртуального прибора.
++ 2x_positonTC.sql - получение параметров обьединенных через Или,И (ver 1)
++ 2x_positonTC2.sql - получение параметров обьединенных через Или,И (ver 2)
++ Create_Arh_EL_INT30.sql - включение архива интегральный30 на разделе EL
++ Create_DA_arch_TS.sql - включение архива для ТС на всем разделе DA
++ MEASARC_ADD1-Интегральные 1 мин\  - создание архивного профиля
++ MEASARC_ADD1-Усредненные на границе 10 секунд\  - создание архивного профиля
++ MEASARC_ADD2-Усредненные на границе 1 минуты\  - создание архивного профиля
++ MEASARC_ADD-Мгн. на границе 5 секунд - 2 мес\  - создание архивного профиля
++ DA_ARC_ADD\  - создание архивного профиля
++ 2022_11_00_DORASCHET_MINMAX\ - добавление функций Min2, Max2, Min3, Max3 
++ pr37-check\ - диапазон открытия форсунки
++ RsduSql\ - загрузка данных в MS SQL через bat
++ Dorachet\  - добавление функций Mod, Trunc, Max3, GetTime, AccidentTimeDate, AccidentFrequency0, min10, max10
  
 ### **С** 
 
-+ ReferenceValue\
++ ReferenceValue\ - добавление функций AccidentTimeDate и AccidentTime (2016)
  
 
 
