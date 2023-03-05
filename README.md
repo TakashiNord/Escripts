@@ -6,7 +6,7 @@ methods: tcl\tk, bash, python, sql, c, php, lua,
 + esztab.sh - размер табличного пространства БД Oracle (FROM dba_free_space)
 + eups.sh - получение информации snmpget -Oqv -c public -v 2c и кладем в БД Oracle
 + edfcheck.sh - проверка размера диска и выдача информации о превышении
-+ ema \ ema.service \ ema.timer - модернизация скрипта ema добавлением serv_list
++ ema (ema.service, ema.timer) - модернизация скрипта ema добавлением serv_list
 + emahlpdsk.sh - service php-fpm , mysqld , nginx , elasticsearch , supervisord restart
 + emalogs.sh - аккамуляция логов и настроек
 + emview.sh \ emview.sql - обновление MVIEWS посредством скрипта 
@@ -19,16 +19,15 @@ methods: tcl\tk, bash, python, sql, c, php, lua,
 
 ### **Python**
 
-+ pr38-cid2profile\
-+ ema_time.sh
-  + ema_time4.sh
-  + ema_time_p.sh
-  + ema_time_v1.sh
-  + ema_time_v2.sh
-+ ema_autoload_rename.png \ ema_autoload_rename.py
-+ emasm1.py
-+ emasmget.py
-+ eweat1.json \ eweat2.json \ eweather.py \ eweather.txt
++ pr38-cid2profile\ - конвертация .iid.profile (xml-формат) в json (проект не завершен)
++ ema_time.sh - Script to check time offset between local system and remote NTP servers
+  + ema_time4.sh - fix version
+  + ema_time_p.sh - ver 1
+  + ema_time_v1.sh - fix error bash-script (ver 1)
+  + ema_time_v2.sh - fix error bash-script (ver 2)
++ ema_autoload_rename.py (ema_autoload_rename.png) - выравнивание автозагрузки в glob /etc/init.d/rc*/*
++ emasmget.py - получение статуса сервера от sysmon udp:2003 или acrsvd udp:2005
++ eweather.py ( eweat1.json, eweat2.json, eweather.txt ) - получение погоды для обьектов
 
 ### **Tcl\Tk**
 
@@ -43,7 +42,7 @@ methods: tcl\tk, bash, python, sql, c, php, lua,
 + ema_trim_da_dev.tcl - операция trim(name) для таблицы da_dev_desc
 + ema_trim_da_param.tcl - операция trim(name) для таблицы da_param
 + ema_autoload_rename.tcl - выравнивание автозагрузки в glob /etc/init.d/rc*/*
-+ e_file_to_csv.tcl \ e_file_to_csv.log - 
++ e_file_to_csv.tcl \ e_file_to_csv.log - ???обход всех папок,и обьединение в 1.???
 + arc_dg_el_(file)_export.tcl - экспорт таблиц схемы DG\EL
 + arc_dg_export.tcl - merge таблиц схемы DG из 2-х БД
 + arc_elphpsau_export.tcl - экспорт таблиц схемы EL\PH\PS\AU
@@ -69,7 +68,7 @@ methods: tcl\tk, bash, python, sql, c, php, lua,
 
 ### **Php**
 
-+ wasutp.config.php \ ewasutp.sh  - установка сервера в Web-iSMS (конфиг файл, скрипт для cron) 
++ wasutp.config.php ( emasm1.py, ewasutp.sh )  - установка сервера в Web-iSMS (конфиг файл, скрипт для cron) 
 
 ### **SQL**
 
