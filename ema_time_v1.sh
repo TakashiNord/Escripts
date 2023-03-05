@@ -3,7 +3,6 @@
 # If time offset is greater than offset limit then opens connection to the signal system and
 # send special signal for this
 #
-# Created by A.Korshunov (EMA), 2010
 #!/bin/bash
 
 
