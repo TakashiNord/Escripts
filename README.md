@@ -3,19 +3,19 @@ methods: tcl\tk, bash, python, sql, c, php, lua,
 
 ### **BASH**
 
-+ esztab.sh
-+ eups.sh
-+ edfcheck.sh
-+ ema \ ema.service \ ema.timer
-+ emahlpdsk.sh
-+ emalogs.sh
-+ emview.sh \ emview.sql
-+ sp.sh
++ esztab.sh - размер табличного пространства БД Oracle (FROM dba_free_space)
++ eups.sh - получение информации snmpget -Oqv -c public -v 2c и кладем в БД Oracle
++ edfcheck.sh - проверка размера диска и выдача информации о превышении
++ ema \ ema.service \ ema.timer - модернизация скрипта ema добавлением serv_list
++ emahlpdsk.sh - service php-fpm , mysqld , nginx , elasticsearch , supervisord restart
++ emalogs.sh - аккамуляция логов и настроек
++ emview.sh \ emview.sql - обновление MVIEWS посредством скрипта 
++ sp.sh - получение process+session из БД Oracle
 
 ### **CMD**
 
-+ apc2.cmd
-+ apc92.cmd \ apc92.txt
++ apc2.cmd  - plink -pw
++ apc92.cmd \ apc92.txt - выполнение команды через putty.exe -m apc92.txt -ssh
 
 ### **Python**
 
@@ -67,8 +67,8 @@ emalogsOracle1.tcl
 
 ### **Lua**
 
-+ ereadfile_to_rsdu.lua \ ereadfile_to_rsdu_out_u_g.txt
-+ lua cgk-3.txt
++ ereadfile_to_rsdu.lua \ ereadfile_to_rsdu_out_u_g.txt - чтение файлов посредством Lua (pcall)
++ lua cgk-3.txt   - ДорасчетТС, количество переключений
 
 ### **Php**
 
