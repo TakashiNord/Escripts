@@ -21,11 +21,11 @@ proc auto1 { } {
 
   foreach {x} [ db $str1 ] {
 	set name [ lindex $x 0 ]
-        #puts "$name \n"
-        set n1 0
+    #puts "$name \n"
+    set n1 0
 	set str2 "select count(*) from $name where from_dt1970(time1970)>(sysdate-36);"
 	foreach {y} [ db $str2 ] {
-          set n0 [ lindex $y 0 ]
+      set n0 [ lindex $y 0 ]
 	  set n1 [ expr int($n0) ]
 	}
 	if {$n1==0} { continue ; }
@@ -33,8 +33,8 @@ proc auto1 { } {
 	set str2 "select from_dt1970(time1970), $name.* from $name where from_dt1970(time1970)>(sysdate-36);"
 	foreach {z} [ db $str2 ] {
 	  puts ${z}
-        }
-        puts "--"
+    }
+    puts "--"
   }
 
 # Закрываем соединение к БД

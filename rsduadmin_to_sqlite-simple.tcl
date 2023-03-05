@@ -135,7 +135,7 @@ proc LogWrite  { s } {
     set columns3 [ string trimleft $columns3 "," ]
     set columns3 [ string trim $columns3 " " ]
     set cnt 0 ; # число записей
-  set r33 [ db2 $s3 ]
+    set r33 [ db2 $s3 ]
     foreach {r3} $r33 {
       set s0 ""
       set n [llength $r3]
@@ -209,7 +209,7 @@ proc LogWrite  { s } {
     set columns3 [ string trimleft $columns3 "," ]
     set columns3 [ string trim $columns3 " " ]
     set cnt 0 ; # число записей
-  set r33 [ db2 $s3 ]
+    set r33 [ db2 $s3 ]
     foreach {r3} $r33 {
       set s0 ""
       set n [llength $r3]
@@ -218,7 +218,7 @@ proc LogWrite  { s } {
         if {[string first ' $s1]>=0} {
           set s1 "_____"
         }
-    append s0 "\'$s1\'"
+        append s0 "\'$s1\'"
         if {$i!=[expr $n-1]} {  append s0 "," }
       }
       set s1 "INSERT INTO $tbname ($columns3) values($s0)"
