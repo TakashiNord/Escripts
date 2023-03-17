@@ -34,10 +34,10 @@ methods: tcl\tk, bash, python, sql, c, php, lua,
 + zvkdgk\ - экспорт из БД MS Sql 'zvkdgk' в SQLite
 + serverApi\ - получение посредством rest api информации от server
 + output_ELREG_LIST_V\ - вывод : имя распределительного устройства - имя секции шин - Краткое имя присоединения - Тип параметра - Полное имя типа параметра - Краткое имя типа параметра - Единица измерения - Точность представления - Источник значений - Параметр источника значений.
-+ dgexp2\ - экспорт их XLS в таблицу DG
++ dgexp2\ - экспорт из XLS в таблицу DG
 + daDevTcl\ - проект для редактирования DA_DEV_DESC (не завершен)
 + Scada Data GateWay\ - В полуавтоматическом режиме формирует таблицу для файла данных программы "SCADA Data Gateway"
-+ pr14-Virtualport\ - операция trim(name) для таблицы da_dev_desc
++ pr14-Virtualport\ - создание виртуального прибора(не завершен)
 + table_trim.cmd \ table_trim.tcl - операция trim(name) для таблиц obj_tree,meas_list,da_dev_desc,da_param,RPT_LST,sys_otyp
 + ema_trim_da_dev.tcl - операция trim(name) для таблицы da_dev_desc
 + ema_trim_da_param.tcl - операция trim(name) для таблицы da_param
