@@ -86,6 +86,8 @@ methods: tcl\tk, bash, python, sql, c, php, lua,
 + pr37-check\ - диапазон открытия форсунки
 + RsduSql\ - загрузка данных в MS SQL через bat
 + Dorachet\  - добавление функций Mod, Trunc, Max3, GetTime, AccidentTimeDate, AccidentFrequency0, min10, max10
++ sql_da_202304.txt - вывод из сборных таблиц в формате = ;Прибор;id;Наименование;Квалификатор;ТИП;НазваниеИсточника;idИсточника;НаименованиеИсточника;
+
  
 ### **С** 
 
