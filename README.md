@@ -1,5 +1,5 @@
 # Escripts (Garbage\Мусор)
-methods: tcl\tk, bash, python, sql, c, php, lua,  
+methods: tcl\tk, bash, python, p-sql, php, lua,  
 
 ### **BASH**
 
@@ -82,18 +82,11 @@ methods: tcl\tk, bash, python, sql, c, php, lua,
 + MEASARC_ADD2-Усредненные на границе 1 минуты\  - создание архивного профиля
 + MEASARC_ADD-Мгн. на границе 5 секунд - 2 мес\  - создание архивного профиля
 + DA_ARC_ADD\  - создание архивного профиля
-+ 2022_11_00_DORASCHET_MINMAX\ - добавление функций Min2, Max2, Min3, Max3 
 + pr37-check\ - диапазон открытия форсунки
 + RsduSql\ - загрузка данных в MS SQL через bat
-+ Dorachet\  - добавление функций Mod, Trunc, Max3, GetTime, AccidentTimeDate, AccidentFrequency0, min10, max10
 + sql_da_202304.txt - вывод из сборных таблиц в формате = ;Прибор;id;Наименование;Квалификатор;ТИП;НазваниеИсточника;idИсточника;НаименованиеИсточника;
 + sql_el_202304.txt - вывод из сборных таблиц в формате = ;id;АЛИАС/Наименование;Канал;idИсточника;НаименованиеИсточника;
  
-### **С** 
-
-+ ReferenceValue\ - добавление функций AccidentTimeDate и AccidentTime (2016)
- 
-
 
 --------------------------
   eОсновной комплекс ENMAC(324).csv
