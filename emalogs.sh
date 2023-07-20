@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# ver 11/10/2022
+# ver 18/03/2020
 
 # folders
 EMA_LOGS1=(
@@ -28,13 +28,13 @@ EMA_LOGS1=(
 /etc/sysconfig/network
 /usr/lib/nagios/plugins
 /usr/local/nagios/etc
-/usr/lib/oracle/11.2/client
-/usr/lib/oracle/11.2/client64
+#/usr/lib/oracle/11.2/client
+#/usr/lib/oracle/11.2/client64
 /opt/oracle/instantclient_11_2
 /etc/rabbitmq
 /var/log/rabbitmq
+#/var/ema/coredumps
 /var/log/mongodb
-# /var/ema/coredumps
 /var/www/hde.conf
 /var/www/hde.app/log
 );
@@ -95,9 +95,11 @@ EMA_LOGS2=(
 /opt/APC/PowerChute/group1/psaggregator.m11
 /etc/mongod.conf
 /var/www/hde.conf/nginx.conf
-/etc/logrotate.d/rabbitmq-server
-/etc/logrotate.d/ema
-/etc/cron.d/ema_time
+/usr/lib/oracle/11.2/client/tnsnames.ora
+/usr/lib/oracle/11.2/client64/sqlnet.ora
+/usr/lib/oracle/11.2/client64/tnsnames.ora
+/usr/lib/oracle/12.3/client64/sqlnet.ora
+/usr/lib/oracle/12.3/client64/tnsnames.ora
 );
 
 
@@ -291,10 +293,10 @@ EMA_logs_stat ()
   cmd1="service ntp status"
   echo -e  "\n$cmd1" >> $n
   $cmd1 >> $n
-
+  
   cmd1="service ntpd status"
   echo -e  "\n$cmd1" >> $n
-  $cmd1 >> $n
+  $cmd1 >> $n  
 
   cmd1="ntpq -np -4"
   echo -e  "\n$cmd1" >> $n
@@ -563,7 +565,7 @@ ShowUsage()
 
 EMA_main ()
 {
-  EMA_logs_dir
+  d=EMA_logs_dir()
 
   EMA_logs_env
   EMA_logs_list
@@ -571,6 +573,8 @@ EMA_main ()
   EMA_logs_ema
   #EMA_logs_mysql
   EMA_logs_oracle
+
+  chmod -R 755 "$d"
 
   echo -n "${reset}"
 }
