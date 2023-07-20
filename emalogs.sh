@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# ver 18/03/2020
+# ver 20/07/2023
 
 # folders
 EMA_LOGS1=(
