@@ -5,12 +5,6 @@
 # folders
 EMA_LOGS1=(
 /home/ema
-/var/log/ema
-/var/log/mysql
-/var/log/apache2
-/var/isms
-/usr/share/ema
-/usr/bin/isms
 /home/www-data/www/htdocs/WASUTP/config
 /home/www-data/www/htdocs/WASUTP/public/resource
 /etc/ema
@@ -18,7 +12,6 @@ EMA_LOGS1=(
 /etc/mysql
 /etc/apache2
 /etc/nginx
-/usr/lib64/nginx/modules
 /etc/ntp
 /etc/vmware
 /etc/sysconfig
@@ -26,17 +19,24 @@ EMA_LOGS1=(
 /etc/unixODBC
 /etc/unixODBC_23
 /etc/sysconfig/network
+/etc/rabbitmq
+/usr/share/ema
+/usr/bin/isms
 /usr/lib/nagios/plugins
 /usr/local/nagios/etc
+#/usr/lib64/nginx/modules
 #/usr/lib/oracle/11.2/client
 #/usr/lib/oracle/11.2/client64
 /opt/oracle/instantclient_11_2
-/etc/rabbitmq
-/var/log/rabbitmq
+#/var/log/rabbitmq
 #/var/ema/coredumps
-/var/log/mongodb
+#/var/log/mongodb
 /var/www/hde.conf
 /var/www/hde.app/log
+/var/log/ema
+/var/log/mysql
+/var/log/apache2
+/var/isms
 );
 
 
@@ -60,13 +60,17 @@ EMA_LOGS2=(
 /etc/vsftpd.conf
 /etc/profile.d/oracle.sh
 /etc/my.conf
+/etc/mongod.conf
 /etc/cron.d/isms_autobackup
+/etc/cron.d/ema_time
 /etc/rc.d/boot.local
 /etc/rc.d/rc.local
 /etc/conf.d/local.start
 /etc/xinetd.d/nrpe
 /etc/logrotate.d/ema
+/etc/logrotate.d/rabbitmq-server
 /etc/ld.so.conf
+/etc/ld.so.conf.d/oracle.conf
 /var/log/mail
 /var/log/ntp
 /var/log/auth.log
@@ -84,7 +88,6 @@ EMA_LOGS2=(
 /root/LinuxRT/trunk/rsdu.config
 /usr/share/doc/isms/ReleaseNotesiSMS.txt
 /usr/lib/npreal2/driver/npreal2d.cf
-/etc/ld.so.conf.d/oracle.conf
 /opt/APC/PowerChute/group1/m11.cfg
 /opt/APC/PowerChute/group1/m11.bak
 /opt/APC/PowerChute/group1/pcnsconfig.ini
@@ -93,7 +96,6 @@ EMA_LOGS2=(
 /opt/APC/PowerChute/group1/comps.m11
 /opt/APC/PowerChute/group1/shutdownerlets.m11
 /opt/APC/PowerChute/group1/psaggregator.m11
-/etc/mongod.conf
 /var/www/hde.conf/nginx.conf
 /usr/lib/oracle/11.2/client/tnsnames.ora
 /usr/lib/oracle/11.2/client64/sqlnet.ora
