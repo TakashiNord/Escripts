@@ -2,8 +2,8 @@
 package require tclodbc
 package require sqlite3
 
-# 
-# scheme RSDU2 Oracle to Sqlite 
+#
+# scheme RSDU2 Oracle to Sqlite
 # 2016 year
 #
 #
@@ -151,6 +151,19 @@ proc  CreateTable { tbname owner } {
 
   LogFlush
 
+
+  global out_journal out_meas30
+  # не выводить журналы
+  if {$out_journal=="OFF"} {
+    if {0==[ string compare -nocase -length 2 "j_" $tbname ]} { return 0 ; }
+  }
+
+  # не выводить MEAS_SNAPSHOT30
+  if {$out_meas30=="OFF"} {
+    if {0==[ string compare -nocase "MEAS_SNAPSHOT30" $tbname ]} { return 0 ; }
+  }
+
+
   set cNum 500000 ;
   set cnt_insert 0 ; # число записей ВСТАВКИ
   set iCnt 0
@@ -188,6 +201,8 @@ proc  CreateTable { tbname owner } {
 proc  CreateTables { strSQL owner } {
 # ===============================================
   global db2
+  global out_journal out_meas30
+
 
   # формируем столбцы, создаем таблицу, копируем данные - последовательно.
   set cnt_table 0 ; # количество таблиц
@@ -195,10 +210,25 @@ proc  CreateTables { strSQL owner } {
     incr cnt_table
     set tbname [ lindex $r1 0 ]
     LogWrite "\n-- $tbname  ($cnt_table)"
-	catch {
-      CreateTable $tbname $owner
-	} err
-	
+
+    set out_flag 1
+
+    # не выводить журналы
+    #if {$out_journal=="OFF"} {
+    #    if {0==[ string compare -nocase -length 2 "j_" $tbname ]} { set out_flag 0 ; }
+    #}
+
+    # не выводить MEAS_SNAPSHOT30
+    #if {$out_meas30=="OFF"} {
+    #    if {0==[ string compare -nocase "MEAS_SNAPSHOT30" $tbname ]} { set out_flag 0 ; }
+    #}
+
+    if {$out_flag==1} {
+      catch {
+           CreateTable $tbname $owner
+      } err
+    }
+
   }
 
   return 0 ;
@@ -217,6 +247,11 @@ proc  main { } {
   set tns "rsdu2"
   set usr "rsduadmin" ; # sys "rsduadmin" admin  nov_ema
   set pwd "passme" ; # passme  qwertyqaz
+
+  global out_journal out_meas30
+  set out_journal "OFF" ; # не выводить журналы
+  set out_meas30  "OFF" ; # не выводить meas*
+
 
   # scheme
   set own "RSDU2"
@@ -250,81 +285,35 @@ proc  main { } {
   db1 eval {PRAGMA synchronous=OFF}
   db1 eval {PRAGMA journal_mode=OFF}
 
+
   # scheme
-  set owner "RSDUADMIN"
+  #set owner "RSDUADMIN"
   #catch {
-    # CreateTable_ALL_OBJECTS $owner
+  #   CreateTable_ALL_OBJECTS $owner
   #} err1
   catch {
    CreateTable DBA_SEGMENTS SYS
   } err2
 
+
   set strSQL01 "select table_name from all_tables where owner = '%s'"
   set strSQL02 "SELECT * FROM ( SELECT table_name , row_number() over (order by table_name) rn FROM all_tables where owner = '%s' ) WHERE rn <= 100"
   set strSQL03 "SELECT * FROM ( SELECT table_name , row_number() over (order by table_name) rn FROM all_tables where owner = '%s' ) WHERE rn > 100 and rn <= 200"
 
-  set s1 [ format $strSQL01 $owner ]
-  CreateTables $s1 $owner
+  set schema [ list "RSDUADMIN" ]
+  #set schema [ list "RSDUADMIN" "RSDU2DAARH" "RSDU2ELARH" "RSDU2PHARH" "RSDU2PSARH" "RSDU2AUARH" "RSDU2CLARH" "RSDU2EAARH" "RSDU2DGARH" "RSDU2EXARH" ]
+  #set schema [ list "RSDUADMIN" "RSDU2ELARH" "RSDU2PHARH" "RSDU2PSARH" "RSDU2AUARH" "RSDU2DGARH" "RSDU2EXARH" ]
+  foreach owner $schema {
+    set s1 [ format $strSQL01 $owner ]
+    CreateTables $s1 $owner
+  }
 
-  # scheme
-  set owner "INP"
-  set s1 [ format $strSQL01 $owner ]
-  #CreateTables $s1 $owner    
+  set schema_add [ list "INP" "RSDUJOB" "RSDU_FMON" ]
+  foreach owner $schema_add {
+    set s1 [ format $strSQL01 $owner ]
+    #CreateTables $s1 $owner
+  }
 
-  # scheme
-  set owner "RSDU2AUARH"
-  set s1 [ format $strSQL01 $owner ]
-  #CreateTables $s1 $owner  
-  
-  # scheme
-  set owner "RSDU2CLARH"
-  set s1 [ format $strSQL01 $owner ]
-  #CreateTables $s1 $owner  
-  
-  # scheme
-  set owner "RSDU2DAARH"
-  set s1 [ format $strSQL01 $owner ]
-  #CreateTables $s1 $owner 
-  
-  # scheme
-  set owner "RSDU2DGARH"
-  set s1 [ format $strSQL01 $owner ]
-  #CreateTables $s1 $owner
-  
-  # scheme
-  set owner "RSDU2EAARH"
-  set s1 [ format $strSQL01 $owner ]
-  #CreateTables $s1 $owner  
-
-  # scheme
-  set owner "RSDU2ELARH"
-  set s1 [ format $strSQL01 $owner ]
-  #CreateTables $s1 $owner
-  
-  # scheme
-  set owner "RSDU2PHARH"
-  set s1 [ format $strSQL01 $owner ]
-  #CreateTables $s1 $owner
-
-  # scheme
-  set owner "RSDU2PSARH"
-  set s1 [ format $strSQL01 $owner ]
-  #CreateTables $s1 $owner
-
-  # scheme
-  set owner "RSDUJOB"
-  set s1 [ format $strSQL01 $owner ]
-  #CreateTables $s1 $owner
-  
-  # scheme
-  set owner "RSDU_FMON"
-  set s1 [ format $strSQL01 $owner ]
-  #CreateTables $s1 $owner    
-  
-  # scheme
-  set owner "RSDU2EXARH"
-  set s1 [ format $strSQL01 $owner ]
-  #CreateTables $s1 $owner  
 
   db1 close
 
