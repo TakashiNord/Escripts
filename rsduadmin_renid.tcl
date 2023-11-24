@@ -107,7 +107,7 @@ proc BASE1 { rf db2 } {
 
         LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
 
-		set strSQL3 "UPDATE $TABLE_NAME SET ID=$j WHERE ID=$id_old"
+        set strSQL3 "UPDATE $TABLE_NAME SET ID=$j WHERE ID=$id_old"
         $db2 $strSQL3
         $db2 commit
 
@@ -164,7 +164,7 @@ proc SYS_TREE21 { rf db2 } {
       set id_old [lindex $r1 $i ]
       if {$id_old!=$j} {
 
-	   LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
+       LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
 
        #--$TABLE_NAME
        $db2 "UPDATE $TABLE_NAME SET ID_PARENT=$maxID WHERE ID_PARENT=$id_old"
@@ -235,7 +235,7 @@ proc US_BUTTON_DESC { rf db2 } {
       set id_old [lindex $r1 $i ]
       if {$id_old!=$j} {
 
-	   LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
+       LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
 
        #--US_MENU
        $db2 "UPDATE US_MENU SET ID_BUTTON=$maxID WHERE ID_BUTTON=$id_old"
@@ -283,7 +283,7 @@ proc US_MENU { rf db2 } {
     }
 
     # ---------------------------------------- ID_BUTTON
-	set maxID [ expr int($maxID)+1 ]
+    set maxID [ expr int($maxID)+1 ]
     set strSQL0 "INSERT INTO $TABLE_NAME (ID,ID_BUTTON,NAME) VALUES ($maxID,37006,'TEXTRENAMETEXT') "
     $db2 $strSQL0
     $db2 commit
@@ -295,7 +295,7 @@ proc US_MENU { rf db2 } {
       set id_old [lindex $r1 $i ]
       if {$id_old!=$j} {
 
-	   LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
+       LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
 
        #--$TABLE_NAME
        $db2 "UPDATE $TABLE_NAME SET ID_PARENT=$maxID WHERE ID_PARENT=$id_old"
@@ -366,7 +366,7 @@ proc SYS_APD { rf db2 } {
       set id_old [lindex $r1 $i ]
       if {$id_old!=$j} {
 
-	   LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
+       LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
 
        #--$TABLE_NAME
        $db2 "UPDATE $TABLE_NAME SET ID_PARENT=$maxID WHERE ID_PARENT=$id_old"
@@ -444,7 +444,7 @@ proc AD_DIR { rf db2 } {
       set id_old [lindex $r1 $i ]
       if {$id_old!=$j} {
 
-	   LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
+       LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
 
        #--AD_DIR
        $db2 "UPDATE AD_DIR SET ID_PARENT=$maxID WHERE ID_PARENT=$id_old"
@@ -603,7 +603,7 @@ proc AD_LIST { rf db2 } {
       set id_old [lindex $r1 $i ]
       if {$id_old!=$j} {
 
-	   LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
+       LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
 
        #--AD_PINFO
        $db2 "UPDATE AD_PINFO SET ID_PARAM=$maxID WHERE ID_PARAM=$id_old"
@@ -677,7 +677,7 @@ proc AST_ORG { rf db2 } {
       set id_old [lindex $r1 $i ]
       if {$id_old!=$j} {
 
-	   LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
+       LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
 
        #--AST_ORG
        $db2 "UPDATE AST_ORG SET ID_PARENT=$maxID WHERE ID_PARENT=$id_old"
@@ -772,7 +772,7 @@ proc AST_CNT { rf db2 } {
       set id_old [lindex $r1 $i ]
       if {$id_old!=$j} {
 
-	   LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
+       LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
 
        #--AST_CNT
        $db2 "UPDATE AST_CNT SET ID_PARENT=$maxID WHERE ID_PARENT=$id_old"
@@ -876,7 +876,7 @@ proc VP_GROUP { rf db2 } {
       set id_old [lindex $r1 $i ]
       if {$id_old!=$j} {
 
-	   LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
+       LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
 
        #--VP_GROUP
        $db2 "UPDATE VP_GROUP SET ID_PARENT=$maxID WHERE ID_PARENT=$id_old"
@@ -951,7 +951,7 @@ proc VP_PANEL { rf db2 ID_TABLE ID_APPL } {
       set id_old [lindex $r1 $i ]
       if {$id_old!=$j} {
 
-	   LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
+       LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
 
        #--VP_CTRL
        $db2 "UPDATE VP_CTRL SET ID_PANEL=$maxID WHERE ID_PANEL=$id_old"
@@ -976,28 +976,28 @@ proc VP_PANEL { rf db2 ID_TABLE ID_APPL } {
 
         #SYS_APPL ( ALIAS )
         # pnview.exe /168
-		set strSQL9 "SELECT ID, ALIAS FROM SYS_APPL"
-		set r9all [ $db2 $strSQL9 ]
+        set strSQL9 "SELECT ID, ALIAS FROM SYS_APPL"
+        set r9all [ $db2 $strSQL9 ]
         foreach {r9} $r9all {
            set mID [ lindex $r9 0 ]
            set mALIAS [ lindex $r9 1 ]
-		   set ret1 [ regexp -nocase -- "pnview" $mALIAS ]
-		   if {$ret1>0} {
-		    set ln "\\y$id_old\\y"
-			set ret2 [ regexp -all -- $ln $mALIAS ]
-		    if {$ret2>0} {
-			    set mALIAS_new ""
-			    set ln_new "$j"
-			    set ret3 [ regsub -nocase -all -- $ln $mALIAS $ln_new mALIAS_new ]
-				if {$ret3>0} {
-				    #
-			        $db2 "UPDATE SYS_APPL SET ALIAS='${mALIAS_new}' WHERE ID=$mID"
-				    $db2 commit
-				    #
-			        LogWrite "SYS_APPL (ID=${mID}) old='${mALIAS}'  new='${mALIAS_new}' "
-			    }
-			}
-		   }
+           set ret1 [ regexp -nocase -- "pnview" $mALIAS ]
+           if {$ret1>0} {
+             set ln "\\y$id_old\\y"
+             set ret2 [ regexp -all -- $ln $mALIAS ]
+             if {$ret2>0} {
+               set mALIAS_new ""
+               set ln_new "$j"
+               set ret3 [ regsub -nocase -all -- $ln $mALIAS $ln_new mALIAS_new ]
+               if {$ret3>0} {
+                 #
+                 $db2 "UPDATE SYS_APPL SET ALIAS='${mALIAS_new}' WHERE ID=$mID"
+                 $db2 commit
+                 #
+                 LogWrite "SYS_APPL (ID=${mID}) old='${mALIAS}'  new='${mALIAS_new}' "
+               }
+             }
+           }
         }
 
 
@@ -1073,7 +1073,7 @@ proc VP_CTRL { rf db2 } {
       set id_old [lindex $r1 $i ]
       if {$id_old!=$j} {
 
-	   LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
+       LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
 
        #--VP_PARAMS
        $db2 "UPDATE VP_PARAMS SET ID_CTRL=$maxID WHERE ID_CTRL=$id_old"
@@ -1146,7 +1146,7 @@ proc VS_GROUP { rf db2 } {
       set id_old [lindex $r1 $i ]
       if {$id_old!=$j} {
 
-	   LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
+       LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
 
        #--VS_GROUP
        $db2 "UPDATE VS_GROUP SET ID_PARENT=$maxID WHERE ID_PARENT=$id_old"
@@ -1220,7 +1220,7 @@ proc VS_FORM { rf db2 ID_TABLE ID_APPL } {
       set id_old [lindex $r1 $i ]
       if {$id_old!=$j} {
 
-	   LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
+       LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
 
        #--VS_COMP
        $db2 "UPDATE VS_COMP SET ID_FORM=$maxID WHERE ID_FORM=$id_old"
@@ -1229,24 +1229,24 @@ proc VS_FORM { rf db2 ID_TABLE ID_APPL } {
        #$db2 "UPDATE VS_OBJ_TUNE SET ID_FORM=$maxID WHERE ID_FORM=$id_old"
        #$db2 commit
        #--VS_MODUS_NODE
-	   if {[checkTable $rf $db2 "VS_MODUS_NODE" "ID_FORM"]} {
+       if {[checkTable $rf $db2 "VS_MODUS_NODE" "ID_FORM"]} {
          $db2 "UPDATE VS_MODUS_NODE  SET ID_FORM=$maxID WHERE ID_FORM=$id_old"
-         $db2 commit       
-	   }
+         $db2 commit
+       }
        #--VS_FORM_INIPARAMS
-	   if {[checkTable $rf $db2 "VS_FORM_INIPARAMS" "ID_FORM"]} {
+       if {[checkTable $rf $db2 "VS_FORM_INIPARAMS" "ID_FORM"]} {
          $db2 "UPDATE VS_FORM_INIPARAMS   SET ID_FORM=$maxID WHERE ID_FORM=$id_old"
          $db2 commit
-	   }
+       }
        #--TAG_POSITION
        $db2 "UPDATE TAG_POSITION   SET ID_SCHEME=$maxID WHERE ID_SCHEME=$id_old"
        $db2 commit
-       #RSDUJOB.JOB_MAIN		ID_SCHEME
+       #RSDUJOB.JOB_MAIN    ID_SCHEME
        $db2 "UPDATE RSDUJOB.JOB_MAIN   SET ID_SCHEME=$maxID WHERE ID_SCHEME=$id_old"
-       $db2 commit	   
+       $db2 commit
 
 
-	   #--US_MENU  ID_APPL=1232 - schemeviewer.exe
+       #--US_MENU  ID_APPL=1232 - schemeviewer.exe
        $db2 "UPDATE US_MENU SET ID_PARAM=$maxID WHERE ID_PARAM=$id_old AND ID_APPL=$ID_APPL"
        $db2 commit
        #--VP_PARAMS  ID_TABLE=43 - VS_FORM_LST
@@ -1263,28 +1263,28 @@ proc VS_FORM { rf db2 ID_TABLE ID_APPL } {
 
         #SYS_APPL ( ALIAS )
         # schemeviewer.exe /168
-		set strSQL9 "SELECT ID, ALIAS FROM SYS_APPL"
-		set r9all [ $db2 $strSQL9 ]
+        set strSQL9 "SELECT ID, ALIAS FROM SYS_APPL"
+        set r9all [ $db2 $strSQL9 ]
         foreach {r9} $r9all {
            set mID [ lindex $r9 0 ]
            set mALIAS [ lindex $r9 1 ]
-		   set ret1 [ regexp -nocase -- "schemeviewer" $mALIAS ]
-		   if {$ret1>0} {
-		    set ln "\\y$id_old\\y"
-			set ret2 [ regexp -all -- $ln $mALIAS ]
-		    if {$ret2>0} {
-			    set mALIAS_new ""
-			    set ln_new "$j"
-			    set ret3 [ regsub -nocase -all -- $ln $mALIAS $ln_new mALIAS_new ]
-				if {$ret3>0} {
-				    #
-			        $db2 "UPDATE SYS_APPL SET ALIAS='${mALIAS_new}' WHERE ID=$mID"
-				    $db2 commit
-				    #
-			        LogWrite "SYS_APPL (ID=${mID}) old='${mALIAS}'  new='${mALIAS_new}' "
-			    }
-			}
-		   }
+           set ret1 [ regexp -nocase -- "schemeviewer" $mALIAS ]
+           if {$ret1>0} {
+             set ln "\\y$id_old\\y"
+             set ret2 [ regexp -all -- $ln $mALIAS ]
+             if {$ret2>0} {
+               set mALIAS_new ""
+               set ln_new "$j"
+               set ret3 [ regsub -nocase -all -- $ln $mALIAS $ln_new mALIAS_new ]
+               if {$ret3>0} {
+                 #
+                 $db2 "UPDATE SYS_APPL SET ALIAS='${mALIAS_new}' WHERE ID=$mID"
+                 $db2 commit
+                 #
+                 LogWrite "SYS_APPL (ID=${mID}) old='${mALIAS}'  new='${mALIAS_new}' "
+               }
+             }
+           }
         }
 
 
@@ -1295,23 +1295,23 @@ proc VS_FORM { rf db2 ID_TABLE ID_APPL } {
        #$db2 "UPDATE VS_OBJ_TUNE SET ID_FORM=$j WHERE ID_FORM=$maxID"
        #$db2 commit
        #--VS_MODUS_NODE
-	   if {[checkTable $rf $db2 "VS_MODUS_NODE" "ID_FORM"]} {
+       if {[checkTable $rf $db2 "VS_MODUS_NODE" "ID_FORM"]} {
          $db2 "UPDATE VS_MODUS_NODE  SET ID_FORM=$j WHERE ID_FORM=$maxID"
-         $db2 commit       
-	   }
+         $db2 commit
+       }
        #--VS_FORM_INIPARAMS
-	   if {[checkTable $rf $db2 "VS_FORM_INIPARAMS" "ID_FORM"]} {
+       if {[checkTable $rf $db2 "VS_FORM_INIPARAMS" "ID_FORM"]} {
          $db2 "UPDATE VS_FORM_INIPARAMS   SET ID_FORM=$j WHERE ID_FORM=$maxID"
          $db2 commit
-	   }
+       }
        #--TAG_POSITION
        $db2 "UPDATE TAG_POSITION   SET ID_SCHEME=$j WHERE ID_SCHEME=$maxID"
        $db2 commit
-       #RSDUJOB.JOB_MAIN		ID_SCHEME
+       #RSDUJOB.JOB_MAIN    ID_SCHEME
        $db2 "UPDATE RSDUJOB.JOB_MAIN   SET ID_SCHEME=$j WHERE ID_SCHEME=$maxID"
-       $db2 commit		   
+       $db2 commit
 
-	   #--US_MENU  ID_APPL=1232 - schemeviewer.exe
+       #--US_MENU  ID_APPL=1232 - schemeviewer.exe
        $db2 "UPDATE US_MENU SET ID_PARAM=$j WHERE ID_PARAM=$maxID AND ID_APPL=$ID_APPL"
        $db2 commit
        #--VP_PARAMS  ID_TABLE=43 - VS_FORM_LST
@@ -1375,7 +1375,7 @@ proc VS_COMP { rf db2 } {
       set id_old [lindex $r1 $i ]
       if {$id_old!=$j} {
 
-	   LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
+       LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
 
        #--VS_REGIM_TUNE
        $db2 "UPDATE VS_REGIM_TUNE SET ID_OWNLST=$maxID WHERE ID_OWNLST=$id_old"
@@ -1454,7 +1454,7 @@ proc RPT_DIR { rf db2 } {
       set id_old [lindex $r1 $i ]
       if {$id_old!=$j} {
 
-	   LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
+       LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
 
        #--RPT_DIR
        $db2 "UPDATE RPT_DIR SET ID_PARENT=$maxID WHERE ID_PARENT=$id_old"
@@ -1529,7 +1529,7 @@ proc RPT_LST { rf db2 ID_TABLE ID_APPL } {
       set id_old [lindex $r1 $i ]
       if {$id_old!=$j} {
 
-	   LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
+       LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
 
        #--RPT_PARAMS
        $db2 "UPDATE RPT_PARAMS SET ID_REPORT=$maxID WHERE ID_REPORT=$id_old"
@@ -1626,7 +1626,7 @@ proc R_GROUP { rf db2 } {
       set id_old [lindex $r1 $i ]
       if {$id_old!=$j} {
 
-	   LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
+       LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
 
        #--R_GROUP
        $db2 "UPDATE R_GROUP SET ID_PARENT=$maxID WHERE ID_PARENT=$id_old"
@@ -1690,7 +1690,7 @@ proc R_KADR { rf db2 ID_TABLE ID_APPL } {
 
     set maxID [ expr int($maxID)+1 ]
     ##set strSQL0 "INSERT INTO $TABLE_NAME (ID,ID_NODE,ID_TYPE,NAME,ALIAS) VALUES ($maxID,NULL,526,'TEXTRENAMETEXT','') "
-	set strSQL0 "INSERT INTO $TABLE_NAME (ID,ID_NODE,ID_TYPE,NAME,ALIAS,SETTINGS_JSON) VALUES ($maxID,NULL,526,'TEXTRENAMETEXT','','') "
+    set strSQL0 "INSERT INTO $TABLE_NAME (ID,ID_NODE,ID_TYPE,NAME,ALIAS,SETTINGS_JSON) VALUES ($maxID,NULL,526,'TEXTRENAMETEXT','','') "
     $db2 $strSQL0
     $db2 commit
 
@@ -1702,14 +1702,14 @@ proc R_KADR { rf db2 ID_TABLE ID_APPL } {
       set id_old [lindex $r1 $i ]
       if {$id_old!=$j} {
 
-	   LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
+       LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
 
        #--R_PSETS
        $db2 "UPDATE R_PSETS SET ID_KADR=$maxID WHERE ID_KADR=$id_old"
        $db2 commit
 
 
-	   #--US_MENU  ID_APPL=602 - retroview_live.exe
+       #--US_MENU  ID_APPL=602 - retroview_live.exe
        $db2 "UPDATE US_MENU SET ID_PARAM=$maxID WHERE ID_PARAM=$id_old AND ID_APPL=$ID_APPL"
        $db2 commit
        #--VP_PARAMS  ID_TABLE=46 - R_KADR
@@ -1724,31 +1724,31 @@ proc R_KADR { rf db2 ID_TABLE ID_APPL } {
        $db2 $strSQL3
        $db2 commit
 
-        #SYS_APPL ( ALIAS )
-        # retroview_live.exe /168
-		set strSQL9 "SELECT ID, ALIAS FROM SYS_APPL"
-		set r9all [ $db2 $strSQL9 ]
-        foreach {r9} $r9all {
-           set mID [ lindex $r9 0 ]
-           set mALIAS [ lindex $r9 1 ]
-		   set ret1 [ regexp -nocase -- "retroview_live" $mALIAS ]
-		   if {$ret1>0} {
-		    set ln "\\y$id_old\\y"
-			set ret2 [ regexp -all -- $ln $mALIAS ]
-		    if {$ret2>0} {
-			    set mALIAS_new ""
-			    set ln_new "$j"
-			    set ret3 [ regsub -nocase -all -- $ln $mALIAS $ln_new mALIAS_new ]
-				if {$ret3>0} {
-				    #
-			        $db2 "UPDATE SYS_APPL SET ALIAS='${mALIAS_new}' WHERE ID=$mID"
-				    $db2 commit
-				    #
-			        LogWrite "SYS_APPL (ID=${mID}) old='${mALIAS}'  new='${mALIAS_new}' "
-			    }
-			}
-		   }
-        }
+       #SYS_APPL ( ALIAS )
+       # retroview_live.exe /168
+       set strSQL9 "SELECT ID, ALIAS FROM SYS_APPL"
+       set r9all [ $db2 $strSQL9 ]
+       foreach {r9} $r9all {
+         set mID [ lindex $r9 0 ]
+         set mALIAS [ lindex $r9 1 ]
+         set ret1 [ regexp -nocase -- "retroview_live" $mALIAS ]
+         if {$ret1>0} {
+           set ln "\\y$id_old\\y"
+           set ret2 [ regexp -all -- $ln $mALIAS ]
+           if {$ret2>0} {
+             set mALIAS_new ""
+             set ln_new "$j"
+             set ret3 [ regsub -nocase -all -- $ln $mALIAS $ln_new mALIAS_new ]
+             if {$ret3>0} {
+               #
+               $db2 "UPDATE SYS_APPL SET ALIAS='${mALIAS_new}' WHERE ID=$mID"
+               $db2 commit
+               #
+               LogWrite "SYS_APPL (ID=${mID}) old='${mALIAS}'  new='${mALIAS_new}' "
+             }
+           }
+         }
+       }
 
 
        #--R_PSETS
@@ -1756,7 +1756,7 @@ proc R_KADR { rf db2 ID_TABLE ID_APPL } {
        $db2 commit
 
 
-	   #--US_MENU  ID_APPL=602 - retroview_live.exe
+       #--US_MENU  ID_APPL=602 - retroview_live.exe
        $db2 "UPDATE US_MENU SET ID_PARAM=$j WHERE ID_PARAM=$maxID AND ID_APPL=$ID_APPL"
        $db2 commit
        #--VP_PARAMS  ID_TABLE=46 - R_KADR
@@ -1822,7 +1822,7 @@ proc DBE_STORAGE { rf db2 } {
       set id_old [lindex $r1 $i ]
       if {$id_old!=$j} {
 
-	   LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
+       LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
 
        #--DBE_JOB
        $db2 "UPDATE DBE_JOB SET ID_STORAGE=$maxID WHERE ID_STORAGE=$id_old"
@@ -1879,8 +1879,8 @@ proc DBE_JOB { rf db2 } {
 
     set maxID [ expr int($maxID)+1 ]
     set strSQL0 "INSERT INTO $TABLE_NAME (ID,ID_STORAGE,IS_ENABLED,NAME,ALIAS,SCHEDULE_CRON_EXPRESSION,\
-	ID_TIMEINTERVAL,TIMEINTERVAL_COUNT,TIMEINTERVAL_OFFSET,RUN_TIME_OFFSET) \
-	VALUES ($maxID,1,0,'TEXTRENAMETEXT','--','--',1,0,0,0) "
+  ID_TIMEINTERVAL,TIMEINTERVAL_COUNT,TIMEINTERVAL_OFFSET,RUN_TIME_OFFSET) \
+  VALUES ($maxID,1,0,'TEXTRENAMETEXT','--','--',1,0,0,0) "
     $db2 $strSQL0
     $db2 commit
 
@@ -1891,7 +1891,7 @@ proc DBE_JOB { rf db2 } {
       set id_old [lindex $r1 $i ]
       if {$id_old!=$j} {
 
-	   LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
+       LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
 
        #--DBE_ACTION
        $db2 "UPDATE DBE_ACTION SET ID_JOB=$maxID WHERE ID_JOB=$id_old"
@@ -1959,9 +1959,9 @@ proc DBE_ACTION { rf db2 } {
 
     set maxID [ expr int($maxID)+1 ]
     set strSQL0 "INSERT INTO $TABLE_NAME (ID,ID_JOB,NAME,ALIAS,SQL_TEXT,\
-	REQUEST_TIME_OFFSET,RESPONSE_TIME_OFFSET,ID_DTFIELD_TYPE,\
-	ENABLE_ROW_HANDLER,ROW_HANDLER_TEXT,ENABLE_TABLE_HANDLER,TABLE_HANDLER_TEXT) \
-	VALUES ($maxID,1,'TEXTRENAMETEXT','--','--',0,0,2,0,0,'',0,'') "
+  REQUEST_TIME_OFFSET,RESPONSE_TIME_OFFSET,ID_DTFIELD_TYPE,\
+  ENABLE_ROW_HANDLER,ROW_HANDLER_TEXT,ENABLE_TABLE_HANDLER,TABLE_HANDLER_TEXT) \
+  VALUES ($maxID,1,'TEXTRENAMETEXT','--','--',0,0,2,0,0,'',0,'') "
     $db2 $strSQL0
     $db2 commit
 
@@ -1972,7 +1972,7 @@ proc DBE_ACTION { rf db2 } {
       set id_old [lindex $r1 $i ]
       if {$id_old!=$j} {
 
-	   LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
+       LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
 
        #--DBE_DESTINATION
        $db2 "UPDATE DBE_DESTINATION SET ID_ACTION=$maxID WHERE ID_ACTION=$id_old"
@@ -2052,7 +2052,7 @@ proc ARC1 { rf db2 } {
       set id_old [lindex $r1 $i ]
       if {$id_old!=$j} {
 
-	   LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
+       LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
 
        #--ARC_SERVICES_TUNE
        $db2 "UPDATE ARC_SERVICES_TUNE SET ID_SPROFILE=$maxID WHERE ID_SPROFILE=$id_old"
@@ -2124,7 +2124,7 @@ proc AA2 { rf db2 } {
       set id_old [lindex $r1 $i ]
       if {$id_old!=$j} {
 
-	    LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
+        LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
 
         set strSQL3 "UPDATE $TABLE_NAME SET ID=$j WHERE ID=$id_old"
         $db2 $strSQL3
@@ -2163,9 +2163,10 @@ proc AA2 { rf db2 } {
 # -- DA_PARAM
 proc DA_PARAM { rf db2 } {
 
-	set da_list [ list ]
-	LogWrite "====DA_SUBSYST==="
-	set strSQL11 "select id,id_parent, name, id_lsttbl \
+    set da_list [ list ]
+    LogWrite "====DA_SUBSYST==="
+
+    set strSQL11 "select id,id_parent, name, id_lsttbl \
 from sys_tree21 \
 where id_parent in ( \
 select distinct id_parent from sys_tree21 where id_lsttbl in \
@@ -2174,12 +2175,13 @@ select distinct id_parent from sys_tree21 where id_lsttbl in \
 and id_node in \
 (select id from sys_db_part where id_parent in \
 (select id from sys_db_part where define_alias like 'DA_SUBSYST' ))))"
+
     foreach {r11} [ $db2 $strSQL11 ] {
       LogWrite $r11
-	  set id_lsttbl [ lindex $r11 3 ]
-	  lappend da_list $id_lsttbl
+      set id_lsttbl [ lindex $r11 3 ]
+      lappend da_list $id_lsttbl
     }
-	LogWrite "============"
+    LogWrite "============"
 
 
     set TABLE_NAME "DA_PARAM"
@@ -2194,12 +2196,12 @@ and id_node in \
       puts $s1
     }
 
-	LogWrite "======DA_PARAM======"
-	set strSQL11 "SELECT * FROM $TABLE_NAME"
+    LogWrite "======DA_PARAM======"
+    set strSQL11 "SELECT * FROM $TABLE_NAME"
     foreach {r11} [ $db2 $strSQL11 ] {
       LogWrite $r11
     }
-	LogWrite "============"
+    LogWrite "============"
 
     set maxID [ expr int($maxID)+1 ]
     set strSQL0 "INSERT INTO $TABLE_NAME (ID,ID_NODE,ID_POINT,ID_UCLASS, PRIORITY, SCALE, SCALE_MAX, SCALE_MIN, NAME, ALIAS, STATE, APERTURE) VALUES ($maxID,1,1,1,0,1,1,1,'TEXTRENAMETEXT','',0,0) "
@@ -2213,7 +2215,7 @@ and id_node in \
       set id_old [lindex $r1 $i ]
       if {$id_old!=$j} {
 
-	   LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
+       LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
 
        #--DA_ARC  ID_PARAM
        $db2 "UPDATE DA_ARC SET ID_PARAM=$maxID WHERE ID_PARAM=$id_old"
@@ -2236,13 +2238,13 @@ and id_node in \
 
        foreach ID_TABLE $da_list {
          #set ID_TABLE 54
-	     #--VP_PARAMS  ID_PARAM ID_TABLE=54 - SYS_TBLLST(DA_V_LST_1_LST)
+         #--VP_PARAMS  ID_PARAM ID_TABLE=54 - SYS_TBLLST(DA_V_LST_1_LST)
          $db2 "UPDATE VP_PARAMS SET ID_PARAM=$maxID WHERE ID_PARAM=$id_old AND ID_TABLE=$ID_TABLE"
          $db2 commit
          #--VS_REGIM_TUNE  ID_PARAM ID_TABLE=54 - SYS_TBLLST(DA_V_LST_1_LST)
          $db2 "UPDATE VS_REGIM_TUNE SET ID_PARAM=$maxID WHERE ID_PARAM=$id_old AND ID_TABLE=$ID_TABLE"
          $db2 commit
-	   }
+       }
 
 
        $db2 "UPDATE $TABLE_NAME SET ID=$j WHERE ID=$id_old"
@@ -2270,13 +2272,13 @@ and id_node in \
 
        foreach ID_TABLE $da_list {
          #set ID_TABLE 54
-	     #--VP_PARAMS  ID_PARAM ID_TABLE=54 - SYS_TBLLST(DA_V_LST_1_LST)
+         #--VP_PARAMS  ID_PARAM ID_TABLE=54 - SYS_TBLLST(DA_V_LST_1_LST)
          $db2 "UPDATE VP_PARAMS SET ID_PARAM=$j WHERE ID_PARAM=$maxID AND ID_TABLE=$ID_TABLE"
          $db2 commit
          #--VS_REGIM_TUNE  ID_PARAM ID_TABLE=54 - SYS_TBLLST(DA_V_LST_1_LST)
          $db2 "UPDATE VS_REGIM_TUNE SET ID_PARAM=$j WHERE ID_PARAM=$maxID AND ID_TABLE=$ID_TABLE"
          $db2 commit
-	   }
+       }
 
       }
     }
@@ -2343,7 +2345,7 @@ proc DA_DEV { rf db2 } {
       set id_old [lindex $r1 $i ]
       if {$id_old!=$j} {
 
-	   LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
+       LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
 
        #--DA_SLAVE  ID_DEV
        $db2 "UPDATE DA_SLAVE SET ID_DEV=$maxID WHERE ID_DEV=$id_old"
@@ -2423,7 +2425,7 @@ proc DA_DEV_DESC { rf db2 } {
       set id_old [lindex $r1 $i ]
       if {$id_old!=$j} {
 
-	    LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
+        LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
 
         #--DA_PARAM  ID_POINT
         $db2 "UPDATE DA_PARAM SET ID_POINT=$maxID WHERE ID_POINT=$id_old"
@@ -2494,8 +2496,8 @@ proc DA_CAT { rf db2 } {
       LogWrite "$r1"
     }
 
-	LogWrite "----------\n"
-	#return ;
+    LogWrite "----------\n"
+    #return ;
 
     set maxID [ expr int($maxID)+1 ]
     set strSQL0 "INSERT INTO $TABLE_NAME (ID,ID_TYPE,ID_PARENT,NAME,ALIAS,ID_RESERVE,ID_FILEWAV) VALUES ($maxID,1,NULL,'TEXTRENAMETEXT','',NULL,NULL) "
@@ -2509,7 +2511,7 @@ proc DA_CAT { rf db2 } {
       set id_old [lindex $r1 $i ]
       if {$id_old!=$j} {
 
-	   LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
+       LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
 
        #--DA_DEV_OPT  ID_NODE
        $db2 "UPDATE DA_DEV_OPT SET ID_NODE=$maxID WHERE ID_NODE=$id_old"
@@ -2559,7 +2561,7 @@ proc DA_CAT { rf db2 } {
        $db2 $strSQL3
        $db2 commit
 
-	   #--DA_CAT  ID_RESERVE
+       #--DA_CAT  ID_RESERVE
        $db2 "UPDATE $TABLE_NAME SET ID_RESERVE=$j WHERE ID_RESERVE=$maxID"
        $db2 commit
        #--DA_CAT  ID_PARENT
@@ -2704,6 +2706,11 @@ proc CCC0 { rf db2 ind1 ind2 } {
           $db2 "UPDATE OBJ_EL_PIN SET ID_OBJ=$ind1 WHERE ID_OBJ=$ind2"
           $db2 commit
         }
+        #--OBJ_EQUALIFIER  ID_OBJ
+        if {[checkTable $rf $db2 "OBJ_EQUALIFIER" "ID_OBJ"]} {
+          $db2 "UPDATE OBJ_EQUALIFIER SET ID_OBJ=$ind1 WHERE ID_OBJ=$ind2"
+          $db2 commit
+        }
         #--OBJ_LOCATION  ID_OBJ
         if {[checkTable $rf $db2 "OBJ_LOCATION" "ID_OBJ"]} {
           $db2 "UPDATE OBJ_LOCATION SET ID_OBJ=$ind1 WHERE ID_OBJ=$ind2"
@@ -2773,7 +2780,7 @@ proc OBJ_TREE { rf db2 } {
       set id_old [lindex $r1 $i ]
       if {$id_old!=$j} {
 
-		LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
+        LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
 
         CCC0 $rf $db2 $maxID $id_old
 
