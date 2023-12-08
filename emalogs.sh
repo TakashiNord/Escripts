@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# ver 14/09/2023
+# ver 07/12/2023
 
 # folders
 EMA_LOGS1=(
@@ -39,6 +39,7 @@ EMA_LOGS1=(
 /var/log/mysql
 /var/log/apache2
 /var/isms
+/root/.ssh
 );
 
 
@@ -528,7 +529,31 @@ function EMA_logs_oracle ( )
     fi
 
     ob2=$ob/backup/script
-    arr=$(find $ob2 -maxdepth 1  -name "*.sh" -o -name "*.log")
+    arr=$(find $ob2 -maxdepth 1 -type f -name "*.sh" -o -name "*.log" -o -name "*.sql" )
+    echo -e  "=\n${arr[@]}"  >> $n
+    for f in "${arr[@]}"
+    do
+      EMA_file_exists $f
+      if [ "$?" -eq 1 ]
+      then
+         cp -a --parents ${f} ${DIR}
+      fi
+    done
+
+    ob2=$ob/check
+    arr=$(find $ob2 -maxdepth 1 -type f -name "*.sh" -o -name "*.log" -o -name "*.sql" )
+    echo -e  "=\n${arr[@]}"  >> $n
+    for f in "${arr[@]}"
+    do
+      EMA_file_exists $f
+      if [ "$?" -eq 1 ]
+      then
+         cp -a --parents ${f} ${DIR}
+      fi
+    done
+
+    ob2=$ob/backup/check
+    arr=$(find $ob2 -maxdepth 1 -type f -name "*.sh" -o -name "*.log" -o -name "*.sql")
     echo -e  "=\n${arr[@]}"  >> $n
     for f in "${arr[@]}"
     do
@@ -555,6 +580,18 @@ function EMA_logs_oracle ( )
     fi
   done
 
+  ob3=/usr/lib64/oracle
+  arr=$(find $ob3 -type f -name "tnsnames*.ora" -o -name "sqlnet*.ora")
+  echo -e  "=\n${arr[@]}"  >> $n
+  for f in "${arr[@]}"
+  do
+    EMA_file_exists $f
+    if [ "$?" -eq 1 ]
+    then
+       cp -a --parents ${f} ${DIR}
+    fi
+  done
+
 
   ob3=/opt/oracle/instantclient
   arr=$(find /opt/oracle/instantclient_11_2 /opt/oracle/instantclient_11_4 -type f -name "tnsnames*.ora" -o -name "sqlnet*.ora")
@@ -567,6 +604,19 @@ function EMA_logs_oracle ( )
        cp -a --parents ${f} ${DIR}
     fi
   done
+
+
+
+  ob3=/opt/oracle/.ssh
+  echo -e  "\n $ob3 "  >> $n
+  EMA_dir_exists "$ob3"
+  if [ "$?" -eq 1 ]
+  then
+    mkdir -p "${DIR}${ob3}" 2> /dev/null
+    cp -a ${ob3}/* ${DIR}${ob3}
+  fi
+
+
 
   return 0
 }
@@ -628,6 +678,17 @@ function EMA_logs_ema ( )
   then
     darr=$(du -sh "$ob1")
     echo -e  "\nSIZE $ob1 = ${darr[@]}"  >> $n
+  fi
+
+
+  ob1=/retro
+  EMA_dir_exists "$ob1"
+  if [ "$?" -eq 1 ]
+  then
+    darr=$(du -sh "$ob1")
+    echo -e  "\nSIZE $ob1 = ${darr[@]}"  >> $n
+    arr=$(find $ob1 -type f)
+    echo -e  "=\n${arr[@]}"  >> $n
   fi
 
 
@@ -745,12 +806,12 @@ EMA_main ( )
   EMA_logs_list "$d"
   EMA_logs_stat "$d"
   EMA_logs_ema  "$d"
-  #EMA_logs_mysql "$d"
   EMA_logs_oracle "$d"
   EMA_logs_cass "$d"
+  #EMA_logs_mysql "$d"
 
-  #chmod -R 755 "$d"
   chmod -R 666 "$d"
+  #chmod --silent -R a+rwx,u-x,g-x,o-x "$d"
   #chown -R root.users "$d"
 
   echo -n "${reset}"
