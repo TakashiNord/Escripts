@@ -4,10 +4,9 @@ package require sqlite3
 
 #
 # scheme RSDU2 Oracle to Sqlite
-# 2016 year
+# 2016 - 2023 year
 #
 #
-
 
 
 # ===============================================
@@ -35,9 +34,11 @@ proc  CreateTable_ALL_OBJECTS { owner } {
   global db2
 
   LogWrite "-- ALL_OBJECTS $owner"
+  
+  set name_t "_ALL_OBJECTS_${owner}"
 
 # создаем таблицу-вьюшку ALL_OBJECTS
-  set str "create table if not exists _${owner} (\
+  set str "create table if not exists $name_t (\
    OWNER text, \
    OBJECT_NAME  text, \
    SUBOBJECT_NAME  text, \
@@ -54,7 +55,8 @@ proc  CreateTable_ALL_OBJECTS { owner } {
 
   db1 eval $str
 
-  set strSQL1 "SELECT * FROM all_objects WHERE owner = '%s' AND object_type = 'TABLE'"
+  #set strSQL1 "SELECT * FROM all_objects WHERE owner = '%s' AND object_type = 'TABLE'"
+  set strSQL1 "SELECT * FROM all_objects WHERE owner = '%s' "
 
   set s2 [ format $strSQL1 $owner ]
   db1 eval {BEGIN}
@@ -66,7 +68,46 @@ proc  CreateTable_ALL_OBJECTS { owner } {
       set s0 "$s0'$s1'"
       if {$i!=[expr $n-1]} {  set s0 "$s0," }
     }
-    set s1 "INSERT INTO _${owner} values($s0)"
+    set s1 "INSERT INTO $name_t values($s0)"
+    LogWrite $s1
+    db1 eval "$s1"
+  }
+  db1 eval {COMMIT}
+
+}
+
+# ===============================================
+proc  CreateTable_all_views { owner } {
+# ===============================================
+  global db1
+  global db2
+
+  LogWrite "-- all_views $owner"
+  
+  set name_v "_all_views_${owner}"
+
+# создаем таблицу-вьюшку _all_views
+  set str "create table if not exists $name_v (\
+   OWNER text, \
+   VIEW_NAME  text, \
+   TEXT_LENGTH  text, \
+   TEXT  text ) "
+
+  db1 eval $str
+
+  set strSQL1 "SELECT OWNER,VIEW_NAME,TEXT_LENGTH,TEXT FROM all_views WHERE owner = '%s' "
+
+  set s2 [ format $strSQL1 $owner ]
+  db1 eval {BEGIN}
+  foreach {r1} [ db2 $s2 ] {
+    set s0 ""
+    set n [llength $r1]
+    for  {set i 0} {$i < $n } {incr i} {
+      set s1 [lindex $r1 $i]
+      set s0 "$s0'$s1'"
+      if {$i!=[expr $n-1]} {  set s0 "$s0," }
+    }
+    set s1 "INSERT INTO $name_v values($s0)"
     LogWrite $s1
     db1 eval "$s1"
   }
@@ -287,15 +328,33 @@ proc  main { } {
 
 
   # scheme
-  #set owner "RSDUADMIN"
-  #catch {
-  #   CreateTable_ALL_OBJECTS $owner
-  #} err1
+  set owner "RSDUADMIN"
+  set err1 ""
   catch {
-   CreateTable DBA_SEGMENTS SYS
+     CreateTable_ALL_OBJECTS $owner
+  } err1
+  puts "CreateTable_ALL_OBJECTS - $err1"
+  set err2 ""
+  catch {
+    CreateTable DBA_SEGMENTS SYS
   } err2
+  puts "CreateTable DBA_SEGMENTS SYS - $err2"
 
 
+  # ----------------------------- create views
+  set schema [ list "RSDUADMIN" ]
+  set err3 ""
+  catch {
+    CreateTable_all_views $schema
+  } err3 
+  puts "CreateTable_all_views - $err3"
+  set strSQLview "select view_name from all_views where owner = '%s'"
+  foreach owner $schema {
+    set s1 [ format $strSQLview $owner ]
+    CreateTables $s1 $owner
+  }
+
+  # ----------------------------- create tables
   set strSQL01 "select table_name from all_tables where owner = '%s'"
   set strSQL02 "SELECT * FROM ( SELECT table_name , row_number() over (order by table_name) rn FROM all_tables where owner = '%s' ) WHERE rn <= 100"
   set strSQL03 "SELECT * FROM ( SELECT table_name , row_number() over (order by table_name) rn FROM all_tables where owner = '%s' ) WHERE rn > 100 and rn <= 200"
@@ -307,7 +366,7 @@ proc  main { } {
     set s1 [ format $strSQL01 $owner ]
     CreateTables $s1 $owner
   }
-
+  
   set schema_add [ list "INP" "RSDUJOB" "RSDU_FMON" ]
   foreach owner $schema_add {
     set s1 [ format $strSQL01 $owner ]
