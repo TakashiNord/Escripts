@@ -2866,33 +2866,14 @@ proc DA_CAT { rf db2 } {
 
        LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
 
-       #--DA_DEV_OPT  ID_NODE
-       $db2 "UPDATE DA_DEV_OPT SET ID_NODE=$maxID WHERE ID_NODE=$id_old"
-       $db2 commit
-       #--DA_EQUALIFIER  ID_NODE
-       $db2 "UPDATE DA_EQUALIFIER SET ID_NODE=$maxID WHERE ID_NODE=$id_old"
-       $db2 commit
-       #--DA_FAILURE_JRNL  ID_NODE
-       $db2 "UPDATE DA_FAILURE_JRNL SET ID_NODE=$maxID WHERE ID_NODE=$id_old"
-       $db2 commit
-       #--DA_KTSUSD  ID_NODE
-       $db2 "UPDATE DA_KTSUSD SET ID_NODE=$maxID WHERE ID_NODE=$id_old"
-       $db2 commit
-       #--DA_MASTER  ID_NODE
-       $db2 "UPDATE DA_MASTER SET ID_NODE=$maxID WHERE ID_NODE=$id_old"
-       $db2 commit
-       #--DA_PARAM  ID_NODE
-       $db2 "UPDATE DA_PARAM SET ID_NODE=$maxID WHERE ID_NODE=$id_old"
-       $db2 commit
-       #--DA_PC  ID_NODE
-       $db2 "UPDATE DA_PC SET ID_NODE=$maxID WHERE ID_NODE=$id_old"
-       $db2 commit
-       #--DA_PORT  ID_NODE
-       $db2 "UPDATE DA_PORT SET ID_NODE=$maxID WHERE ID_NODE=$id_old"
-       $db2 commit
-       #--DA_SLAVE  ID_NODE
-       $db2 "UPDATE DA_SLAVE SET ID_NODE=$maxID WHERE ID_NODE=$id_old"
-       $db2 commit
+       #--  ID_NODE
+       set TABLE_LIST [ list DA_DEV_OPT  DA_EQUALIFIER \
+         DA_FAILURE_JRNL DA_KTSUSD DA_MASTER  DA_PARAM \
+         DA_PC  DA_PORT  DA_SLAVE ]
+       foreach T_NAME $TABLE_LIST {
+         $db2 "UPDATE $T_NAME SET ID_NODE=$maxID WHERE ID_NODE=$id_old"
+         $db2 commit
+       }
 
        #--J_DADV  ID_DEVICE
        $db2 "UPDATE J_DADV SET ID_DEVICE=$maxID WHERE ID_DEVICE=$id_old"
@@ -2921,35 +2902,14 @@ proc DA_CAT { rf db2 } {
        $db2 "UPDATE $TABLE_NAME SET ID_PARENT=$j WHERE ID_PARENT=$maxID"
        $db2 commit
 
-
-
-       #--DA_DEV_OPT  ID_NODE
-       $db2 "UPDATE DA_DEV_OPT SET ID_NODE=$j WHERE ID_NODE=$maxID"
-       $db2 commit
-       #--DA_EQUALIFIER  ID_NODE
-       $db2 "UPDATE DA_EQUALIFIER SET ID_NODE=$j WHERE ID_NODE=$maxID"
-       $db2 commit
-       #--DA_FAILURE_JRNL  ID_NODE
-       $db2 "UPDATE DA_FAILURE_JRNL SET ID_NODE=$j WHERE ID_NODE=$maxID"
-       $db2 commit
-       #--DA_KTSUSD  ID_NODE
-       $db2 "UPDATE DA_KTSUSD SET ID_NODE=$j WHERE ID_NODE=$maxID"
-       $db2 commit
-       #--DA_MASTER  ID_NODE
-       $db2 "UPDATE DA_MASTER SET ID_NODE=$j WHERE ID_NODE=$maxID"
-       $db2 commit
-       #--DA_PARAM  ID_NODE
-       $db2 "UPDATE DA_PARAM SET ID_NODE=$j WHERE ID_NODE=$maxID"
-       $db2 commit
-       #--DA_PC  ID_NODE
-       $db2 "UPDATE DA_PC SET ID_NODE=$j WHERE ID_NODE=$maxID"
-       $db2 commit
-       #--DA_PORT  ID_NODE
-       $db2 "UPDATE DA_PORT SET ID_NODE=$j WHERE ID_NODE=$maxID"
-       $db2 commit
-       #--DA_SLAVE  ID_NODE
-       $db2 "UPDATE DA_SLAVE SET ID_NODE=$j WHERE ID_NODE=$maxID"
-       $db2 commit
+       #--  ID_NODE
+       set TABLE_LIST [ list DA_DEV_OPT  DA_EQUALIFIER \
+         DA_FAILURE_JRNL DA_KTSUSD DA_MASTER  DA_PARAM \
+         DA_PC  DA_PORT  DA_SLAVE ]
+       foreach T_NAME $TABLE_LIST {
+         $db2 "UPDATE $T_NAME SET ID_NODE=$j WHERE ID_NODE=$maxID"
+         $db2 commit
+       }
 
        #--J_DADV  ID_DEVICE
        $db2 "UPDATE J_DADV SET ID_DEVICE=$j WHERE ID_DEVICE=$maxID"
@@ -2985,118 +2945,38 @@ proc DA_CAT { rf db2 } {
 
 proc CCC0 { rf db2 ind1 ind2 } {
 
-        #--AST_LINK ID_OBJ
-        if {[checkTable $rf $db2 "AST_LINK" "ID_OBJ"]} {
-          $db2 "UPDATE AST_LINK SET ID_OBJ=$ind1 WHERE ID_OBJ=$ind2"
-          $db2 commit
-        }
+    #--  ID_OBJ
+    set TABLE_LIST [ list AST_LINK DG_GROUPS_DESC EA_POINTS FEED_PROP  NTP_EDGE MEAS_LIST \
+	 OBJ_CNT OBJ_EL_PIN OBJ_EQUALIFIER OBJ_LOCATION OBJ_PARAM OBJ_CONN_NODE OBJ_GEO OBJ_REFERENCES ]
+    foreach T_NAME $TABLE_LIST {
+      if {[checkTable $rf $db2 $T_NAME "ID_OBJ"]} {
+        $db2 "UPDATE $T_NAME SET ID_OBJ=$ind1 WHERE ID_OBJ=$ind2"
+        $db2 commit
+      }
+    }
+
         #--CALC_LIST  ID_NODE
         if {[checkTable $rf $db2 "CALC_LIST" "ID_NODE"]} {
           $db2 "UPDATE CALC_LIST SET ID_NODE=$ind1 WHERE ID_NODE=$ind2"
           $db2 commit
         }
-        #--DG_GROUPS_DESC ID_OBJ
-        if {[checkTable $rf $db2 "DG_GROUPS_DESC" "ID_OBJ" ]} {
-          $db2 "UPDATE DG_GROUPS_DESC SET ID_OBJ=$ind1 WHERE ID_OBJ=$ind2"
-          $db2 commit
-        }
-        #--EA_POINTS  ID_OBJ
-        if {[checkTable $rf $db2 "EA_POINTS" "ID_OBJ"]} {
-          $db2 "UPDATE EA_POINTS SET ID_OBJ=$ind1 WHERE ID_OBJ=$ind2"
-          $db2 commit
-        }
 
-        #--FEED_PROP  ID_OBJ
-        if {[checkTable $rf $db2 "FEED_PROP" "ID_OBJ_FEEDER"]} {
-          $db2 "UPDATE FEED_PROP SET ID_OBJ_FEEDER=$ind1 WHERE ID_OBJ_FEEDER=$ind2"
-          $db2 commit
-        }
-
-        #--NTP_EDGE  ID_OBJ
-        if {[checkTable $rf $db2 "NTP_EDGE" "ID_OBJ"]} {
-          $db2 "UPDATE NTP_EDGE SET ID_OBJ=$ind1 WHERE ID_OBJ=$ind2"
-          $db2 commit
-        }
-
-        #--MEAS_LIST  ID_OBJ
-        if {[checkTable $rf $db2 "MEAS_LIST" "ID_OBJ"]} {
-          $db2 "UPDATE MEAS_LIST SET ID_OBJ=$ind1 WHERE ID_OBJ=$ind2"
-          $db2 commit
-        }
-
-
-        #--J_ELSET ID_OBJECT
-        if {[checkTable $rf $db2 "J_ELSET" "ID_OBJECT"]} {
-          #LOCK TABLE J_ELSET IN SHARE ROW EXCLUSIVE MODE;
-          $db2 "UPDATE J_ELSET SET ID_OBJECT=$ind1 WHERE ID_OBJECT=$ind2"
-          $db2 commit
-        }
-        #--J_PHSET  ID_OBJECT
-        if {[checkTable $rf $db2 "J_PHSET" "ID_OBJECT"]} {
-          $db2 "UPDATE J_PHSET SET ID_OBJECT=$ind1 WHERE ID_OBJECT=$ind2"
-          $db2 commit
-        }
-        #--J_TELEREG  ID_OBJECT
-        if {[checkTable $rf $db2 "J_TELEREG" "ID_OBJECT"]} {
-          $db2 "UPDATE J_TELEREG SET ID_OBJECT=$ind1 WHERE ID_OBJECT=$ind2"
-          $db2 commit
-        }
-
-        #--J_TELEREG  ID_OBJECT
-        #if {[checkTable $rf $db2 "J_TELEREG" "ID_OBJECT"]} {
-        #  $db2 "UPDATE J_TELEREG SET ID_OBJECT=$ind1 WHERE ID_OBJECT=$ind2"
-        #  $db2 commit
-        #}
-
-
-        #--OBJ_CNT  ID_OBJ
-        if {[checkTable $rf $db2 "OBJ_CNT" "ID_OBJ"]} {
-          $db2 "UPDATE OBJ_CNT SET ID_OBJ=$ind1 WHERE ID_OBJ=$ind2"
-          $db2 commit
-        }
-        #--OBJ_EL_PIN  ID_OBJ
-        if {[checkTable $rf $db2 "OBJ_EL_PIN" "ID_OBJ"]} {
-          $db2 "UPDATE OBJ_EL_PIN SET ID_OBJ=$ind1 WHERE ID_OBJ=$ind2"
-          $db2 commit
-        }
-        #--OBJ_EQUALIFIER  ID_OBJ
-        if {[checkTable $rf $db2 "OBJ_EQUALIFIER" "ID_OBJ"]} {
-          $db2 "UPDATE OBJ_EQUALIFIER SET ID_OBJ=$ind1 WHERE ID_OBJ=$ind2"
-          $db2 commit
-        }
-        #--OBJ_LOCATION  ID_OBJ
-        if {[checkTable $rf $db2 "OBJ_LOCATION" "ID_OBJ"]} {
-          $db2 "UPDATE OBJ_LOCATION SET ID_OBJ=$ind1 WHERE ID_OBJ=$ind2"
-          $db2 commit
-        }
-        #--OBJ_PARAM  ID_OBJ
-        if {[checkTable $rf $db2 "OBJ_PARAM" "ID_OBJ"]} {
-          $db2 "UPDATE OBJ_PARAM SET ID_OBJ=$ind1 WHERE ID_OBJ=$ind2"
-          $db2 commit
-        }
-
-        #--OBJ_CONN_NODE  ID_OBJ
-        if {[checkTable $rf $db2 "OBJ_CONN_NODE" "ID_OBJ"]} {
-          $db2 "UPDATE OBJ_CONN_NODE SET ID_OBJ=$ind1 WHERE ID_OBJ=$ind2"
-          $db2 commit
-        }
-        #--OBJ_GEO  ID_OBJ
-        if {[checkTable $rf $db2 "OBJ_GEO" "ID_OBJ"]} {
-          $db2 "UPDATE OBJ_GEO SET ID_OBJ=$ind1 WHERE ID_OBJ=$ind2"
-          $db2 commit
-        }
-        #--OBJ_REFERENCES  ID_OBJ
-        if {[checkTable $rf $db2 "OBJ_REFERENCES" "ID_OBJ"]} {
-          $db2 "UPDATE OBJ_REFERENCES SET ID_OBJ=$ind1 WHERE ID_OBJ=$ind2"
-          $db2 commit
-        }
+    
+	#LOCK TABLE J_ELSET IN SHARE ROW EXCLUSIVE MODE;
+	#--  ID_OBJECT
+    set TABLE_LIST [ list J_ELSET  J_PHSET  J_TELEREG ]
+    foreach T_NAME $TABLE_LIST {
+      if {[checkTable $rf $db2 $T_NAME "ID_OBJECT"]} {
+        $db2 "UPDATE $T_NAME SET ID_OBJECT=$ind1 WHERE ID_OBJECT=$ind2"
+        $db2 commit
+      }
+    }
 
         #--TAG_LIST  ID_NODE
         if {[checkTable $rf $db2 "TAG_LIST" "ID_NODE"]} {
           $db2 "UPDATE TAG_LIST SET ID_NODE=$ind1 WHERE ID_NODE=$ind2"
           $db2 commit
         }
-
 
 }
 
