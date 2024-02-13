@@ -911,16 +911,10 @@ proc AD_DIR { rf db2 } {
        LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
 
 
-       #--AD_DIR
-       $db2 "UPDATE AD_DIR SET ID_PARENT=$maxID WHERE ID_PARENT=$id_old"
-       $db2 commit
        #--AD_HOSTS
        $db2 "UPDATE AD_HOSTS SET ID_SYSTEM_NODE=$maxID WHERE ID_SYSTEM_NODE=$id_old"
        $db2 commit
        $db2 "UPDATE AD_HOSTS SET ID_HOST_NODE=$maxID WHERE ID_HOST_NODE=$id_old"
-       $db2 commit
-       #--AD_JRNL
-       $db2 "UPDATE AD_JRNL SET ID_SERVER_NODE=$maxID WHERE ID_SERVER_NODE=$id_old"
        $db2 commit
        #--AD_PINFO
        $db2 "UPDATE AD_PINFO SET ID_INTRFACE_NODE=$maxID WHERE ID_INTRFACE_NODE=$id_old"
@@ -928,13 +922,12 @@ proc AD_DIR { rf db2 } {
        #--AD_SEGMENT
        $db2 "UPDATE AD_SEGMENT SET ID_PORT_NODE=$maxID WHERE ID_PORT_NODE=$id_old"
        $db2 commit
-       #--AD_SINFO
-       $db2 "UPDATE AD_SINFO SET ID_SERVER_NODE=$maxID WHERE ID_SERVER_NODE=$id_old"
-       $db2 commit
-       #--AD_SINFO_INI
-       $db2 "UPDATE AD_SINFO_INI SET ID_SERVER_NODE=$maxID WHERE ID_SERVER_NODE=$id_old"
-       $db2 commit
-
+       #--  ID_SERVER_NODE
+       set TABLE_LIST [ list AD_JRNL AD_SINFO AD_SINFO_INI ]
+       foreach T_NAME $TABLE_LIST {
+         $db2 "UPDATE $T_NAME SET ID_SERVER_NODE=$maxID WHERE ID_SERVER_NODE=$id_old"
+         $db2 commit
+       }
        #--  ID_NODE
        set TABLE_LIST [ list AD_COMCARD AD_IPINFO AD_LIST AD_MBII AD_MODEM AD_NCARD \
         AD_PORT AD_SEGMENT ]
@@ -942,6 +935,16 @@ proc AD_DIR { rf db2 } {
          $db2 "UPDATE $T_NAME SET ID_NODE=$maxID WHERE ID_NODE=$id_old"
          $db2 commit
        }
+       #--J_SHDV
+       if {[checkTable $rf $db2 "J_SHDV" "ID_DEVICE"]} {
+         $db2 "UPDATE J_SHDV SET ID_DEVICE=$maxID WHERE ID_DEVICE=$id_old"
+         $db2 commit
+       }
+
+
+       #--AD_DIR
+       $db2 "UPDATE AD_DIR SET ID_PARENT=$maxID WHERE ID_PARENT=$id_old"
+       $db2 commit
 
 
        set strSQL3 "UPDATE $TABLE_NAME SET ID=$j WHERE ID=$id_old"
@@ -949,6 +952,16 @@ proc AD_DIR { rf db2 } {
        $db2 commit
 
 
+       #--AD_DIR
+       $db2 "UPDATE AD_DIR SET ID_PARENT=$j WHERE ID_PARENT=$maxID"
+       $db2 commit
+
+
+       #--J_SHDV
+       if {[checkTable $rf $db2 "J_SHDV" "ID_DEVICE"]} {
+         $db2 "UPDATE J_SHDV SET ID_DEVICE=$j WHERE ID_DEVICE=$maxID"
+         $db2 commit
+       }
        #--  ID_NODE
        set TABLE_LIST [ list AD_COMCARD AD_IPINFO AD_LIST AD_MBII AD_MODEM AD_NCARD \
         AD_PORT AD_SEGMENT ]
@@ -956,29 +969,22 @@ proc AD_DIR { rf db2 } {
          $db2 "UPDATE $T_NAME SET ID_NODE=$j WHERE ID_NODE=$maxID"
          $db2 commit
        }
-
-       #--AD_DIR
-       $db2 "UPDATE AD_DIR SET ID_PARENT=$j WHERE ID_PARENT=$maxID"
-       $db2 commit
+       #--  ID_SERVER_NODE
+       set TABLE_LIST [ list AD_JRNL AD_SINFO AD_SINFO_INI ]
+       foreach T_NAME $TABLE_LIST {
+         $db2 "UPDATE $T_NAME SET ID_SERVER_NODE=$j WHERE ID_SERVER_NODE=$maxID"
+         $db2 commit
+       }
        #--AD_HOSTS
        $db2 "UPDATE AD_HOSTS SET ID_SYSTEM_NODE=$j WHERE ID_SYSTEM_NODE=$maxID"
        $db2 commit
        $db2 "UPDATE AD_HOSTS SET ID_HOST_NODE=$j WHERE ID_HOST_NODE=$maxID"
-       $db2 commit
-       #--AD_JRNL
-       $db2 "UPDATE AD_JRNL SET ID_SERVER_NODE=$j WHERE ID_SERVER_NODE=$maxID"
        $db2 commit
        #--AD_PINFO
        $db2 "UPDATE AD_PINFO SET ID_INTRFACE_NODE=$j WHERE ID_INTRFACE_NODE=$maxID"
        $db2 commit
        #--AD_SEGMENT
        $db2 "UPDATE AD_SEGMENT SET ID_PORT_NODE=$j WHERE ID_PORT_NODE=$maxID"
-       $db2 commit
-       #--AD_SINFO
-       $db2 "UPDATE AD_SINFO SET ID_SERVER_NODE=$j WHERE ID_SERVER_NODE=$maxID"
-       $db2 commit
-       #--AD_SINFO_INI
-       $db2 "UPDATE AD_SINFO_INI SET ID_SERVER_NODE=$j WHERE ID_SERVER_NODE=$maxID"
        $db2 commit
 
       }
@@ -1186,19 +1192,14 @@ proc AST_ORG { rf db2 } {
        #--AST_ORG
        $db2 "UPDATE AST_ORG SET ID_PARENT=$maxID WHERE ID_PARENT=$id_old"
        $db2 commit
-       #--AST_LINK
-       $db2 "UPDATE AST_LINK SET ID_ORG=$maxID WHERE ID_ORG=$id_old"
-       $db2 commit
+       set TABLE_LIST [ list AST_LINK  OBJ_TREE RSDU_USERS ]
+       foreach T_NAME $TABLE_LIST {
+         $db2 "UPDATE $T_NAME SET ID_ORG=$maxID WHERE ID_ORG=$id_old"
+         $db2 commit
+       }	   
        #--AST_PERSONNEL
        $db2 "UPDATE AST_PERSONNEL SET ID_NODE=$maxID WHERE ID_NODE=$id_old"
        $db2 commit
-       #--OBJ_TREE
-       $db2 "UPDATE OBJ_TREE SET ID_ORG=$maxID WHERE ID_ORG=$id_old"
-       $db2 commit
-       #--RSDU_USERS
-       $db2 "UPDATE RSDU_USERS SET ID_ORG=$maxID WHERE ID_ORG=$id_old"
-       $db2 commit
-
 
        set strSQL3 "UPDATE $TABLE_NAME SET ID=$j WHERE ID=$id_old"
        $db2 $strSQL3
@@ -1208,18 +1209,14 @@ proc AST_ORG { rf db2 } {
        #--AST_ORG
        $db2 "UPDATE AST_ORG SET ID_PARENT=$j WHERE ID_PARENT=$maxID"
        $db2 commit
-       #--AST_LINK
-       $db2 "UPDATE AST_LINK SET ID_ORG=$j WHERE ID_ORG=$maxID"
-       $db2 commit
        #--AST_PERSONNEL
        $db2 "UPDATE AST_PERSONNEL SET ID_NODE=$j WHERE ID_NODE=$maxID"
        $db2 commit
-       #--OBJ_TREE
-       $db2 "UPDATE OBJ_TREE SET ID_ORG=$j WHERE ID_ORG=$maxID"
-       $db2 commit
-       #--RSDU_USERS
-       $db2 "UPDATE RSDU_USERS SET ID_ORG=$j WHERE ID_ORG=$maxID"
-       $db2 commit
+       set TABLE_LIST [ list AST_LINK  OBJ_TREE RSDU_USERS ]
+       foreach T_NAME $TABLE_LIST {
+         $db2 "UPDATE $T_NAME SET ID_ORG=$j WHERE ID_ORG=$maxID"
+         $db2 commit
+       }	   
 
       }
     }
