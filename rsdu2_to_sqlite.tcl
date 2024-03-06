@@ -34,7 +34,7 @@ proc  CreateTable_ALL_OBJECTS { owner } {
   global db2
 
   LogWrite "-- ALL_OBJECTS $owner"
-  
+
   set name_t "_ALL_OBJECTS_${owner}"
 
 # создаем таблицу-вьюшку ALL_OBJECTS
@@ -83,7 +83,7 @@ proc  CreateTable_all_views { owner } {
   global db2
 
   LogWrite "-- all_views $owner"
-  
+
   set name_v "_all_views_${owner}"
 
 # создаем таблицу-вьюшку _all_views
@@ -104,6 +104,7 @@ proc  CreateTable_all_views { owner } {
     set n [llength $r1]
     for  {set i 0} {$i < $n } {incr i} {
       set s1 [lindex $r1 $i]
+      set s1 [ string map {' ''} $s1 ]
       set s0 "$s0'$s1'"
       if {$i!=[expr $n-1]} {  set s0 "$s0," }
     }
@@ -297,6 +298,7 @@ proc  main { } {
   # scheme
   set own "RSDU2"
 
+
 # лог - файл
   set ph [info script]
   if {$ph==""} {
@@ -310,16 +312,18 @@ proc  main { } {
   puts "\nstart = $t1\n"
   LogWrite "--START=$t1\n"
 
-# Устанавливаем соединение к БД
+
+# Устанавливаем соединение к БД  ORACLE
   database db2 $tns $usr $pwd
   db2 set autocommit off
+
 
 # открываем - создаем бд
   set ph [info script]
   if {$ph==""} {
     set ph ${own}_sqlite
   } else {
-    set ph [file rootname $ph ].db
+    set ph [file rootname ${own} ].db
   }
   sqlite3 db1 $ph ;# associate the SQLite database with the object
 
@@ -327,7 +331,7 @@ proc  main { } {
   db1 eval {PRAGMA journal_mode=OFF}
 
 
-  # scheme
+  # ----------------------------- scheme base of objects
   set owner "RSDUADMIN"
   set err1 ""
   catch {
@@ -341,19 +345,6 @@ proc  main { } {
   puts "CreateTable DBA_SEGMENTS SYS - $err2"
 
 
-  # ----------------------------- create views
-  set schema [ list "RSDUADMIN" ]
-  set err3 ""
-  catch {
-    CreateTable_all_views $schema
-  } err3 
-  puts "CreateTable_all_views - $err3"
-  set strSQLview "select view_name from all_views where owner = '%s'"
-  foreach owner $schema {
-    set s1 [ format $strSQLview $owner ]
-    CreateTables $s1 $owner
-  }
-
   # ----------------------------- create tables
   set strSQL01 "select table_name from all_tables where owner = '%s'"
   set strSQL02 "SELECT * FROM ( SELECT table_name , row_number() over (order by table_name) rn FROM all_tables where owner = '%s' ) WHERE rn <= 100"
@@ -366,14 +357,39 @@ proc  main { } {
     set s1 [ format $strSQL01 $owner ]
     CreateTables $s1 $owner
   }
-  
-  set schema_add [ list "INP" "RSDUJOB" "RSDU_FMON" ]
+
+
+  set schema_add [ list "RSDU5RETRO" ]
   foreach owner $schema_add {
     set s1 [ format $strSQL01 $owner ]
-    #CreateTables $s1 $owner
+    CreateTables $s1 $owner
+    ##CreateTables $owner.$s1 $owner
   }
 
 
+  set schema_add [ list "INP" "RSDUJOB" "RSDU_FMON" ]
+  foreach owner $schema_add {
+    set s1 [ format $strSQL01 $owner ]
+    CreateTables $s1 $owner
+    ##CreateTables "$owner_$s1" $owner
+  }
+
+
+  # ----------------------------- create views as tables
+  set schema [ list "RSDUADMIN" ]
+  set err3 ""
+  catch {
+    CreateTable_all_views $schema
+  } err3
+  puts "CreateTable_all_views - $err3"
+  set strSQLview "select view_name from all_views where owner = '%s'"
+  foreach owner $schema {
+    set s1 [ format $strSQLview $owner ]
+    CreateTables $s1 $owner
+  }
+
+
+  # -----------------------------
   db1 close
 
 # Закрываем соединение к БД
