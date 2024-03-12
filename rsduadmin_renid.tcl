@@ -67,13 +67,13 @@ proc checkTable { rf db2 tblname col } {
 proc BASE1 { rf db2 } {
 
   set TABLE_LIST [ list AD_ACSRVC AD_SINFO_INI AD_JRNL \
- OBJ_MODEL_MEAS \
  RSDU_UPDATE RSDU_ERROR \
  DA_SLAVE DA_MASTER DA_DEV_OPT DA_PC DA_PORT \
  MEAS_EL_DEPENDENT_SVAL \
  DBE_DESTINATION \
  R_PSETS \
  OBJ_GENERATOR_PQ \
+ OBJ_MODEL_MEAS OBJ_PARAM OBJ_CONSTRAINT \
  VP_PARAMS \
  SYS_APP_SERV_LST SYS_APP_SERVICES SYS_APP_SSYST SYS_APP_INI \
  SYS_TBLREF SYS_TBLLNK \
@@ -81,6 +81,7 @@ proc BASE1 { rf db2 } {
  SIG_PROP \
  US_ZONE US_VARS US_SIGN_PROP US_SIGN_GROUP US_SIG US_MSGLOG ]
 
+  #set TABLE_LIST [ list OBJ_MODEL_MEAS OBJ_PARAM ]
 
   foreach TABLE_NAME $TABLE_LIST {
 
@@ -262,8 +263,8 @@ proc DG_GROUPS { rf db2 } {
          $db2 "UPDATE DG_KDU_JOURNAL_OLD SET ID_OBJECT=$maxID WHERE ID_OBJECT=$id_old"
          $db2 commit
        }
-       
-	   #--DG_LIST
+
+     #--DG_LIST
        $db2 "UPDATE DG_LIST SET ID_NODE=$maxID WHERE ID_NODE=$id_old"
        $db2 commit
 
@@ -295,8 +296,8 @@ proc DG_GROUPS { rf db2 } {
          $db2 "UPDATE DG_KDU_JOURNAL_OLD SET ID_OBJECT=$j WHERE ID_OBJECT=$maxID"
          $db2 commit
        }
-       
-	   #--DG_LIST
+
+     #--DG_LIST
        $db2 "UPDATE DG_LIST SET ID_NODE=$j WHERE ID_NODE=$maxID"
        $db2 commit
 
@@ -1196,7 +1197,7 @@ proc AST_ORG { rf db2 } {
        foreach T_NAME $TABLE_LIST {
          $db2 "UPDATE $T_NAME SET ID_ORG=$maxID WHERE ID_ORG=$id_old"
          $db2 commit
-       }	   
+       }
        #--AST_PERSONNEL
        $db2 "UPDATE AST_PERSONNEL SET ID_NODE=$maxID WHERE ID_NODE=$id_old"
        $db2 commit
@@ -1216,7 +1217,7 @@ proc AST_ORG { rf db2 } {
        foreach T_NAME $TABLE_LIST {
          $db2 "UPDATE $T_NAME SET ID_ORG=$j WHERE ID_ORG=$maxID"
          $db2 commit
-       }	   
+       }
 
       }
     }
@@ -1291,7 +1292,7 @@ proc AST_CNT { rf db2 } {
        $db2 "UPDATE DG_KDU_JOURNAL SET ID_SRC_CNT=$maxID WHERE ID_SRC_CNT=$id_old"
        $db2 commit
        #--DG_KDU_JOURNAL_OLD
-	   if {[checkTable $rf $db2 "DG_KDU_JOURNAL_OLD" "ID_SRC_CNT"]} {
+     if {[checkTable $rf $db2 "DG_KDU_JOURNAL_OLD" "ID_SRC_CNT"]} {
          $db2 "UPDATE DG_KDU_JOURNAL_OLD SET ID_SRC_CNT=$maxID WHERE ID_SRC_CNT=$id_old"
          $db2 commit
        }
@@ -1318,7 +1319,7 @@ proc AST_CNT { rf db2 } {
        $db2 "UPDATE DG_KDU_JOURNAL SET ID_SRC_CNT=$j WHERE ID_SRC_CNT=$maxID"
        $db2 commit
        #--DG_KDU_JOURNAL_OLD
-	   if {[checkTable $rf $db2 "DG_KDU_JOURNAL_OLD" "ID_SRC_CNT"]} {
+     if {[checkTable $rf $db2 "DG_KDU_JOURNAL_OLD" "ID_SRC_CNT"]} {
          $db2 "UPDATE DG_KDU_JOURNAL_OLD SET ID_SRC_CNT=$j WHERE ID_SRC_CNT=$maxID"
          $db2 commit
        }
@@ -3153,7 +3154,7 @@ proc OBJ_TREE { rf db2 } {
 
     set maxID [ expr int($maxID)+1 + $shiftID ]
     set strSQL0 "INSERT INTO $TABLE_NAME (ID,ID_PARENT,ID_MODEL,ID_TYPE,ID_ORG,NAME,ALIAS,ID_FILEWAV,DATE_MOD,GUID) \
-  VALUES ($maxID,null,null,5,null,'TEXTRENAMETEXT','TEXTRENAMETEXT',null,null,null)"
+                 VALUES ($maxID,null,null,5,null,'TEXTRENAMETEXT','TEXTRENAMETEXT',null,null,null)"
     $db2 $strSQL0
     $db2 commit
 
@@ -3210,7 +3211,7 @@ proc OBJ_TREE { rf db2 } {
 
 # -- одиночные таблицы
 #BASE1 $rf db2
-
+#BASE1 $rf db2
 
 # -- SYS_TREE21 -- ?ломается структура?
 #SYS_TREE21  $rf db2
@@ -3224,6 +3225,8 @@ proc OBJ_TREE { rf db2 } {
 #S_GROUPS $rf db2
 
 # -- из за больших журналов переименовываение занимает большой промежуток времени
+# -- после необх менять все id ssbsd и тд.
+# --
 # -- S_USERS -- необ гасить все модули и запускать после S_GROUPS
 # ##S_USERS $rf db2
 # -- S_USERS LITE -- необ гасить все модули и запускать после S_GROUPS - ID= КАК db_USERS

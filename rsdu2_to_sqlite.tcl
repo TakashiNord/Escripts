@@ -3,10 +3,28 @@ package require tclodbc
 package require sqlite3
 
 #
-# scheme RSDU2 Oracle to Sqlite
+# RSDU2 Oracle to Sqlite
 # 2016 - 2023 year
 #
 #
+
+  # avtorization
+  global tns usr pwd
+  set tns "rsdu2"
+  set usr "rsduadmin" ; # sys "rsduadmin" admin  nov_ema
+  set pwd "passme" ; # passme  qwertyqaz
+
+  global out_journal out_meas30
+  set out_journal "OFF" ; # не выводить журналы
+  set out_meas30  "OFF" ; # не выводить meas*
+
+  global schema
+  set schema [ list "RSDUADMIN" ]
+  #set schema [ list "RSDUADMIN" "RSDU2DAARH" "RSDU2ELARH" "RSDU2PHARH" "RSDU2PSARH" "RSDU2AUARH" "RSDU2CLARH" "RSDU2EAARH" "RSDU2DGARH" "RSDU2EXARH" ]
+  #set schema [ list "RSDUADMIN" "RSDU2ELARH" "RSDU2PHARH" "RSDU2PSARH" "RSDU2AUARH" "RSDU2DGARH" "RSDU2EXARH" ]
+
+  global schemav
+  set schemav [ list "RSDUADMIN" ]
 
 
 # ===============================================
@@ -280,33 +298,24 @@ proc  CreateTables { strSQL owner } {
 # ===============================================
 proc  main { } {
 # ===============================================
+  global tns usr pwd
   global db1
   global db2
   global own
   global rf
 
-  # avtorization
-  set tns "rsdu2"
-  set usr "rsduadmin" ; # sys "rsduadmin" admin  nov_ema
-  set pwd "passme" ; # passme  qwertyqaz
-
-  global out_journal out_meas30
-  set out_journal "OFF" ; # не выводить журналы
-  set out_meas30  "OFF" ; # не выводить meas*
-
-
-  # scheme
-  set own "RSDU2"
+  set tN [ clock format [ clock seconds ] -format "%Y%m%d_%H%M%S" ]
 
 
 # лог - файл
   set ph [info script]
   if {$ph==""} {
-    set ph ${own}_sqlite.log
+    set ph ${tns}_sqlite_${tN}.log
   } else {
-    set ph [file rootname $ph ].log
+    set ph [ file rootname $ph ]_${tN}.log
   }
   set rf [ open $ph "w+"  ]
+
 
   set t1 [ clock format [ clock seconds ] -format "%T" ]
   puts "\nstart = $t1\n"
@@ -321,12 +330,13 @@ proc  main { } {
 # открываем - создаем бд
   set ph [info script]
   if {$ph==""} {
-    set ph ${own}_sqlite
+    set ph ${tns}_sqlite_${tN}.db
   } else {
-    set ph [file rootname ${own} ].db
+    set ph [ file rootname ${ph} ]_${tN}.db
   }
-  sqlite3 db1 $ph ;# associate the SQLite database with the object
 
+
+  sqlite3 db1 $ph ;# associate the SQLite database with the object
   db1 eval {PRAGMA synchronous=OFF}
   db1 eval {PRAGMA journal_mode=OFF}
 
@@ -350,25 +360,32 @@ proc  main { } {
   set strSQL02 "SELECT * FROM ( SELECT table_name , row_number() over (order by table_name) rn FROM all_tables where owner = '%s' ) WHERE rn <= 100"
   set strSQL03 "SELECT * FROM ( SELECT table_name , row_number() over (order by table_name) rn FROM all_tables where owner = '%s' ) WHERE rn > 100 and rn <= 200"
 
-  set schema [ list "RSDUADMIN" ]
-  #set schema [ list "RSDUADMIN" "RSDU2DAARH" "RSDU2ELARH" "RSDU2PHARH" "RSDU2PSARH" "RSDU2AUARH" "RSDU2CLARH" "RSDU2EAARH" "RSDU2DGARH" "RSDU2EXARH" ]
-  #set schema [ list "RSDUADMIN" "RSDU2ELARH" "RSDU2PHARH" "RSDU2PSARH" "RSDU2AUARH" "RSDU2DGARH" "RSDU2EXARH" ]
+
+  global schema
+  if {0==[info exists schema]} {
+    set schema [ list "RSDUADMIN" ]
+  }
+
+  if {0==[llength $schema]} {
+    set schema [ list "RSDUADMIN" ]
+  }
+
   foreach owner $schema {
     set s1 [ format $strSQL01 $owner ]
     CreateTables $s1 $owner
   }
 
 
-  set schema_add [ list "RSDU5RETRO" ]
-  foreach owner $schema_add {
+  set schema_add1 [ list "RSDU5RETRO" ]
+  foreach owner $schema_add1 {
     set s1 [ format $strSQL01 $owner ]
     CreateTables $s1 $owner
     ##CreateTables $owner.$s1 $owner
   }
 
 
-  set schema_add [ list "INP" "RSDUJOB" "RSDU_FMON" ]
-  foreach owner $schema_add {
+  set schema_add2 [ list "INP" "RSDUJOB" "RSDU_FMON" ]
+  foreach owner $schema_add2 {
     set s1 [ format $strSQL01 $owner ]
     CreateTables $s1 $owner
     ##CreateTables "$owner_$s1" $owner
@@ -376,23 +393,31 @@ proc  main { } {
 
 
   # ----------------------------- create views as tables
-  set schema [ list "RSDUADMIN" ]
+  global schemav
+  if {0==[info exists schemav]} {
+    set schemav [ list "RSDUADMIN" ]
+  }
+
+  if {0==[llength $schemav]} {
+    set schemav [ list "RSDUADMIN" ]
+  }
+
   set err3 ""
   catch {
-    CreateTable_all_views $schema
+    CreateTable_all_views $schemav
   } err3
   puts "CreateTable_all_views - $err3"
   set strSQLview "select view_name from all_views where owner = '%s'"
-  foreach owner $schema {
+  foreach owner $schemav {
     set s1 [ format $strSQLview $owner ]
     CreateTables $s1 $owner
   }
 
 
-  # -----------------------------
+  # ----------------------------- Sqlite
   db1 close
 
-# Закрываем соединение к БД
+# Закрываем соединение к БД Oracle
 #  db2 commit
   db2 disconnect
 
