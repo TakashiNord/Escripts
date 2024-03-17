@@ -71,9 +71,11 @@ proc BASE1 { rf db2 } {
  DA_SLAVE DA_MASTER DA_DEV_OPT DA_PC DA_PORT \
  MEAS_EL_DEPENDENT_SVAL \
  DBE_DESTINATION \
+ DG_KDU_JOURNAL \
  R_PSETS \
  OBJ_GENERATOR_PQ \
  OBJ_MODEL_MEAS OBJ_PARAM OBJ_CONSTRAINT \
+ OBJ_AUX_EL_PIN OBJ_LINK OBJ_LOCATION OBJ_MODEL_PARAM OBJ_PARAM \
  VP_PARAMS \
  SYS_APP_SERV_LST SYS_APP_SERVICES SYS_APP_SSYST SYS_APP_INI \
  SYS_TBLREF SYS_TBLLNK \
@@ -87,7 +89,9 @@ proc BASE1 { rf db2 } {
 
     #--
     if {[checkTable $rf $db2 $TABLE_NAME "ID"]==0} {
-        continue
+        set s1 "\n$TABLE_NAME or ID = not exists"
+        puts $s1
+    continue
     }
 
     set strSQL1 "SELECT max(ID), min(ID), count(*) FROM $TABLE_NAME"
@@ -2194,8 +2198,11 @@ proc R_KADR { rf db2 ID_TABLE ID_APPL } {
     }
 
     set maxID [ expr int($maxID)+1 ]
-    ##set strSQL0 "INSERT INTO $TABLE_NAME (ID,ID_NODE,ID_TYPE,NAME,ALIAS) VALUES ($maxID,NULL,526,'TEXTRENAMETEXT','') "
-    set strSQL0 "INSERT INTO $TABLE_NAME (ID,ID_NODE,ID_TYPE,NAME,ALIAS,SETTINGS_JSON) VALUES ($maxID,NULL,526,'TEXTRENAMETEXT','','') "
+    set strSQL0 "INSERT INTO $TABLE_NAME (ID,ID_NODE,ID_TYPE,NAME,ALIAS) VALUES ($maxID,NULL,526,'TEXTRENAMETEXT','') "
+    if {[checkTable $rf $db2 $TABLE_NAME "SETTINGS_JSON"]} {
+        set strSQL0 "INSERT INTO $TABLE_NAME (ID,ID_NODE,ID_TYPE,NAME,ALIAS,SETTINGS_JSON) VALUES ($maxID,NULL,526,'TEXTRENAMETEXT','','') "
+    }
+
     $db2 $strSQL0
     $db2 commit
 
@@ -2662,6 +2669,86 @@ proc AA2 { rf db2 } {
 }
 
 
+# ==============================================================================================================
+
+# -- MEAS_LIST
+proc MEAS_LIST { rf db2 } {
+
+    set da_list [ list ]
+    LogWrite "====MEAS_LIST==="
+
+    set strSQL11 "select id,id_parent, name, id_lsttbl \
+from sys_tree21 \
+where id_parent in ( \
+select distinct id_parent from sys_tree21 where id_lsttbl in \
+(select id from sys_tbllst where id_type in \
+(select id from sys_otyp where define_alias like 'LST') \
+and id_node in \
+(select id from sys_db_part where id_parent in \
+(select id from sys_db_part where define_alias like 'DA_SUBSYST' ))))"
+
+    foreach {r11} [ $db2 $strSQL11 ] {
+      LogWrite $r11
+      set id_lsttbl [ lindex $r11 3 ]
+      lappend da_list $id_lsttbl
+    }
+    LogWrite "============"
+
+
+    set TABLE_NAME "MEAS_LIST"
+
+    set strSQL1 "SELECT max(ID), min(ID), count(*) FROM $TABLE_NAME"
+    set maxID 0 ; set minID 0 ; set cntID 0 ;
+    foreach {r1} [ $db2 $strSQL1 ] {
+      set maxID [ lindex $r1 0 ]
+      set minID [ lindex $r1 1 ]
+      set cntID [ lindex $r1 2 ]
+      set s1 "\n$TABLE_NAME = max=$maxID min=$minID cnt=$cntID \n"
+      puts $s1
+    }
+
+    LogWrite "======MEAS_LIST======"
+    set strSQL11 "SELECT * FROM $TABLE_NAME"
+    foreach {r11} [ $db2 $strSQL11 ] {
+      LogWrite $r11
+    }
+    LogWrite "============"
+
+    #set maxID [ expr int($maxID)+1 ]
+    #set strSQL0 "INSERT INTO $TABLE_NAME (ID,ID_NODE,ID_POINT,ID_UCLASS, PRIORITY, SCALE, SCALE_MAX, SCALE_MIN, NAME, ALIAS, STATE, APERTURE) VALUES ($maxID,1,1,1,0,1,1,1,'TEXTRENAMETEXT','',0,0) "
+    #$db2 $strSQL0
+    #$db2 commit
+
+    set strSQL2 "SELECT ID FROM $TABLE_NAME ORDER BY ID ASC"
+    set r1 [ $db2 $strSQL2 ]
+    for {set i 0} {$i < $cntID} {incr i} {
+      set j [ expr $i+1 ]
+      set id_old [lindex $r1 $i ]
+      if {$id_old!=$j} {
+
+       LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
+
+      }
+    }
+
+    $db2 "DELETE FROM $TABLE_NAME WHERE NAME LIKE '%TEXTRENAMETEXT%' "
+    $db2 commit
+
+    set strSQL3 "SELECT ${TABLE_NAME}_S.nextval FROM dual"
+    set r3 [ $db2 $strSQL3 ]
+    set l3 [ llength $r3 ]
+    if {$l3>0} {
+     set increment_old [lindex $r3 0 ]
+     set increment_old [ expr (1-int($increment_old)) ]
+     set str2 [ format "alter sequence %s_S increment by %d" $TABLE_NAME $increment_old ]
+     $db2 $str2
+     $db2 $strSQL3
+     $db2 "alter sequence ${TABLE_NAME}_S increment by 1"
+    }
+
+
+ return 0 ;
+}
 
 # ==============================================================================================================
 
@@ -2722,21 +2809,17 @@ and id_node in \
 
        LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
 
-       #--DA_ARC  ID_PARAM
-       $db2 "UPDATE DA_ARC SET ID_PARAM=$maxID WHERE ID_PARAM=$id_old"
-       $db2 commit
-       #--DA_PARGROUP_TUNE  ID_PARAM
-       $db2 "UPDATE DA_PARGROUP_TUNE SET ID_PARAM=$maxID WHERE ID_PARAM=$id_old"
-       $db2 commit
-       #--DA_PROFILE  ID_PARAM
-       $db2 "UPDATE DA_PROFILE SET ID_PARAM=$maxID WHERE ID_PARAM=$id_old"
-       $db2 commit
+
+       set TABLE_LIST [ list DA_ARC  DA_PARGROUP_TUNE DA_PROFILE DA_VAL ]
+       foreach T_NAME $TABLE_LIST {
+         $db2 "UPDATE $T_NAME SET ID_PARAM=$maxID WHERE ID_PARAM=$id_old"
+         $db2 commit
+       }
+
        #--DA_SRC_CHANNEL  ID_OWNLST
        $db2 "UPDATE DA_SRC_CHANNEL SET ID_OWNLST=$maxID WHERE ID_OWNLST=$id_old"
        $db2 commit
-       #--DA_VAL  ID_PARAM
-       $db2 "UPDATE DA_VAL SET ID_PARAM=$maxID WHERE ID_PARAM=$id_old"
-       $db2 commit
+
        #--J_MAILDISP  ID_DIRECTORY
        $db2 "UPDATE J_MAILDISP SET ID_DIRECTORY=$maxID WHERE ID_DIRECTORY=$id_old"
        $db2 commit
@@ -2756,21 +2839,16 @@ and id_node in \
        $db2 commit
 
 
-       #--DA_ARC  ID_PARAM
-       $db2 "UPDATE DA_ARC SET ID_PARAM=$j WHERE ID_PARAM=$maxID"
-       $db2 commit
-       #--DA_PARGROUP_TUNE  ID_PARAM
-       $db2 "UPDATE DA_PARGROUP_TUNE SET ID_PARAM=$j WHERE ID_PARAM=$maxID"
-       $db2 commit
-       #--DA_PROFILE  ID_PARAM
-       $db2 "UPDATE DA_PROFILE SET ID_PARAM=$j WHERE ID_PARAM=$maxID"
-       $db2 commit
+       set TABLE_LIST [ list DA_ARC  DA_PARGROUP_TUNE DA_PROFILE DA_VAL ]
+       foreach T_NAME $TABLE_LIST {
+         $db2 "UPDATE $T_NAME SET ID_PARAM=$j WHERE ID_PARAM=$maxID"
+         $db2 commit
+       }
+
        #--DA_SRC_CHANNEL  ID_OWNLST
        $db2 "UPDATE DA_SRC_CHANNEL SET ID_OWNLST=$j WHERE ID_OWNLST=$maxID"
        $db2 commit
-       #--DA_VAL  ID_PARAM
-       $db2 "UPDATE DA_VAL SET ID_PARAM=$j WHERE ID_PARAM=$maxID"
-       $db2 commit
+
        #--J_MAILDISP  ID_DIRECTORY
        $db2 "UPDATE J_MAILDISP SET ID_DIRECTORY=$j WHERE ID_DIRECTORY=$maxID"
        $db2 commit
@@ -2852,29 +2930,23 @@ proc DA_DEV { rf db2 } {
 
        LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
 
-       #--DA_SLAVE  ID_DEV
-       $db2 "UPDATE DA_SLAVE SET ID_DEV=$maxID WHERE ID_DEV=$id_old"
-       $db2 commit
-       #--DA_DEV_PROTO  ID_DEV
-       $db2 "UPDATE DA_DEV_PROTO SET ID_DEV=$maxID WHERE ID_DEV=$id_old"
-       $db2 commit
-       #--DA_DEV_DESC  ID_DEV
-       $db2 "UPDATE DA_DEV_DESC SET ID_DEV=$maxID WHERE ID_DEV=$id_old"
-       $db2 commit
+       set TABLE_LIST [ list DA_SLAVE  DA_DEV_PROTO  DA_DEV_DESC ]
+       foreach T_NAME $TABLE_LIST {
+         $db2 "UPDATE $T_NAME SET ID_DEV=$maxID WHERE ID_DEV=$id_old"
+         $db2 commit
+       }
+
 
        set strSQL3 "UPDATE $TABLE_NAME SET ID=$j WHERE ID=$id_old"
        $db2 $strSQL3
        $db2 commit
 
-       #--DA_SLAVE  ID_DEV
-       $db2 "UPDATE DA_SLAVE SET ID_DEV=$j WHERE ID_DEV=$maxID"
-       $db2 commit
-       #--DA_DEV_PROTO  ID_DEV
-       $db2 "UPDATE DA_DEV_PROTO SET ID_DEV=$j WHERE ID_DEV=$maxID"
-       $db2 commit
-       #--DA_DEV_DESC  ID_DEV
-       $db2 "UPDATE DA_DEV_DESC SET ID_DEV=$j WHERE ID_DEV=$maxID"
-       $db2 commit
+
+       set TABLE_LIST [ list DA_SLAVE  DA_DEV_PROTO  DA_DEV_DESC ]
+       foreach T_NAME $TABLE_LIST {
+         $db2 "UPDATE $T_NAME SET ID_DEV=$j WHERE ID_DEV=$maxID"
+         $db2 commit
+       }
 
       }
     }
@@ -3098,8 +3170,12 @@ proc DA_CAT { rf db2 } {
 proc CCC0 { rf db2 ind1 ind2 } {
 
     #--  ID_OBJ
-    set TABLE_LIST [ list AST_LINK DG_GROUPS_DESC EA_POINTS FEED_PROP  NTP_EDGE MEAS_LIST \
-      OBJ_CNT OBJ_EL_PIN OBJ_EQUALIFIER OBJ_LOCATION OBJ_PARAM OBJ_CONN_NODE OBJ_GEO OBJ_REFERENCES ]
+    set TABLE_LIST [ list AST_LINK DG_GROUPS_DESC EA_POINTS  \
+      FEED_PROP \
+    NTP_EDGE MEAS_LIST \
+    OBJ_AUX_EL_PIN OBJ_LIMIT_SET OBJ_NAMES OBJ_PARAM OBJ_PQCURVES \
+    OBJ_GENERATOR_PQ \
+      OBJ_CNT OBJ_EL_PIN OBJ_EQUALIFIER OBJ_LOCATION OBJ_PARAM OBJ_CONN_NODE OBJ_GEO ]
     foreach T_NAME $TABLE_LIST {
       if {[checkTable $rf $db2 $T_NAME "ID_OBJ"]} {
         $db2 "UPDATE $T_NAME SET ID_OBJ=$ind1 WHERE ID_OBJ=$ind2"
@@ -3107,12 +3183,24 @@ proc CCC0 { rf db2 ind1 ind2 } {
       }
     }
 
-        #--CALC_LIST  ID_NODE
-        if {[checkTable $rf $db2 "CALC_LIST" "ID_NODE"]} {
-          $db2 "UPDATE CALC_LIST SET ID_NODE=$ind1 WHERE ID_NODE=$ind2"
-          $db2 commit
-        }
+    #-- ID_SWITCH
+    set TABLE_LIST [ list OBJ_REFERENCES ]
+    foreach T_NAME $TABLE_LIST {
+      if {[checkTable $rf $db2 $T_NAME "ID_SWITCH"]} {
+        $db2 "UPDATE $T_NAME SET ID_SWITCH=$ind1 WHERE ID_SWITCH=$ind2"
+        $db2 commit
+      }
+    }
 
+
+    #-- ID_NODE
+    set TABLE_LIST [ list CALC_LIST TAG_LIST ]
+    foreach T_NAME $TABLE_LIST {
+      if {[checkTable $rf $db2 $T_NAME "ID_NODE"]} {
+        $db2 "UPDATE $T_NAME SET ID_NODE=$ind1 WHERE ID_NODE=$ind2"
+        $db2 commit
+      }
+    }
 
     #LOCK TABLE J_ELSET IN SHARE ROW EXCLUSIVE MODE;
     #--  ID_OBJECT
@@ -3124,11 +3212,29 @@ proc CCC0 { rf db2 ind1 ind2 } {
       }
     }
 
-        #--TAG_LIST  ID_NODE
-        if {[checkTable $rf $db2 "TAG_LIST" "ID_NODE"]} {
-          $db2 "UPDATE TAG_LIST SET ID_NODE=$ind1 WHERE ID_NODE=$ind2"
-          $db2 commit
-        }
+
+    #--RSDUJOB.JOB_MAIN   JOB_STAMPS   JOB_SWITCH_CONDITIONS
+      if {[checkTable $rf $db2 "RSDUJOB.JOB_MAIN" "ID_OBJ"]} {
+        $db2 "UPDATE RSDUJOB.JOB_MAIN SET ID_OBJ=$ind1 WHERE ID_OBJ=$ind2"
+        $db2 commit
+      }
+      if {[checkTable $rf $db2 "RSDUJOB.JOB_MAIN" "ID_PURPOSE_OBJ"]} {
+        $db2 "UPDATE RSDUJOB.JOB_MAIN SET ID_PURPOSE_OBJ=$ind1 WHERE ID_PURPOSE_OBJ=$ind2"
+        $db2 commit
+      }
+      if {[checkTable $rf $db2 "RSDUJOB.JOB_MAIN" "ID_ENTERPRISE"]} {
+        $db2 "UPDATE RSDUJOB.JOB_MAIN SET ID_ENTERPRISE=$ind1 WHERE ID_ENTERPRISE=$ind2"
+        $db2 commit
+      }
+      if {[checkTable $rf $db2 "RSDUJOB.JOB_STAMPS" "ID_ENTERPRISE"]} {
+        $db2 "UPDATE RSDUJOB.JOB_STAMPS SET ID_ENTERPRISE=$ind1 WHERE ID_ENTERPRISE=$ind2"
+        $db2 commit
+      }
+      if {[checkTable $rf $db2 "RSDUJOB.JOB_SWITCH_CONDITIONS" "ID_SWITCH"]} {
+        $db2 "UPDATE RSDUJOB.JOB_SWITCH_CONDITIONS SET ID_SWITCH=$ind1 WHERE ID_SWITCH=$ind2"
+        $db2 commit
+      }
+
 
 }
 
@@ -3217,11 +3323,11 @@ proc OBJ_TREE { rf db2 } {
 #SYS_TREE21  $rf db2
 
 
-# -- DG_GROUPS
+# -- DG_GROUPS корректировка сервис GROUP_ID
 #DG_GROUPS  $rf db2
 
 
-# -- S_GROUPS
+# -- S_GROUPS  - корректировка /etc/ema/host.ini  GROUP_ID
 #S_GROUPS $rf db2
 
 # -- из за больших журналов переименовываение занимает большой промежуток времени
@@ -3231,6 +3337,7 @@ proc OBJ_TREE { rf db2 } {
 # ##S_USERS $rf db2
 # -- S_USERS LITE -- необ гасить все модули и запускать после S_GROUPS - ID= КАК db_USERS
 # ##S_USERS_LITE $rf db2
+# -- ПОСЛЕ корректировка /etc/ema/host.ini  USER_ID  + ID SSBSD
 
 
 # -- AD_DIR
@@ -3258,25 +3365,31 @@ proc OBJ_TREE { rf db2 } {
 #SYS_APD  $rf db2
 # -- не запускать
 # ###SYS_APPL
-
+#
 
 # -- RPT_DIR
 #RPT_DIR $rf db2
 # -- RPT_LST  - необходимо проверить ID_TABLE=71 - RPT_LST , ID_APPL=964 - клиент просмотра отчетов
+# -- SELECT * FROM SYS_TBLLST WHERE TABLE_NAME like '%RPT_LST%'
+# -- SELECT * FROM SYS_APPL WHERE ALIAS like '%crviewer%'
 #RPT_LST $rf db2 71 964
 
 
 # -- VS_GROUP
 #VS_GROUP $rf db2
 # -- VS_FORM  - необходимо проверить ID_TABLE=43 - VS_FORM_LST , ID_APPL=1232 - schemeviewer.exe
+# -- SELECT * FROM SYS_TBLLST WHERE TABLE_NAME like '%VS_FORM_LST%'
+# -- SELECT * FROM SYS_APPL WHERE ALIAS like '%schemeviewer%'
 #VS_FORM $rf db2 43 1232
 # -- VS_COMP - запуск после VS_FORM
-# #VS_COMP $rf db2
+#VS_COMP $rf db2
 
 
 # -- VP_GROUP
 #VP_GROUP $rf db2
 # -- VP_PANEL - необходимо проверить ID_TABLE=40 - VP_PANEL , ID_APPL=87 - pnview.exe
+# -- SELECT * FROM SYS_TBLLST WHERE TABLE_NAME like '%VP_PANEL%'
+# -- SELECT * FROM SYS_APPL WHERE ALIAS like '%pnview%'
 #VP_PANEL $rf db2 40 87
 # -- VP_CTRL
 #VP_CTRL $rf db2
@@ -3285,6 +3398,8 @@ proc OBJ_TREE { rf db2 } {
 # -- R_GROUP
 #R_GROUP $rf db2
 #  -- R_KADR  - необходимо проверить ID_TABLE=46 - R_KADR , ID_APPL=602 - retroview_live.exe
+# -- SELECT * FROM SYS_TBLLST WHERE TABLE_NAME like '%R_KADR%'
+# -- SELECT * FROM SYS_APPL WHERE ALIAS like '%retroview_live%'
 #R_KADR $rf db2 46 602
 
 
@@ -3307,9 +3422,17 @@ proc OBJ_TREE { rf db2 } {
 # AA2 $rf db2
 
 
+# не запускать
+# -- MEAS_LIST - запускать очень осторожно, если нет привязки к отчетам - !нет переименовывания таблиц\view архивов !
+# --
+# ##### MEAS_LIST $rf db2
+#
+
+# не запускать
 # -- DA_PARAM - запускать очень осторожно, если нет привязки к отчетам - !нет переименовывания таблиц\view архивов !
 # -- контроль квалификаторов! в DA_DEV_DESC id могут для контроля Приборов. также id в LUA.
-# #####DA_PARAM $rf db2
+# ##### DA_PARAM $rf db2
+# нарушаются привязки в Электрическом режиме
 
 # -- DA_DEV
 #DA_DEV $rf db2
@@ -3322,8 +3445,8 @@ proc OBJ_TREE { rf db2 } {
 
 
 # -- OBJ_TREE -- отключать ssbsd + контроль Сигнальной системы  -- !необходимо! гасить модули elregd, phregd, ?ssbsd?
-# #####OBJ_TREE $rf db2
-
+# ##### OBJ_TREE $rf db2
+#
 
 # ==============================================================================================================
 
