@@ -2990,8 +2990,8 @@ proc DA_DEV_DESC { rf db2 } {
     }
 
     set maxID [ expr int($maxID)+1 ]
-    set strSQL0 "INSERT INTO $TABLE_NAME (ID,ID_PROTO_POINT,ID_DEV,ID_PARENT,NAME,CVALIF,ID_TYPE,ID_GTOPT,ATTR_NAME,SCALE,COLOR) \
-  VALUES ($maxID,51,1,$maxID,'TEXTRENAMETEXT',1,405,1,null,1,'')"
+    set strSQL0 "INSERT INTO $TABLE_NAME (ID,ID_PROTO_POINT,ID_DEV,ID_PARENT,NAME,CVALIF,ID_TYPE,ID_GTOPT,ATTR_NAME,SCALE) \
+  VALUES ($maxID,51,1,$maxID,'TEXTRENAMETEXT',1,405,1,null,1)"
     $db2 $strSQL0
     $db2 commit
 
@@ -3437,7 +3437,7 @@ proc OBJ_TREE { rf db2 } {
 # -- DA_DEV
 #DA_DEV $rf db2
 
-# -- DA_DEV_DESC
+# -- DA_DEV_DESC - уточнить ID_PROTO_POINT = 51 (по умолчанию)
 #DA_DEV_DESC $rf db2
 
 # -- DA_CAT -- отключать ssbsd + перестроить view с новыми id
