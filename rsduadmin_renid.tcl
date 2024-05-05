@@ -268,7 +268,7 @@ proc DG_GROUPS { rf db2 } {
          $db2 commit
        }
 
-     #--DG_LIST
+       #--DG_LIST
        $db2 "UPDATE DG_LIST SET ID_NODE=$maxID WHERE ID_NODE=$id_old"
        $db2 commit
 
@@ -379,9 +379,11 @@ proc S_GROUPS { rf db2 } {
        $db2 "UPDATE S_USERS SET ID_NODE=$maxID WHERE ID_NODE=$id_old"
        $db2 commit
 
+
        set strSQL3 "UPDATE $TABLE_NAME SET ID=$j WHERE ID=$id_old"
        $db2 $strSQL3
        $db2 commit
+
 
        #--  ID_GROUP
        set TABLE_LIST [ list S_G_RGHT US_MENU US_SIG US_VARS ]
@@ -424,13 +426,13 @@ proc S_GROUPS { rf db2 } {
 
 proc S_USERS_TABLE { rf db2 ind1 ind2 mode } {
 
-  #if {$mode!=0} {
+  ##if {$mode!=0} {
     #--DB_S_USERS  S_ID
     if {[checkTable $rf $db2 "DB_S_USERS" "S_ID"]} {
       $db2 "UPDATE DB_S_USERS SET S_ID=$ind1 WHERE S_ID=$ind2"
       $db2 commit
     }
-  #}
+  ##}
 
 
   #--  ID_USER_CREATE ID_USER_MODIFY
@@ -534,7 +536,7 @@ proc S_USERS { rf db2 } {
     }
 
     set maxID [ expr int($maxID)+1 ]
-    set strSQL0 "INSERT INTO $TABLE_NAME (ID,ID_NODE,ID_TYPE,LOGIN,NAME) VALUES ($maxID,1,1,'TEXTRENAMETEXT','TEXTRENAMETEXT') "
+    set strSQL0 "INSERT INTO $TABLE_NAME (ID,ID_NODE,ID_TYPE,LOGIN,NAME) VALUES ($maxID,1,1,'TEXTX1','TEXTX1') "
     $db2 $strSQL0
     $db2 commit
 
@@ -555,7 +557,7 @@ proc S_USERS { rf db2 } {
       }
     }
 
-    $db2 "DELETE FROM $TABLE_NAME WHERE NAME LIKE '%TEXTRENAMETEXT%' "
+    $db2 "DELETE FROM $TABLE_NAME WHERE NAME LIKE '%TEXTX1%' "
     $db2 commit
 
     set strSQL3 "SELECT ${TABLE_NAME}_S.nextval FROM dual"
@@ -576,10 +578,27 @@ proc S_USERS { rf db2 } {
 }
 
 
-# -- S_USERS
-proc S_USERS_LITE { rf db2 } {
+# -- S_USERS=DB_S_USERS
+proc S_USERS__DB_S_USERS { rf db2 } {
+
+  # -- переводим id в последовательность 1....n
+  S_USERS $rf $db2
+
+  return ;
+  --------------------------------------------------------
 
   set TABLE_LIST [ list S_USERS ]
+
+  foreach TABLE_NAME $TABLE_LIST {
+
+    set maxID 0 ; set minID 0 ; set cntID 0 ;
+    foreach {r1} [ $db2 "SELECT max(ID), min(ID), count(*) FROM $TABLE_NAME" ] {
+      set maxID [ lindex $r1 0 ]
+      set minID [ lindex $r1 1 ]
+      set cntID [ lindex $r1 2 ]
+      set s1 "\n$TABLE_NAME = max=$maxID min=$minID cnt=$cntID \n"
+      puts $s1
+    }
 
   foreach TABLE_NAME $TABLE_LIST {
 
@@ -594,22 +613,46 @@ proc S_USERS_LITE { rf db2 } {
       puts $s1
     }
 
-    set maxID [ expr int($maxID)+1 ]
-    set strSQL0 "INSERT INTO $TABLE_NAME (ID,ID_NODE,ID_TYPE,LOGIN,NAME) VALUES ($maxID,1,1,'TEXTRENAMETEXT','TEXTRENAMETEXT') "
-    $db2 $strSQL0
-    $db2 commit
-
-    set strSQL_DB_S_USERS_1 "SELECT max(DB_ID) FROM DB_S_USERS"
-    set DB_S_USERS_maxID 0 ;
-    foreach {r1} [ $db2 $strSQL_DB_S_USERS_1 ] {
-      set DB_S_USERS_maxID [ lindex $r1 0 ]
-      set s1 "\nDB_S_USERS = max=$DB_S_USERS_maxID \n"
-      puts $s1
-    }
-    set DB_S_USERS_maxID [ expr int($DB_S_USERS_maxID)+1 ]
 
     set strSQL_DB_S_USERS "SELECT S_ID,DB_ID FROM DB_S_USERS ORDER BY S_ID ASC"
     set listDB_S_USERS [ $db2 $strSQL_DB_S_USERS ]
+
+
+    set maxID [ expr int($maxID)+1 ]
+    set strSQL0 "INSERT INTO $TABLE_NAME (ID,ID_NODE,ID_TYPE,LOGIN,NAME) VALUES ($maxID,1,1,'TEXTX1','TEXTX1') "
+    $db2 $strSQL0
+    $db2 commit
+
+    set strSQL2 "SELECT ID FROM $TABLE_NAME ORDER BY ID ASC"
+    set r1 [ $db2 $strSQL2 ]
+    for {set i 0} {$i < $cntID} {incr i} {
+      set j [ expr $i+1 ]
+      set id_old [lindex $r1 $i ]
+      if {$id_old!=$j} {
+        LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
+        S_USERS_TABLE $rf $db2 $maxID $id_old 1
+        if {[checkTable $rf $db2 $TABLE_NAME "ID" ]} {
+          set strSQL3 "UPDATE $TABLE_NAME SET ID=$j WHERE ID=$id_old"
+          $db2 $strSQL3
+          $db2 commit
+        }
+        S_USERS_TABLE $rf $db2 $j $maxID 1
+      }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     set strSQL2 "SELECT ID FROM $TABLE_NAME ORDER BY ID ASC"
     set r1 [ $db2 $strSQL2 ]
@@ -650,7 +693,7 @@ proc S_USERS_LITE { rf db2 } {
 
     }
 
-    $db2 "DELETE FROM $TABLE_NAME WHERE NAME LIKE '%TEXTRENAMETEXT%' "
+    $db2 "DELETE FROM $TABLE_NAME WHERE NAME LIKE '%TEXTX1%' "
     $db2 commit
 
     set strSQL3 "SELECT ${TABLE_NAME}_S.nextval FROM dual"
@@ -664,6 +707,7 @@ proc S_USERS_LITE { rf db2 } {
      $db2 $strSQL3
      $db2 "alter sequence ${TABLE_NAME}_S increment by 1"
     }
+
 
   }
 
@@ -3172,9 +3216,9 @@ proc CCC0 { rf db2 ind1 ind2 } {
     #--  ID_OBJ
     set TABLE_LIST [ list AST_LINK DG_GROUPS_DESC EA_POINTS  \
       FEED_PROP \
-    NTP_EDGE MEAS_LIST \
-    OBJ_AUX_EL_PIN OBJ_LIMIT_SET OBJ_NAMES OBJ_PARAM OBJ_PQCURVES \
-    OBJ_GENERATOR_PQ \
+      NTP_EDGE MEAS_LIST \
+      OBJ_AUX_EL_PIN OBJ_LIMIT_SET OBJ_NAMES OBJ_PARAM OBJ_PQCURVES \
+      OBJ_GENERATOR_PQ \
       OBJ_CNT OBJ_EL_PIN OBJ_EQUALIFIER OBJ_LOCATION OBJ_PARAM OBJ_CONN_NODE OBJ_GEO ]
     foreach T_NAME $TABLE_LIST {
       if {[checkTable $rf $db2 $T_NAME "ID_OBJ"]} {
@@ -3335,8 +3379,8 @@ proc OBJ_TREE { rf db2 } {
 # --
 # -- S_USERS -- необ гасить все модули и запускать после S_GROUPS
 # ##S_USERS $rf db2
-# -- S_USERS LITE -- необ гасить все модули и запускать после S_GROUPS - ID= КАК db_USERS
-# ##S_USERS_LITE $rf db2
+# -- S_USERS=DB_S_USERS -- необ гасить все модули и запускать после S_GROUPS - ID= КАК db_USERS
+# ##S_USERS__DB_S_USERS $rf db2
 # -- ПОСЛЕ корректировка /etc/ema/host.ini  USER_ID  + ID SSBSD
 
 
