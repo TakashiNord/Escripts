@@ -83,6 +83,22 @@ proc BASE1 { rf db2 } {
  SIG_PROP \
  US_ZONE US_VARS US_SIGN_PROP US_SIGN_GROUP US_SIG US_MSGLOG ]
 
+  set TABLE_LIST_3 [ list AD_ACSRVC AD_SINFO_INI AD_JRNL \
+ RSDU_UPDATE RSDU_ERROR \
+ DA_SLAVE DA_MASTER DA_DEV_OPT DA_PC DA_PORT \
+ MEAS_EL_DEPENDENT_SVAL \
+ DBE_DESTINATION \
+ DG_KDU_JOURNAL \
+ R_PSETS \
+ OBJ_GENERATOR_PQ \
+ OBJ_MODEL_MEAS OBJ_PARAM OBJ_CONSTRAINT \
+ OBJ_AUX_EL_PIN OBJ_LINK OBJ_LOCATION OBJ_MODEL_PARAM OBJ_PARAM \
+ SYS_APP_SERV_LST SYS_APP_SERVICES SYS_APP_SSYST SYS_APP_INI \
+ SYS_TBLREF SYS_TBLLNK \
+ S_U_RGHT S_G_RGHT S_RIGHTS \
+ SIG_PROP \
+ US_ZONE US_VARS US_SIGN_PROP US_SIGN_GROUP US_SIG US_MSGLOG ]
+
   #set TABLE_LIST [ list OBJ_MODEL_MEAS OBJ_PARAM ]
 
   foreach TABLE_NAME $TABLE_LIST {
@@ -587,130 +603,6 @@ proc S_USERS__DB_S_USERS { rf db2 } {
   return ;
   --------------------------------------------------------
 
-  set TABLE_LIST [ list S_USERS ]
-
-  foreach TABLE_NAME $TABLE_LIST {
-
-    set maxID 0 ; set minID 0 ; set cntID 0 ;
-    foreach {r1} [ $db2 "SELECT max(ID), min(ID), count(*) FROM $TABLE_NAME" ] {
-      set maxID [ lindex $r1 0 ]
-      set minID [ lindex $r1 1 ]
-      set cntID [ lindex $r1 2 ]
-      set s1 "\n$TABLE_NAME = max=$maxID min=$minID cnt=$cntID \n"
-      puts $s1
-    }
-
-  foreach TABLE_NAME $TABLE_LIST {
-
-    set strSQL1 "SELECT max(ID), min(ID), count(*) FROM $TABLE_NAME"
-
-    set maxID 0 ; set minID 0 ; set cntID 0 ;
-    foreach {r1} [ $db2 $strSQL1 ] {
-      set maxID [ lindex $r1 0 ]
-      set minID [ lindex $r1 1 ]
-      set cntID [ lindex $r1 2 ]
-      set s1 "\n$TABLE_NAME = max=$maxID min=$minID cnt=$cntID \n"
-      puts $s1
-    }
-
-
-    set strSQL_DB_S_USERS "SELECT S_ID,DB_ID FROM DB_S_USERS ORDER BY S_ID ASC"
-    set listDB_S_USERS [ $db2 $strSQL_DB_S_USERS ]
-
-
-    set maxID [ expr int($maxID)+1 ]
-    set strSQL0 "INSERT INTO $TABLE_NAME (ID,ID_NODE,ID_TYPE,LOGIN,NAME) VALUES ($maxID,1,1,'TEXTX1','TEXTX1') "
-    $db2 $strSQL0
-    $db2 commit
-
-    set strSQL2 "SELECT ID FROM $TABLE_NAME ORDER BY ID ASC"
-    set r1 [ $db2 $strSQL2 ]
-    for {set i 0} {$i < $cntID} {incr i} {
-      set j [ expr $i+1 ]
-      set id_old [lindex $r1 $i ]
-      if {$id_old!=$j} {
-        LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
-        S_USERS_TABLE $rf $db2 $maxID $id_old 1
-        if {[checkTable $rf $db2 $TABLE_NAME "ID" ]} {
-          set strSQL3 "UPDATE $TABLE_NAME SET ID=$j WHERE ID=$id_old"
-          $db2 $strSQL3
-          $db2 commit
-        }
-        S_USERS_TABLE $rf $db2 $j $maxID 1
-      }
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    set strSQL2 "SELECT ID FROM $TABLE_NAME ORDER BY ID ASC"
-    set r1 [ $db2 $strSQL2 ]
-    for {set i 0} {$i < $cntID} {incr i} {
-      set j [ expr $i+1 ]
-      set id_old [lindex $r1 $i ]
-
-      if {$id_old==1} { continue ; }
-
-      set DB_ID -1 ;
-
-      foreach recDB_ID $listDB_S_USERS {
-        set S_ID [lindex $recDB_ID 0 ]
-        if {$S_ID==$id_old} {
-          set DB_ID [lindex $recDB_ID 1 ]
-          break ;
-        }
-      }
-
-      if {$DB_ID<=0} {
-        #continue ;
-        set DB_S_USERS_maxID [ expr $DB_S_USERS_maxID+1 ]
-        set j $DB_S_USERS_maxID
-      } else {
-        set j $DB_ID
-      }
-
-      if {$id_old!=$j} {
-        LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
-        S_USERS_TABLE $rf $db2 $maxID $id_old 0
-        if {[checkTable $rf $db2 $TABLE_NAME "ID" ]} {
-          set strSQL3 "UPDATE $TABLE_NAME SET ID=$j WHERE ID=$id_old"
-          $db2 $strSQL3
-          $db2 commit
-        }
-        S_USERS_TABLE $rf $db2 $j $maxID 0
-      }
-
-    }
-
-    $db2 "DELETE FROM $TABLE_NAME WHERE NAME LIKE '%TEXTX1%' "
-    $db2 commit
-
-    set strSQL3 "SELECT ${TABLE_NAME}_S.nextval FROM dual"
-    set r3 [ $db2 $strSQL3 ]
-    set l3 [ llength $r3 ]
-    if {$l3>0} {
-     set increment_old [lindex $r3 0 ]
-     set increment_old [ expr (1-int($increment_old)) ]
-     set str2 [ format "alter sequence %s_S increment by %d" $TABLE_NAME $increment_old ]
-     $db2 $str2
-     $db2 $strSQL3
-     $db2 "alter sequence ${TABLE_NAME}_S increment by 1"
-    }
-
-
-  }
-
  return 0 ;
 }
 
@@ -1094,7 +986,7 @@ proc AD_DTYP { rf db2 } {
        LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
 
        #--AD_DIR
-       $db2 "UPDATE AD_PINFO SET ID_TYPE=$maxID WHERE ID_TYPE=$id_old"
+       $db2 "UPDATE AD_DIR SET ID_TYPE=$maxID WHERE ID_TYPE=$id_old"
        $db2 commit
 
 
@@ -1104,7 +996,7 @@ proc AD_DTYP { rf db2 } {
 
 
        #--AD_DIR
-       $db2 "UPDATE AD_PINFO SET ID_TYPE=$j WHERE ID_TYPE=$maxID"
+       $db2 "UPDATE AD_DIR SET ID_TYPE=$j WHERE ID_TYPE=$maxID"
        $db2 commit
 
       }
@@ -3386,14 +3278,14 @@ proc OBJ_TREE { rf db2 } {
 
 # -- AD_DIR
 #AD_DIR $rf db2
-# -- AD_DTYP
-#AD_DTYP $rf db2
+# -- AD_DTYP ------!!!!--ID_TYPE !!!! не запускать.!!!!!
+# !!!!!####AD_DTYP $rf db2!!!!
 # -- AD_LIST
 #AD_LIST $rf db2
 
 
-# -- AST_ORG
-#AST_ORG  $rf db2
+# -- AST_ORG -------!!!!
+# # ## AST_ORG  $rf db2
 
 # -- AST_CNT
 #AST_CNT  $rf db2
