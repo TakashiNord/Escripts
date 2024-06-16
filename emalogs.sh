@@ -810,7 +810,7 @@ EMA_main ( )
   EMA_logs_cass "$d"
   #EMA_logs_mysql "$d"
 
-  chmod -R 666 "$d"
+  chmod -R 667 "$d"
   #chmod --silent -R a+rwx,u-x,g-x,o-x "$d"
   #chown -R root.users "$d"
 
