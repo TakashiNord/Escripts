@@ -815,6 +815,97 @@ proc SYS_APD { rf db2 } {
 }
 
 
+# -- SYS_APPL
+proc SYS_APPL { rf db2 } {
+
+  set TABLE_LIST [ list SYS_APPL ]
+
+  foreach TABLE_NAME $TABLE_LIST {
+
+    set strSQL1 "SELECT max(ID), min(ID), count(*) FROM $TABLE_NAME"
+
+    set maxID 0 ; set minID 0 ; set cntID 0 ;
+    foreach {r1} [ $db2 $strSQL1 ] {
+      set maxID [ lindex $r1 0 ]
+      set minID [ lindex $r1 1 ]
+      set cntID [ lindex $r1 2 ]
+      set s1 "\n$TABLE_NAME = max=$maxID min=$minID cnt=$cntID \n"
+      puts $s1
+    }
+
+    set maxID [ expr int($maxID)+1 ]
+    set strSQL0 "INSERT INTO $TABLE_NAME (ID,ID_NODE,NAME,ALIAS,ID_TYPE) VALUES ($maxID,NULL,'TEXTRENAMETEXT','',1) "
+    $db2 $strSQL0
+    $db2 commit
+
+
+    set strSQL2 "SELECT ID FROM $TABLE_NAME ORDER BY ID ASC"
+    set r1 [ $db2 $strSQL2 ]
+    set shift 1500
+    for {set i 0} {$i < $cntID} {incr i} {
+      set j [ expr $i+1 ]
+      set id_old [lindex $r1 $i ]
+      if {$id_old<$shift} { continue ; }
+      set j_shift [ expr ($j+$shift) ]
+      if {$id_old!=$j_shift} {
+
+       LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j_shift ( maxID=$maxID )"
+
+       #--  ID_APPL
+       set TABLE_LIST2 [ list AD_DTYP AD_SINFO \
+        AST_CTYP AST_DTYP AST_TTYP \
+        DA_TYPE RSDU_SUBSYST S_TGRPS \
+        SYS_APP_INI SYS_APP_PARAMS SYS_APP_SERVICES SYS_APP_SERV_LST SYS_APP_SSYST SYS_APP_TYPE SYS_DB_DTYP SYS_SRTT \
+        US_APPL_CONFIG  US_ENV US_MENU US_VAR_DESC WPORTAL_MENU ]
+
+       foreach TABLE_NAME2 $TABLE_LIST2 {
+         #--  ID_APPL
+         if {[checkTable $rf $db2 $TABLE_NAME2 "ID_APPL"]} {
+           $db2 "UPDATE $TABLE_NAME2 SET ID_APPL=$maxID WHERE ID_APPL=$id_old"
+           $db2 commit
+         }
+       }
+
+
+       set strSQL3 "UPDATE $TABLE_NAME SET ID=$j_shift WHERE ID=$id_old"
+       $db2 $strSQL3
+       $db2 commit
+
+
+       foreach TABLE_NAME2 $TABLE_LIST2 {
+         #--  ID_APPL
+         if {[checkTable $rf $db2 $TABLE_NAME2 "ID_APPL"]} {
+           $db2 "UPDATE $TABLE_NAME2 SET ID_APPL=$j_shift WHERE ID_APPL=$maxID"
+           $db2 commit
+         }
+       }
+
+
+      }
+    }
+
+    $db2 "DELETE FROM $TABLE_NAME WHERE NAME LIKE '%TEXTRENAMETEXT%' "
+    $db2 commit
+
+    set strSQL3 "SELECT ${TABLE_NAME}_S.nextval FROM dual"
+    set r3 [ $db2 $strSQL3 ]
+    set l3 [ llength $r3 ]
+    if {$l3>0} {
+     set increment_old [lindex $r3 0 ]
+     set increment_old [ expr (1-int($increment_old)) ]
+     set str2 [ format "alter sequence %s_S increment by %d" $TABLE_NAME $increment_old ]
+     $db2 $str2
+     $db2 $strSQL3
+     $db2 "alter sequence ${TABLE_NAME}_S increment by 1"
+    }
+
+  }
+
+ return 0 ;
+}
+
+
+
 # ==============================================================================================================
 
 
@@ -2936,6 +3027,7 @@ proc DA_DEV_DESC { rf db2 } {
     for {set i 0} {$i < $cntID} {incr i} {
       set j [ expr $i+1 ]
       set id_old [lindex $r1 $i ]
+    ##if {$id_old<=1000} { continue ; }
       if {$id_old!=$j} {
 
         LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
@@ -3278,7 +3370,7 @@ proc OBJ_TREE { rf db2 } {
 
 # -- AD_DIR
 #AD_DIR $rf db2
-# -- AD_DTYP ------!!!!--ID_TYPE !!!! не запускать.!!!!!
+# -- AD_DTYP ------!!!!--ID_TYPE !!!! не запускать.!!!!! sysmon\ssbsd сильно зависят
 # !!!!!####AD_DTYP $rf db2!!!!
 # -- AD_LIST
 #AD_LIST $rf db2
@@ -3299,8 +3391,9 @@ proc OBJ_TREE { rf db2 } {
 
 # -- SYS_APD
 #SYS_APD  $rf db2
-# -- не запускать
-# ###SYS_APPL
+# -- !!!!!
+# ###
+#SYS_APPL $rf db2
 #
 
 # -- RPT_DIR
