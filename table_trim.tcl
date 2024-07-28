@@ -8,43 +8,34 @@ global tns usr pwd
   set pwd "passme" ; # passme  qwertyqaz
 
 #=============================================
-proc TableTrim { db2 tbl colname toBD } {
+proc TableTrim { db2 tbl colid colname toBD } {
 #=============================================
+
+  set str1 "select $colid , $colname from $tbl ;"
+
   set count  0
-
-  set str1 "select $colname from $tbl order by $colname"
-
   foreach {x} [ $db2 $str1 ] {
-    set idName1  [ lindex $x 0 ]
+    set id       [ lindex $x 0 ]
+    set idName1  [ lindex $x 1 ]
+
     set idName2  [ string trim $idName1 ]
-  
     set fl 0
-    set s0 "update $tbl set "
-    set s1 ""
-    set s2 ""
-    set s3 ""
 
     set l1 [ string length $idName1  ]
     set l2 [ string length $idName2  ]
     if {$l1!=$l2} {
-      puts "---- =${idName1}=${idName2}="
-      set s1 [ format "%s='%s' " $colname $idName2 ]
+      puts "---- ${id}=${idName1}=${idName2}="
       incr fl;
-    }
+      set si [ format "update $tbl set $colname = $idName2 where $colid = %s" $id ]
 
-    if {$fl>0} {
-      set si [ format " where id=%s" $id ]
-      set sl1 [ string length $s1  ]
-      set sl2 [ string length $s2  ]
-      if {$sl1>0 && $sl2>0} { set s3 " , " }
-      set s "${s0}${s1}${s3}${s2}${si}"
       if {$toBD==1} {
-        puts $s
-        db $s
+        puts $si
+        $db2 $si
       } else {
-        puts "--${s}"
+        puts "--${si}"
       }
       incr count;
+
     }
 
     #puts ${x}
@@ -68,12 +59,12 @@ proc main { } {
   database db $tns $usr $pwd
 #db set autocommit off
 
-  TableTrim db "obj_tree" "name" 0
-  TableTrim db "meas_list" "name" 0
-  TableTrim db "da_dev_desc" "name" 0
-  TableTrim db "da_param" "name" 0
-  #TableTrim db "RPT_LST" "name" 0
-  #TableTrim db "sys_otyp" "name" 0
+  TableTrim db "obj_tree" "id" "name" 1
+  TableTrim db "meas_list" "id" "name" 1
+  TableTrim db "da_dev_desc" "id" "name" 1
+  TableTrim db "da_param" "id" "name" 1
+  TableTrim db "RPT_LST" "id" "name" 1
+  TableTrim db "sys_otyp" "id" "name" 1
 
 # Закрываем соединение к БД
   db commit
