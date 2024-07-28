@@ -26,7 +26,7 @@ proc TableTrim { db2 tbl colid colname toBD } {
     if {$l1!=$l2} {
       puts "---- ${id}=${idName1}=${idName2}="
       incr fl;
-      set si [ format "update $tbl set $colname = $idName2 where $colid = %s" $id ]
+      set si "update $tbl set $colname = '${idName2}' where $colid = $id ;"
 
       if {$toBD==1} {
         puts $si
@@ -60,11 +60,15 @@ proc main { } {
 #db set autocommit off
 
   TableTrim db "obj_tree" "id" "name" 1
+  TableTrim db "obj_tree" "id" "alias" 1
   TableTrim db "meas_list" "id" "name" 1
+  TableTrim db "meas_list" "id" "alias" 1
   TableTrim db "da_dev_desc" "id" "name" 1
+  TableTrim db "da_dev_desc" "id" "alias" 1
   TableTrim db "da_param" "id" "name" 1
+  TableTrim db "da_param" "id" "alias" 1
   TableTrim db "RPT_LST" "id" "name" 1
-  TableTrim db "sys_otyp" "id" "name" 1
+
 
 # Закрываем соединение к БД
   db commit
