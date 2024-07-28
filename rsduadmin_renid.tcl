@@ -11,7 +11,7 @@
 package require tclodbc
 package require sqlite3
 
-set tns "poli24" ; #"rsdu2"  "RSDU_ATEC"
+set tns "rsdu2" ; #"rsdu2"  "RSDU_ATEC" "Postrsdu5" "poli24"
 set usr "rsduadmin" ; #  admin  nov_ema
 set pwd "passme" ; # passme  qwertyqaz
 
@@ -1329,8 +1329,8 @@ proc AST_ORG { rf db2 } {
        $db2 "UPDATE AST_ORG SET ID_PARENT=$j WHERE ID_PARENT=$maxID"
        $db2 commit
 
-	   
-	   
+
+
        #--AST_PERSONNEL
        $db2 "UPDATE AST_PERSONNEL SET ID_NODE=$j WHERE ID_NODE=$maxID"
        $db2 commit
@@ -1432,9 +1432,9 @@ proc AST_CNT { rf db2 } {
        #--AST_CNT
        $db2 "UPDATE AST_CNT SET ID_PARENT=$j WHERE ID_PARENT=$maxID"
        $db2 commit
-	   
-	   
-	   
+
+
+
        #--AST_LINK
        $db2 "UPDATE AST_LINK SET ID_CNT=$j WHERE ID_CNT=$maxID"
        $db2 commit
@@ -3122,7 +3122,7 @@ proc DA_DEV_DESC { rf db2 } {
     for {set i 0} {$i < $cntID} {incr i} {
       set j [ expr $i+1 ]
       set id_old [lindex $r1 $i ]
-    ##if {$id_old<=1000} { continue ; }
+      ##if {$id_old<=1000} { continue ; }
       if {$id_old!=$j} {
 
         LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
@@ -3354,7 +3354,7 @@ proc CCC0 { rf db2 ind1 ind2 } {
     }
 
 
-    #--RSDUJOB.JOB_MAIN   JOB_STAMPS   JOB_SWITCH_CONDITIONS
+      #--RSDUJOB.JOB_MAIN   JOB_STAMPS   JOB_SWITCH_CONDITIONS
       if {[checkTable $rf $db2 "RSDUJOB.JOB_MAIN" "ID_OBJ"]} {
         $db2 "UPDATE RSDUJOB.JOB_MAIN SET ID_OBJ=$ind1 WHERE ID_OBJ=$ind2"
         $db2 commit
@@ -3494,7 +3494,7 @@ proc OBJ_EL_PIN { rf db2 } {
          if {[checkTable $rf $db2 $T_NAME "ID_PIN"]==0} {
            puts "\n$T_NAME or ID = not exists"
            continue
-         }      
+         }
   	     $db2 "UPDATE $T_NAME SET ID_PIN=$maxID WHERE ID_PIN=$id_old"
          $db2 commit
        }
@@ -3505,7 +3505,7 @@ proc OBJ_EL_PIN { rf db2 } {
          if {[checkTable $rf $db2 $T_NAME "ID_EL_PIN"]==0} {
            puts "\n$T_NAME or ID = not exists"
            continue
-         } 
+         }
          $db2 "UPDATE $T_NAME SET ID_EL_PIN=$maxID WHERE ID_EL_PIN=$id_old"
          $db2 commit
        }
@@ -3524,7 +3524,7 @@ proc OBJ_EL_PIN { rf db2 } {
          if {[checkTable $rf $db2 $T_NAME "ID_PIN"]==0} {
            puts "\n$T_NAME or ID = not exists"
            continue
-         } 
+         }
          $db2 "UPDATE $T_NAME SET ID_PIN=$j WHERE ID_PIN=$maxID"
          $db2 commit
        }
@@ -3535,8 +3535,8 @@ proc OBJ_EL_PIN { rf db2 } {
          if {[checkTable $rf $db2 $T_NAME "ID_EL_PIN"]==0} {
            puts "\n$T_NAME or ID = not exists"
            continue
-         }          
-		 $db2 "UPDATE $T_NAME SET ID_EL_PIN=$j WHERE ID_EL_PIN=$maxID"
+         }
+		     $db2 "UPDATE $T_NAME SET ID_EL_PIN=$j WHERE ID_EL_PIN=$maxID"
          $db2 commit
        }
 
@@ -3771,7 +3771,7 @@ proc OBJ_MODEL { rf db2 } {
 
 
 # -- AST_ORG -------!!!!
-# # ## 
+# # ##
 #AST_ORG  $rf db2
 
 # -- AST_CNT
@@ -3869,7 +3869,8 @@ proc OBJ_MODEL { rf db2 } {
 
 
 # -- OBJ_TREE -- отключать ssbsd + контроль Сигнальной системы  -- !необходимо! гасить модули elregd, phregd, ?ssbsd?
-# ##### OBJ_TREE $rf db2
+# #####
+#OBJ_TREE $rf db2
 #
 # -- OBJ_EL_PIN
 #OBJ_EL_PIN $rf db2
