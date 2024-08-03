@@ -6,7 +6,7 @@ package require tclodbc
   global db
   global rf
 
-  set tns "rsdu2" ; #
+  set tns "poli24" ; #"rsdu2"  "RSDU_ATEC" "Postrsdu5" "poli24"
   set usr "rsduadmin" ; #  admin  nov_ema
   set pwd "passme" ; # passme  qwertyqaz
 
@@ -87,7 +87,7 @@ proc pq_1 { } {
       set s2 " ( $ID , $ID_OBJ , $PERCENT_PU , $P , $Q_MIN_BASE , $Q_MAX_BASE , $Q_MIN_ACT , $Q_MAX_ACT ) ; "
       set s3 "${s1}${s2}"
       #puts $s3
-      LogWrite "\n$s3"
+      LogWrite "$s3"
     }
     LogWrite "\n--"
     incr cntOBJ ;
@@ -103,18 +103,18 @@ proc pq_1 { } {
       set s1 "INSERT OBJ_CURVE_DATA (ID_CURVE,PERCENT_PU,XVALUE,Y1VALUE,Y2VALUE ) VALUES "
       set s2 " ( $cntOBJ , $PERCENT_PU , $P , $Q_MIN_BASE , $Q_MAX_BASE ) ; "
       set s3 "${s1}${s2}"
-      LogWrite "\n$s3"
+      LogWrite "$s3"
     }
     LogWrite "\n\n -- -- OBJ_PQCURVES"
     set s1 "INSERT OBJ_PQCURVES (ID_OBJ,ID_PQCURVE,IS_DEFAULT ) VALUES "
     set s2 " ( $ID_OBJx , $cntOBJ , 1 ) ; "
     set s3 "${s1}${s2}"
-    LogWrite "\n$s3"
+    LogWrite "$s3"
     LogWrite "\n\n -- -- OBJ_CURVES"
     set s1 "INSERT OBJ_CURVES (ID,GUID,NAME,CURVE_STYLE_VAL ) VALUES "
     set s2 " ( $cntOBJ , '261DFF3C61B443238012298A50A87945' , 'PQ-הטאדנאללא ֳׂ-' , 2) ; "
     set s3 "${s1}${s2}"
-    LogWrite "\n$s3"
+    LogWrite "$s3"
   }
 
   return 0 ;
@@ -152,14 +152,14 @@ proc pq_2 { } {
   set str1 "SELECT ID,GUID,NAME,CURVE_STYLE_VAL FROM OBJ_CURVES"
   foreach {x} [ db $str1 ] {
     set ID               [ lindex $x 0 ]
-    set GUID             [ lindex $x 1 ]
+    set GUID          [format "%s" [ lindex $x 1 ] ]
     set NAME             [ lindex $x 2 ]
     set CURVE_STYLE_VAL  [ lindex $x 3 ]
     set s1 "INSERT OBJ_CURVES (ID,GUID,NAME,CURVE_STYLE_VAL) VALUES "
     set s2 " ( $ID , '$GUID' , '$NAME' , $CURVE_STYLE_VAL ) ; "
     set s3 "${s1}${s2}"
     #puts $s3
-    LogWrite "\n$s3"
+    LogWrite "$s3"
   }
 
   set str1 "SELECT ID_OBJ,ID_PQCURVE,IS_DEFAULT FROM OBJ_PQCURVES"
@@ -171,7 +171,7 @@ proc pq_2 { } {
     set s2 " ( $ID_OBJ , $ID_PQCURVE , $IS_DEFAULT ) ; "
     set s3 "${s1}${s2}"
     #puts $s3
-    LogWrite "\n$s3"
+    LogWrite "$s3"
   }
 
   set cnt 0
@@ -190,7 +190,7 @@ proc pq_2 { } {
       set s2 " ( $ID_CURVE , $PERCENT_PU , $XVALUE , $Y1VALUE , $Y2VALUE ) ; "
       set s3 "${s1}${s2}"
       #puts $s3
-      LogWrite "\n$s3"
+      LogWrite "$s3"
     }
     LogWrite "\n--"
     foreach {x} [ db $str2 ] {
@@ -203,7 +203,7 @@ proc pq_2 { } {
       set s1 "INSERT OBJ_GENERATOR_PQ (ID,ID_OBJ,PERCENT_PU,P,Q_MIN_BASE,Q_MAX_BASE,Q_MIN_ACT,Q_MAX_ACT ) VALUES "
       set s2 " ( $cnt , $ID_CURVE , $PERCENT_PU , $XVALUE , $Y1VALUE , $Y2VALUE , $Y1VALUE , $Y2VALUE ) ; "
       set s3 "${s1}${s2}"
-      LogWrite "\n$s3"
+      LogWrite "$s3"
     }
   }
 
@@ -251,6 +251,9 @@ proc main { } {
   puts "\n----end = $t1\n"
 
   LogWrite "\n--END=$t1"
+  LogFlush
+  
+  close $rf
 
   return
 }
