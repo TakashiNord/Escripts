@@ -56,6 +56,7 @@ proc LogWrite  { s } {
 
 # --
 proc checkTable { rf db2 tblname col } {
+# --
   set strSQL1 "SELECT count($col) FROM $tblname"
   set df ""
   set err ""
@@ -67,6 +68,21 @@ proc checkTable { rf db2 tblname col } {
   if {$err!=""} { return 0 ; }
   return 1 ;
 }
+
+# --
+proc changeTable { rf db2 ind1 ind2 col TABLE_LIST2 } {
+# --
+  foreach T_NAME $TABLE_LIST2 {
+    if {[ checkTable $rf $db2 $T_NAME $col ]} {
+      $db2 "UPDATE $T_NAME SET $col=$ind1 WHERE $col=$ind2"
+      $db2 commit
+    }
+  }
+
+  return 0
+}
+
+
 
 
 # ==============================================================================================================
@@ -3587,19 +3603,9 @@ proc OBJ_CONN_NODE { rf db2 } {
 
        LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
 
-
        #--  ID_CONN_NODE
-       set TABLE_LIST2 [ list OBJ_EL_PIN  VS_MODUS_NODE DMS_SCHEMES_BNODES ]
-
-       foreach T_NAME $TABLE_LIST2 {
-         #--
-         if {[checkTable $rf $db2 $T_NAME "ID_CONN_NODE"]==0} {
-           puts "\n$T_NAME or ID = not exists"
-           continue
-         }
-         $db2 "UPDATE $T_NAME SET ID_CONN_NODE=$maxID WHERE ID_CONN_NODE=$id_old"
-         $db2 commit
-       }
+       set TABLE_LIST2 [ list OBJ_EL_PIN VS_MODUS_NODE DMS_SCHEMES_BNODES ]
+       changeTable $rf $db2 $maxID $id_old "ID_CONN_NODE" $TABLE_LIST2
 
        #--
        set strSQL3 "UPDATE $TABLE_NAME SET ID=$j WHERE ID=$id_old"
@@ -3607,16 +3613,7 @@ proc OBJ_CONN_NODE { rf db2 } {
        $db2 commit
 
 
-       foreach T_NAME $TABLE_LIST2 {
-         #--
-         if {[checkTable $rf $db2 $T_NAME "ID_CONN_NODE"]==0} {
-           puts "\n$T_NAME or ID = not exists"
-           continue
-         }
-         $db2 "UPDATE $T_NAME SET ID_CONN_NODE=$j WHERE ID_CONN_NODE=$maxID"
-         $db2 commit
-       }
-
+       changeTable $rf $db2 $j $maxID "ID_CONN_NODE" $TABLE_LIST2
 
       }
     }
@@ -3676,21 +3673,14 @@ proc OBJ_MODEL { rf db2 } {
 
        #--  ID_MODEL
        set TABLE_LIST2 [ list OBJ_MODEL_MEAS  OBJ_MODEL_PARAM  OBJ_TREE ]
-
-       foreach T_NAME $TABLE_LIST2 {
-         $db2 "UPDATE $T_NAME SET ID_MODEL=$maxID WHERE ID_MODEL=$id_old"
-         $db2 commit
-       }
+       changeTable $rf $db2 $maxID $id_old "ID_MODEL" $TABLE_LIST2
 
        #--
        set strSQL3 "UPDATE $TABLE_NAME SET ID=$j WHERE ID=$id_old"
        $db2 $strSQL3
        $db2 commit
 
-       foreach T_NAME $TABLE_LIST2 {
-         $db2 "UPDATE $T_NAME SET ID_MODEL=$j WHERE ID_MODEL=$maxID"
-         $db2 commit
-       }
+       changeTable $rf $db2 $j $maxID "ID_MODEL" $TABLE_LIST2
 
 
       }
@@ -3755,12 +3745,7 @@ proc TAG_LIST { rf db2 } {
        #--  ID_TAG
        set TABLE_LIST2 [ list TAG_DOCS TAG_POSITION ]
 
-       foreach T_NAME $TABLE_LIST2 {
-       if {[checkTable $rf $db2 $T_NAME "ID_TAG"]} {
-         $db2 "UPDATE $T_NAME SET ID_TAG=$maxID WHERE ID_TAG=$id_old"
-         $db2 commit
-        }
-       }
+       changeTable $rf $db2 $maxID $id_old "ID_TAG" $TABLE_LIST2
 
 
        set strSQL3 "UPDATE $TABLE_NAME SET ID=$j WHERE ID=$id_old"
@@ -3768,12 +3753,7 @@ proc TAG_LIST { rf db2 } {
        $db2 commit
 
 
-       foreach T_NAME $TABLE_LIST2 {
-       if {[checkTable $rf $db2 $T_NAME "ID_TAG"]} {
-         $db2 "UPDATE $T_NAME SET ID_TAG=$j WHERE ID_TAG=$maxID"
-         $db2 commit
-        }
-       }
+       changeTable $rf $db2 $j $maxID "ID_TAG" $TABLE_LIST2
 
       }
     }
@@ -3849,12 +3829,7 @@ proc SYS_WAVE { rf db2 } {
  TSSO_MPOFFER TSSO_MPOFFER_GTP TSSO_MPOFFER_REQUEST \
  WRPT_CAT WRPT_TMPL_CAT ]
 
-       foreach T_NAME $TABLE_LIST2 {
-       if {[checkTable $rf $db2 $T_NAME "ID_FILEWAV"]} {
-         $db2 "UPDATE $T_NAME SET ID_FILEWAV=$maxID WHERE ID_FILEWAV=$id_old"
-         $db2 commit
-        }
-       }
+       changeTable $rf $db2 $maxID $id_old "ID_FILEWAV" $TABLE_LIST2
 
 
        set strSQL3 "UPDATE $TABLE_NAME SET ID=$j WHERE ID=$id_old"
@@ -3862,12 +3837,7 @@ proc SYS_WAVE { rf db2 } {
        $db2 commit
 
 
-       foreach T_NAME $TABLE_LIST2 {
-       if {[checkTable $rf $db2 $T_NAME "ID_FILEWAV"]} {
-         $db2 "UPDATE $T_NAME SET ID_FILEWAV=$j WHERE ID_FILEWAV=$maxID"
-         $db2 commit
-        }
-       }
+       changeTable $rf $db2 $j $maxID "ID_FILEWAV" $TABLE_LIST2
 
       }
     }
@@ -3934,13 +3904,7 @@ proc SYS_TBLLST_1 { rf db2 } {
 
        #--  ID_TAG
        set TABLE_LIST2 [ list TAG_DOCS TAG_POSITION ]
-
-       foreach T_NAME $TABLE_LIST2 {
-       if {[checkTable $rf $db2 $T_NAME "ID_TAG"]} {
-         $db2 "UPDATE $T_NAME SET ID_TAG=$maxID WHERE ID_TAG=$id_old"
-         $db2 commit
-        }
-       }
+       changeTable $rf $db2 $maxID $id_old "ID_TYPE" $TABLE_LIST2
 
 
        set strSQL3 "UPDATE $TABLE_NAME SET ID=$j WHERE ID=$id_old"
@@ -3948,12 +3912,7 @@ proc SYS_TBLLST_1 { rf db2 } {
        $db2 commit
 
 
-       foreach T_NAME $TABLE_LIST2 {
-       if {[checkTable $rf $db2 $T_NAME "ID_TAG"]} {
-         $db2 "UPDATE $T_NAME SET ID_TAG=$j WHERE ID_TAG=$maxID"
-         $db2 commit
-        }
-       }
+       changeTable $rf $db2 $j $maxID "ID_TYPE" $TABLE_LIST2
 
       }
     }
@@ -4019,21 +3978,11 @@ proc SYS_MEAS_TYPES { rf db2 } {
 
        #--  ID_TYPE
        set TABLE_LIST2 [ list CALC_LIST DG_LIST NME_PARAM_LIST ]
-       foreach T_NAME $TABLE_LIST2 {
-       if {[checkTable $rf $db2 $T_NAME "ID_TYPE"]} {
-         $db2 "UPDATE $T_NAME SET ID_TYPE=$maxID WHERE ID_TYPE=$id_old"
-         $db2 commit
-        }
-       }
+       changeTable $rf $db2 $maxID $id_old "ID_TYPE" $TABLE_LIST2
 
        #--  ID_MEAS_TYPE
        set TABLE_LIST2 [ list DMS_CALC_RESULT_MEAS DMS_EXTEQUIV_MEAS MEAS_LIST OBJ_MODEL_MEAS SYS_OTYP_MEAS ]
-       foreach T_NAME $TABLE_LIST2 {
-       if {[checkTable $rf $db2 $T_NAME "ID_MEAS_TYPE"]} {
-         $db2 "UPDATE $T_NAME SET ID_MEAS_TYPE=$maxID WHERE ID_MEAS_TYPE=$id_old"
-         $db2 commit
-        }
-       }
+       changeTable $rf $db2 $maxID $id_old "ID_MEAS_TYPE" $TABLE_LIST2
 
 
        set strSQL3 "UPDATE $TABLE_NAME SET ID=$j WHERE ID=$id_old"
@@ -4043,21 +3992,11 @@ proc SYS_MEAS_TYPES { rf db2 } {
 
        #--  ID_TYPE
        set TABLE_LIST2 [ list CALC_LIST DG_LIST NME_PARAM_LIST ]
-       foreach T_NAME $TABLE_LIST2 {
-       if {[checkTable $rf $db2 $T_NAME "ID_TYPE"]} {
-         $db2 "UPDATE $T_NAME SET ID_TYPE=$j WHERE ID_TYPE=$maxID"
-         $db2 commit
-        }
-       }
+       changeTable $rf $db2 $j $maxID "ID_TYPE" $TABLE_LIST2
 
        #--  ID_MEAS_TYPE
        set TABLE_LIST2 [ list DMS_CALC_RESULT_MEAS DMS_EXTEQUIV_MEAS MEAS_LIST OBJ_MODEL_MEAS SYS_OTYP_MEAS ]
-       foreach T_NAME $TABLE_LIST2 {
-       if {[checkTable $rf $db2 $T_NAME "ID_MEAS_TYPE"]} {
-         $db2 "UPDATE $T_NAME SET ID_MEAS_TYPE=$j WHERE ID_MEAS_TYPE=$maxID"
-         $db2 commit
-        }
-       }
+       changeTable $rf $db2 $j $maxID "ID_MEAS_TYPE" $TABLE_LIST2
 
       }
     }
@@ -4125,12 +4064,7 @@ proc SYS_PUNIT { rf db2 } {
        set TABLE_LIST2 [ list DMS_CALC_RESULT_MEAS DMS_EXTEQUIV_MEAS DMS_CALC_INIPARAMS DMS_CALC_INIPARAMS_DEFAULT \
  OBJ_MODEL_PARAM OBJ_PARAM SYS_MEAS_TYPES SYS_OTYP_PARAM SYS_PARAM_TYPES VS_FORM_PARAMTYPE ]
 
-       foreach T_NAME $TABLE_LIST2 {
-       if {[checkTable $rf $db2 $T_NAME "ID_UNIT"]} {
-         $db2 "UPDATE $T_NAME SET ID_UNIT=$maxID WHERE ID_UNIT=$id_old"
-         $db2 commit
-        }
-       }
+       changeTable $rf $db2 $maxID $id_old "ID_UNIT" $TABLE_LIST2
 
 
        set strSQL3 "UPDATE $TABLE_NAME SET ID=$j WHERE ID=$id_old"
@@ -4138,12 +4072,7 @@ proc SYS_PUNIT { rf db2 } {
        $db2 commit
 
 
-       foreach T_NAME $TABLE_LIST2 {
-       if {[checkTable $rf $db2 $T_NAME "ID_UNIT"]} {
-         $db2 "UPDATE $T_NAME SET ID_UNIT=$j WHERE ID_UNIT=$maxID"
-         $db2 commit
-        }
-       }
+       changeTable $rf $db2 $j $maxID "ID_UNIT" $TABLE_LIST2
 
       }
     }
@@ -4210,21 +4139,11 @@ proc SYS_PTYP { rf db2 } {
 
        #--  ID_PTYPE
        set TABLE_LIST2 [ list OBJ_LIMIT ]
-       foreach T_NAME $TABLE_LIST2 {
-       if {[checkTable $rf $db2 $T_NAME "ID_PTYPE"]} {
-         $db2 "UPDATE $T_NAME SET ID_PTYPE=$maxID WHERE ID_PTYPE=$id_old"
-         $db2 commit
-        }
-       }
+       changeTable $rf $db2 $maxID $id_old "ID_PTYPE" $TABLE_LIST2
 
        #--  ID_TYPE
        set TABLE_LIST2 [ list SYS_MEAS_TYPES SYS_PARAM_TYPES SYS_PUNIT ]
-       foreach T_NAME $TABLE_LIST2 {
-       if {[checkTable $rf $db2 $T_NAME "ID_TYPE"]} {
-         $db2 "UPDATE $T_NAME SET ID_TYPE=$maxID WHERE ID_TYPE=$id_old"
-         $db2 commit
-        }
-       }
+       changeTable $rf $db2 $maxID $id_old "ID_TYPE" $TABLE_LIST2
 
 
        set strSQL3 "UPDATE $TABLE_NAME SET ID=$j WHERE ID=$id_old"
@@ -4234,22 +4153,11 @@ proc SYS_PTYP { rf db2 } {
 
        #--  ID_PTYPE
        set TABLE_LIST2 [ list OBJ_LIMIT ]
-       foreach T_NAME $TABLE_LIST2 {
-       if {[checkTable $rf $db2 $T_NAME "ID_PTYPE"]} {
-         $db2 "UPDATE $T_NAME SET ID_PTYPE=$j WHERE ID_PTYPE=$maxID"
-         $db2 commit
-        }
-       }
+       changeTable $rf $db2 $j $maxID "ID_PTYPE" $TABLE_LIST2
 
        #--  ID_TYPE
        set TABLE_LIST2 [ list SYS_MEAS_TYPES SYS_PARAM_TYPES SYS_PUNIT ]
-       foreach T_NAME $TABLE_LIST2 {
-       if {[checkTable $rf $db2 $T_NAME "ID_TYPE"]} {
-         $db2 "UPDATE $T_NAME SET ID_TYPE=$j WHERE ID_TYPE=$maxID"
-         $db2 commit
-        }
-       }
-
+       changeTable $rf $db2 $j $maxID "ID_TYPE" $TABLE_LIST2
 
       }
     }
@@ -4317,12 +4225,7 @@ proc SYS_PARAM_TYPES { rf db2 } {
        #--  ID_PARAM_TYPE
        set TABLE_LIST2 [ list DMS_CALC_INIPARAMS DMS_CALC_INIPARAMS_DEFAULT OBJ_MODEL_PARAM OBJ_PARAM SYS_OTYP_PARAM VS_FORM_INIPARAMS ]
 
-       foreach T_NAME $TABLE_LIST2 {
-       if {[checkTable $rf $db2 $T_NAME "ID_PARAM_TYPE"]} {
-         $db2 "UPDATE $T_NAME SET ID_PARAM_TYPE=$maxID WHERE ID_PARAM_TYPE=$id_old"
-         $db2 commit
-        }
-       }
+       changeTable $rf $db2 $maxID $id_old "ID_PARAM_TYPE" $TABLE_LIST2
 
 
        set strSQL3 "UPDATE $TABLE_NAME SET ID=$j WHERE ID=$id_old"
@@ -4330,12 +4233,7 @@ proc SYS_PARAM_TYPES { rf db2 } {
        $db2 commit
 
 
-       foreach T_NAME $TABLE_LIST2 {
-       if {[checkTable $rf $db2 $T_NAME "ID_PARAM_TYPE"]} {
-         $db2 "UPDATE $T_NAME SET ID_PARAM_TYPE=$j WHERE ID_PARAM_TYPE=$maxID"
-         $db2 commit
-        }
-       }
+       changeTable $rf $db2 $j $maxID "ID_PARAM_TYPE" $TABLE_LIST2
 
       }
     }
@@ -4401,13 +4299,7 @@ proc SYS_DB_PART { rf db2 } {
 
        #--  ID_NODE
        set TABLE_LIST2 [ list SYS_TBLLST ]
-
-       foreach T_NAME $TABLE_LIST2 {
-       if {[checkTable $rf $db2 $T_NAME "ID_NODE"]} {
-         $db2 "UPDATE $T_NAME SET ID_NODE=$maxID WHERE ID_NODE=$id_old"
-         $db2 commit
-        }
-       }
+       changeTable $rf $db2 $maxID $id_old "ID_NODE" $TABLE_LIST2
 
 
        set strSQL3 "UPDATE $TABLE_NAME SET ID_PARENT=$maxID WHERE ID_PARENT=$id_old"
@@ -4422,13 +4314,8 @@ proc SYS_DB_PART { rf db2 } {
        $db2 $strSQL3
        $db2 commit
 
+       changeTable $rf $db2 $j $maxID "ID_NODE" $TABLE_LIST2
 
-       foreach T_NAME $TABLE_LIST2 {
-       if {[checkTable $rf $db2 $T_NAME "ID_NODE"]} {
-         $db2 "UPDATE $T_NAME SET ID_NODE=$j WHERE ID_NODE=$maxID"
-         $db2 commit
-        }
-       }
 
       }
     }
@@ -4717,7 +4604,7 @@ proc SYS_OTYP { rf db2 } {
 
 
 # -- SYS_MEAS_TYPES
-# SYS_MEAS_TYPES $rf db2
+# # SYS_MEAS_TYPES $rf db2
 
 # -- SYS_PUNIT
 # #  SYS_PUNIT $rf db2
