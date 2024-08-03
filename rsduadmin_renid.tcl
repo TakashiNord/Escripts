@@ -15,20 +15,36 @@ set tns "rsdu2" ; #"rsdu2"  "RSDU_ATEC" "Postrsdu5" "poli24"
 set usr "rsduadmin" ; #  admin  nov_ema
 set pwd "passme" ; # passme  qwertyqaz
 
-puts "-- Start --"
-
+global rf
 global db2
 
 set t1 [ clock format [ clock seconds ] -format "%Y%m%d_%H%M%S" ]
 puts "\nstart = $t1\n"
 
 # лог - файл
-  set ph [info script]
-  if {$ph==""} {
-    set ph rsduadmin_change_id_${t1}.log
-  } else {
-    set ph [file rootname $ph ]_${t1}.log
-  }
+set ph [info script]
+if {$ph==""} {
+  set ph rsduadmin_change_id_${t1}.log
+} else {
+  set ph [file rootname $ph ]_${t1}.log
+}
+
+
+set rf [ open $ph "w+"  ]
+
+# Устанавливаем соединение к БД
+database db2 $tns $usr $pwd
+db2 set autocommit off
+
+set owner "RSDUADMIN"
+
+# Устанавливаем РОЛЬ
+# по умолчанию = BASE_EXT_CONNECT_OIK CONNECT => SBOR_STAND_READ
+if {$usr!="rsduadmin"} {
+  db2 "SET ROLE SBOR_STAND_READ , BASE_STAND_READ"
+  db2 "select * from session_roles"
+}
+
 
 proc LogWrite  { s } {
   global rf
@@ -36,23 +52,6 @@ proc LogWrite  { s } {
   if {$rf==""} { return }
   puts $rf $s
 }
-
- set rf [ open $ph "w+"  ]
-
-# Устанавливаем соединение к БД
- database db2 $tns $usr $pwd
- db2 set autocommit off
-
- set owner "RSDUADMIN"
-
-# Устанавливаем РОЛЬ
-# по умолчанию = BASE_EXT_CONNECT_OIK CONNECT => SBOR_STAND_READ
-  if {$usr!="rsduadmin"} {
-    db2 "SET ROLE SBOR_STAND_READ , BASE_STAND_READ"
-    db2 "select * from session_roles"
-  }
-
-
 
 # --
 proc checkTable { db2 tblname col } {
@@ -70,7 +69,7 @@ proc checkTable { db2 tblname col } {
 }
 
 # --
-proc changeTable { rf db2 ind1 ind2 col TABLE_LIST2 } {
+proc changeTable { db2 ind1 ind2 col TABLE_LIST2 } {
 # --
   foreach T_NAME $TABLE_LIST2 {
     if {[ checkTable $db2 $T_NAME $col ]} {
@@ -114,7 +113,7 @@ proc changeSeq { db2 TABLE_NAME } {
 # ==============================================================================================================
 
 # --
-proc BASE_ID { rf db2 } {
+proc BASE_ID { db2 } {
 
   set TABLE_LIST [ list AD_ACSRVC AD_SINFO_INI AD_JRNL \
  RSDU_UPDATE RSDU_ERROR \
@@ -190,7 +189,7 @@ proc BASE_ID { rf db2 } {
 # ==============================================================================================================
 
 
-proc RSDU_UPDATE { rf db2 } {
+proc RSDU_UPDATE { db2 } {
 
   set TABLE_LIST [ list RSDU_UPDATE ]
 
@@ -239,17 +238,7 @@ proc RSDU_UPDATE { rf db2 } {
     $db2 "DELETE FROM $TABLE_NAME WHERE NAME LIKE '%TEXTRENAMETEXT%' "
     $db2 commit
 
-    set strSQL3 "SELECT ${TABLE_NAME}_S.nextval FROM dual"
-    set r3 [ $db2 $strSQL3 ]
-    set l3 [ llength $r3 ]
-    if {$l3>0} {
-     set increment_old [lindex $r3 0 ]
-     set increment_old [ expr (1-int($increment_old)) ]
-     set str2 [ format "alter sequence %s_S increment by %d" $TABLE_NAME $increment_old ]
-     $db2 $str2
-     $db2 $strSQL3
-     $db2 "alter sequence ${TABLE_NAME}_S increment by 1"
-    }
+    changeSeq $db2 $TABLE_NAME
 
   }
 
@@ -261,7 +250,7 @@ proc RSDU_UPDATE { rf db2 } {
 # ==============================================================================================================
 
 
-proc SYS_TREE21 { rf db2 } {
+proc SYS_TREE21 { db2 } {
 
   set TABLE_LIST [ list SYS_TREE21 ]
 
@@ -310,17 +299,7 @@ proc SYS_TREE21 { rf db2 } {
     $db2 "DELETE FROM $TABLE_NAME WHERE NAME LIKE '%TEXTRENAMETEXT%' "
     $db2 commit
 
-    set strSQL3 "SELECT ${TABLE_NAME}_S.nextval FROM dual"
-    set r3 [ $db2 $strSQL3 ]
-    set l3 [ llength $r3 ]
-    if {$l3>0} {
-     set increment_old [lindex $r3 0 ]
-     set increment_old [ expr (1-int($increment_old)) ]
-     set str2 [ format "alter sequence %s_S increment by %d" $TABLE_NAME $increment_old ]
-     $db2 $str2
-     $db2 $strSQL3
-     $db2 "alter sequence ${TABLE_NAME}_S increment by 1"
-    }
+    changeSeq $db2 $TABLE_NAME
 
   }
 
@@ -332,7 +311,7 @@ proc SYS_TREE21 { rf db2 } {
 # ==============================================================================================================
 
 
-proc DG_GROUPS { rf db2 } {
+proc DG_GROUPS { db2 } {
 
   set TABLE_LIST [ list DG_GROUPS ]
 
@@ -369,7 +348,7 @@ proc DG_GROUPS { rf db2 } {
 
        #--  ID_OBJECT
        set TABLE_LIST2 [ list DG_KDU_JOURNAL DG_KDU_JOURNAL_OLD ]
-       changeTable $rf $db2 $maxID $id_old "ID_OBJECT" $TABLE_LIST2
+       changeTable $db2 $maxID $id_old "ID_OBJECT" $TABLE_LIST2
 
        #--DG_LIST
        $db2 "UPDATE DG_LIST SET ID_NODE=$maxID WHERE ID_NODE=$id_old"
@@ -395,7 +374,7 @@ proc DG_GROUPS { rf db2 } {
 
        #--  ID_OBJECT
        set TABLE_LIST2 [ list DG_KDU_JOURNAL DG_KDU_JOURNAL_OLD ]
-       changeTable $rf $db2 $j $maxID "ID_OBJECT" $TABLE_LIST2
+       changeTable $db2 $j $maxID "ID_OBJECT" $TABLE_LIST2
 
        #--DG_LIST
        $db2 "UPDATE DG_LIST SET ID_NODE=$j WHERE ID_NODE=$maxID"
@@ -407,17 +386,7 @@ proc DG_GROUPS { rf db2 } {
     $db2 "DELETE FROM $TABLE_NAME WHERE NAME LIKE '%TEXTRENAMETEXT%' "
     $db2 commit
 
-    set strSQL3 "SELECT ${TABLE_NAME}_S.nextval FROM dual"
-    set r3 [ $db2 $strSQL3 ]
-    set l3 [ llength $r3 ]
-    if {$l3>0} {
-     set increment_old [lindex $r3 0 ]
-     set increment_old [ expr (1-int($increment_old)) ]
-     set str2 [ format "alter sequence %s_S increment by %d" $TABLE_NAME $increment_old ]
-     $db2 $str2
-     $db2 $strSQL3
-     $db2 "alter sequence ${TABLE_NAME}_S increment by 1"
-    }
+    changeSeq $db2 $TABLE_NAME
 
   }
 
@@ -429,7 +398,7 @@ proc DG_GROUPS { rf db2 } {
 # ==============================================================================================================
 
 # -- S_GROUPS
-proc S_GROUPS { rf db2 } {
+proc S_GROUPS { db2 } {
 
   set TABLE_LIST [ list S_GROUPS ]
 
@@ -462,7 +431,7 @@ proc S_GROUPS { rf db2 } {
 
        #--  ID_GROUP
        set TABLE_LIST2 [ list S_G_RGHT US_MENU US_SIG US_VARS ]
-       changeTable $rf $db2 $maxID $id_old "ID_GROUP" $TABLE_LIST2
+       changeTable $db2 $maxID $id_old "ID_GROUP" $TABLE_LIST2
 
        #--S_USERS
        $db2 "UPDATE S_USERS SET ID_NODE=$maxID WHERE ID_NODE=$id_old"
@@ -482,7 +451,7 @@ proc S_GROUPS { rf db2 } {
        $db2 commit
 
 
-       changeTable $rf $db2 $j $maxID "ID_GROUP" $TABLE_LIST2
+       changeTable $db2 $j $maxID "ID_GROUP" $TABLE_LIST2
 
        #--S_USERS
        $db2 "UPDATE S_USERS SET ID_NODE=$j WHERE ID_NODE=$maxID"
@@ -494,17 +463,7 @@ proc S_GROUPS { rf db2 } {
     $db2 "DELETE FROM $TABLE_NAME WHERE NAME LIKE '%TEXTRENAMETEXT%' "
     $db2 commit
 
-    set strSQL3 "SELECT ${TABLE_NAME}_S.nextval FROM dual"
-    set r3 [ $db2 $strSQL3 ]
-    set l3 [ llength $r3 ]
-    if {$l3>0} {
-     set increment_old [lindex $r3 0 ]
-     set increment_old [ expr (1-int($increment_old)) ]
-     set str2 [ format "alter sequence %s_S increment by %d" $TABLE_NAME $increment_old ]
-     $db2 $str2
-     $db2 $strSQL3
-     $db2 "alter sequence ${TABLE_NAME}_S increment by 1"
-    }
+    changeSeq $db2 $TABLE_NAME
 
   }
 
@@ -512,7 +471,7 @@ proc S_GROUPS { rf db2 } {
 }
 
 
-proc S_USERS_TABLE { rf db2 ind1 ind2 mode } {
+proc S_USERS_TABLE { db2 ind1 ind2 mode } {
 
   ##if {$mode!=0} {
     #--DB_S_USERS  S_ID
@@ -524,66 +483,37 @@ proc S_USERS_TABLE { rf db2 ind1 ind2 mode } {
 
 
   #--  ID_USER_CREATE ID_USER_MODIFY
-  set TABLE_LIST [ list DG_KDU_JOURNAL  DG_KDU_JOURNAL_OLD TAG_LIST  ]
-  foreach TABLE_NAME $TABLE_LIST {
-    #--  ID_USER_CREATE ID_USER_MODIFY
-    if {[checkTable $db2 $TABLE_NAME "ID_USER_CREATE"]} {
-      $db2 "UPDATE $TABLE_NAME SET ID_USER_CREATE=$ind1 WHERE ID_USER_CREATE=$ind2"
-      $db2 commit
-    }
-    if {[checkTable $db2 $TABLE_NAME "ID_USER_MODIFY"]} {
-      $db2 "UPDATE $TABLE_NAME SET ID_USER_MODIFY=$ind1 WHERE ID_USER_MODIFY=$ind2"
-      $db2 commit
-    }
-  }
+  set TABLE_LIST2 [ list DG_KDU_JOURNAL  DG_KDU_JOURNAL_OLD TAG_LIST  ]
+
+  changeTable $db2 $ind1 $ind2 "ID_USER_CREATE" $TABLE_LIST2
+  changeTable $db2 $ind1 $ind2 "ID_USER_MODIFY" $TABLE_LIST2
 
 
   #--  ID_USER
-  set TABLE_LIST [ list AD_SINFO  HG_NOTES \
+  set TABLE_LIST2 [ list AD_SINFO  HG_NOTES \
    J_DA_SRC_VAl J_MEAS_SRC_VAL J_USER_AUDIT  J_USTCH \
    RSDU_USERS  S_U_RGHT  RSDU_PROCS \
    SYS_DIST \
    US_APPL_CONFIG  US_ENV US_MENU US_SIG US_SIGN  US_SIGN_GROUP US_SIGN_PROP  US_VARS  US_ZONE  ]
 
-  foreach TABLE_NAME $TABLE_LIST {
-    #--  ID_USER
-    if {[checkTable $db2 $TABLE_NAME "ID_USER"]} {
-      $db2 "UPDATE $TABLE_NAME SET ID_USER=$ind1 WHERE ID_USER=$ind2"
-      $db2 commit
-    }
-  }
+  changeTable $db2 $ind1 $ind2 "ID_USER" $TABLE_LIST2
+
 
 
   #--  ID_SRCUSER  ID_CAUSE
-  set TABLE_LIST [ list J_ARC_VAL_CHANGE  J_AUSW  J_DADV  J_DAPARAMSTATE  J_DBE \
+  set TABLE_LIST2 [ list J_ARC_VAL_CHANGE  J_AUSW  J_DADV  J_DAPARAMSTATE  J_DBE \
   J_DGSTATE  J_ELSET  J_ENMAC_EVENTS  J_HWSTATE J_KVIT  J_MAILDISP  J_PHSET \
   J_PSTATE  J_PWSW ]
-  foreach TABLE_NAME $TABLE_LIST {
-    #--  ID_SRCUSER  ID_CAUSE
-    if {[checkTable $db2 $TABLE_NAME "ID_SRCUSER"]} {
-      $db2 "UPDATE $TABLE_NAME SET ID_SRCUSER=$ind1 WHERE ID_SRCUSER=$ind2"
-      $db2 commit
-    }
-    if {[checkTable $db2 $TABLE_NAME "ID_CAUSE"]} {
-      $db2 "UPDATE $TABLE_NAME SET ID_CAUSE=$ind1 WHERE ID_CAUSE=$ind2"
-      $db2 commit
-    }
-  }
+
+  changeTable $db2 $ind1 $ind2 "ID_SRCUSER" $TABLE_LIST2
+  changeTable $db2 $ind1 $ind2 "ID_CAUSE" $TABLE_LIST2
 
 
   #--US_MAIL  ID_USER ID_USER_DST
-  set TABLE_LIST [ list US_MAIL  US_MSGLOG ]
-  foreach TABLE_NAME $TABLE_LIST {
-    #--  ID_USER ID_USER_DST
-    if {[checkTable $db2 $TABLE_NAME "ID_USER"]} {
-      $db2 "UPDATE $TABLE_NAME SET ID_USER=$ind1 WHERE ID_USER=$ind2"
-      $db2 commit
-    }
-    if {[checkTable $db2 $TABLE_NAME "ID_USER_DST"]} {
-      $db2 "UPDATE $TABLE_NAME SET ID_USER_DST=$ind1 WHERE ID_USER_DST=$ind2"
-      $db2 commit
-    }
-  }
+  set TABLE_LIST2 [ list US_MAIL  US_MSGLOG ]
+
+  changeTable $db2 $ind1 $ind2 "ID_USER" $TABLE_LIST2
+  changeTable $db2 $ind1 $ind2 "ID_USER_DST" $TABLE_LIST2
 
 
   #--WSERV_UMENU  R_UID
@@ -606,7 +536,7 @@ proc S_USERS_TABLE { rf db2 ind1 ind2 mode } {
 }
 
 # -- S_USERS
-proc S_USERS { rf db2 } {
+proc S_USERS { db2 } {
 
   set TABLE_LIST [ list S_USERS ]
 
@@ -635,30 +565,20 @@ proc S_USERS { rf db2 } {
       set id_old [lindex $r1 $i ]
       if {$id_old!=$j} {
         LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
-        S_USERS_TABLE $rf $db2 $maxID $id_old 1
+        S_USERS_TABLE $db2 $maxID $id_old 1
         if {[checkTable $db2 $TABLE_NAME "ID" ]} {
           set strSQL3 "UPDATE $TABLE_NAME SET ID=$j WHERE ID=$id_old"
           $db2 $strSQL3
           $db2 commit
         }
-        S_USERS_TABLE $rf $db2 $j $maxID 1
+        S_USERS_TABLE $db2 $j $maxID 1
       }
     }
 
     $db2 "DELETE FROM $TABLE_NAME WHERE NAME LIKE '%TEXTX1%' "
     $db2 commit
 
-    set strSQL3 "SELECT ${TABLE_NAME}_S.nextval FROM dual"
-    set r3 [ $db2 $strSQL3 ]
-    set l3 [ llength $r3 ]
-    if {$l3>0} {
-     set increment_old [lindex $r3 0 ]
-     set increment_old [ expr (1-int($increment_old)) ]
-     set str2 [ format "alter sequence %s_S increment by %d" $TABLE_NAME $increment_old ]
-     $db2 $str2
-     $db2 $strSQL3
-     $db2 "alter sequence ${TABLE_NAME}_S increment by 1"
-    }
+    changeSeq $db2 $TABLE_NAME
 
   }
 
@@ -667,10 +587,10 @@ proc S_USERS { rf db2 } {
 
 
 # -- S_USERS=DB_S_USERS
-proc S_USERS__DB_S_USERS { rf db2 } {
+proc S_USERS__DB_S_USERS { db2 } {
 
   # -- переводим id в последовательность 1....n
-  S_USERS $rf $db2
+  S_USERS $db2
 
   return ;
   --------------------------------------------------------
@@ -682,7 +602,7 @@ proc S_USERS__DB_S_USERS { rf db2 } {
 # ==============================================================================================================
 
 # -- US_BUTTON_DESC
-proc US_BUTTON_DESC { rf db2 } {
+proc US_BUTTON_DESC { db2 } {
 
   set TABLE_LIST [ list US_BUTTON_DESC ]
 
@@ -738,7 +658,7 @@ proc US_BUTTON_DESC { rf db2 } {
 }
 
 # -- US_MENU
-proc US_MENU { rf db2 } {
+proc US_MENU { db2 } {
 
   set TABLE_LIST [ list US_MENU ]
 
@@ -792,17 +712,7 @@ proc US_MENU { rf db2 } {
     $db2 "DELETE FROM $TABLE_NAME WHERE NAME LIKE '%TEXTRENAMETEXT%' "
     $db2 commit
 
-    set strSQL3 "SELECT ${TABLE_NAME}_S.nextval FROM dual"
-    set r3 [ $db2 $strSQL3 ]
-    set l3 [ llength $r3 ]
-    if {$l3>0} {
-     set increment_old [lindex $r3 0 ]
-     set increment_old [ expr (1-int($increment_old)) ]
-     set str2 [ format "alter sequence %s_S increment by %d" $TABLE_NAME $increment_old ]
-     $db2 $str2
-     $db2 $strSQL3
-     $db2 "alter sequence ${TABLE_NAME}_S increment by 1"
-    }
+    changeSeq $db2 $TABLE_NAME
 
   }
 
@@ -814,7 +724,7 @@ proc US_MENU { rf db2 } {
 
 
 # -- SYS_APD
-proc SYS_APD { rf db2 } {
+proc SYS_APD { db2 } {
 
   set TABLE_LIST [ list SYS_APD ]
 
@@ -869,17 +779,7 @@ proc SYS_APD { rf db2 } {
     $db2 "DELETE FROM $TABLE_NAME WHERE NAME LIKE '%TEXTRENAMETEXT%' "
     $db2 commit
 
-    set strSQL3 "SELECT ${TABLE_NAME}_S.nextval FROM dual"
-    set r3 [ $db2 $strSQL3 ]
-    set l3 [ llength $r3 ]
-    if {$l3>0} {
-     set increment_old [lindex $r3 0 ]
-     set increment_old [ expr (1-int($increment_old)) ]
-     set str2 [ format "alter sequence %s_S increment by %d" $TABLE_NAME $increment_old ]
-     $db2 $str2
-     $db2 $strSQL3
-     $db2 "alter sequence ${TABLE_NAME}_S increment by 1"
-    }
+    changeSeq $db2 $TABLE_NAME
 
   }
 
@@ -888,7 +788,7 @@ proc SYS_APD { rf db2 } {
 
 
 # -- SYS_APPL
-proc SYS_APPL { rf db2 } {
+proc SYS_APPL { db2 } {
 
   set TABLE_LIST [ list SYS_APPL ]
 
@@ -930,7 +830,7 @@ proc SYS_APPL { rf db2 } {
          SYS_APP_INI SYS_APP_PARAMS SYS_APP_SERVICES SYS_APP_SERV_LST SYS_APP_SSYST SYS_APP_TYPE SYS_DB_DTYP SYS_SRTT \
          US_APPL_CONFIG  US_ENV US_MENU US_VAR_DESC WPORTAL_MENU ]
 
-       changeTable $rf $db2 $maxID $id_old "ID_APPL" $TABLE_LIST2
+       changeTable $db2 $maxID $id_old "ID_APPL" $TABLE_LIST2
 
 
        set strSQL3 "UPDATE $TABLE_NAME SET ID=$j_shift WHERE ID=$id_old"
@@ -938,7 +838,7 @@ proc SYS_APPL { rf db2 } {
        $db2 commit
 
 
-       changeTable $rf $db2 $j $maxID "ID_APPL" $TABLE_LIST2
+       changeTable $db2 $j $maxID "ID_APPL" $TABLE_LIST2
 
 
       }
@@ -947,17 +847,7 @@ proc SYS_APPL { rf db2 } {
     $db2 "DELETE FROM $TABLE_NAME WHERE NAME LIKE '%TEXTRENAMETEXT%' "
     $db2 commit
 
-    set strSQL3 "SELECT ${TABLE_NAME}_S.nextval FROM dual"
-    set r3 [ $db2 $strSQL3 ]
-    set l3 [ llength $r3 ]
-    if {$l3>0} {
-     set increment_old [lindex $r3 0 ]
-     set increment_old [ expr (1-int($increment_old)) ]
-     set str2 [ format "alter sequence %s_S increment by %d" $TABLE_NAME $increment_old ]
-     $db2 $str2
-     $db2 $strSQL3
-     $db2 "alter sequence ${TABLE_NAME}_S increment by 1"
-    }
+    changeSeq $db2 $TABLE_NAME
 
   }
 
@@ -970,7 +860,7 @@ proc SYS_APPL { rf db2 } {
 
 
 # -- AD_DIR
-proc AD_DIR { rf db2 } {
+proc AD_DIR { db2 } {
 
   set TABLE_LIST [ list AD_DIR ]
 
@@ -1016,10 +906,10 @@ proc AD_DIR { rf db2 } {
        $db2 commit
        #--  ID_SERVER_NODE
        set TABLE_LIST2 [ list AD_JRNL AD_SINFO AD_SINFO_INI ]
-       changeTable $rf $db2 $maxID $id_old "ID_SERVER_NODE" $TABLE_LIST2
+       changeTable $db2 $maxID $id_old "ID_SERVER_NODE" $TABLE_LIST2
        #--  ID_NODE
        set TABLE_LIST2 [ list AD_COMCARD AD_IPINFO AD_LIST AD_MBII AD_MODEM AD_NCARD AD_PORT AD_SEGMENT ]
-       changeTable $rf $db2 $maxID $id_old "ID_NODE" $TABLE_LIST2
+       changeTable $db2 $maxID $id_old "ID_NODE" $TABLE_LIST2
 
        #-- ID_DEVICE
        if {[checkTable $db2 "J_SHDV" "ID_DEVICE"]} {
@@ -1050,10 +940,10 @@ proc AD_DIR { rf db2 } {
        }
        #--  ID_SERVER_NODE
        set TABLE_LIST2 [ list AD_JRNL AD_SINFO AD_SINFO_INI ]
-       changeTable $rf $db2 $j $maxID "ID_SERVER_NODE" $TABLE_LIST2
+       changeTable $db2 $j $maxID "ID_SERVER_NODE" $TABLE_LIST2
        #--  ID_NODE
        set TABLE_LIST2 [ list AD_COMCARD AD_IPINFO AD_LIST AD_MBII AD_MODEM AD_NCARD AD_PORT AD_SEGMENT ]
-       changeTable $rf $db2 $j $maxID "ID_NODE" $TABLE_LIST2
+       changeTable $db2 $j $maxID "ID_NODE" $TABLE_LIST2
        #--AD_HOSTS
        $db2 "UPDATE AD_HOSTS SET ID_SYSTEM_NODE=$j WHERE ID_SYSTEM_NODE=$maxID"
        $db2 commit
@@ -1072,17 +962,7 @@ proc AD_DIR { rf db2 } {
     $db2 "DELETE FROM $TABLE_NAME WHERE NAME LIKE '%TEXTRENAMETEXT%' "
     $db2 commit
 
-    set strSQL3 "SELECT ${TABLE_NAME}_S.nextval FROM dual"
-    set r3 [ $db2 $strSQL3 ]
-    set l3 [ llength $r3 ]
-    if {$l3>0} {
-     set increment_old [lindex $r3 0 ]
-     set increment_old [ expr (1-int($increment_old)) ]
-     set str2 [ format "alter sequence %s_S increment by %d" $TABLE_NAME $increment_old ]
-     $db2 $str2
-     $db2 $strSQL3
-     $db2 "alter sequence ${TABLE_NAME}_S increment by 1"
-    }
+    changeSeq $db2 $TABLE_NAME
 
   }
 
@@ -1092,7 +972,7 @@ proc AD_DIR { rf db2 } {
 
 
 # -- AD_DTYP
-proc AD_DTYP { rf db2 } {
+proc AD_DTYP { db2 } {
 
   set TABLE_LIST [ list AD_DTYP ]
 
@@ -1143,17 +1023,7 @@ proc AD_DTYP { rf db2 } {
     $db2 "DELETE FROM $TABLE_NAME WHERE NAME LIKE '%TEXTRENAMETEXT%' "
     $db2 commit
 
-    set strSQL3 "SELECT ${TABLE_NAME}_S.nextval FROM dual"
-    set r3 [ $db2 $strSQL3 ]
-    set l3 [ llength $r3 ]
-    if {$l3>0} {
-      set increment_old [lindex $r3 0 ]
-      set increment_old [ expr (1-int($increment_old)) ]
-      set str2 [ format "alter sequence %s_S increment by %d" $TABLE_NAME $increment_old ]
-      $db2 $str2
-      $db2 $strSQL3
-      $db2 "alter sequence ${TABLE_NAME}_S increment by 1"
-    }
+    changeSeq $db2 $TABLE_NAME
 
   }
 
@@ -1162,7 +1032,7 @@ proc AD_DTYP { rf db2 } {
 
 
 # -- AD_LIST
-proc AD_LIST { rf db2 } {
+proc AD_LIST { db2 } {
 
   set TABLE_LIST [ list AD_LIST ]
 
@@ -1214,17 +1084,7 @@ proc AD_LIST { rf db2 } {
     $db2 "DELETE FROM $TABLE_NAME WHERE NAME LIKE '%TEXTRENAMETEXT%' "
     $db2 commit
 
-    set strSQL3 "SELECT ${TABLE_NAME}_S.nextval FROM dual"
-    set r3 [ $db2 $strSQL3 ]
-    set l3 [ llength $r3 ]
-    if {$l3>0} {
-     set increment_old [lindex $r3 0 ]
-     set increment_old [ expr (1-int($increment_old)) ]
-     set str2 [ format "alter sequence %s_S increment by %d" $TABLE_NAME $increment_old ]
-     $db2 $str2
-     $db2 $strSQL3
-     $db2 "alter sequence ${TABLE_NAME}_S increment by 1"
-    }
+    changeSeq $db2 $TABLE_NAME
 
   }
 
@@ -1236,7 +1096,7 @@ proc AD_LIST { rf db2 } {
 # ==============================================================================================================
 
 # -- AST_ORG
-proc AST_ORG { rf db2 } {
+proc AST_ORG { db2 } {
 
   set TABLE_LIST [ list AST_ORG ]
 
@@ -1270,7 +1130,7 @@ proc AST_ORG { rf db2 } {
 
        #-- ID_ORG
        set TABLE_LIST2 [ list AST_LINK OBJ_TREE RSDU_USERS FEED_ORG_LINK ]
-       changeTable $rf $db2 $maxID $id_old "ID_ORG" $TABLE_LIST2
+       changeTable $db2 $maxID $id_old "ID_ORG" $TABLE_LIST2
 
        #--AST_PERSONNEL
        $db2 "UPDATE AST_PERSONNEL SET ID_NODE=$maxID WHERE ID_NODE=$id_old"
@@ -1298,7 +1158,7 @@ proc AST_ORG { rf db2 } {
 
        #-- ID_ORG
        set TABLE_LIST2 [ list AST_LINK OBJ_TREE RSDU_USERS FEED_ORG_LINK ]
-       changeTable $rf $db2 $j $maxID "ID_ORG" $TABLE_LIST2
+       changeTable $db2 $j $maxID "ID_ORG" $TABLE_LIST2
 
       }
     }
@@ -1306,17 +1166,7 @@ proc AST_ORG { rf db2 } {
     $db2 "DELETE FROM $TABLE_NAME WHERE NAME LIKE '%TEXTRENAMETEXT%' "
     $db2 commit
 
-    set strSQL3 "SELECT ${TABLE_NAME}_S.nextval FROM dual"
-    set r3 [ $db2 $strSQL3 ]
-    set l3 [ llength $r3 ]
-    if {$l3>0} {
-     set increment_old [lindex $r3 0 ]
-     set increment_old [ expr (1-int($increment_old)) ]
-     set str2 [ format "alter sequence %s_S increment by %d" $TABLE_NAME $increment_old ]
-     $db2 $str2
-     $db2 $strSQL3
-     $db2 "alter sequence ${TABLE_NAME}_S increment by 1"
-    }
+    changeSeq $db2 $TABLE_NAME
 
   }
 
@@ -1325,7 +1175,7 @@ proc AST_ORG { rf db2 } {
 
 
 # -- AST_CNT
-proc AST_CNT { rf db2 } {
+proc AST_CNT { db2 } {
 
   set TABLE_LIST [ list AST_CNT]
 
@@ -1360,11 +1210,11 @@ proc AST_CNT { rf db2 } {
 
        #-- ID_CNT
        set TABLE_LIST2 [ list AST_LINK  OBJ_CNT ]
-       changeTable $rf $db2 $maxID $id_old "ID_CNT" $TABLE_LIST2
+       changeTable $db2 $maxID $id_old "ID_CNT" $TABLE_LIST2
 
        #-- ID_SRC_CNT
        set TABLE_LIST2 [ list DG_KDU_JOURNAL DG_KDU_JOURNAL_OLD ]
-       changeTable $rf $db2 $maxID $id_old "ID_SRC_CNT" $TABLE_LIST2
+       changeTable $db2 $maxID $id_old "ID_SRC_CNT" $TABLE_LIST2
 
        #--AST_CNT_LIST
        $db2 "UPDATE AST_CNT_LIST SET ID_NODE=$maxID WHERE ID_NODE=$id_old"
@@ -1390,11 +1240,11 @@ proc AST_CNT { rf db2 } {
 
        #-- ID_CNT
        set TABLE_LIST2 [ list AST_LINK  OBJ_CNT ]
-       changeTable $rf $db2 $j $maxID "ID_CNT" $TABLE_LIST2
+       changeTable $db2 $j $maxID "ID_CNT" $TABLE_LIST2
 
        #-- ID_SRC_CNT
        set TABLE_LIST2 [ list DG_KDU_JOURNAL DG_KDU_JOURNAL_OLD ]
-       changeTable $rf $db2 $j $maxID "ID_SRC_CNT" $TABLE_LIST2
+       changeTable $db2 $j $maxID "ID_SRC_CNT" $TABLE_LIST2
 
       }
     }
@@ -1402,17 +1252,7 @@ proc AST_CNT { rf db2 } {
     $db2 "DELETE FROM $TABLE_NAME WHERE NAME LIKE '%TEXTRENAMETEXT%' "
     $db2 commit
 
-    set strSQL3 "SELECT ${TABLE_NAME}_S.nextval FROM dual"
-    set r3 [ $db2 $strSQL3 ]
-    set l3 [ llength $r3 ]
-    if {$l3>0} {
-     set increment_old [lindex $r3 0 ]
-     set increment_old [ expr (1-int($increment_old)) ]
-     set str2 [ format "alter sequence %s_S increment by %d" $TABLE_NAME $increment_old ]
-     $db2 $str2
-     $db2 $strSQL3
-     $db2 "alter sequence ${TABLE_NAME}_S increment by 1"
-    }
+    changeSeq $db2 $TABLE_NAME
 
   }
 
@@ -1423,7 +1263,7 @@ proc AST_CNT { rf db2 } {
 
 # ==============================================================================================================
 
-proc VP_GROUP { rf db2 } {
+proc VP_GROUP { db2 } {
 
   set TABLE_LIST [ list VP_GROUP ]
 
@@ -1479,17 +1319,7 @@ proc VP_GROUP { rf db2 } {
     $db2 "DELETE FROM $TABLE_NAME WHERE NAME LIKE '%TEXTRENAMETEXT%' "
     $db2 commit
 
-    set strSQL3 "SELECT ${TABLE_NAME}_S.nextval FROM dual"
-    set r3 [ $db2 $strSQL3 ]
-    set l3 [ llength $r3 ]
-    if {$l3>0} {
-     set increment_old [lindex $r3 0 ]
-     set increment_old [ expr (1-int($increment_old)) ]
-     set str2 [ format "alter sequence %s_S increment by %d" $TABLE_NAME $increment_old ]
-     $db2 $str2
-     $db2 $strSQL3
-     $db2 "alter sequence ${TABLE_NAME}_S increment by 1"
-    }
+    changeSeq $db2 $TABLE_NAME
 
   }
 
@@ -1498,7 +1328,7 @@ proc VP_GROUP { rf db2 } {
 
 
 #  -- VP_PANEL  - необходимо проверить ID_TABLE=40 - VP_PANEL , ID_APPL=87 - pnview.exe
-proc VP_PANEL { rf db2 ID_TABLE ID_APPL } {
+proc VP_PANEL { db2 ID_TABLE ID_APPL } {
 
   set TABLE_LIST [ list VP_PANEL ]
 
@@ -1601,17 +1431,7 @@ proc VP_PANEL { rf db2 ID_TABLE ID_APPL } {
     $db2 "DELETE FROM $TABLE_NAME WHERE NAME LIKE '%TEXTRENAMETEXT%' "
     $db2 commit
 
-    set strSQL3 "SELECT ${TABLE_NAME}_S.nextval FROM dual"
-    set r3 [ $db2 $strSQL3 ]
-    set l3 [ llength $r3 ]
-    if {$l3>0} {
-     set increment_old [lindex $r3 0 ]
-     set increment_old [ expr (1-int($increment_old)) ]
-     set str2 [ format "alter sequence %s_S increment by %d" $TABLE_NAME $increment_old ]
-     $db2 $str2
-     $db2 $strSQL3
-     $db2 "alter sequence ${TABLE_NAME}_S increment by 1"
-    }
+    changeSeq $db2 $TABLE_NAME
 
   }
 
@@ -1620,7 +1440,7 @@ proc VP_PANEL { rf db2 ID_TABLE ID_APPL } {
 
 
 
-proc VP_CTRL { rf db2 } {
+proc VP_CTRL { db2 } {
 
   set TABLE_LIST [ list VP_CTRL ]
 
@@ -1670,17 +1490,7 @@ proc VP_CTRL { rf db2 } {
     $db2 "DELETE FROM $TABLE_NAME WHERE CONST_NAME LIKE '%TEXTRENAMETEXT%' "
     $db2 commit
 
-    set strSQL3 "SELECT ${TABLE_NAME}_S.nextval FROM dual"
-    set r3 [ $db2 $strSQL3 ]
-    set l3 [ llength $r3 ]
-    if {$l3>0} {
-     set increment_old [lindex $r3 0 ]
-     set increment_old [ expr (1-int($increment_old)) ]
-     set str2 [ format "alter sequence %s_S increment by %d" $TABLE_NAME $increment_old ]
-     $db2 $str2
-     $db2 $strSQL3
-     $db2 "alter sequence ${TABLE_NAME}_S increment by 1"
-    }
+    changeSeq $db2 $TABLE_NAME
 
   }
 
@@ -1693,7 +1503,7 @@ proc VP_CTRL { rf db2 } {
 
 
 # -- VS_GROUP
-proc VS_GROUP { rf db2 } {
+proc VS_GROUP { db2 } {
 
   set TABLE_LIST [ list VS_GROUP ]
 
@@ -1749,17 +1559,7 @@ proc VS_GROUP { rf db2 } {
     $db2 "DELETE FROM $TABLE_NAME WHERE NAME LIKE '%TEXTRENAMETEXT%' "
     $db2 commit
 
-    set strSQL3 "SELECT ${TABLE_NAME}_S.nextval FROM dual"
-    set r3 [ $db2 $strSQL3 ]
-    set l3 [ llength $r3 ]
-    if {$l3>0} {
-     set increment_old [lindex $r3 0 ]
-     set increment_old [ expr (1-int($increment_old)) ]
-     set str2 [ format "alter sequence %s_S increment by %d" $TABLE_NAME $increment_old ]
-     $db2 $str2
-     $db2 $strSQL3
-     $db2 "alter sequence ${TABLE_NAME}_S increment by 1"
-    }
+    changeSeq $db2 $TABLE_NAME
 
   }
 
@@ -1768,7 +1568,7 @@ proc VS_GROUP { rf db2 } {
 
 
 #  -- VS_FORM  - необходимо проверить ID_TABLE=43 - VS_FORM_LST , ID_APPL=1232 - schemeviewer.exe
-proc VS_FORM { rf db2 ID_TABLE ID_APPL } {
+proc VS_FORM { db2 ID_TABLE ID_APPL } {
 
   set TABLE_LIST [ list VS_FORM ]
 
@@ -1802,11 +1602,11 @@ proc VS_FORM { rf db2 ID_TABLE ID_APPL } {
 
        #-- ID_FORM
        set TABLE_LIST2 [ list VS_COMP  VS_OBJ_TUNE  VS_MODUS_NODE VS_FORM_INIPARAMS ]
-       changeTable $rf $db2 $maxID $id_old "ID_FORM" $TABLE_LIST2
+       changeTable $db2 $maxID $id_old "ID_FORM" $TABLE_LIST2
 
        #-- ID_SCHEME
        set TABLE_LIST2 [ list TAG_POSITION  RSDUJOB.JOB_MAIN ]
-       changeTable $rf $db2 $maxID $id_old "ID_SCHEME" $TABLE_LIST2
+       changeTable $db2 $maxID $id_old "ID_SCHEME" $TABLE_LIST2
 
 
        #--US_MENU  ID_APPL=1232 - schemeviewer.exe
@@ -1853,11 +1653,11 @@ proc VS_FORM { rf db2 ID_TABLE ID_APPL } {
 
        #-- ID_FORM
        set TABLE_LIST2 [ list VS_COMP  VS_OBJ_TUNE  VS_MODUS_NODE VS_FORM_INIPARAMS ]
-       changeTable $rf $db2 $j $maxID "ID_FORM" $TABLE_LIST2
+       changeTable $db2 $j $maxID "ID_FORM" $TABLE_LIST2
 
        #-- ID_SCHEME
        set TABLE_LIST2 [ list TAG_POSITION  RSDUJOB.JOB_MAIN ]
-       changeTable $rf $db2 $j $maxID "ID_SCHEME" $TABLE_LIST2
+       changeTable $db2 $j $maxID "ID_SCHEME" $TABLE_LIST2
 
        #--US_MENU  ID_APPL=1232 - schemeviewer.exe
        $db2 "UPDATE US_MENU SET ID_PARAM=$j WHERE ID_PARAM=$maxID AND ID_APPL=$ID_APPL"
@@ -1875,17 +1675,7 @@ proc VS_FORM { rf db2 ID_TABLE ID_APPL } {
     $db2 "DELETE FROM $TABLE_NAME WHERE NAME LIKE '%TEXTRENAMETEXT%' "
     $db2 commit
 
-    set strSQL3 "SELECT ${TABLE_NAME}_S.nextval FROM dual"
-    set r3 [ $db2 $strSQL3 ]
-    set l3 [ llength $r3 ]
-    if {$l3>0} {
-     set increment_old [lindex $r3 0 ]
-     set increment_old [ expr (1-int($increment_old)) ]
-     set str2 [ format "alter sequence %s_S increment by %d" $TABLE_NAME $increment_old ]
-     $db2 $str2
-     $db2 $strSQL3
-     $db2 "alter sequence ${TABLE_NAME}_S increment by 1"
-    }
+    changeSeq $db2 $TABLE_NAME
 
   }
 
@@ -1894,7 +1684,7 @@ proc VS_FORM { rf db2 ID_TABLE ID_APPL } {
 
 
 #  -- VS_COMP  -
-proc VS_COMP { rf db2 } {
+proc VS_COMP { db2 } {
 
   set TABLE_LIST [ list VS_COMP ]
 
@@ -1951,17 +1741,7 @@ proc VS_COMP { rf db2 } {
     $db2 "DELETE FROM $TABLE_NAME WHERE NAME LIKE '%TEXTRENAMETEXT%' "
     $db2 commit
 
-    set strSQL3 "SELECT ${TABLE_NAME}_S.nextval FROM dual"
-    set r3 [ $db2 $strSQL3 ]
-    set l3 [ llength $r3 ]
-    if {$l3>0} {
-     set increment_old [lindex $r3 0 ]
-     set increment_old [ expr (1-int($increment_old)) ]
-     set str2 [ format "alter sequence %s_S increment by %d" $TABLE_NAME $increment_old ]
-     $db2 $str2
-     $db2 $strSQL3
-     $db2 "alter sequence ${TABLE_NAME}_S increment by 1"
-    }
+    changeSeq $db2 $TABLE_NAME
 
   }
 
@@ -1972,7 +1752,7 @@ proc VS_COMP { rf db2 } {
 # ==============================================================================================================
 
 # -- RPT_DIR
-proc RPT_DIR { rf db2 } {
+proc RPT_DIR { db2 } {
 
   set TABLE_LIST [ list RPT_DIR ]
 
@@ -2028,17 +1808,7 @@ proc RPT_DIR { rf db2 } {
     $db2 "DELETE FROM $TABLE_NAME WHERE NAME LIKE '%TEXTRENAMETEXT%' "
     $db2 commit
 
-    set strSQL3 "SELECT ${TABLE_NAME}_S.nextval FROM dual"
-    set r3 [ $db2 $strSQL3 ]
-    set l3 [ llength $r3 ]
-    if {$l3>0} {
-     set increment_old [lindex $r3 0 ]
-     set increment_old [ expr (1-int($increment_old)) ]
-     set str2 [ format "alter sequence %s_S increment by %d" $TABLE_NAME $increment_old ]
-     $db2 $str2
-     $db2 $strSQL3
-     $db2 "alter sequence ${TABLE_NAME}_S increment by 1"
-    }
+    changeSeq $db2 $TABLE_NAME
 
   }
 
@@ -2047,7 +1817,7 @@ proc RPT_DIR { rf db2 } {
 
 
 #  -- RPT_LST  - необходимо проверить ID_TABLE=71 - RPT_LST , ID_APPL=964 - клиент просмотра отчетов
-proc RPT_LST { rf db2 ID_TABLE ID_APPL } {
+proc RPT_LST { db2 ID_TABLE ID_APPL } {
 
   set TABLE_LIST [ list RPT_LST ]
 
@@ -2121,17 +1891,7 @@ proc RPT_LST { rf db2 ID_TABLE ID_APPL } {
     $db2 "DELETE FROM $TABLE_NAME WHERE NAME LIKE '%TEXTRENAMETEXT%' "
     $db2 commit
 
-    set strSQL3 "SELECT ${TABLE_NAME}_S.nextval FROM dual"
-    set r3 [ $db2 $strSQL3 ]
-    set l3 [ llength $r3 ]
-    if {$l3>0} {
-     set increment_old [lindex $r3 0 ]
-     set increment_old [ expr (1-int($increment_old)) ]
-     set str2 [ format "alter sequence %s_S increment by %d" $TABLE_NAME $increment_old ]
-     $db2 $str2
-     $db2 $strSQL3
-     $db2 "alter sequence ${TABLE_NAME}_S increment by 1"
-    }
+    changeSeq $db2 $TABLE_NAME
 
   }
 
@@ -2142,7 +1902,7 @@ proc RPT_LST { rf db2 ID_TABLE ID_APPL } {
 
 # ==============================================================================================================
 # -- R_GROUP
-proc R_GROUP { rf db2 } {
+proc R_GROUP { db2 } {
 
   set TABLE_LIST [ list R_GROUP ]
 
@@ -2197,17 +1957,7 @@ proc R_GROUP { rf db2 } {
     $db2 "DELETE FROM $TABLE_NAME WHERE NAME LIKE '%TEXTRENAMETEXT%' "
     $db2 commit
 
-    set strSQL3 "SELECT ${TABLE_NAME}_S.nextval FROM dual"
-    set r3 [ $db2 $strSQL3 ]
-    set l3 [ llength $r3 ]
-    if {$l3>0} {
-     set increment_old [lindex $r3 0 ]
-     set increment_old [ expr (1-int($increment_old)) ]
-     set str2 [ format "alter sequence %s_S increment by %d" $TABLE_NAME $increment_old ]
-     $db2 $str2
-     $db2 $strSQL3
-     $db2 "alter sequence ${TABLE_NAME}_S increment by 1"
-    }
+    changeSeq $db2 $TABLE_NAME
 
   }
 
@@ -2216,7 +1966,7 @@ proc R_GROUP { rf db2 } {
 
 
 #  -- R_KADR  - необходимо проверить ID_TABLE=46 - R_KADR , ID_APPL=602 - retroview_live.exe
-proc R_KADR { rf db2 ID_TABLE ID_APPL } {
+proc R_KADR { db2 ID_TABLE ID_APPL } {
 
   set TABLE_LIST [ list R_KADR ]
 
@@ -2320,17 +2070,7 @@ proc R_KADR { rf db2 ID_TABLE ID_APPL } {
     $db2 "DELETE FROM $TABLE_NAME WHERE NAME LIKE '%TEXTRENAMETEXT%' "
     $db2 commit
 
-    set strSQL3 "SELECT ${TABLE_NAME}_S.nextval FROM dual"
-    set r3 [ $db2 $strSQL3 ]
-    set l3 [ llength $r3 ]
-    if {$l3>0} {
-     set increment_old [lindex $r3 0 ]
-     set increment_old [ expr (1-int($increment_old)) ]
-     set str2 [ format "alter sequence %s_S increment by %d" $TABLE_NAME $increment_old ]
-     $db2 $str2
-     $db2 $strSQL3
-     $db2 "alter sequence ${TABLE_NAME}_S increment by 1"
-    }
+    changeSeq $db2 $TABLE_NAME
 
   }
 
@@ -2341,7 +2081,7 @@ proc R_KADR { rf db2 ID_TABLE ID_APPL } {
 # ==============================================================================================================
 
 # -- DBE_STORAGE
-proc DBE_STORAGE { rf db2 } {
+proc DBE_STORAGE { db2 } {
 
   set TABLE_LIST [ list DBE_STORAGE ]
 
@@ -2390,17 +2130,7 @@ proc DBE_STORAGE { rf db2 } {
     $db2 "DELETE FROM $TABLE_NAME WHERE NAME LIKE '%TEXTRENAMETEXT%' "
     $db2 commit
 
-    set strSQL3 "SELECT ${TABLE_NAME}_S.nextval FROM dual"
-    set r3 [ $db2 $strSQL3 ]
-    set l3 [ llength $r3 ]
-    if {$l3>0} {
-     set increment_old [lindex $r3 0 ]
-     set increment_old [ expr (1-int($increment_old)) ]
-     set str2 [ format "alter sequence %s_S increment by %d" $TABLE_NAME $increment_old ]
-     $db2 $str2
-     $db2 $strSQL3
-     $db2 "alter sequence ${TABLE_NAME}_S increment by 1"
-    }
+    changeSeq $db2 $TABLE_NAME
 
   }
 
@@ -2408,7 +2138,7 @@ proc DBE_STORAGE { rf db2 } {
 }
 
 # -- DBE_JOB  -- J_DBE
-proc DBE_JOB { rf db2 } {
+proc DBE_JOB { db2 } {
 
   set TABLE_LIST [ list DBE_JOB ]
 
@@ -2443,13 +2173,13 @@ proc DBE_JOB { rf db2 } {
 
        #-- ID_JOB
        set TABLE_LIST2 [ list DBE_ACTION J_DBE ]
-       changeTable $rf $db2 $maxID $id_old "ID_JOB" $TABLE_LIST2
+       changeTable $db2 $maxID $id_old "ID_JOB" $TABLE_LIST2
 
        set strSQL3 "UPDATE $TABLE_NAME SET ID=$j WHERE ID=$id_old"
        $db2 $strSQL3
        $db2 commit
 
-       changeTable $rf $db2 $j $maxID "ID_JOB" $TABLE_LIST2
+       changeTable $db2 $j $maxID "ID_JOB" $TABLE_LIST2
 
       }
     }
@@ -2457,17 +2187,7 @@ proc DBE_JOB { rf db2 } {
     $db2 "DELETE FROM $TABLE_NAME WHERE NAME LIKE '%TEXTRENAMETEXT%' "
     $db2 commit
 
-    set strSQL3 "SELECT ${TABLE_NAME}_S.nextval FROM dual"
-    set r3 [ $db2 $strSQL3 ]
-    set l3 [ llength $r3 ]
-    if {$l3>0} {
-     set increment_old [lindex $r3 0 ]
-     set increment_old [ expr (1-int($increment_old)) ]
-     set str2 [ format "alter sequence %s_S increment by %d" $TABLE_NAME $increment_old ]
-     $db2 $str2
-     $db2 $strSQL3
-     $db2 "alter sequence ${TABLE_NAME}_S increment by 1"
-    }
+    changeSeq $db2 $TABLE_NAME
 
   }
 
@@ -2476,8 +2196,8 @@ proc DBE_JOB { rf db2 } {
 
 
 # -- DBE_ACTION  -- J_DBE
-#DBE_ACTION $rf db2
-proc DBE_ACTION { rf db2 } {
+#DBE_ACTION db2
+proc DBE_ACTION { db2 } {
 
   set TABLE_LIST [ list DBE_ACTION ]
 
@@ -2513,7 +2233,7 @@ proc DBE_ACTION { rf db2 } {
 
        #-- ID_ACTION
        set TABLE_LIST2 [ list DBE_DESTINATION J_DBE ]
-       changeTable $rf $db2 $maxID $id_old "ID_ACTION" $TABLE_LIST2
+       changeTable $db2 $maxID $id_old "ID_ACTION" $TABLE_LIST2
 
 
        set strSQL3 "UPDATE $TABLE_NAME SET ID=$j WHERE ID=$id_old"
@@ -2521,7 +2241,7 @@ proc DBE_ACTION { rf db2 } {
        $db2 commit
 
 
-       changeTable $rf $db2 $j $maxID "ID_ACTION" $TABLE_LIST2
+       changeTable $db2 $j $maxID "ID_ACTION" $TABLE_LIST2
 
       }
     }
@@ -2529,17 +2249,7 @@ proc DBE_ACTION { rf db2 } {
     $db2 "DELETE FROM $TABLE_NAME WHERE NAME LIKE '%TEXTRENAMETEXT%' "
     $db2 commit
 
-    set strSQL3 "SELECT ${TABLE_NAME}_S.nextval FROM dual"
-    set r3 [ $db2 $strSQL3 ]
-    set l3 [ llength $r3 ]
-    if {$l3>0} {
-     set increment_old [lindex $r3 0 ]
-     set increment_old [ expr (1-int($increment_old)) ]
-     set str2 [ format "alter sequence %s_S increment by %d" $TABLE_NAME $increment_old ]
-     $db2 $str2
-     $db2 $strSQL3
-     $db2 "alter sequence ${TABLE_NAME}_S increment by 1"
-    }
+    changeSeq $db2 $TABLE_NAME
 
   }
 
@@ -2551,7 +2261,7 @@ proc DBE_ACTION { rf db2 } {
 # ==============================================================================================================
 
 # -- ARC_SUBSYST_PROFILE
-proc ARC1 { rf db2 } {
+proc ARC1 { db2 } {
 
   set TABLE_LIST [ list ARC_SUBSYST_PROFILE ]
 
@@ -2584,14 +2294,14 @@ proc ARC1 { rf db2 } {
 
        #-- ID_SPROFILE
        set TABLE_LIST2 [ list ARC_SERVICES_TUNE ARC_SERVICES_ACCESS ]
-       changeTable $rf $db2 $maxID $id_old "ID_SPROFILE" $TABLE_LIST2
+       changeTable $db2 $maxID $id_old "ID_SPROFILE" $TABLE_LIST2
 
 
        set strSQL3 "UPDATE $TABLE_NAME SET ID=$j WHERE ID=$id_old"
        $db2 $strSQL3
        $db2 commit
 
-       changeTable $rf $db2 $j $maxID "ID_SPROFILE" $TABLE_LIST2
+       changeTable $db2 $j $maxID "ID_SPROFILE" $TABLE_LIST2
 
       }
     }
@@ -2599,17 +2309,7 @@ proc ARC1 { rf db2 } {
     $db2 "DELETE FROM $TABLE_NAME WHERE ID=$maxID"
     $db2 commit
 
-    set strSQL3 "SELECT ${TABLE_NAME}_S.nextval FROM dual"
-    set r3 [ $db2 $strSQL3 ]
-    set l3 [ llength $r3 ]
-    if {$l3>0} {
-     set increment_old [lindex $r3 0 ]
-     set increment_old [ expr (1-int($increment_old)) ]
-     set str2 [ format "alter sequence %s_S increment by %d" $TABLE_NAME $increment_old ]
-     $db2 $str2
-     $db2 $strSQL3
-     $db2 "alter sequence ${TABLE_NAME}_S increment by 1"
-    }
+    changeSeq $db2 $TABLE_NAME
 
   }
 
@@ -2618,7 +2318,7 @@ proc ARC1 { rf db2 } {
 
 # ==============================================================================================================
 
-proc AA2 { rf db2 } {
+proc AA2 { db2 } {
 
   set TABLE_LIST [ list J_AUSW J_PWSW J_USTCH J_ELSET J_DADV J_DAPARAMSTATE \
                         J_DA_SRC_VAL J_HWSTATE J_KVIT J_MEAS_SRC_VAL J_PHSET J_AUDIT \
@@ -2660,17 +2360,7 @@ proc AA2 { rf db2 } {
 ##--select J_RSDU_ERROR_S.nextval from dual
 ##--alter sequence J_RSDU_ERROR_S increment by 1;
 
-    set strSQL3 "SELECT ${TABLE_NAME}_S.nextval FROM dual"
-    set r3 [ $db2 $strSQL3 ]
-    set l3 [ llength $r3 ]
-    if {$l3>0} {
-     set increment_old [lindex $r3 0 ]
-     set increment_old [ expr (1-int($increment_old)) ]
-     set str2 [ format "alter sequence %s_S increment by %d" $TABLE_NAME $increment_old ]
-     $db2 $str2
-     $db2 $strSQL3
-     $db2 "alter sequence ${TABLE_NAME}_S increment by 1"
-    }
+    changeSeq $db2 $TABLE_NAME
 
   }
 
@@ -2681,7 +2371,7 @@ proc AA2 { rf db2 } {
 # ==============================================================================================================
 
 # -- MEAS_LIST
-proc MEAS_LIST { rf db2 } {
+proc MEAS_LIST { db2 } {
 
     set da_list [ list ]
     LogWrite "====MEAS_LIST==="
@@ -2743,17 +2433,7 @@ and id_node in \
     $db2 "DELETE FROM $TABLE_NAME WHERE NAME LIKE '%TEXTRENAMETEXT%' "
     $db2 commit
 
-    set strSQL3 "SELECT ${TABLE_NAME}_S.nextval FROM dual"
-    set r3 [ $db2 $strSQL3 ]
-    set l3 [ llength $r3 ]
-    if {$l3>0} {
-     set increment_old [lindex $r3 0 ]
-     set increment_old [ expr (1-int($increment_old)) ]
-     set str2 [ format "alter sequence %s_S increment by %d" $TABLE_NAME $increment_old ]
-     $db2 $str2
-     $db2 $strSQL3
-     $db2 "alter sequence ${TABLE_NAME}_S increment by 1"
-    }
+    changeSeq $db2 $TABLE_NAME
 
 
  return 0 ;
@@ -2762,7 +2442,7 @@ and id_node in \
 # ==============================================================================================================
 
 # -- DA_PARAM
-proc DA_PARAM { rf db2 } {
+proc DA_PARAM { db2 } {
 
     set da_list [ list ]
     LogWrite "====DA_SUBSYST==="
@@ -2878,17 +2558,7 @@ and id_node in \
     $db2 "DELETE FROM $TABLE_NAME WHERE NAME LIKE '%TEXTRENAMETEXT%' "
     $db2 commit
 
-    set strSQL3 "SELECT ${TABLE_NAME}_S.nextval FROM dual"
-    set r3 [ $db2 $strSQL3 ]
-    set l3 [ llength $r3 ]
-    if {$l3>0} {
-     set increment_old [lindex $r3 0 ]
-     set increment_old [ expr (1-int($increment_old)) ]
-     set str2 [ format "alter sequence %s_S increment by %d" $TABLE_NAME $increment_old ]
-     $db2 $str2
-     $db2 $strSQL3
-     $db2 "alter sequence ${TABLE_NAME}_S increment by 1"
-    }
+    changeSeq $db2 $TABLE_NAME
 
 
  return 0 ;
@@ -2896,7 +2566,7 @@ and id_node in \
 
 
 # -- DA_ARC - correction
-proc DA_ARC_correction { rf db2 } {
+proc DA_ARC_correction { db2 } {
 
  #alter table OLD_TABLE rename to NEW_TABLE;
  #rename OLD_TABLE TO NEW_TABLE;
@@ -2910,7 +2580,7 @@ proc DA_ARC_correction { rf db2 } {
 # ==============================================================================================================
 
 # -- DA_DEV
-proc DA_DEV { rf db2 } {
+proc DA_DEV { db2 } {
 
     set TABLE_NAME "DA_DEV"
 
@@ -2941,7 +2611,7 @@ proc DA_DEV { rf db2 } {
 
        #-- ID_DEV
        set TABLE_LIST2 [ list DA_SLAVE  DA_DEV_PROTO  DA_DEV_DESC ]
-       changeTable $rf $db2 $maxID $id_old "ID_DEV" $TABLE_LIST2
+       changeTable $db2 $maxID $id_old "ID_DEV" $TABLE_LIST2
 
 
        set strSQL3 "UPDATE $TABLE_NAME SET ID=$j WHERE ID=$id_old"
@@ -2949,7 +2619,7 @@ proc DA_DEV { rf db2 } {
        $db2 commit
 
 
-       changeTable $rf $db2 $j $maxID "ID_DEV" $TABLE_LIST2
+       changeTable $db2 $j $maxID "ID_DEV" $TABLE_LIST2
 
       }
     }
@@ -2957,17 +2627,7 @@ proc DA_DEV { rf db2 } {
     $db2 "DELETE FROM $TABLE_NAME WHERE NAME LIKE '%TEXTRENAMETEXT%' "
     $db2 commit
 
-    set strSQL3 "SELECT ${TABLE_NAME}_S.nextval FROM dual"
-    set r3 [ $db2 $strSQL3 ]
-    set l3 [ llength $r3 ]
-    if {$l3>0} {
-     set increment_old [lindex $r3 0 ]
-     set increment_old [ expr (1-int($increment_old)) ]
-     set str2 [ format "alter sequence %s_S increment by %d" $TABLE_NAME $increment_old ]
-     $db2 $str2
-     $db2 $strSQL3
-     $db2 "alter sequence ${TABLE_NAME}_S increment by 1"
-    }
+    changeSeq $db2 $TABLE_NAME
 
 
  return 0 ;
@@ -2976,7 +2636,7 @@ proc DA_DEV { rf db2 } {
 # ==============================================================================================================
 
 # -- DA_DEV_DESC
-proc DA_DEV_DESC { rf db2 } {
+proc DA_DEV_DESC { db2 } {
 
     # -- DA_DEV_DESC  ID  ID_PARENT
     set TABLE_NAME "DA_DEV_DESC"
@@ -3035,17 +2695,7 @@ proc DA_DEV_DESC { rf db2 } {
     $db2 "DELETE FROM $TABLE_NAME WHERE NAME LIKE '%TEXTRENAMETEXT%' "
     $db2 commit
 
-    set strSQL3 "SELECT ${TABLE_NAME}_S.nextval FROM dual"
-    set r3 [ $db2 $strSQL3 ]
-    set l3 [ llength $r3 ]
-    if {$l3>0} {
-     set increment_old [lindex $r3 0 ]
-     set increment_old [ expr (1-int($increment_old)) ]
-     set str2 [ format "alter sequence %s_S increment by %d" $TABLE_NAME $increment_old ]
-     $db2 $str2
-     $db2 $strSQL3
-     $db2 "alter sequence ${TABLE_NAME}_S increment by 1"
-    }
+    changeSeq $db2 $TABLE_NAME
 
 
  return 0 ;
@@ -3055,7 +2705,7 @@ proc DA_DEV_DESC { rf db2 } {
 # ==============================================================================================================
 
 # -- DA_CAT -- отключать ssbsd + перестроить view da_v_cat_XXX     с новыми id
-proc DA_CAT { rf db2 } {
+proc DA_CAT { db2 } {
 
     set TABLE_NAME "DA_CAT"
 
@@ -3098,11 +2748,11 @@ proc DA_CAT { rf db2 } {
        set TABLE_LIST2 [ list DA_DEV_OPT  DA_EQUALIFIER \
          DA_FAILURE_JRNL DA_KTSUSD DA_MASTER  DA_PARAM \
          DA_PC  DA_PORT  DA_SLAVE ]
-       changeTable $rf $db2 $maxID $id_old "ID_NODE" $TABLE_LIST2
+       changeTable $db2 $maxID $id_old "ID_NODE" $TABLE_LIST2
 
        #-- ID_DEVICE
        set TABLE_LIST2 [ list J_DADV  J_DAPARAMSTATE ]
-       changeTable $rf $db2 $maxID $id_old "ID_DEVICE" $TABLE_LIST2
+       changeTable $db2 $maxID $id_old "ID_DEVICE" $TABLE_LIST2
 
 
        #--DA_CAT  ID_RESERVE
@@ -3128,11 +2778,11 @@ proc DA_CAT { rf db2 } {
        set TABLE_LIST2 [ list DA_DEV_OPT  DA_EQUALIFIER \
          DA_FAILURE_JRNL DA_KTSUSD DA_MASTER  DA_PARAM \
          DA_PC  DA_PORT  DA_SLAVE ]
-       changeTable $rf $db2 $j $maxID "ID_NODE" $TABLE_LIST2
+       changeTable $db2 $j $maxID "ID_NODE" $TABLE_LIST2
 
        #-- ID_DEVICE
        set TABLE_LIST2 [ list J_DADV  J_DAPARAMSTATE ]
-       changeTable $rf $db2 $j $maxID "ID_DEVICE" $TABLE_LIST2
+       changeTable $db2 $j $maxID "ID_DEVICE" $TABLE_LIST2
 
       }
     }
@@ -3140,17 +2790,7 @@ proc DA_CAT { rf db2 } {
     $db2 "DELETE FROM $TABLE_NAME WHERE NAME LIKE '%TEXTRENAMETEXT%' "
     $db2 commit
 
-    set strSQL3 "SELECT ${TABLE_NAME}_S.nextval FROM dual"
-    set r3 [ $db2 $strSQL3 ]
-    set l3 [ llength $r3 ]
-    if {$l3>0} {
-     set increment_old [lindex $r3 0 ]
-     set increment_old [ expr (1-int($increment_old)) ]
-     set str2 [ format "alter sequence %s_S increment by %d" $TABLE_NAME $increment_old ]
-     $db2 $str2
-     $db2 $strSQL3
-     $db2 "alter sequence ${TABLE_NAME}_S increment by 1"
-    }
+    changeSeq $db2 $TABLE_NAME
 
 
  return 0 ;
@@ -3159,7 +2799,7 @@ proc DA_CAT { rf db2 } {
 
 # ==============================================================================================================
 
-proc CCC0 { rf db2 ind1 ind2 } {
+proc CCC0 { db2 ind1 ind2 } {
 
     #--  ID_OBJ
     set TABLE_LIST2 [ list AST_LINK DG_GROUPS_DESC EA_POINTS  \
@@ -3168,59 +2808,34 @@ proc CCC0 { rf db2 ind1 ind2 } {
       OBJ_GENERATOR_PQ \
       OBJ_CNT OBJ_EL_PIN OBJ_EQUALIFIER OBJ_LOCATION OBJ_CONN_NODE OBJ_GEO \
       TOPO_EDGE ]
-    foreach T_NAME $TABLE_LIST2 {
-      if {[checkTable $db2 $T_NAME "ID_OBJ"]} {
-        $db2 "UPDATE $T_NAME SET ID_OBJ=$ind1 WHERE ID_OBJ=$ind2"
-        $db2 commit
-      }
-    }
+
+    changeTable $db2 $ind1 $ind2 "ID_OBJ" $TABLE_LIST2
+
 
     #-- ID_SWITCH
     set TABLE_LIST2 [ list OBJ_REFERENCES ]
-    foreach T_NAME $TABLE_LIST2 {
-      if {[checkTable $db2 $T_NAME "ID_SWITCH"]} {
-        $db2 "UPDATE $T_NAME SET ID_SWITCH=$ind1 WHERE ID_SWITCH=$ind2"
-        $db2 commit
-      }
-    }
+    changeTable $db2 $ind1 $ind2 "ID_SWITCH" $TABLE_LIST2
+
 
     #-- ID_OBJ_FEEDER
     set TABLE_LIST2 [ list FEED_PROP ]
-    foreach T_NAME $TABLE_LIST2 {
-      if {[checkTable $db2 $T_NAME "ID_OBJ_FEEDER"]} {
-        $db2 "UPDATE $T_NAME SET ID_OBJ_FEEDER=$ind1 WHERE ID_OBJ_FEEDER=$ind2"
-        $db2 commit
-      }
-    }
+    changeTable $db2 $ind1 $ind2 "ID_OBJ_FEEDER" $TABLE_LIST2
+
 
     #-- ID_NODE
     set TABLE_LIST2 [ list CALC_LIST TAG_LIST NME_PARAM_LIST ]
-    foreach T_NAME $TABLE_LIST2 {
-      if {[checkTable $db2 $T_NAME "ID_NODE"]} {
-        $db2 "UPDATE $T_NAME SET ID_NODE=$ind1 WHERE ID_NODE=$ind2"
-        $db2 commit
-      }
-    }
+    changeTable $db2 $ind1 $ind2 "ID_NODE" $TABLE_LIST2
 
 
     #-- ID_EQUIP
     set TABLE_LIST2 [ list DMS_CALC_RESULT_MEAS ]
-    foreach T_NAME $TABLE_LIST2 {
-      if {[checkTable $db2 $T_NAME "ID_EQUIP"]} {
-        $db2 "UPDATE $T_NAME SET ID_EQUIP=$ind1 WHERE ID_EQUIP=$ind2"
-        $db2 commit
-      }
-    }
+    changeTable $db2 $ind1 $ind2 "ID_EQUIP" $TABLE_LIST2
+
 
     #LOCK TABLE J_ELSET IN SHARE ROW EXCLUSIVE MODE;
     #--  ID_OBJECT
     set TABLE_LIST2 [ list J_ELSET  J_PHSET  J_TELEREG ]
-    foreach T_NAME $TABLE_LIST2 {
-      if {[checkTable $db2 $T_NAME "ID_OBJECT"]} {
-        $db2 "UPDATE $T_NAME SET ID_OBJECT=$ind1 WHERE ID_OBJECT=$ind2"
-        $db2 commit
-      }
-    }
+    changeTable $db2 $ind1 $ind2 "ID_OBJECT" $TABLE_LIST2
 
 
     #--RSDUJOB.JOB_MAIN   JOB_STAMPS   JOB_SWITCH_CONDITIONS
@@ -3232,14 +2847,10 @@ proc CCC0 { rf db2 ind1 ind2 } {
         $db2 "UPDATE RSDUJOB.JOB_MAIN SET ID_PURPOSE_OBJ=$ind1 WHERE ID_PURPOSE_OBJ=$ind2"
         $db2 commit
       }
-      if {[checkTable $db2 "RSDUJOB.JOB_MAIN" "ID_ENTERPRISE"]} {
-        $db2 "UPDATE RSDUJOB.JOB_MAIN SET ID_ENTERPRISE=$ind1 WHERE ID_ENTERPRISE=$ind2"
-        $db2 commit
-      }
-      if {[checkTable $rf $db2 "RSDUJOB.JOB_STAMPS" "ID_ENTERPRISE"]} {
-        $db2 "UPDATE RSDUJOB.JOB_STAMPS SET ID_ENTERPRISE=$ind1 WHERE ID_ENTERPRISE=$ind2"
-        $db2 commit
-      }
+
+      set TABLE_LIST2 [ list RSDUJOB.JOB_MAIN  RSDUJOB.JOB_STAMPS ]
+      changeTable $db2 $ind1 $ind2 "ID_ENTERPRISE" $TABLE_LIST2
+
       if {[checkTable $db2 "RSDUJOB.JOB_SWITCH_CONDITIONS" "ID_SWITCH"]} {
         $db2 "UPDATE RSDUJOB.JOB_SWITCH_CONDITIONS SET ID_SWITCH=$ind1 WHERE ID_SWITCH=$ind2"
         $db2 commit
@@ -3251,7 +2862,7 @@ proc CCC0 { rf db2 ind1 ind2 } {
 
 
 # -- OBJ_TREE -- !необходимо! гасить модули elregd, phregd, ?ssbsd?
-proc OBJ_TREE { rf db2 } {
+proc OBJ_TREE { db2 } {
 
     set shiftID 0 ; # смещение id - нет , нельзя
 
@@ -3283,7 +2894,7 @@ proc OBJ_TREE { rf db2 } {
 
         LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
 
-        CCC0 $rf $db2 $maxID $id_old
+        CCC0 $db2 $maxID $id_old
 
         if {[checkTable $db2 $TABLE_NAME "ID" ]} {
           #--- ID_PARENT
@@ -3296,7 +2907,7 @@ proc OBJ_TREE { rf db2 } {
           $db2 commit
         }
 
-        CCC0 $rf $db2 $j $maxID
+        CCC0 $db2 $j $maxID
 
       }
     }
@@ -3305,17 +2916,7 @@ proc OBJ_TREE { rf db2 } {
     $db2 "DELETE FROM $TABLE_NAME WHERE NAME LIKE '%TEXTRENAMETEXT%' "
     $db2 commit
 
-    set strSQL3 "SELECT ${TABLE_NAME}_S.nextval FROM dual"
-    set r3 [ $db2 $strSQL3 ]
-    set l3 [ llength $r3 ]
-    if {$l3>0} {
-       set increment_old [lindex $r3 0 ]
-       set increment_old [ expr (1-int($increment_old)) ]
-       set str2 [ format "alter sequence %s_S increment by %d" $TABLE_NAME $increment_old ]
-       $db2 $str2
-       $db2 $strSQL3
-       $db2 "alter sequence ${TABLE_NAME}_S increment by 1"
-    }
+    changeSeq $db2 $TABLE_NAME
 
 
  return 0 ;
@@ -3323,7 +2924,7 @@ proc OBJ_TREE { rf db2 } {
 
 
 # -- OBJ_EL_PIN
-proc OBJ_EL_PIN { rf db2 } {
+proc OBJ_EL_PIN { db2 } {
 
   set TABLE_LIST [ list OBJ_EL_PIN ]
 
@@ -3358,11 +2959,11 @@ proc OBJ_EL_PIN { rf db2 } {
 
        #--  ID_PIN
        set TABLE_LIST2 [ list MEAS_LIST TAG_LIST DMS_BNODE_PINS DMS_CALC_RESULT_MEAS ]
-       changeTable $rf $db2 $maxID $id_old "ID_PIN" $TABLE_LIST2
+       changeTable $db2 $maxID $id_old "ID_PIN" $TABLE_LIST2
 
        #--  ID_EL_PIN
        set TABLE_LIST2 [ list OBJ_AUX_EL_PIN OBJ_LIMIT_SET ]
-       changeTable $rf $db2 $maxID $id_old "ID_EL_PIN" $TABLE_LIST2
+       changeTable $db2 $maxID $id_old "ID_EL_PIN" $TABLE_LIST2
 
 
        set strSQL3 "UPDATE $TABLE_NAME SET ID=$j WHERE ID=$id_old"
@@ -3372,11 +2973,11 @@ proc OBJ_EL_PIN { rf db2 } {
 
        #--  ID_PIN
        set TABLE_LIST2 [ list MEAS_LIST TAG_LIST DMS_BNODE_PINS DMS_CALC_RESULT_MEAS ]
-       changeTable $rf $db2 $j $maxID "ID_PIN" $TABLE_LIST2
+       changeTable $db2 $j $maxID "ID_PIN" $TABLE_LIST2
 
        #--  ID_EL_PIN
        set TABLE_LIST2 [ list OBJ_AUX_EL_PIN OBJ_LIMIT_SET ]
-       changeTable $rf $db2 $j $maxID "ID_EL_PIN" $TABLE_LIST2
+       changeTable $db2 $j $maxID "ID_EL_PIN" $TABLE_LIST2
 
 
       }
@@ -3385,17 +2986,7 @@ proc OBJ_EL_PIN { rf db2 } {
     $db2 "DELETE FROM $TABLE_NAME WHERE NAME LIKE '%TEXTRENAMETEXT%' "
     $db2 commit
 
-    set strSQL3 "SELECT ${TABLE_NAME}_S.nextval FROM dual"
-    set r3 [ $db2 $strSQL3 ]
-    set l3 [ llength $r3 ]
-    if {$l3>0} {
-     set increment_old [lindex $r3 0 ]
-     set increment_old [ expr (1-int($increment_old)) ]
-     set str2 [ format "alter sequence %s_S increment by %d" $TABLE_NAME $increment_old ]
-     $db2 $str2
-     $db2 $strSQL3
-     $db2 "alter sequence ${TABLE_NAME}_S increment by 1"
-    }
+    changeSeq $db2 $TABLE_NAME
 
   }
 
@@ -3403,7 +2994,7 @@ proc OBJ_EL_PIN { rf db2 } {
 }
 
 # -- OBJ_CONN_NODE
-proc OBJ_CONN_NODE { rf db2 } {
+proc OBJ_CONN_NODE { db2 } {
 
   set TABLE_LIST [ list OBJ_CONN_NODE ]
 
@@ -3437,7 +3028,7 @@ proc OBJ_CONN_NODE { rf db2 } {
 
        #--  ID_CONN_NODE
        set TABLE_LIST2 [ list OBJ_EL_PIN VS_MODUS_NODE DMS_SCHEMES_BNODES ]
-       changeTable $rf $db2 $maxID $id_old "ID_CONN_NODE" $TABLE_LIST2
+       changeTable $db2 $maxID $id_old "ID_CONN_NODE" $TABLE_LIST2
 
        #--
        set strSQL3 "UPDATE $TABLE_NAME SET ID=$j WHERE ID=$id_old"
@@ -3445,7 +3036,7 @@ proc OBJ_CONN_NODE { rf db2 } {
        $db2 commit
 
 
-       changeTable $rf $db2 $j $maxID "ID_CONN_NODE" $TABLE_LIST2
+       changeTable $db2 $j $maxID "ID_CONN_NODE" $TABLE_LIST2
 
       }
     }
@@ -3453,17 +3044,7 @@ proc OBJ_CONN_NODE { rf db2 } {
     $db2 "DELETE FROM $TABLE_NAME WHERE NAME LIKE '%TEXTRENAMETEXT%' "
     $db2 commit
 
-    set strSQL3 "SELECT ${TABLE_NAME}_S.nextval FROM dual"
-    set r3 [ $db2 $strSQL3 ]
-    set l3 [ llength $r3 ]
-    if {$l3>0} {
-     set increment_old [lindex $r3 0 ]
-     set increment_old [ expr (1-int($increment_old)) ]
-     set str2 [ format "alter sequence %s_S increment by %d" $TABLE_NAME $increment_old ]
-     $db2 $str2
-     $db2 $strSQL3
-     $db2 "alter sequence ${TABLE_NAME}_S increment by 1"
-    }
+    changeSeq $db2 $TABLE_NAME
 
   }
 
@@ -3471,7 +3052,7 @@ proc OBJ_CONN_NODE { rf db2 } {
 }
 
 # -- OBJ_MODEL
-proc OBJ_MODEL { rf db2 } {
+proc OBJ_MODEL { db2 } {
 
   set TABLE_LIST [ list OBJ_MODEL ]
 
@@ -3505,14 +3086,14 @@ proc OBJ_MODEL { rf db2 } {
 
        #--  ID_MODEL
        set TABLE_LIST2 [ list OBJ_MODEL_MEAS  OBJ_MODEL_PARAM  OBJ_TREE ]
-       changeTable $rf $db2 $maxID $id_old "ID_MODEL" $TABLE_LIST2
+       changeTable $db2 $maxID $id_old "ID_MODEL" $TABLE_LIST2
 
        #--
        set strSQL3 "UPDATE $TABLE_NAME SET ID=$j WHERE ID=$id_old"
        $db2 $strSQL3
        $db2 commit
 
-       changeTable $rf $db2 $j $maxID "ID_MODEL" $TABLE_LIST2
+       changeTable $db2 $j $maxID "ID_MODEL" $TABLE_LIST2
 
 
       }
@@ -3521,17 +3102,7 @@ proc OBJ_MODEL { rf db2 } {
     $db2 "DELETE FROM $TABLE_NAME WHERE NAME LIKE '%TEXTRENAMETEXT%' "
     $db2 commit
 
-    set strSQL3 "SELECT ${TABLE_NAME}_S.nextval FROM dual"
-    set r3 [ $db2 $strSQL3 ]
-    set l3 [ llength $r3 ]
-    if {$l3>0} {
-     set increment_old [lindex $r3 0 ]
-     set increment_old [ expr (1-int($increment_old)) ]
-     set str2 [ format "alter sequence %s_S increment by %d" $TABLE_NAME $increment_old ]
-     $db2 $str2
-     $db2 $strSQL3
-     $db2 "alter sequence ${TABLE_NAME}_S increment by 1"
-    }
+    changeSeq $db2 $TABLE_NAME
 
   }
 
@@ -3543,7 +3114,7 @@ proc OBJ_MODEL { rf db2 } {
 # ==============================================================================================================
 
 # -- TAG_LIST
-proc TAG_LIST { rf db2 } {
+proc TAG_LIST { db2 } {
 
   set TABLE_LIST [ list TAG_LIST ]
 
@@ -3577,7 +3148,7 @@ proc TAG_LIST { rf db2 } {
        #--  ID_TAG
        set TABLE_LIST2 [ list TAG_DOCS TAG_POSITION ]
 
-       changeTable $rf $db2 $maxID $id_old "ID_TAG" $TABLE_LIST2
+       changeTable $db2 $maxID $id_old "ID_TAG" $TABLE_LIST2
 
 
        set strSQL3 "UPDATE $TABLE_NAME SET ID=$j WHERE ID=$id_old"
@@ -3585,7 +3156,7 @@ proc TAG_LIST { rf db2 } {
        $db2 commit
 
 
-       changeTable $rf $db2 $j $maxID "ID_TAG" $TABLE_LIST2
+       changeTable $db2 $j $maxID "ID_TAG" $TABLE_LIST2
 
       }
     }
@@ -3593,17 +3164,7 @@ proc TAG_LIST { rf db2 } {
     $db2 "DELETE FROM $TABLE_NAME WHERE DESCRIPTION LIKE '%TEXTRENAMETEXT%' "
     $db2 commit
 
-    set strSQL3 "SELECT ${TABLE_NAME}_S.nextval FROM dual"
-    set r3 [ $db2 $strSQL3 ]
-    set l3 [ llength $r3 ]
-    if {$l3>0} {
-     set increment_old [lindex $r3 0 ]
-     set increment_old [ expr (1-int($increment_old)) ]
-     set str2 [ format "alter sequence %s_S increment by %d" $TABLE_NAME $increment_old ]
-     $db2 $str2
-     $db2 $strSQL3
-     $db2 "alter sequence ${TABLE_NAME}_S increment by 1"
-    }
+    changeSeq $db2 $TABLE_NAME
 
   }
 
@@ -3614,7 +3175,7 @@ proc TAG_LIST { rf db2 } {
 # ==============================================================================================================
 
 # -- SYS_WAVE
-proc SYS_WAVE { rf db2 } {
+proc SYS_WAVE { db2 } {
 
   set TABLE_LIST [ list SYS_WAVE ]
 
@@ -3661,7 +3222,7 @@ proc SYS_WAVE { rf db2 } {
  TSSO_MPOFFER TSSO_MPOFFER_GTP TSSO_MPOFFER_REQUEST \
  WRPT_CAT WRPT_TMPL_CAT ]
 
-       changeTable $rf $db2 $maxID $id_old "ID_FILEWAV" $TABLE_LIST2
+       changeTable $db2 $maxID $id_old "ID_FILEWAV" $TABLE_LIST2
 
 
        set strSQL3 "UPDATE $TABLE_NAME SET ID=$j WHERE ID=$id_old"
@@ -3669,7 +3230,7 @@ proc SYS_WAVE { rf db2 } {
        $db2 commit
 
 
-       changeTable $rf $db2 $j $maxID "ID_FILEWAV" $TABLE_LIST2
+       changeTable $db2 $j $maxID "ID_FILEWAV" $TABLE_LIST2
 
       }
     }
@@ -3677,17 +3238,7 @@ proc SYS_WAVE { rf db2 } {
     $db2 "DELETE FROM $TABLE_NAME WHERE name LIKE '%TEXTRENAMETEXT%' "
     $db2 commit
 
-    set strSQL3 "SELECT ${TABLE_NAME}_S.nextval FROM dual"
-    set r3 [ $db2 $strSQL3 ]
-    set l3 [ llength $r3 ]
-    if {$l3>0} {
-     set increment_old [lindex $r3 0 ]
-     set increment_old [ expr (1-int($increment_old)) ]
-     set str2 [ format "alter sequence %s_S increment by %d" $TABLE_NAME $increment_old ]
-     $db2 $str2
-     $db2 $strSQL3
-     $db2 "alter sequence ${TABLE_NAME}_S increment by 1"
-    }
+    changeSeq $db2 $TABLE_NAME
 
   }
 
@@ -3699,7 +3250,7 @@ proc SYS_WAVE { rf db2 } {
 # ==============================================================================================================
 
 # -- SYS_TBLLST
-proc SYS_TBLLST_1 { rf db2 } {
+proc SYS_TBLLST_1 { db2 } {
 
   set TABLE_LIST [ list SYS_TBLLST ]
 
@@ -3736,7 +3287,7 @@ proc SYS_TBLLST_1 { rf db2 } {
 
        #--  ID_TAG
        set TABLE_LIST2 [ list TAG_DOCS TAG_POSITION ]
-       changeTable $rf $db2 $maxID $id_old "ID_TYPE" $TABLE_LIST2
+       changeTable $db2 $maxID $id_old "ID_TYPE" $TABLE_LIST2
 
 
        set strSQL3 "UPDATE $TABLE_NAME SET ID=$j WHERE ID=$id_old"
@@ -3744,7 +3295,7 @@ proc SYS_TBLLST_1 { rf db2 } {
        $db2 commit
 
 
-       changeTable $rf $db2 $j $maxID "ID_TYPE" $TABLE_LIST2
+       changeTable $db2 $j $maxID "ID_TYPE" $TABLE_LIST2
 
       }
     }
@@ -3752,17 +3303,7 @@ proc SYS_TBLLST_1 { rf db2 } {
     $db2 "DELETE FROM $TABLE_NAME WHERE name LIKE '%TEXTRENAMETEXT%' "
     $db2 commit
 
-    set strSQL3 "SELECT ${TABLE_NAME}_S.nextval FROM dual"
-    set r3 [ $db2 $strSQL3 ]
-    set l3 [ llength $r3 ]
-    if {$l3>0} {
-     set increment_old [lindex $r3 0 ]
-     set increment_old [ expr (1-int($increment_old)) ]
-     set str2 [ format "alter sequence %s_S increment by %d" $TABLE_NAME $increment_old ]
-     $db2 $str2
-     $db2 $strSQL3
-     $db2 "alter sequence ${TABLE_NAME}_S increment by 1"
-    }
+    changeSeq $db2 $TABLE_NAME
 
   }
 
@@ -3773,7 +3314,7 @@ proc SYS_TBLLST_1 { rf db2 } {
 # ==============================================================================================================
 
 # -- SYS_MEAS_TYPES
-proc SYS_MEAS_TYPES { rf db2 } {
+proc SYS_MEAS_TYPES { db2 } {
 
   set TABLE_LIST [ list SYS_MEAS_TYPES ]
 
@@ -3810,11 +3351,11 @@ proc SYS_MEAS_TYPES { rf db2 } {
 
        #--  ID_TYPE
        set TABLE_LIST2 [ list CALC_LIST DG_LIST NME_PARAM_LIST ]
-       changeTable $rf $db2 $maxID $id_old "ID_TYPE" $TABLE_LIST2
+       changeTable $db2 $maxID $id_old "ID_TYPE" $TABLE_LIST2
 
        #--  ID_MEAS_TYPE
        set TABLE_LIST2 [ list DMS_CALC_RESULT_MEAS DMS_EXTEQUIV_MEAS MEAS_LIST OBJ_MODEL_MEAS SYS_OTYP_MEAS ]
-       changeTable $rf $db2 $maxID $id_old "ID_MEAS_TYPE" $TABLE_LIST2
+       changeTable $db2 $maxID $id_old "ID_MEAS_TYPE" $TABLE_LIST2
 
 
        set strSQL3 "UPDATE $TABLE_NAME SET ID=$j WHERE ID=$id_old"
@@ -3824,11 +3365,11 @@ proc SYS_MEAS_TYPES { rf db2 } {
 
        #--  ID_TYPE
        set TABLE_LIST2 [ list CALC_LIST DG_LIST NME_PARAM_LIST ]
-       changeTable $rf $db2 $j $maxID "ID_TYPE" $TABLE_LIST2
+       changeTable $db2 $j $maxID "ID_TYPE" $TABLE_LIST2
 
        #--  ID_MEAS_TYPE
        set TABLE_LIST2 [ list DMS_CALC_RESULT_MEAS DMS_EXTEQUIV_MEAS MEAS_LIST OBJ_MODEL_MEAS SYS_OTYP_MEAS ]
-       changeTable $rf $db2 $j $maxID "ID_MEAS_TYPE" $TABLE_LIST2
+       changeTable $db2 $j $maxID "ID_MEAS_TYPE" $TABLE_LIST2
 
       }
     }
@@ -3836,17 +3377,7 @@ proc SYS_MEAS_TYPES { rf db2 } {
     $db2 "DELETE FROM $TABLE_NAME WHERE name LIKE '%TEXTRENAMETEXT%' "
     $db2 commit
 
-    set strSQL3 "SELECT ${TABLE_NAME}_S.nextval FROM dual"
-    set r3 [ $db2 $strSQL3 ]
-    set l3 [ llength $r3 ]
-    if {$l3>0} {
-     set increment_old [lindex $r3 0 ]
-     set increment_old [ expr (1-int($increment_old)) ]
-     set str2 [ format "alter sequence %s_S increment by %d" $TABLE_NAME $increment_old ]
-     $db2 $str2
-     $db2 $strSQL3
-     $db2 "alter sequence ${TABLE_NAME}_S increment by 1"
-    }
+    changeSeq $db2 $TABLE_NAME
 
   }
 
@@ -3857,7 +3388,7 @@ proc SYS_MEAS_TYPES { rf db2 } {
 # ==============================================================================================================
 
 # -- SYS_PUNIT
-proc SYS_PUNIT { rf db2 } {
+proc SYS_PUNIT { db2 } {
 
   set TABLE_LIST [ list SYS_PUNIT ]
 
@@ -3896,7 +3427,7 @@ proc SYS_PUNIT { rf db2 } {
        set TABLE_LIST2 [ list DMS_CALC_RESULT_MEAS DMS_EXTEQUIV_MEAS DMS_CALC_INIPARAMS DMS_CALC_INIPARAMS_DEFAULT \
  OBJ_MODEL_PARAM OBJ_PARAM SYS_MEAS_TYPES SYS_OTYP_PARAM SYS_PARAM_TYPES VS_FORM_PARAMTYPE ]
 
-       changeTable $rf $db2 $maxID $id_old "ID_UNIT" $TABLE_LIST2
+       changeTable $db2 $maxID $id_old "ID_UNIT" $TABLE_LIST2
 
 
        set strSQL3 "UPDATE $TABLE_NAME SET ID=$j WHERE ID=$id_old"
@@ -3904,7 +3435,7 @@ proc SYS_PUNIT { rf db2 } {
        $db2 commit
 
 
-       changeTable $rf $db2 $j $maxID "ID_UNIT" $TABLE_LIST2
+       changeTable $db2 $j $maxID "ID_UNIT" $TABLE_LIST2
 
       }
     }
@@ -3912,17 +3443,7 @@ proc SYS_PUNIT { rf db2 } {
     $db2 "DELETE FROM $TABLE_NAME WHERE name LIKE '%TEXTRENAMETEXT%' "
     $db2 commit
 
-    set strSQL3 "SELECT ${TABLE_NAME}_S.nextval FROM dual"
-    set r3 [ $db2 $strSQL3 ]
-    set l3 [ llength $r3 ]
-    if {$l3>0} {
-     set increment_old [lindex $r3 0 ]
-     set increment_old [ expr (1-int($increment_old)) ]
-     set str2 [ format "alter sequence %s_S increment by %d" $TABLE_NAME $increment_old ]
-     $db2 $str2
-     $db2 $strSQL3
-     $db2 "alter sequence ${TABLE_NAME}_S increment by 1"
-    }
+    changeSeq $db2 $TABLE_NAME
 
   }
 
@@ -3934,7 +3455,7 @@ proc SYS_PUNIT { rf db2 } {
 # ==============================================================================================================
 
 # -- SYS_PTYP
-proc SYS_PTYP { rf db2 } {
+proc SYS_PTYP { db2 } {
 
   set TABLE_LIST [ list SYS_PTYP ]
 
@@ -3971,11 +3492,11 @@ proc SYS_PTYP { rf db2 } {
 
        #--  ID_PTYPE
        set TABLE_LIST2 [ list OBJ_LIMIT ]
-       changeTable $rf $db2 $maxID $id_old "ID_PTYPE" $TABLE_LIST2
+       changeTable $db2 $maxID $id_old "ID_PTYPE" $TABLE_LIST2
 
        #--  ID_TYPE
        set TABLE_LIST2 [ list SYS_MEAS_TYPES SYS_PARAM_TYPES SYS_PUNIT ]
-       changeTable $rf $db2 $maxID $id_old "ID_TYPE" $TABLE_LIST2
+       changeTable $db2 $maxID $id_old "ID_TYPE" $TABLE_LIST2
 
 
        set strSQL3 "UPDATE $TABLE_NAME SET ID=$j WHERE ID=$id_old"
@@ -3985,11 +3506,11 @@ proc SYS_PTYP { rf db2 } {
 
        #--  ID_PTYPE
        set TABLE_LIST2 [ list OBJ_LIMIT ]
-       changeTable $rf $db2 $j $maxID "ID_PTYPE" $TABLE_LIST2
+       changeTable $db2 $j $maxID "ID_PTYPE" $TABLE_LIST2
 
        #--  ID_TYPE
        set TABLE_LIST2 [ list SYS_MEAS_TYPES SYS_PARAM_TYPES SYS_PUNIT ]
-       changeTable $rf $db2 $j $maxID "ID_TYPE" $TABLE_LIST2
+       changeTable $db2 $j $maxID "ID_TYPE" $TABLE_LIST2
 
       }
     }
@@ -3997,17 +3518,7 @@ proc SYS_PTYP { rf db2 } {
     $db2 "DELETE FROM $TABLE_NAME WHERE name LIKE '%TEXTRENAMETEXT%' "
     $db2 commit
 
-    set strSQL3 "SELECT ${TABLE_NAME}_S.nextval FROM dual"
-    set r3 [ $db2 $strSQL3 ]
-    set l3 [ llength $r3 ]
-    if {$l3>0} {
-     set increment_old [lindex $r3 0 ]
-     set increment_old [ expr (1-int($increment_old)) ]
-     set str2 [ format "alter sequence %s_S increment by %d" $TABLE_NAME $increment_old ]
-     $db2 $str2
-     $db2 $strSQL3
-     $db2 "alter sequence ${TABLE_NAME}_S increment by 1"
-    }
+    changeSeq $db2 $TABLE_NAME
 
   }
 
@@ -4019,7 +3530,7 @@ proc SYS_PTYP { rf db2 } {
 # ==============================================================================================================
 
 # -- SYS_PARAM_TYPES
-proc SYS_PARAM_TYPES { rf db2 } {
+proc SYS_PARAM_TYPES { db2 } {
 
   set TABLE_LIST [ list SYS_PARAM_TYPES ]
 
@@ -4057,7 +3568,7 @@ proc SYS_PARAM_TYPES { rf db2 } {
        #--  ID_PARAM_TYPE
        set TABLE_LIST2 [ list DMS_CALC_INIPARAMS DMS_CALC_INIPARAMS_DEFAULT OBJ_MODEL_PARAM OBJ_PARAM SYS_OTYP_PARAM VS_FORM_INIPARAMS ]
 
-       changeTable $rf $db2 $maxID $id_old "ID_PARAM_TYPE" $TABLE_LIST2
+       changeTable $db2 $maxID $id_old "ID_PARAM_TYPE" $TABLE_LIST2
 
 
        set strSQL3 "UPDATE $TABLE_NAME SET ID=$j WHERE ID=$id_old"
@@ -4065,7 +3576,7 @@ proc SYS_PARAM_TYPES { rf db2 } {
        $db2 commit
 
 
-       changeTable $rf $db2 $j $maxID "ID_PARAM_TYPE" $TABLE_LIST2
+       changeTable $db2 $j $maxID "ID_PARAM_TYPE" $TABLE_LIST2
 
       }
     }
@@ -4073,17 +3584,7 @@ proc SYS_PARAM_TYPES { rf db2 } {
     $db2 "DELETE FROM $TABLE_NAME WHERE name LIKE '%TEXTRENAMETEXT%' "
     $db2 commit
 
-    set strSQL3 "SELECT ${TABLE_NAME}_S.nextval FROM dual"
-    set r3 [ $db2 $strSQL3 ]
-    set l3 [ llength $r3 ]
-    if {$l3>0} {
-     set increment_old [lindex $r3 0 ]
-     set increment_old [ expr (1-int($increment_old)) ]
-     set str2 [ format "alter sequence %s_S increment by %d" $TABLE_NAME $increment_old ]
-     $db2 $str2
-     $db2 $strSQL3
-     $db2 "alter sequence ${TABLE_NAME}_S increment by 1"
-    }
+    changeSeq $db2 $TABLE_NAME
 
   }
 
@@ -4094,7 +3595,7 @@ proc SYS_PARAM_TYPES { rf db2 } {
 # ==============================================================================================================
 
 # -- SYS_DB_PART
-proc SYS_DB_PART { rf db2 } {
+proc SYS_DB_PART { db2 } {
 
   set TABLE_LIST [ list SYS_DB_PART ]
 
@@ -4131,7 +3632,7 @@ proc SYS_DB_PART { rf db2 } {
 
        #--  ID_NODE
        set TABLE_LIST2 [ list SYS_TBLLST ]
-       changeTable $rf $db2 $maxID $id_old "ID_NODE" $TABLE_LIST2
+       changeTable $db2 $maxID $id_old "ID_NODE" $TABLE_LIST2
 
 
        set strSQL3 "UPDATE $TABLE_NAME SET ID_PARENT=$maxID WHERE ID_PARENT=$id_old"
@@ -4146,7 +3647,7 @@ proc SYS_DB_PART { rf db2 } {
        $db2 $strSQL3
        $db2 commit
 
-       changeTable $rf $db2 $j $maxID "ID_NODE" $TABLE_LIST2
+       changeTable $db2 $j $maxID "ID_NODE" $TABLE_LIST2
 
 
       }
@@ -4155,17 +3656,7 @@ proc SYS_DB_PART { rf db2 } {
     $db2 "DELETE FROM $TABLE_NAME WHERE name LIKE '%TEXTRENAMETEXT%' "
     $db2 commit
 
-    set strSQL3 "SELECT ${TABLE_NAME}_S.nextval FROM dual"
-    set r3 [ $db2 $strSQL3 ]
-    set l3 [ llength $r3 ]
-    if {$l3>0} {
-     set increment_old [lindex $r3 0 ]
-     set increment_old [ expr (1-int($increment_old)) ]
-     set str2 [ format "alter sequence %s_S increment by %d" $TABLE_NAME $increment_old ]
-     $db2 $str2
-     $db2 $strSQL3
-     $db2 "alter sequence ${TABLE_NAME}_S increment by 1"
-    }
+    changeSeq $db2 $TABLE_NAME
 
   }
 
@@ -4176,7 +3667,7 @@ proc SYS_DB_PART { rf db2 } {
 # ==============================================================================================================
 
 # -- SYS_OTYP
-proc SYS_OTYP { rf db2 } {
+proc SYS_OTYP { db2 } {
 
   set TABLE_LIST [ list SYS_OTYP ]
 
@@ -4248,17 +3739,7 @@ proc SYS_OTYP { rf db2 } {
     $db2 "DELETE FROM $TABLE_NAME WHERE name LIKE '%TEXTRENAMETEXT%' "
     $db2 commit
 
-    set strSQL3 "SELECT ${TABLE_NAME}_S.nextval FROM dual"
-    set r3 [ $db2 $strSQL3 ]
-    set l3 [ llength $r3 ]
-    if {$l3>0} {
-     set increment_old [lindex $r3 0 ]
-     set increment_old [ expr (1-int($increment_old)) ]
-     set str2 [ format "alter sequence %s_S increment by %d" $TABLE_NAME $increment_old ]
-     $db2 $str2
-     $db2 $strSQL3
-     $db2 "alter sequence ${TABLE_NAME}_S increment by 1"
-    }
+    changeSeq $db2 $TABLE_NAME
 
   }
 
@@ -4271,184 +3752,184 @@ proc SYS_OTYP { rf db2 } {
 
 
 # -- одиночные таблицы
-#BASE_ID $rf db2
-#BASE_ID $rf db2
+#BASE_ID db2
+#BASE_ID db2
 
 # -- RSDU_UPDATE
-#RSDU_UPDATE $rf db2
+#RSDU_UPDATE db2
 
 
 # -- SYS_TREE21 -- ?ломается структура?
-#SYS_TREE21  $rf db2
+#SYS_TREE21 db2
 
 # -- SYS_DB_PART
-# # SYS_DB_PART $rf db2
+# # SYS_DB_PART db2
 
 
 # -- DG_GROUPS корректировка сервис GROUP_ID
-#DG_GROUPS  $rf db2
+#DG_GROUPS db2
 
 
 # -- S_GROUPS  - корректировка /etc/ema/host.ini  GROUP_ID
-#S_GROUPS $rf db2
+#S_GROUPS db2
 
 # -- из за больших журналов переименовываение занимает большой промежуток времени
 # -- после необх менять все id ssbsd и тд.
 # --
 # -- S_USERS -- необ гасить все модули и запускать после S_GROUPS
-# ##S_USERS $rf db2
+# ##S_USERS db2
 # -- S_USERS=DB_S_USERS -- необ гасить все модули и запускать после S_GROUPS - ID= КАК db_USERS
-# ##S_USERS__DB_S_USERS $rf db2
+# ##S_USERS__DB_S_USERS db2
 # -- ПОСЛЕ корректировка /etc/ema/host.ini  USER_ID  + ID SSBSD
 
 
 # -- AD_DIR
-#AD_DIR $rf db2
+#AD_DIR db2
 # -- AD_DTYP ------!!!!--ID_TYPE !!!! не запускать.!!!!! sysmon\ssbsd сильно зависят
-# !!!!!####AD_DTYP $rf db2!!!!
+# !!!!!####AD_DTYP db2!!!!
 # -- AD_LIST
-#AD_LIST $rf db2
+#AD_LIST db2
 
 
 # -- AST_ORG -------!!!!
 # # ##
-#AST_ORG  $rf db2
+#AST_ORG  db2
 
 # -- AST_CNT
-#AST_CNT  $rf db2
+#AST_CNT  db2
 
 
 # -- US_BUTTON_DESC -- запускать НЕЛЬЗЯ, потому что id жестко забиты в appbar-e
-# ###US_BUTTON_DESC  $rf db2
+# ###US_BUTTON_DESC  db2
 # -- US_MENU -- уточнять id ID_BUTTON
-#US_MENU  $rf db2
+#US_MENU  db2
 
 
 # -- SYS_APD
-#SYS_APD  $rf db2
+#SYS_APD  db2
 # -- !!!!!
 # ###
-#SYS_APPL $rf db2
+#SYS_APPL db2
 #
 
 # -- RPT_DIR
-#RPT_DIR $rf db2
+#RPT_DIR db2
 # -- RPT_LST  - необходимо проверить ID_TABLE=71 - RPT_LST , ID_APPL=964 - клиент просмотра отчетов
 # -- SELECT * FROM SYS_TBLLST WHERE TABLE_NAME like '%RPT_LST%'
 # -- SELECT * FROM SYS_APPL WHERE ALIAS like '%crviewer%'
-#RPT_LST $rf db2 71 964
+#RPT_LST db2 71 964
 
 
 # -- VS_GROUP
-#VS_GROUP $rf db2
+#VS_GROUP db2
 # -- VS_FORM  - необходимо проверить ID_TABLE=43 - VS_FORM_LST , ID_APPL=1232 - schemeviewer.exe
 # -- SELECT * FROM SYS_TBLLST WHERE TABLE_NAME like '%VS_FORM_LST%'
 # -- SELECT * FROM SYS_APPL WHERE ALIAS like '%schemeviewer%'
-#VS_FORM $rf db2 43 1232
+#VS_FORM db2 43 1232
 # -- VS_COMP - запуск после VS_FORM
-#VS_COMP $rf db2
+#VS_COMP db2
 
 
 # -- VP_GROUP
-#VP_GROUP $rf db2
+#VP_GROUP db2
 # -- VP_PANEL - необходимо проверить ID_TABLE=40 - VP_PANEL , ID_APPL=87 - pnview.exe
 # -- SELECT * FROM SYS_TBLLST WHERE TABLE_NAME like '%VP_PANEL%'
 # -- SELECT * FROM SYS_APPL WHERE ALIAS like '%pnview%'
-#VP_PANEL $rf db2 40 87
+#VP_PANEL db2 40 87
 # -- VP_CTRL
-#VP_CTRL $rf db2
+#VP_CTRL db2
 
 
 # -- R_GROUP
-#R_GROUP $rf db2
+#R_GROUP db2
 #  -- R_KADR  - необходимо проверить ID_TABLE=46 - R_KADR , ID_APPL=602 - retroview_live.exe
 # -- SELECT * FROM SYS_TBLLST WHERE TABLE_NAME like '%R_KADR%'
 # -- SELECT * FROM SYS_APPL WHERE ALIAS like '%retroview_live%'
-#R_KADR $rf db2 46 602
+#R_KADR db2 46 602
 
 
 
 # -- J_DBE - полностью очистить
 # -- DBE_STORAGE
-#DBE_STORAGE $rf db2
+#DBE_STORAGE db2
 # -- DBE_JOB
-#DBE_JOB $rf db2
+#DBE_JOB db2
 # -- DBE_ACTION
-#DBE_ACTION $rf db2
+#DBE_ACTION db2
 
 
 
 # -- ARC_SUBSYST_PROFILE
-#ARC1 $rf db2
+#ARC1 db2
 
 
 # -- журналы -- отключать ssbsd
-# AA2 $rf db2
+# AA2 db2
 
 
 # не запускать
 # -- MEAS_LIST - запускать очень осторожно, если нет привязки к отчетам - !нет переименовывания таблиц\view архивов !
 # --
-# ##### MEAS_LIST $rf db2
+# ##### MEAS_LIST db2
 #
 
 # не запускать
 # -- DA_PARAM - запускать очень осторожно, если нет привязки к отчетам - !нет переименовывания таблиц\view архивов !
 # -- контроль квалификаторов! в DA_DEV_DESC id могут для контроля Приборов. также id в LUA.
-# ##### DA_PARAM $rf db2
+# ##### DA_PARAM db2
 # нарушаются привязки в Электрическом режиме
 
 # -- DA_DEV
-#DA_DEV $rf db2
+#DA_DEV db2
 
 # -- DA_DEV_DESC - уточнить ID_PROTO_POINT = 51 (по умолчанию)
-#DA_DEV_DESC $rf db2
+#DA_DEV_DESC db2
 
 # -- DA_CAT -- отключать ssbsd + перестроить view с новыми id
-#DA_CAT $rf db2
+#DA_CAT db2
 
 
 # -- OBJ_TREE -- отключать ssbsd + контроль Сигнальной системы
 # -- !необходимо! гасить модули elregd, phregd, ?ssbsd? - ! ОТЧЕТЫ - корректировка обьектов в процедурах!
 # #####
-#OBJ_TREE $rf db2
+#OBJ_TREE  db2
 #
 # -- OBJ_EL_PIN
-#OBJ_EL_PIN $rf db2
+#OBJ_EL_PIN  db2
 # -- OBJ_CONN_NODE
-#OBJ_CONN_NODE $rf db2
+#OBJ_CONN_NODE  db2
 # -- OBJ_MODEL
-#OBJ_MODEL $rf db2
+#OBJ_MODEL  db2
 #
 
 
 
 # -- TAG_LIST
-# # TAG_LIST $rf db2
+# # TAG_LIST  db2
 
 
 # -- SYS_WAVE   -- не рекомендуем запускать, может возникнуть коллизия в именах файлов
-# ## SYS_WAVE $rf db2
+# ## SYS_WAVE  db2
 
 
 # -- SYS_TBLLST
-# # SYS_TBLLST_1 $rf db2
+# # SYS_TBLLST_1  db2
 
 
 # -- SYS_MEAS_TYPES
-# # SYS_MEAS_TYPES $rf db2
+# # SYS_MEAS_TYPES  db2
 
 # -- SYS_PUNIT
-# #  SYS_PUNIT $rf db2
+# #  SYS_PUNIT  db2
 
 # -- SYS_PTYP
-# # SYS_PTYP $rf db2
+# # SYS_PTYP  db2
 
 # -- SYS_PARAM_TYPES
-# # SYS_PARAM_TYPES $rf db2
+# # SYS_PARAM_TYPES  db2
 
 # -- SYS_OTYP
-# # SYS_OTYP $rf db2
+# # SYS_OTYP  db2
 
 # ==============================================================================================================
 
