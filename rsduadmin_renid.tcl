@@ -86,29 +86,19 @@ proc BASE1 { rf db2 } {
  OBJ_AUX_EL_PIN OBJ_LINK OBJ_LOCATION OBJ_MODEL_PARAM OBJ_PARAM \
  VP_PARAMS \
  SYS_APP_SERV_LST SYS_APP_SERVICES SYS_APP_SSYST SYS_APP_INI \
+ SYS_OTYP_MEAS SYS_OTYP_PARAM \
  SYS_TBLREF SYS_TBLLNK \
  S_U_RGHT S_G_RGHT S_RIGHTS \
+ SYS_UNIT \
  SIG_PROP \
- US_ZONE US_VARS US_SIGN_PROP US_SIGN_GROUP US_SIG US_MSGLOG US_JSWITCH_FILTERS US_MAIL ]
+ TAG_DOCS \
+ US_ZONE US_VARS US_SIGN_PROP US_SIGN_GROUP US_SIG US_MSGLOG US_JSWITCH_FILTERS US_MAIL \
+ VSZ_DICT ]
 
 
-  set TABLE_LIST_3 [ list AD_ACSRVC AD_SINFO_INI AD_JRNL \
- RSDU_ERROR \
- DA_SLAVE DA_MASTER DA_DEV_OPT DA_PC DA_PORT \
- MEAS_EL_DEPENDENT_SVAL \
- DBE_DESTINATION \
- DG_KDU_JOURNAL \
- R_PSETS \
- OBJ_GENERATOR_PQ \
- OBJ_MODEL_MEAS OBJ_PARAM OBJ_CONSTRAINT \
- OBJ_AUX_EL_PIN OBJ_LINK OBJ_LOCATION OBJ_MODEL_PARAM OBJ_PARAM \
- SYS_APP_SERV_LST SYS_APP_SERVICES SYS_APP_SSYST SYS_APP_INI \
- SYS_TBLREF SYS_TBLLNK \
- S_U_RGHT S_G_RGHT S_RIGHTS \
- SIG_PROP \
- US_ZONE US_VARS US_SIGN_PROP US_SIGN_GROUP US_SIG US_MSGLOG ]
+  set TABLE_LIST_3 [ list ]
 
-  #set TABLE_LIST [ list OBJ_MODEL_MEAS OBJ_PARAM ]
+  #set TABLE_LIST_5 [ list OBJ_MODEL_MEAS OBJ_PARAM ]
 
   foreach TABLE_NAME $TABLE_LIST {
 
@@ -2174,7 +2164,7 @@ proc RPT_LST { rf db2 ID_TABLE ID_APPL } {
        $db2 commit
 
        #--ID_TABLE=71 - RPT_LST
-	   set TABLE_LIST [ list VP_PARAMS VS_REGIM_TUNE ]
+     set TABLE_LIST [ list VP_PARAMS VS_REGIM_TUNE ]
        foreach T_NAME $TABLE_LIST {
          $db2 "UPDATE $T_NAME SET ID_PARAM=$maxID WHERE ID_PARAM=$id_old AND ID_TABLE=$ID_TABLE"
          $db2 commit
@@ -2195,7 +2185,7 @@ proc RPT_LST { rf db2 ID_TABLE ID_APPL } {
        $db2 commit
 
        #--ID_TABLE=71 - RPT_LST
-	   set TABLE_LIST [ list VP_PARAMS VS_REGIM_TUNE ]
+     set TABLE_LIST [ list VP_PARAMS VS_REGIM_TUNE ]
        foreach T_NAME $TABLE_LIST {
          $db2 "UPDATE $T_NAME SET ID_PARAM=$j WHERE ID_PARAM=$maxID AND ID_TABLE=$ID_TABLE"
          $db2 commit
@@ -2689,8 +2679,8 @@ proc ARC1 { rf db2 } {
        LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
 
        #--
-	   set TABLE_LIST [ list ARC_SERVICES_TUNE ARC_SERVICES_ACCESS ]
-       foreach T_NAME $TABLE_LIST {
+       set TABLE_LIST2 [ list ARC_SERVICES_TUNE ARC_SERVICES_ACCESS ]
+       foreach T_NAME $TABLE_LIST2 {
          $db2 "UPDATE $T_NAME SET ID_SPROFILE=$maxID WHERE ID_SPROFILE=$id_old"
          $db2 commit
        }
@@ -2700,8 +2690,8 @@ proc ARC1 { rf db2 } {
        $db2 commit
 
        #--
-	   set TABLE_LIST [ list ARC_SERVICES_TUNE ARC_SERVICES_ACCESS ]
-       foreach T_NAME $TABLE_LIST {
+       set TABLE_LIST2 [ list ARC_SERVICES_TUNE ARC_SERVICES_ACCESS ]
+       foreach T_NAME $TABLE_LIST2 {
          $db2 "UPDATE $T_NAME SET ID_SPROFILE=$j WHERE ID_SPROFILE=$maxID"
          $db2 commit
        }
@@ -2932,8 +2922,8 @@ and id_node in \
        LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
 
 
-       set TABLE_LIST [ list DA_ARC  DA_PARGROUP_TUNE DA_PROFILE DA_VAL ]
-       foreach T_NAME $TABLE_LIST {
+       set TABLE_LIST2 [ list DA_ARC  DA_PARGROUP_TUNE DA_PROFILE DA_VAL ]
+       foreach T_NAME $TABLE_LIST2 {
          $db2 "UPDATE $T_NAME SET ID_PARAM=$maxID WHERE ID_PARAM=$id_old"
          $db2 commit
        }
@@ -2961,8 +2951,8 @@ and id_node in \
        $db2 commit
 
 
-       set TABLE_LIST [ list DA_ARC  DA_PARGROUP_TUNE DA_PROFILE DA_VAL ]
-       foreach T_NAME $TABLE_LIST {
+       set TABLE_LIST2 [ list DA_ARC  DA_PARGROUP_TUNE DA_PROFILE DA_VAL ]
+       foreach T_NAME $TABLE_LIST2 {
          $db2 "UPDATE $T_NAME SET ID_PARAM=$j WHERE ID_PARAM=$maxID"
          $db2 commit
        }
@@ -3052,8 +3042,8 @@ proc DA_DEV { rf db2 } {
 
        LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
 
-       set TABLE_LIST [ list DA_SLAVE  DA_DEV_PROTO  DA_DEV_DESC ]
-       foreach T_NAME $TABLE_LIST {
+       set TABLE_LIST2 [ list DA_SLAVE  DA_DEV_PROTO  DA_DEV_DESC ]
+       foreach T_NAME $TABLE_LIST2 {
          $db2 "UPDATE $T_NAME SET ID_DEV=$maxID WHERE ID_DEV=$id_old"
          $db2 commit
        }
@@ -3064,8 +3054,8 @@ proc DA_DEV { rf db2 } {
        $db2 commit
 
 
-       set TABLE_LIST [ list DA_SLAVE  DA_DEV_PROTO  DA_DEV_DESC ]
-       foreach T_NAME $TABLE_LIST {
+       set TABLE_LIST2 [ list DA_SLAVE  DA_DEV_PROTO  DA_DEV_DESC ]
+       foreach T_NAME $TABLE_LIST2 {
          $db2 "UPDATE $T_NAME SET ID_DEV=$j WHERE ID_DEV=$maxID"
          $db2 commit
        }
@@ -3214,10 +3204,10 @@ proc DA_CAT { rf db2 } {
        LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
 
        #--  ID_NODE
-       set TABLE_LIST [ list DA_DEV_OPT  DA_EQUALIFIER \
+       set TABLE_LIST2 [ list DA_DEV_OPT  DA_EQUALIFIER \
          DA_FAILURE_JRNL DA_KTSUSD DA_MASTER  DA_PARAM \
          DA_PC  DA_PORT  DA_SLAVE ]
-       foreach T_NAME $TABLE_LIST {
+       foreach T_NAME $TABLE_LIST2 {
          $db2 "UPDATE $T_NAME SET ID_NODE=$maxID WHERE ID_NODE=$id_old"
          $db2 commit
        }
@@ -3250,10 +3240,10 @@ proc DA_CAT { rf db2 } {
        $db2 commit
 
        #--  ID_NODE
-       set TABLE_LIST [ list DA_DEV_OPT  DA_EQUALIFIER \
+       set TABLE_LIST2 [ list DA_DEV_OPT  DA_EQUALIFIER \
          DA_FAILURE_JRNL DA_KTSUSD DA_MASTER  DA_PARAM \
          DA_PC  DA_PORT  DA_SLAVE ]
-       foreach T_NAME $TABLE_LIST {
+       foreach T_NAME $TABLE_LIST2 {
          $db2 "UPDATE $T_NAME SET ID_NODE=$j WHERE ID_NODE=$maxID"
          $db2 commit
        }
@@ -3293,13 +3283,13 @@ proc DA_CAT { rf db2 } {
 proc CCC0 { rf db2 ind1 ind2 } {
 
     #--  ID_OBJ
-    set TABLE_LIST [ list AST_LINK DG_GROUPS_DESC EA_POINTS  \
+    set TABLE_LIST2 [ list AST_LINK DG_GROUPS_DESC EA_POINTS  \
       NTP_EDGE MEAS_LIST \
       OBJ_AUX_EL_PIN OBJ_LIMIT_SET OBJ_NAMES OBJ_PARAM OBJ_PQCURVES \
       OBJ_GENERATOR_PQ \
       OBJ_CNT OBJ_EL_PIN OBJ_EQUALIFIER OBJ_LOCATION OBJ_CONN_NODE OBJ_GEO \
       TOPO_EDGE ]
-    foreach T_NAME $TABLE_LIST {
+    foreach T_NAME $TABLE_LIST2 {
       if {[checkTable $rf $db2 $T_NAME "ID_OBJ"]} {
         $db2 "UPDATE $T_NAME SET ID_OBJ=$ind1 WHERE ID_OBJ=$ind2"
         $db2 commit
@@ -3307,8 +3297,8 @@ proc CCC0 { rf db2 ind1 ind2 } {
     }
 
     #-- ID_SWITCH
-    set TABLE_LIST [ list OBJ_REFERENCES ]
-    foreach T_NAME $TABLE_LIST {
+    set TABLE_LIST2 [ list OBJ_REFERENCES ]
+    foreach T_NAME $TABLE_LIST2 {
       if {[checkTable $rf $db2 $T_NAME "ID_SWITCH"]} {
         $db2 "UPDATE $T_NAME SET ID_SWITCH=$ind1 WHERE ID_SWITCH=$ind2"
         $db2 commit
@@ -3316,8 +3306,8 @@ proc CCC0 { rf db2 ind1 ind2 } {
     }
 
     #-- ID_OBJ_FEEDER
-    set TABLE_LIST [ list FEED_PROP ]
-    foreach T_NAME $TABLE_LIST {
+    set TABLE_LIST2 [ list FEED_PROP ]
+    foreach T_NAME $TABLE_LIST2 {
       if {[checkTable $rf $db2 $T_NAME "ID_OBJ_FEEDER"]} {
         $db2 "UPDATE $T_NAME SET ID_OBJ_FEEDER=$ind1 WHERE ID_OBJ_FEEDER=$ind2"
         $db2 commit
@@ -3325,8 +3315,8 @@ proc CCC0 { rf db2 ind1 ind2 } {
     }
 
     #-- ID_NODE
-    set TABLE_LIST [ list CALC_LIST TAG_LIST NME_PARAM_LIST ]
-    foreach T_NAME $TABLE_LIST {
+    set TABLE_LIST2 [ list CALC_LIST TAG_LIST NME_PARAM_LIST ]
+    foreach T_NAME $TABLE_LIST2 {
       if {[checkTable $rf $db2 $T_NAME "ID_NODE"]} {
         $db2 "UPDATE $T_NAME SET ID_NODE=$ind1 WHERE ID_NODE=$ind2"
         $db2 commit
@@ -3335,8 +3325,8 @@ proc CCC0 { rf db2 ind1 ind2 } {
 
 
     #-- ID_EQUIP
-    set TABLE_LIST [ list DMS_CALC_RESULT_MEAS ]
-    foreach T_NAME $TABLE_LIST {
+    set TABLE_LIST2 [ list DMS_CALC_RESULT_MEAS ]
+    foreach T_NAME $TABLE_LIST2 {
       if {[checkTable $rf $db2 $T_NAME "ID_EQUIP"]} {
         $db2 "UPDATE $T_NAME SET ID_EQUIP=$ind1 WHERE ID_EQUIP=$ind2"
         $db2 commit
@@ -3345,8 +3335,8 @@ proc CCC0 { rf db2 ind1 ind2 } {
 
     #LOCK TABLE J_ELSET IN SHARE ROW EXCLUSIVE MODE;
     #--  ID_OBJECT
-    set TABLE_LIST [ list J_ELSET  J_PHSET  J_TELEREG ]
-    foreach T_NAME $TABLE_LIST {
+    set TABLE_LIST2 [ list J_ELSET  J_PHSET  J_TELEREG ]
+    foreach T_NAME $TABLE_LIST2 {
       if {[checkTable $rf $db2 $T_NAME "ID_OBJECT"]} {
         $db2 "UPDATE $T_NAME SET ID_OBJECT=$ind1 WHERE ID_OBJECT=$ind2"
         $db2 commit
@@ -3354,7 +3344,7 @@ proc CCC0 { rf db2 ind1 ind2 } {
     }
 
 
-      #--RSDUJOB.JOB_MAIN   JOB_STAMPS   JOB_SWITCH_CONDITIONS
+    #--RSDUJOB.JOB_MAIN   JOB_STAMPS   JOB_SWITCH_CONDITIONS
       if {[checkTable $rf $db2 "RSDUJOB.JOB_MAIN" "ID_OBJ"]} {
         $db2 "UPDATE RSDUJOB.JOB_MAIN SET ID_OBJ=$ind1 WHERE ID_OBJ=$ind2"
         $db2 commit
@@ -3488,19 +3478,19 @@ proc OBJ_EL_PIN { rf db2 } {
 
 
        #--  ID_PIN
-       set TABLE_LIST [ list MEAS_LIST TAG_LIST DMS_BNODE_PINS DMS_CALC_RESULT_MEAS ]
-       foreach T_NAME $TABLE_LIST {
+       set TABLE_LIST2 [ list MEAS_LIST TAG_LIST DMS_BNODE_PINS DMS_CALC_RESULT_MEAS ]
+       foreach T_NAME $TABLE_LIST2 {
          #--
          if {[checkTable $rf $db2 $T_NAME "ID_PIN"]==0} {
            puts "\n$T_NAME or ID = not exists"
            continue
          }
-  	     $db2 "UPDATE $T_NAME SET ID_PIN=$maxID WHERE ID_PIN=$id_old"
+         $db2 "UPDATE $T_NAME SET ID_PIN=$maxID WHERE ID_PIN=$id_old"
          $db2 commit
        }
        #--  ID_EL_PIN
-       set TABLE_LIST [ list OBJ_AUX_EL_PIN OBJ_LIMIT_SET ]
-       foreach T_NAME $TABLE_LIST {
+       set TABLE_LIST2 [ list OBJ_AUX_EL_PIN OBJ_LIMIT_SET ]
+       foreach T_NAME $TABLE_LIST2 {
          #--
          if {[checkTable $rf $db2 $T_NAME "ID_EL_PIN"]==0} {
            puts "\n$T_NAME or ID = not exists"
@@ -3518,8 +3508,8 @@ proc OBJ_EL_PIN { rf db2 } {
 
 
        #--  ID_PIN
-       set TABLE_LIST [ list MEAS_LIST TAG_LIST DMS_BNODE_PINS DMS_CALC_RESULT_MEAS]
-       foreach T_NAME $TABLE_LIST {
+       set TABLE_LIST2 [ list MEAS_LIST TAG_LIST DMS_BNODE_PINS DMS_CALC_RESULT_MEAS]
+       foreach T_NAME $TABLE_LIST2 {
          #--
          if {[checkTable $rf $db2 $T_NAME "ID_PIN"]==0} {
            puts "\n$T_NAME or ID = not exists"
@@ -3529,14 +3519,14 @@ proc OBJ_EL_PIN { rf db2 } {
          $db2 commit
        }
        #--  ID_EL_PIN
-       set TABLE_LIST [ list OBJ_AUX_EL_PIN OBJ_LIMIT_SET ]
-       foreach T_NAME $TABLE_LIST {
+       set TABLE_LIST2 [ list OBJ_AUX_EL_PIN OBJ_LIMIT_SET ]
+       foreach T_NAME $TABLE_LIST2 {
          #--
          if {[checkTable $rf $db2 $T_NAME "ID_EL_PIN"]==0} {
            puts "\n$T_NAME or ID = not exists"
            continue
          }
-		     $db2 "UPDATE $T_NAME SET ID_EL_PIN=$j WHERE ID_EL_PIN=$maxID"
+         $db2 "UPDATE $T_NAME SET ID_EL_PIN=$j WHERE ID_EL_PIN=$maxID"
          $db2 commit
        }
 
@@ -3599,8 +3589,9 @@ proc OBJ_CONN_NODE { rf db2 } {
 
 
        #--  ID_CONN_NODE
-       set TABLE_LIST [ list OBJ_EL_PIN  VS_MODUS_NODE DMS_SCHEMES_BNODES ]
-       foreach T_NAME $TABLE_LIST {
+       set TABLE_LIST2 [ list OBJ_EL_PIN  VS_MODUS_NODE DMS_SCHEMES_BNODES ]
+
+       foreach T_NAME $TABLE_LIST2 {
          #--
          if {[checkTable $rf $db2 $T_NAME "ID_CONN_NODE"]==0} {
            puts "\n$T_NAME or ID = not exists"
@@ -3616,9 +3607,7 @@ proc OBJ_CONN_NODE { rf db2 } {
        $db2 commit
 
 
-       #--  ID_CONN_NODE
-       set TABLE_LIST [ list OBJ_EL_PIN  VS_MODUS_NODE  DMS_SCHEMES_BNODES ]
-       foreach T_NAME $TABLE_LIST {
+       foreach T_NAME $TABLE_LIST2 {
          #--
          if {[checkTable $rf $db2 $T_NAME "ID_CONN_NODE"]==0} {
            puts "\n$T_NAME or ID = not exists"
@@ -3686,8 +3675,9 @@ proc OBJ_MODEL { rf db2 } {
        LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
 
        #--  ID_MODEL
-       set TABLE_LIST [ list OBJ_MODEL_MEAS  OBJ_MODEL_PARAM  OBJ_TREE ]
-       foreach T_NAME $TABLE_LIST {
+       set TABLE_LIST2 [ list OBJ_MODEL_MEAS  OBJ_MODEL_PARAM  OBJ_TREE ]
+
+       foreach T_NAME $TABLE_LIST2 {
          $db2 "UPDATE $T_NAME SET ID_MODEL=$maxID WHERE ID_MODEL=$id_old"
          $db2 commit
        }
@@ -3697,9 +3687,7 @@ proc OBJ_MODEL { rf db2 } {
        $db2 $strSQL3
        $db2 commit
 
-       #--  ID_MODEL
-       set TABLE_LIST [ list OBJ_MODEL_MEAS  OBJ_MODEL_PARAM  OBJ_TREE  ]
-       foreach T_NAME $TABLE_LIST {
+       foreach T_NAME $TABLE_LIST2 {
          $db2 "UPDATE $T_NAME SET ID_MODEL=$j WHERE ID_MODEL=$maxID"
          $db2 commit
        }
@@ -3730,6 +3718,835 @@ proc OBJ_MODEL { rf db2 } {
 
 
 
+# ==============================================================================================================
+
+# -- TAG_LIST
+proc TAG_LIST { rf db2 } {
+
+  set TABLE_LIST [ list TAG_LIST ]
+
+  foreach TABLE_NAME $TABLE_LIST {
+
+    set strSQL1 "SELECT max(ID), min(ID), count(*) FROM $TABLE_NAME"
+
+    set maxID 0 ; set minID 0 ; set cntID 0 ;
+    foreach {r1} [ $db2 $strSQL1 ] {
+      set maxID [ lindex $r1 0 ]
+      set minID [ lindex $r1 1 ]
+      set cntID [ lindex $r1 2 ]
+      set s1 "\n$TABLE_NAME = max=$maxID min=$minID cnt=$cntID \n"
+      puts $s1
+    }
+
+    set maxID [ expr int($maxID)+1 ]
+    set strSQL0 "INSERT INTO $TABLE_NAME (ID,DESCRIPTION) VALUES ($maxID,'TEXTRENAMETEXT') "
+    $db2 $strSQL0
+    $db2 commit
+
+    set strSQL2 "SELECT ID FROM $TABLE_NAME ORDER BY ID ASC"
+    set r1 [ $db2 $strSQL2 ]
+    for {set i 0} {$i < $cntID} {incr i} {
+      set j [ expr $i+1 ]
+      set id_old [lindex $r1 $i ]
+      if {$id_old!=$j} {
+
+       LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
+
+       #--  ID_TAG
+       set TABLE_LIST2 [ list TAG_DOCS TAG_POSITION ]
+
+       foreach T_NAME $TABLE_LIST2 {
+       if {[checkTable $rf $db2 $T_NAME "ID_TAG"]} {
+         $db2 "UPDATE $T_NAME SET ID_TAG=$maxID WHERE ID_TAG=$id_old"
+         $db2 commit
+        }
+       }
+
+
+       set strSQL3 "UPDATE $TABLE_NAME SET ID=$j WHERE ID=$id_old"
+       $db2 $strSQL3
+       $db2 commit
+
+
+       foreach T_NAME $TABLE_LIST2 {
+       if {[checkTable $rf $db2 $T_NAME "ID_TAG"]} {
+         $db2 "UPDATE $T_NAME SET ID_TAG=$j WHERE ID_TAG=$maxID"
+         $db2 commit
+        }
+       }
+
+      }
+    }
+
+    $db2 "DELETE FROM $TABLE_NAME WHERE DESCRIPTION LIKE '%TEXTRENAMETEXT%' "
+    $db2 commit
+
+    set strSQL3 "SELECT ${TABLE_NAME}_S.nextval FROM dual"
+    set r3 [ $db2 $strSQL3 ]
+    set l3 [ llength $r3 ]
+    if {$l3>0} {
+     set increment_old [lindex $r3 0 ]
+     set increment_old [ expr (1-int($increment_old)) ]
+     set str2 [ format "alter sequence %s_S increment by %d" $TABLE_NAME $increment_old ]
+     $db2 $str2
+     $db2 $strSQL3
+     $db2 "alter sequence ${TABLE_NAME}_S increment by 1"
+    }
+
+  }
+
+  return 0 ;
+}
+
+
+# ==============================================================================================================
+
+# -- SYS_WAVE
+proc SYS_WAVE { rf db2 } {
+
+  set TABLE_LIST [ list SYS_WAVE ]
+
+  foreach TABLE_NAME $TABLE_LIST {
+
+    set strSQL1 "SELECT max(ID), min(ID), count(*) FROM $TABLE_NAME"
+
+    set maxID 0 ; set minID 0 ; set cntID 0 ;
+    foreach {r1} [ $db2 $strSQL1 ] {
+      set maxID [ lindex $r1 0 ]
+      set minID [ lindex $r1 1 ]
+      set cntID [ lindex $r1 2 ]
+      set s1 "\n$TABLE_NAME = max=$maxID min=$minID cnt=$cntID \n"
+      puts $s1
+    }
+
+    set maxID [ expr int($maxID)+1 ]
+    set strSQL0 "INSERT INTO $TABLE_NAME (ID,name) VALUES ($maxID,'TEXTRENAMETEXT') "
+    $db2 $strSQL0
+    $db2 commit
+
+    set strSQL2 "SELECT ID FROM $TABLE_NAME ORDER BY ID ASC"
+    set r1 [ $db2 $strSQL2 ]
+    for {set i 0} {$i < $cntID} {incr i} {
+      set j [ expr $i+1 ]
+      set id_old [lindex $r1 $i ]
+      if {$id_old!=$j} {
+
+       LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
+
+       #--  ID_FILEWAV
+       set TABLE_LIST2 [ list AD_DIR AD_LIST \
+ ASENERGY_MEAS ASENERGY_OBJECTS ASENERGY_SERVICES \
+ AST_CNT AST_GEO AST_ORG AST_TECH \
+ DA_CAT DA_PARAM \
+ DBE_ACTION DBE_JOB DBE_STORAGE \
+ DG_GROUPS DG_LIST \
+ MEAS_LIST \
+ OBJ_TREE \
+ RSDU_SUBSYST \
+ S_GROUPS S_USERS \
+ SH_DIR \
+ SYS_DB_PART SYS_FTR SYS_SIGN \
+ TSSO_MPOFFER TSSO_MPOFFER_GTP TSSO_MPOFFER_REQUEST \
+ WRPT_CAT WRPT_TMPL_CAT ]
+
+       foreach T_NAME $TABLE_LIST2 {
+       if {[checkTable $rf $db2 $T_NAME "ID_FILEWAV"]} {
+         $db2 "UPDATE $T_NAME SET ID_FILEWAV=$maxID WHERE ID_FILEWAV=$id_old"
+         $db2 commit
+        }
+       }
+
+
+       set strSQL3 "UPDATE $TABLE_NAME SET ID=$j WHERE ID=$id_old"
+       $db2 $strSQL3
+       $db2 commit
+
+
+       foreach T_NAME $TABLE_LIST2 {
+       if {[checkTable $rf $db2 $T_NAME "ID_FILEWAV"]} {
+         $db2 "UPDATE $T_NAME SET ID_FILEWAV=$j WHERE ID_FILEWAV=$maxID"
+         $db2 commit
+        }
+       }
+
+      }
+    }
+
+    $db2 "DELETE FROM $TABLE_NAME WHERE name LIKE '%TEXTRENAMETEXT%' "
+    $db2 commit
+
+    set strSQL3 "SELECT ${TABLE_NAME}_S.nextval FROM dual"
+    set r3 [ $db2 $strSQL3 ]
+    set l3 [ llength $r3 ]
+    if {$l3>0} {
+     set increment_old [lindex $r3 0 ]
+     set increment_old [ expr (1-int($increment_old)) ]
+     set str2 [ format "alter sequence %s_S increment by %d" $TABLE_NAME $increment_old ]
+     $db2 $str2
+     $db2 $strSQL3
+     $db2 "alter sequence ${TABLE_NAME}_S increment by 1"
+    }
+
+  }
+
+  return 0 ;
+}
+
+
+
+# ==============================================================================================================
+
+# -- SYS_TBLLST
+proc SYS_TBLLST_1 { rf db2 } {
+
+  set TABLE_LIST [ list SYS_TBLLST ]
+
+  foreach TABLE_NAME $TABLE_LIST {
+
+    set strSQL1 "SELECT max(ID), min(ID), count(*) FROM $TABLE_NAME"
+
+    set maxID 0 ; set minID 0 ; set cntID 0 ;
+    foreach {r1} [ $db2 $strSQL1 ] {
+      set maxID [ lindex $r1 0 ]
+      set minID [ lindex $r1 1 ]
+      set cntID [ lindex $r1 2 ]
+      set s1 "\n$TABLE_NAME = max=$maxID min=$minID cnt=$cntID \n"
+      puts $s1
+    }
+
+    set maxID [ expr int($maxID)+1 ]
+    set strSQL0 "INSERT INTO $TABLE_NAME (ID,NAME,TABLE_NAME,ID_TYPE,DEFINE_ALIAS) VALUES ($maxID,'TEXTRENAMETEXT','TEXTRENAMETEXT',1015,'TEXTRENAMETEXT') "
+    $db2 $strSQL0
+    $db2 commit
+
+
+    set strSQL2 "SELECT ID FROM $TABLE_NAME ORDER BY ID ASC"
+    set r1 [ $db2 $strSQL2 ]
+    set shift 1500
+    for {set i 0} {$i < $cntID} {incr i} {
+      set j [ expr $i+1 ]
+      set id_old [lindex $r1 $i ]
+      if {$id_old<$shift} { continue ; }
+      set j_shift [ expr ($j+$shift) ]
+      if {$id_old!=$j_shift} {
+
+       LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j_shift ( maxID=$maxID )"
+
+       #--  ID_TAG
+       set TABLE_LIST2 [ list TAG_DOCS TAG_POSITION ]
+
+       foreach T_NAME $TABLE_LIST2 {
+       if {[checkTable $rf $db2 $T_NAME "ID_TAG"]} {
+         $db2 "UPDATE $T_NAME SET ID_TAG=$maxID WHERE ID_TAG=$id_old"
+         $db2 commit
+        }
+       }
+
+
+       set strSQL3 "UPDATE $TABLE_NAME SET ID=$j WHERE ID=$id_old"
+       $db2 $strSQL3
+       $db2 commit
+
+
+       foreach T_NAME $TABLE_LIST2 {
+       if {[checkTable $rf $db2 $T_NAME "ID_TAG"]} {
+         $db2 "UPDATE $T_NAME SET ID_TAG=$j WHERE ID_TAG=$maxID"
+         $db2 commit
+        }
+       }
+
+      }
+    }
+
+    $db2 "DELETE FROM $TABLE_NAME WHERE name LIKE '%TEXTRENAMETEXT%' "
+    $db2 commit
+
+    set strSQL3 "SELECT ${TABLE_NAME}_S.nextval FROM dual"
+    set r3 [ $db2 $strSQL3 ]
+    set l3 [ llength $r3 ]
+    if {$l3>0} {
+     set increment_old [lindex $r3 0 ]
+     set increment_old [ expr (1-int($increment_old)) ]
+     set str2 [ format "alter sequence %s_S increment by %d" $TABLE_NAME $increment_old ]
+     $db2 $str2
+     $db2 $strSQL3
+     $db2 "alter sequence ${TABLE_NAME}_S increment by 1"
+    }
+
+  }
+
+  return 0 ;
+}
+
+
+# ==============================================================================================================
+
+# -- SYS_MEAS_TYPES
+proc SYS_MEAS_TYPES { rf db2 } {
+
+  set TABLE_LIST [ list SYS_MEAS_TYPES ]
+
+  foreach TABLE_NAME $TABLE_LIST {
+
+    set strSQL1 "SELECT max(ID), min(ID), count(*) FROM $TABLE_NAME"
+
+    set maxID 0 ; set minID 0 ; set cntID 0 ;
+    foreach {r1} [ $db2 $strSQL1 ] {
+      set maxID [ lindex $r1 0 ]
+      set minID [ lindex $r1 1 ]
+      set cntID [ lindex $r1 2 ]
+      set s1 "\n$TABLE_NAME = max=$maxID min=$minID cnt=$cntID \n"
+      puts $s1
+    }
+
+    set maxID [ expr int($maxID)+1 ]
+    set strSQL0 "INSERT INTO $TABLE_NAME (ID,NAME) VALUES ($maxID,'TEXTRENAMETEXT') "
+    $db2 $strSQL0
+    $db2 commit
+
+
+    set strSQL2 "SELECT ID FROM $TABLE_NAME ORDER BY ID ASC"
+    set r1 [ $db2 $strSQL2 ]
+    set shift 0
+    for {set i 0} {$i < $cntID} {incr i} {
+      set j [ expr $i+1 ]
+      set id_old [lindex $r1 $i ]
+      if {$id_old<$shift} { continue ; }
+      set j_shift [ expr ($j+$shift) ]
+      if {$id_old!=$j_shift} {
+
+       LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j_shift ( maxID=$maxID )"
+
+       #--  ID_TYPE
+       set TABLE_LIST2 [ list CALC_LIST DG_LIST NME_PARAM_LIST ]
+       foreach T_NAME $TABLE_LIST2 {
+       if {[checkTable $rf $db2 $T_NAME "ID_TYPE"]} {
+         $db2 "UPDATE $T_NAME SET ID_TYPE=$maxID WHERE ID_TYPE=$id_old"
+         $db2 commit
+        }
+       }
+
+       #--  ID_MEAS_TYPE
+       set TABLE_LIST2 [ list DMS_CALC_RESULT_MEAS DMS_EXTEQUIV_MEAS MEAS_LIST OBJ_MODEL_MEAS SYS_OTYP_MEAS ]
+       foreach T_NAME $TABLE_LIST2 {
+       if {[checkTable $rf $db2 $T_NAME "ID_MEAS_TYPE"]} {
+         $db2 "UPDATE $T_NAME SET ID_MEAS_TYPE=$maxID WHERE ID_MEAS_TYPE=$id_old"
+         $db2 commit
+        }
+       }
+
+
+       set strSQL3 "UPDATE $TABLE_NAME SET ID=$j WHERE ID=$id_old"
+       $db2 $strSQL3
+       $db2 commit
+
+
+       #--  ID_TYPE
+       set TABLE_LIST2 [ list CALC_LIST DG_LIST NME_PARAM_LIST ]
+       foreach T_NAME $TABLE_LIST2 {
+       if {[checkTable $rf $db2 $T_NAME "ID_TYPE"]} {
+         $db2 "UPDATE $T_NAME SET ID_TYPE=$j WHERE ID_TYPE=$maxID"
+         $db2 commit
+        }
+       }
+
+       #--  ID_MEAS_TYPE
+       set TABLE_LIST2 [ list DMS_CALC_RESULT_MEAS DMS_EXTEQUIV_MEAS MEAS_LIST OBJ_MODEL_MEAS SYS_OTYP_MEAS ]
+       foreach T_NAME $TABLE_LIST2 {
+       if {[checkTable $rf $db2 $T_NAME "ID_MEAS_TYPE"]} {
+         $db2 "UPDATE $T_NAME SET ID_MEAS_TYPE=$j WHERE ID_MEAS_TYPE=$maxID"
+         $db2 commit
+        }
+       }
+
+      }
+    }
+
+    $db2 "DELETE FROM $TABLE_NAME WHERE name LIKE '%TEXTRENAMETEXT%' "
+    $db2 commit
+
+    set strSQL3 "SELECT ${TABLE_NAME}_S.nextval FROM dual"
+    set r3 [ $db2 $strSQL3 ]
+    set l3 [ llength $r3 ]
+    if {$l3>0} {
+     set increment_old [lindex $r3 0 ]
+     set increment_old [ expr (1-int($increment_old)) ]
+     set str2 [ format "alter sequence %s_S increment by %d" $TABLE_NAME $increment_old ]
+     $db2 $str2
+     $db2 $strSQL3
+     $db2 "alter sequence ${TABLE_NAME}_S increment by 1"
+    }
+
+  }
+
+  return 0 ;
+}
+
+
+# ==============================================================================================================
+
+# -- SYS_PUNIT
+proc SYS_PUNIT { rf db2 } {
+
+  set TABLE_LIST [ list SYS_PUNIT ]
+
+  foreach TABLE_NAME $TABLE_LIST {
+
+    set strSQL1 "SELECT max(ID), min(ID), count(*) FROM $TABLE_NAME"
+
+    set maxID 0 ; set minID 0 ; set cntID 0 ;
+    foreach {r1} [ $db2 $strSQL1 ] {
+      set maxID [ lindex $r1 0 ]
+      set minID [ lindex $r1 1 ]
+      set cntID [ lindex $r1 2 ]
+      set s1 "\n$TABLE_NAME = max=$maxID min=$minID cnt=$cntID \n"
+      puts $s1
+    }
+
+    set maxID [ expr int($maxID)+1 ]
+    set strSQL0 "INSERT INTO $TABLE_NAME (ID,NAME) VALUES ($maxID,'TEXTRENAMETEXT') "
+    $db2 $strSQL0
+    $db2 commit
+
+
+    set strSQL2 "SELECT ID FROM $TABLE_NAME ORDER BY ID ASC"
+    set r1 [ $db2 $strSQL2 ]
+    set shift 0
+    for {set i 0} {$i < $cntID} {incr i} {
+      set j [ expr $i+1 ]
+      set id_old [lindex $r1 $i ]
+      if {$id_old<$shift} { continue ; }
+      set j_shift [ expr ($j+$shift) ]
+      if {$id_old!=$j_shift} {
+
+       LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j_shift ( maxID=$maxID )"
+
+       #--  ID_UNIT
+       set TABLE_LIST2 [ list DMS_CALC_RESULT_MEAS DMS_EXTEQUIV_MEAS DMS_CALC_INIPARAMS DMS_CALC_INIPARAMS_DEFAULT \
+ OBJ_MODEL_PARAM OBJ_PARAM SYS_MEAS_TYPES SYS_OTYP_PARAM SYS_PARAM_TYPES VS_FORM_PARAMTYPE ]
+
+       foreach T_NAME $TABLE_LIST2 {
+       if {[checkTable $rf $db2 $T_NAME "ID_UNIT"]} {
+         $db2 "UPDATE $T_NAME SET ID_UNIT=$maxID WHERE ID_UNIT=$id_old"
+         $db2 commit
+        }
+       }
+
+
+       set strSQL3 "UPDATE $TABLE_NAME SET ID=$j WHERE ID=$id_old"
+       $db2 $strSQL3
+       $db2 commit
+
+
+       foreach T_NAME $TABLE_LIST2 {
+       if {[checkTable $rf $db2 $T_NAME "ID_UNIT"]} {
+         $db2 "UPDATE $T_NAME SET ID_UNIT=$j WHERE ID_UNIT=$maxID"
+         $db2 commit
+        }
+       }
+
+      }
+    }
+
+    $db2 "DELETE FROM $TABLE_NAME WHERE name LIKE '%TEXTRENAMETEXT%' "
+    $db2 commit
+
+    set strSQL3 "SELECT ${TABLE_NAME}_S.nextval FROM dual"
+    set r3 [ $db2 $strSQL3 ]
+    set l3 [ llength $r3 ]
+    if {$l3>0} {
+     set increment_old [lindex $r3 0 ]
+     set increment_old [ expr (1-int($increment_old)) ]
+     set str2 [ format "alter sequence %s_S increment by %d" $TABLE_NAME $increment_old ]
+     $db2 $str2
+     $db2 $strSQL3
+     $db2 "alter sequence ${TABLE_NAME}_S increment by 1"
+    }
+
+  }
+
+  return 0 ;
+}
+
+
+
+# ==============================================================================================================
+
+# -- SYS_PTYP
+proc SYS_PTYP { rf db2 } {
+
+  set TABLE_LIST [ list SYS_PTYP ]
+
+  foreach TABLE_NAME $TABLE_LIST {
+
+    set strSQL1 "SELECT max(ID), min(ID), count(*) FROM $TABLE_NAME"
+
+    set maxID 0 ; set minID 0 ; set cntID 0 ;
+    foreach {r1} [ $db2 $strSQL1 ] {
+      set maxID [ lindex $r1 0 ]
+      set minID [ lindex $r1 1 ]
+      set cntID [ lindex $r1 2 ]
+      set s1 "\n$TABLE_NAME = max=$maxID min=$minID cnt=$cntID \n"
+      puts $s1
+    }
+
+    set maxID [ expr int($maxID)+1 ]
+    set strSQL0 "INSERT INTO $TABLE_NAME (ID,NAME) VALUES ($maxID,'TEXTRENAMETEXT') "
+    $db2 $strSQL0
+    $db2 commit
+
+
+    set strSQL2 "SELECT ID FROM $TABLE_NAME ORDER BY ID ASC"
+    set r1 [ $db2 $strSQL2 ]
+    set shift 1500
+    for {set i 0} {$i < $cntID} {incr i} {
+      set j [ expr $i+1 ]
+      set id_old [lindex $r1 $i ]
+      if {$id_old<$shift} { continue ; }
+      set j_shift [ expr ($j+$shift) ]
+      if {$id_old!=$j_shift} {
+
+       LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j_shift ( maxID=$maxID )"
+
+       #--  ID_PTYPE
+       set TABLE_LIST2 [ list OBJ_LIMIT ]
+       foreach T_NAME $TABLE_LIST2 {
+       if {[checkTable $rf $db2 $T_NAME "ID_PTYPE"]} {
+         $db2 "UPDATE $T_NAME SET ID_PTYPE=$maxID WHERE ID_PTYPE=$id_old"
+         $db2 commit
+        }
+       }
+
+       #--  ID_TYPE
+       set TABLE_LIST2 [ list SYS_MEAS_TYPES SYS_PARAM_TYPES SYS_PUNIT ]
+       foreach T_NAME $TABLE_LIST2 {
+       if {[checkTable $rf $db2 $T_NAME "ID_TYPE"]} {
+         $db2 "UPDATE $T_NAME SET ID_TYPE=$maxID WHERE ID_TYPE=$id_old"
+         $db2 commit
+        }
+       }
+
+
+       set strSQL3 "UPDATE $TABLE_NAME SET ID=$j WHERE ID=$id_old"
+       $db2 $strSQL3
+       $db2 commit
+
+
+       #--  ID_PTYPE
+       set TABLE_LIST2 [ list OBJ_LIMIT ]
+       foreach T_NAME $TABLE_LIST2 {
+       if {[checkTable $rf $db2 $T_NAME "ID_PTYPE"]} {
+         $db2 "UPDATE $T_NAME SET ID_PTYPE=$j WHERE ID_PTYPE=$maxID"
+         $db2 commit
+        }
+       }
+
+       #--  ID_TYPE
+       set TABLE_LIST2 [ list SYS_MEAS_TYPES SYS_PARAM_TYPES SYS_PUNIT ]
+       foreach T_NAME $TABLE_LIST2 {
+       if {[checkTable $rf $db2 $T_NAME "ID_TYPE"]} {
+         $db2 "UPDATE $T_NAME SET ID_TYPE=$j WHERE ID_TYPE=$maxID"
+         $db2 commit
+        }
+       }
+
+
+      }
+    }
+
+    $db2 "DELETE FROM $TABLE_NAME WHERE name LIKE '%TEXTRENAMETEXT%' "
+    $db2 commit
+
+    set strSQL3 "SELECT ${TABLE_NAME}_S.nextval FROM dual"
+    set r3 [ $db2 $strSQL3 ]
+    set l3 [ llength $r3 ]
+    if {$l3>0} {
+     set increment_old [lindex $r3 0 ]
+     set increment_old [ expr (1-int($increment_old)) ]
+     set str2 [ format "alter sequence %s_S increment by %d" $TABLE_NAME $increment_old ]
+     $db2 $str2
+     $db2 $strSQL3
+     $db2 "alter sequence ${TABLE_NAME}_S increment by 1"
+    }
+
+  }
+
+  return 0 ;
+}
+
+
+
+# ==============================================================================================================
+
+# -- SYS_PARAM_TYPES
+proc SYS_PARAM_TYPES { rf db2 } {
+
+  set TABLE_LIST [ list SYS_PARAM_TYPES ]
+
+  foreach TABLE_NAME $TABLE_LIST {
+
+    set strSQL1 "SELECT max(ID), min(ID), count(*) FROM $TABLE_NAME"
+
+    set maxID 0 ; set minID 0 ; set cntID 0 ;
+    foreach {r1} [ $db2 $strSQL1 ] {
+      set maxID [ lindex $r1 0 ]
+      set minID [ lindex $r1 1 ]
+      set cntID [ lindex $r1 2 ]
+      set s1 "\n$TABLE_NAME = max=$maxID min=$minID cnt=$cntID \n"
+      puts $s1
+    }
+
+    set maxID [ expr int($maxID)+1 ]
+    set strSQL0 "INSERT INTO $TABLE_NAME (ID,NAME) VALUES ($maxID,'TEXTRENAMETEXT') "
+    $db2 $strSQL0
+    $db2 commit
+
+
+    set strSQL2 "SELECT ID FROM $TABLE_NAME ORDER BY ID ASC"
+    set r1 [ $db2 $strSQL2 ]
+    set shift 1500
+    for {set i 0} {$i < $cntID} {incr i} {
+      set j [ expr $i+1 ]
+      set id_old [lindex $r1 $i ]
+      if {$id_old<$shift} { continue ; }
+      set j_shift [ expr ($j+$shift) ]
+      if {$id_old!=$j_shift} {
+
+       LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j_shift ( maxID=$maxID )"
+
+       #--  ID_PARAM_TYPE
+       set TABLE_LIST2 [ list DMS_CALC_INIPARAMS DMS_CALC_INIPARAMS_DEFAULT OBJ_MODEL_PARAM OBJ_PARAM SYS_OTYP_PARAM VS_FORM_INIPARAMS ]
+
+       foreach T_NAME $TABLE_LIST2 {
+       if {[checkTable $rf $db2 $T_NAME "ID_PARAM_TYPE"]} {
+         $db2 "UPDATE $T_NAME SET ID_PARAM_TYPE=$maxID WHERE ID_PARAM_TYPE=$id_old"
+         $db2 commit
+        }
+       }
+
+
+       set strSQL3 "UPDATE $TABLE_NAME SET ID=$j WHERE ID=$id_old"
+       $db2 $strSQL3
+       $db2 commit
+
+
+       foreach T_NAME $TABLE_LIST2 {
+       if {[checkTable $rf $db2 $T_NAME "ID_PARAM_TYPE"]} {
+         $db2 "UPDATE $T_NAME SET ID_PARAM_TYPE=$j WHERE ID_PARAM_TYPE=$maxID"
+         $db2 commit
+        }
+       }
+
+      }
+    }
+
+    $db2 "DELETE FROM $TABLE_NAME WHERE name LIKE '%TEXTRENAMETEXT%' "
+    $db2 commit
+
+    set strSQL3 "SELECT ${TABLE_NAME}_S.nextval FROM dual"
+    set r3 [ $db2 $strSQL3 ]
+    set l3 [ llength $r3 ]
+    if {$l3>0} {
+     set increment_old [lindex $r3 0 ]
+     set increment_old [ expr (1-int($increment_old)) ]
+     set str2 [ format "alter sequence %s_S increment by %d" $TABLE_NAME $increment_old ]
+     $db2 $str2
+     $db2 $strSQL3
+     $db2 "alter sequence ${TABLE_NAME}_S increment by 1"
+    }
+
+  }
+
+  return 0 ;
+}
+
+
+# ==============================================================================================================
+
+# -- SYS_DB_PART
+proc SYS_DB_PART { rf db2 } {
+
+  set TABLE_LIST [ list SYS_DB_PART ]
+
+  foreach TABLE_NAME $TABLE_LIST {
+
+    set strSQL1 "SELECT max(ID), min(ID), count(*) FROM $TABLE_NAME"
+
+    set maxID 0 ; set minID 0 ; set cntID 0 ;
+    foreach {r1} [ $db2 $strSQL1 ] {
+      set maxID [ lindex $r1 0 ]
+      set minID [ lindex $r1 1 ]
+      set cntID [ lindex $r1 2 ]
+      set s1 "\n$TABLE_NAME = max=$maxID min=$minID cnt=$cntID \n"
+      puts $s1
+    }
+
+    set maxID [ expr int($maxID)+1 ]
+    set strSQL0 "INSERT INTO $TABLE_NAME (ID,NAME) VALUES ($maxID,'TEXTRENAMETEXT') "
+    $db2 $strSQL0
+    $db2 commit
+
+
+    set strSQL2 "SELECT ID FROM $TABLE_NAME ORDER BY ID ASC"
+    set r1 [ $db2 $strSQL2 ]
+    set shift 1500
+    for {set i 0} {$i < $cntID} {incr i} {
+      set j [ expr $i+1 ]
+      set id_old [lindex $r1 $i ]
+      if {$id_old<$shift} { continue ; }
+      set j_shift [ expr ($j+$shift) ]
+      if {$id_old!=$j_shift} {
+
+       LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j_shift ( maxID=$maxID )"
+
+       #--  ID_NODE
+       set TABLE_LIST2 [ list SYS_TBLLST ]
+
+       foreach T_NAME $TABLE_LIST2 {
+       if {[checkTable $rf $db2 $T_NAME "ID_NODE"]} {
+         $db2 "UPDATE $T_NAME SET ID_NODE=$maxID WHERE ID_NODE=$id_old"
+         $db2 commit
+        }
+       }
+
+
+       set strSQL3 "UPDATE $TABLE_NAME SET ID_PARENT=$maxID WHERE ID_PARENT=$id_old"
+       $db2 $strSQL3
+       $db2 commit
+
+       set strSQL3 "UPDATE $TABLE_NAME SET ID=$j WHERE ID=$id_old"
+       $db2 $strSQL3
+       $db2 commit
+
+       set strSQL3 "UPDATE $TABLE_NAME SET ID_PARENT=$j WHERE ID_PARENT=$maxID"
+       $db2 $strSQL3
+       $db2 commit
+
+
+       foreach T_NAME $TABLE_LIST2 {
+       if {[checkTable $rf $db2 $T_NAME "ID_NODE"]} {
+         $db2 "UPDATE $T_NAME SET ID_NODE=$j WHERE ID_NODE=$maxID"
+         $db2 commit
+        }
+       }
+
+      }
+    }
+
+    $db2 "DELETE FROM $TABLE_NAME WHERE name LIKE '%TEXTRENAMETEXT%' "
+    $db2 commit
+
+    set strSQL3 "SELECT ${TABLE_NAME}_S.nextval FROM dual"
+    set r3 [ $db2 $strSQL3 ]
+    set l3 [ llength $r3 ]
+    if {$l3>0} {
+     set increment_old [lindex $r3 0 ]
+     set increment_old [ expr (1-int($increment_old)) ]
+     set str2 [ format "alter sequence %s_S increment by %d" $TABLE_NAME $increment_old ]
+     $db2 $str2
+     $db2 $strSQL3
+     $db2 "alter sequence ${TABLE_NAME}_S increment by 1"
+    }
+
+  }
+
+  return 0 ;
+}
+
+
+# ==============================================================================================================
+
+# -- SYS_OTYP
+proc SYS_OTYP { rf db2 } {
+
+  set TABLE_LIST [ list SYS_OTYP ]
+
+  foreach TABLE_NAME $TABLE_LIST {
+
+    set strSQL1 "SELECT max(ID), min(ID), count(*) FROM $TABLE_NAME"
+
+    set maxID 0 ; set minID 0 ; set cntID 0 ;
+    foreach {r1} [ $db2 $strSQL1 ] {
+      set maxID [ lindex $r1 0 ]
+      set minID [ lindex $r1 1 ]
+      set cntID [ lindex $r1 2 ]
+      set s1 "\n$TABLE_NAME = max=$maxID min=$minID cnt=$cntID \n"
+      puts $s1
+    }
+
+    set maxID [ expr int($maxID)+1 ]
+    set strSQL0 "INSERT INTO $TABLE_NAME (ID,NAME) VALUES ($maxID,'TEXTRENAMETEXT') "
+    $db2 $strSQL0
+    $db2 commit
+
+
+    set strSQL2 "SELECT ID FROM $TABLE_NAME ORDER BY ID ASC"
+    set r1 [ $db2 $strSQL2 ]
+    set shift 1500
+    for {set i 0} {$i < $cntID} {incr i} {
+      set j [ expr $i+1 ]
+      set id_old [lindex $r1 $i ]
+      if {$id_old<$shift} { continue ; }
+      set j_shift [ expr ($j+$shift) ]
+      if {$id_old!=$j_shift} {
+
+       LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j_shift ( maxID=$maxID )"
+
+       #--  ID_NODE
+       set TABLE_LIST2 [ list SYS_TBLLST ]
+
+       foreach T_NAME $TABLE_LIST2 {
+       if {[checkTable $rf $db2 $T_NAME "ID_NODE"]} {
+         $db2 "UPDATE $T_NAME SET ID_NODE=$maxID WHERE ID_NODE=$id_old"
+         $db2 commit
+        }
+       }
+
+
+       set strSQL3 "UPDATE $TABLE_NAME SET ID_PARENT=$maxID WHERE ID_PARENT=$id_old"
+       $db2 $strSQL3
+       $db2 commit
+
+       set strSQL3 "UPDATE $TABLE_NAME SET ID=$j WHERE ID=$id_old"
+       $db2 $strSQL3
+       $db2 commit
+
+       set strSQL3 "UPDATE $TABLE_NAME SET ID_PARENT=$j WHERE ID_PARENT=$maxID"
+       $db2 $strSQL3
+       $db2 commit
+
+
+       foreach T_NAME $TABLE_LIST2 {
+       if {[checkTable $rf $db2 $T_NAME "ID_NODE"]} {
+         $db2 "UPDATE $T_NAME SET ID_NODE=$j WHERE ID_NODE=$maxID"
+         $db2 commit
+        }
+       }
+
+      }
+    }
+
+    $db2 "DELETE FROM $TABLE_NAME WHERE name LIKE '%TEXTRENAMETEXT%' "
+    $db2 commit
+
+    set strSQL3 "SELECT ${TABLE_NAME}_S.nextval FROM dual"
+    set r3 [ $db2 $strSQL3 ]
+    set l3 [ llength $r3 ]
+    if {$l3>0} {
+     set increment_old [lindex $r3 0 ]
+     set increment_old [ expr (1-int($increment_old)) ]
+     set str2 [ format "alter sequence %s_S increment by %d" $TABLE_NAME $increment_old ]
+     $db2 $str2
+     $db2 $strSQL3
+     $db2 "alter sequence ${TABLE_NAME}_S increment by 1"
+    }
+
+  }
+
+  return 0 ;
+}
+
+
 
 # ==============================================================================================================
 
@@ -3741,8 +4558,12 @@ proc OBJ_MODEL { rf db2 } {
 # -- RSDU_UPDATE
 #RSDU_UPDATE $rf db2
 
+
 # -- SYS_TREE21 -- ?ломается структура?
 #SYS_TREE21  $rf db2
+
+# -- SYS_DB_PART
+# # SYS_DB_PART $rf db2
 
 
 # -- DG_GROUPS корректировка сервис GROUP_ID
@@ -3868,7 +4689,8 @@ proc OBJ_MODEL { rf db2 } {
 #DA_CAT $rf db2
 
 
-# -- OBJ_TREE -- отключать ssbsd + контроль Сигнальной системы  -- !необходимо! гасить модули elregd, phregd, ?ssbsd?
+# -- OBJ_TREE -- отключать ssbsd + контроль Сигнальной системы
+# -- !необходимо! гасить модули elregd, phregd, ?ssbsd? - ! ОТЧЕТЫ - корректировка обьектов в процедурах!
 # #####
 #OBJ_TREE $rf db2
 #
@@ -3880,6 +4702,34 @@ proc OBJ_MODEL { rf db2 } {
 #OBJ_MODEL $rf db2
 #
 
+
+
+# -- TAG_LIST
+# # TAG_LIST $rf db2
+
+
+# -- SYS_WAVE   -- не рекомендуем запускать, может возникнуть коллизия в именах файлов
+# ## SYS_WAVE $rf db2
+
+
+# -- SYS_TBLLST
+# # SYS_TBLLST_1 $rf db2
+
+
+# -- SYS_MEAS_TYPES
+# SYS_MEAS_TYPES $rf db2
+
+# -- SYS_PUNIT
+# #  SYS_PUNIT $rf db2
+
+# -- SYS_PTYP
+# # SYS_PTYP $rf db2
+
+# -- SYS_PARAM_TYPES
+# # SYS_PARAM_TYPES $rf db2
+
+# -- SYS_OTYP
+# # SYS_OTYP $rf db2
 
 # ==============================================================================================================
 
