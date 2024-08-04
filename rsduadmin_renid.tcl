@@ -3797,7 +3797,7 @@ proc SYS_OTYP_1 { db2 shift } {
 #RSDU_UPDATE db2
 
 
-# -- SYS_TREE21 -- ?ломается структура?
+# -- SYS_TREE21 --
 #SYS_TREE21 db2
 
 # -- SYS_DB_PART
@@ -3946,13 +3946,13 @@ proc SYS_OTYP_1 { db2 shift } {
 # # TAG_LIST  db2
 
 
-# -- SYS_WAVE   -- не рекомендуем запускать, может возникнуть коллизия в именах файлов
+# -- SYS_WAVE   -- не запускать, может возникнуть коллизия в именах файлов табл - сервер ресурсов
 # ## SYS_WAVE  db2
-
+#################
 
 # -- SYS_TBLLST -- выкл dpload
-# # SYS_TBLLST_1  db2 1500
-
+# # SYS_TBLLST db2 1500
+#######
 
 # -- SYS_MEAS_TYPES
 # # SYS_MEAS_TYPES  db2 0
