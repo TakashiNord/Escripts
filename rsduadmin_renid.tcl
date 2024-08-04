@@ -138,8 +138,7 @@ proc BASE_ID { db2 } {
 
 
   set TABLE_LIST_3 [ list ]
-
-  #set TABLE_LIST_5 [ list OBJ_MODEL_MEAS OBJ_PARAM ]
+  set TABLE_LIST_5 [ list OBJ_MODEL_MEAS OBJ_PARAM ]
 
   foreach TABLE_NAME $TABLE_LIST {
 
@@ -788,7 +787,7 @@ proc SYS_APD { db2 } {
 
 
 # -- SYS_APPL
-proc SYS_APPL { db2 } {
+proc SYS_APPL { db2 shift } {
 
   set TABLE_LIST [ list SYS_APPL ]
 
@@ -813,7 +812,7 @@ proc SYS_APPL { db2 } {
 
     set strSQL2 "SELECT ID FROM $TABLE_NAME ORDER BY ID ASC"
     set r1 [ $db2 $strSQL2 ]
-    set shift 1500
+    #set shift 1500
     for {set i 0} {$i < $cntID} {incr i} {
       set j [ expr $i+1 ]
       set id_old [lindex $r1 $i ]
@@ -830,15 +829,15 @@ proc SYS_APPL { db2 } {
          SYS_APP_INI SYS_APP_PARAMS SYS_APP_SERVICES SYS_APP_SERV_LST SYS_APP_SSYST SYS_APP_TYPE SYS_DB_DTYP SYS_SRTT \
          US_APPL_CONFIG  US_ENV US_MENU US_VAR_DESC WPORTAL_MENU ]
 
-       changeTable $db2 $maxID $id_old "ID_APPL" $TABLE_LIST2
+        changeTable $db2 $maxID $id_old "ID_APPL" $TABLE_LIST2
 
 
-       set strSQL3 "UPDATE $TABLE_NAME SET ID=$j_shift WHERE ID=$id_old"
-       $db2 $strSQL3
-       $db2 commit
+        set strSQL3 "UPDATE $TABLE_NAME SET ID=$j_shift WHERE ID=$id_old"
+        $db2 $strSQL3
+        $db2 commit
 
 
-       changeTable $db2 $j $maxID "ID_APPL" $TABLE_LIST2
+        changeTable $db2 $j_shift $maxID "ID_APPL" $TABLE_LIST2
 
 
       }
@@ -3249,8 +3248,66 @@ proc SYS_WAVE { db2 } {
 
 # ==============================================================================================================
 
+proc SYS_TBLLST_1 { db2 ind1 ind2 } {
+
+       #--  ID_ARCLST
+       set TABLE_LIST2 [ list ARC_READ_VIEW ]
+       changeTable $db2 $ind1 $ind2 "ID_ARCLST" $TABLE_LIST2
+
+       #--  ID_DIR
+       set TABLE_LIST2 [ list TAG_LIST ]
+       changeTable $db2 $ind1 $ind2 "ID_DIR" $TABLE_LIST2
+
+       #--  ID_DSTTBL
+       set TABLE_LIST2 [ list SYS_TBLLNK ]
+       changeTable $db2 $ind1 $ind2 "ID_DSTTBL" $TABLE_LIST2
+
+       #--  ID_LSTTBL
+       set TABLE_LIST2 [ list AD_SINFO ARC_SERVICES_INFO DA_PC R_MANUAL_PARAMS SYS_APP_SER_LST SYS_FTR SYS_TBLLNK SYS_TREE21 ]
+       changeTable $db2 $ind1 $ind2 "ID_LSTTBL" $TABLE_LIST2
+
+       #--  ID_OBJTBL
+       set TABLE_LIST2 [ list J_KVIT ]
+       changeTable $db2 $ind1 $ind2 "ID_OBJTBL" $TABLE_LIST2
+
+       #--  ID_SRCTBL
+       set TABLE_LIST2 [ list CALC_SRC_CHANNEL_TUNE DA_SRC_CHANNEL_TUNE DG_SRC_CHANNEL_TUNE \
+DMS_EXTEQUIV_MEAS \
+J_ARC_VAL_CHANGE \
+MEAS_RCV_CHANNEL_TUNE MEAS_SRC_CHANNEL_TUNE MEAS_SSRC_CHANNEL_TUNE \
+R_PSETS \
+SIG_SOURCE SIG_ZONE_TUNE ]
+       changeTable $db2 $ind1 $ind2 "ID_SRCTBL" $TABLE_LIST2
+
+       #--  ID_TABLE
+       set TABLE_LIST2 [ list ASENERGY_ARCHS DBE_DESTINATION \
+J_HWSTATE J_KVIT J_USTCH \
+SH_REGIM_TUNE \
+TSSO_MPOFFER_DESTINATION \
+US_LOCK \
+VP_PARAMS VS_OBJ_TUNE VS_REGIM_TUNE ]
+       changeTable $db2 $ind1 $ind2 "ID_TABLE" $TABLE_LIST2
+
+       #--  ID_TBL
+       set TABLE_LIST2 [ list SYS_JRNL SYS_TBLREF WSERV_UMENU ]
+       changeTable $db2 $ind1 $ind2 "ID_TBL" $TABLE_LIST2
+
+       #--  ID_TBLLST
+       set TABLE_LIST2 [ list ARC_HIST_PARTITIONS ARC_INTEGRITY ARC_READ_DEFAULTS ARC_READ_VIEW ARC_STAT ARC_SUBSYST_PROFILE ARC_VIEW_PARTITIONS \
+NTP_EDGE \
+SYS_APP_TYPE \
+TOPO_EDGE ]
+       changeTable $db2 $ind1 $ind2 "ID_TBLLST" $TABLE_LIST2
+
+       #--  ID_TBLREF
+       set TABLE_LIST2 [ list SYS_TBLREF ]
+       changeTable $db2 $ind1 $ind2 "ID_TBLREF" $TABLE_LIST2
+
+}
+
+
 # -- SYS_TBLLST
-proc SYS_TBLLST_1 { db2 } {
+proc SYS_TBLLST { db2 shift } {
 
   set TABLE_LIST [ list SYS_TBLLST ]
 
@@ -3275,7 +3332,7 @@ proc SYS_TBLLST_1 { db2 } {
 
     set strSQL2 "SELECT ID FROM $TABLE_NAME ORDER BY ID ASC"
     set r1 [ $db2 $strSQL2 ]
-    set shift 1500
+    #set shift 1500
     for {set i 0} {$i < $cntID} {incr i} {
       set j [ expr $i+1 ]
       set id_old [lindex $r1 $i ]
@@ -3284,18 +3341,14 @@ proc SYS_TBLLST_1 { db2 } {
       if {$id_old!=$j_shift} {
 
        LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j_shift ( maxID=$maxID )"
+       
+       SYS_TBLLST_1 $db2 $maxID $id_old
 
-       #--  ID_TAG
-       set TABLE_LIST2 [ list TAG_DOCS TAG_POSITION ]
-       changeTable $db2 $maxID $id_old "ID_TYPE" $TABLE_LIST2
-
-
-       set strSQL3 "UPDATE $TABLE_NAME SET ID=$j WHERE ID=$id_old"
+       set strSQL3 "UPDATE $TABLE_NAME SET ID=$j_shift WHERE ID=$id_old"
        $db2 $strSQL3
        $db2 commit
-
-
-       changeTable $db2 $j $maxID "ID_TYPE" $TABLE_LIST2
+       
+       SYS_TBLLST_1 $db2 $j_shift $maxID
 
       }
     }
@@ -3314,7 +3367,7 @@ proc SYS_TBLLST_1 { db2 } {
 # ==============================================================================================================
 
 # -- SYS_MEAS_TYPES
-proc SYS_MEAS_TYPES { db2 } {
+proc SYS_MEAS_TYPES { db2 shift } {
 
   set TABLE_LIST [ list SYS_MEAS_TYPES ]
 
@@ -3339,7 +3392,7 @@ proc SYS_MEAS_TYPES { db2 } {
 
     set strSQL2 "SELECT ID FROM $TABLE_NAME ORDER BY ID ASC"
     set r1 [ $db2 $strSQL2 ]
-    set shift 0
+    #set shift 0
     for {set i 0} {$i < $cntID} {incr i} {
       set j [ expr $i+1 ]
       set id_old [lindex $r1 $i ]
@@ -3358,18 +3411,18 @@ proc SYS_MEAS_TYPES { db2 } {
        changeTable $db2 $maxID $id_old "ID_MEAS_TYPE" $TABLE_LIST2
 
 
-       set strSQL3 "UPDATE $TABLE_NAME SET ID=$j WHERE ID=$id_old"
+       set strSQL3 "UPDATE $TABLE_NAME SET ID=$j_shift WHERE ID=$id_old"
        $db2 $strSQL3
        $db2 commit
 
 
        #--  ID_TYPE
        set TABLE_LIST2 [ list CALC_LIST DG_LIST NME_PARAM_LIST ]
-       changeTable $db2 $j $maxID "ID_TYPE" $TABLE_LIST2
+       changeTable $db2 $j_shift $maxID "ID_TYPE" $TABLE_LIST2
 
        #--  ID_MEAS_TYPE
        set TABLE_LIST2 [ list DMS_CALC_RESULT_MEAS DMS_EXTEQUIV_MEAS MEAS_LIST OBJ_MODEL_MEAS SYS_OTYP_MEAS ]
-       changeTable $db2 $j $maxID "ID_MEAS_TYPE" $TABLE_LIST2
+       changeTable $db2 $j_shift $maxID "ID_MEAS_TYPE" $TABLE_LIST2
 
       }
     }
@@ -3388,7 +3441,7 @@ proc SYS_MEAS_TYPES { db2 } {
 # ==============================================================================================================
 
 # -- SYS_PUNIT
-proc SYS_PUNIT { db2 } {
+proc SYS_PUNIT { db2 shift } {
 
   set TABLE_LIST [ list SYS_PUNIT ]
 
@@ -3413,7 +3466,7 @@ proc SYS_PUNIT { db2 } {
 
     set strSQL2 "SELECT ID FROM $TABLE_NAME ORDER BY ID ASC"
     set r1 [ $db2 $strSQL2 ]
-    set shift 0
+    #set shift 0
     for {set i 0} {$i < $cntID} {incr i} {
       set j [ expr $i+1 ]
       set id_old [lindex $r1 $i ]
@@ -3421,21 +3474,21 @@ proc SYS_PUNIT { db2 } {
       set j_shift [ expr ($j+$shift) ]
       if {$id_old!=$j_shift} {
 
-       LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j_shift ( maxID=$maxID )"
+        LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j_shift ( maxID=$maxID )"
 
-       #--  ID_UNIT
-       set TABLE_LIST2 [ list DMS_CALC_RESULT_MEAS DMS_EXTEQUIV_MEAS DMS_CALC_INIPARAMS DMS_CALC_INIPARAMS_DEFAULT \
+        #--  ID_UNIT
+        set TABLE_LIST2 [ list DMS_CALC_RESULT_MEAS DMS_EXTEQUIV_MEAS DMS_CALC_INIPARAMS DMS_CALC_INIPARAMS_DEFAULT \
  OBJ_MODEL_PARAM OBJ_PARAM SYS_MEAS_TYPES SYS_OTYP_PARAM SYS_PARAM_TYPES VS_FORM_PARAMTYPE ]
 
-       changeTable $db2 $maxID $id_old "ID_UNIT" $TABLE_LIST2
+        changeTable $db2 $maxID $id_old "ID_UNIT" $TABLE_LIST2
 
 
-       set strSQL3 "UPDATE $TABLE_NAME SET ID=$j WHERE ID=$id_old"
-       $db2 $strSQL3
-       $db2 commit
+        set strSQL3 "UPDATE $TABLE_NAME SET ID=$j_shift WHERE ID=$id_old"
+        $db2 $strSQL3
+        $db2 commit
 
 
-       changeTable $db2 $j $maxID "ID_UNIT" $TABLE_LIST2
+        changeTable $db2 $j_shift $maxID "ID_UNIT" $TABLE_LIST2
 
       }
     }
@@ -3455,7 +3508,7 @@ proc SYS_PUNIT { db2 } {
 # ==============================================================================================================
 
 # -- SYS_PTYP
-proc SYS_PTYP { db2 } {
+proc SYS_PTYP { db2 shift } {
 
   set TABLE_LIST [ list SYS_PTYP ]
 
@@ -3480,7 +3533,7 @@ proc SYS_PTYP { db2 } {
 
     set strSQL2 "SELECT ID FROM $TABLE_NAME ORDER BY ID ASC"
     set r1 [ $db2 $strSQL2 ]
-    set shift 1500
+    #set shift 1500
     for {set i 0} {$i < $cntID} {incr i} {
       set j [ expr $i+1 ]
       set id_old [lindex $r1 $i ]
@@ -3499,18 +3552,18 @@ proc SYS_PTYP { db2 } {
        changeTable $db2 $maxID $id_old "ID_TYPE" $TABLE_LIST2
 
 
-       set strSQL3 "UPDATE $TABLE_NAME SET ID=$j WHERE ID=$id_old"
+       set strSQL3 "UPDATE $TABLE_NAME SET ID=$j_shift WHERE ID=$id_old"
        $db2 $strSQL3
        $db2 commit
 
 
        #--  ID_PTYPE
        set TABLE_LIST2 [ list OBJ_LIMIT ]
-       changeTable $db2 $j $maxID "ID_PTYPE" $TABLE_LIST2
+       changeTable $db2 $j_shift $maxID "ID_PTYPE" $TABLE_LIST2
 
        #--  ID_TYPE
        set TABLE_LIST2 [ list SYS_MEAS_TYPES SYS_PARAM_TYPES SYS_PUNIT ]
-       changeTable $db2 $j $maxID "ID_TYPE" $TABLE_LIST2
+       changeTable $db2 $j_shift $maxID "ID_TYPE" $TABLE_LIST2
 
       }
     }
@@ -3530,7 +3583,7 @@ proc SYS_PTYP { db2 } {
 # ==============================================================================================================
 
 # -- SYS_PARAM_TYPES
-proc SYS_PARAM_TYPES { db2 } {
+proc SYS_PARAM_TYPES { db2 shift } {
 
   set TABLE_LIST [ list SYS_PARAM_TYPES ]
 
@@ -3555,7 +3608,7 @@ proc SYS_PARAM_TYPES { db2 } {
 
     set strSQL2 "SELECT ID FROM $TABLE_NAME ORDER BY ID ASC"
     set r1 [ $db2 $strSQL2 ]
-    set shift 1500
+    #set shift 1500
     for {set i 0} {$i < $cntID} {incr i} {
       set j [ expr $i+1 ]
       set id_old [lindex $r1 $i ]
@@ -3571,12 +3624,12 @@ proc SYS_PARAM_TYPES { db2 } {
        changeTable $db2 $maxID $id_old "ID_PARAM_TYPE" $TABLE_LIST2
 
 
-       set strSQL3 "UPDATE $TABLE_NAME SET ID=$j WHERE ID=$id_old"
+       set strSQL3 "UPDATE $TABLE_NAME SET ID=$j_shift WHERE ID=$id_old"
        $db2 $strSQL3
        $db2 commit
 
 
-       changeTable $db2 $j $maxID "ID_PARAM_TYPE" $TABLE_LIST2
+       changeTable $db2 $j_shift $maxID "ID_PARAM_TYPE" $TABLE_LIST2
 
       }
     }
@@ -3595,7 +3648,7 @@ proc SYS_PARAM_TYPES { db2 } {
 # ==============================================================================================================
 
 # -- SYS_DB_PART
-proc SYS_DB_PART { db2 } {
+proc SYS_DB_PART { db2 shift } {
 
   set TABLE_LIST [ list SYS_DB_PART ]
 
@@ -3620,7 +3673,7 @@ proc SYS_DB_PART { db2 } {
 
     set strSQL2 "SELECT ID FROM $TABLE_NAME ORDER BY ID ASC"
     set r1 [ $db2 $strSQL2 ]
-    set shift 1500
+    #set shift 1500
     for {set i 0} {$i < $cntID} {incr i} {
       set j [ expr $i+1 ]
       set id_old [lindex $r1 $i ]
@@ -3628,28 +3681,27 @@ proc SYS_DB_PART { db2 } {
       set j_shift [ expr ($j+$shift) ]
       if {$id_old!=$j_shift} {
 
-       LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j_shift ( maxID=$maxID )"
+        LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j_shift ( maxID=$maxID )"
 
-       #--  ID_NODE
-       set TABLE_LIST2 [ list SYS_TBLLST ]
-       changeTable $db2 $maxID $id_old "ID_NODE" $TABLE_LIST2
-
-
-       set strSQL3 "UPDATE $TABLE_NAME SET ID_PARENT=$maxID WHERE ID_PARENT=$id_old"
-       $db2 $strSQL3
-       $db2 commit
-
-       set strSQL3 "UPDATE $TABLE_NAME SET ID=$j WHERE ID=$id_old"
-       $db2 $strSQL3
-       $db2 commit
-
-       set strSQL3 "UPDATE $TABLE_NAME SET ID_PARENT=$j WHERE ID_PARENT=$maxID"
-       $db2 $strSQL3
-       $db2 commit
-
-       changeTable $db2 $j $maxID "ID_NODE" $TABLE_LIST2
+        #--  ID_NODE
+        set TABLE_LIST2 [ list SYS_TBLLST ]
+        changeTable $db2 $maxID $id_old "ID_NODE" $TABLE_LIST2
 
 
+        set strSQL3 "UPDATE $TABLE_NAME SET ID_PARENT=$maxID WHERE ID_PARENT=$id_old"
+        $db2 $strSQL3
+        $db2 commit
+
+        set strSQL3 "UPDATE $TABLE_NAME SET ID=$j_shift WHERE ID=$id_old"
+        $db2 $strSQL3
+        $db2 commit
+
+        set strSQL3 "UPDATE $TABLE_NAME SET ID_PARENT=$j_shift WHERE ID_PARENT=$maxID"
+        $db2 $strSQL3
+        $db2 commit
+
+
+        changeTable $db2 $j_shift $maxID "ID_NODE" $TABLE_LIST2
       }
     }
 
@@ -3667,7 +3719,7 @@ proc SYS_DB_PART { db2 } {
 # ==============================================================================================================
 
 # -- SYS_OTYP
-proc SYS_OTYP { db2 } {
+proc SYS_OTYP_1 { db2 shift } {
 
   set TABLE_LIST [ list SYS_OTYP ]
 
@@ -3692,7 +3744,7 @@ proc SYS_OTYP { db2 } {
 
     set strSQL2 "SELECT ID FROM $TABLE_NAME ORDER BY ID ASC"
     set r1 [ $db2 $strSQL2 ]
-    set shift 1500
+    #set shift 1500
     for {set i 0} {$i < $cntID} {incr i} {
       set j [ expr $i+1 ]
       set id_old [lindex $r1 $i ]
@@ -3705,33 +3757,19 @@ proc SYS_OTYP { db2 } {
        #--  ID_NODE
        set TABLE_LIST2 [ list SYS_TBLLST ]
 
-       foreach T_NAME $TABLE_LIST2 {
-       if {[checkTable $db2 $T_NAME "ID_NODE"]} {
-         $db2 "UPDATE $T_NAME SET ID_NODE=$maxID WHERE ID_NODE=$id_old"
-         $db2 commit
-        }
-       }
-
 
        set strSQL3 "UPDATE $TABLE_NAME SET ID_PARENT=$maxID WHERE ID_PARENT=$id_old"
        $db2 $strSQL3
        $db2 commit
 
-       set strSQL3 "UPDATE $TABLE_NAME SET ID=$j WHERE ID=$id_old"
+       set strSQL3 "UPDATE $TABLE_NAME SET ID=$j_shift WHERE ID=$id_old"
        $db2 $strSQL3
        $db2 commit
 
-       set strSQL3 "UPDATE $TABLE_NAME SET ID_PARENT=$j WHERE ID_PARENT=$maxID"
+       set strSQL3 "UPDATE $TABLE_NAME SET ID_PARENT=$j_shift WHERE ID_PARENT=$maxID"
        $db2 $strSQL3
        $db2 commit
 
-
-       foreach T_NAME $TABLE_LIST2 {
-       if {[checkTable $db2 $T_NAME "ID_NODE"]} {
-         $db2 "UPDATE $T_NAME SET ID_NODE=$j WHERE ID_NODE=$maxID"
-         $db2 commit
-        }
-       }
 
       }
     }
@@ -3763,7 +3801,7 @@ proc SYS_OTYP { db2 } {
 #SYS_TREE21 db2
 
 # -- SYS_DB_PART
-# # SYS_DB_PART db2
+# # SYS_DB_PART db2 1500
 
 
 # -- DG_GROUPS корректировка сервис GROUP_ID
@@ -3809,7 +3847,7 @@ proc SYS_OTYP { db2 } {
 #SYS_APD  db2
 # -- !!!!!
 # ###
-#SYS_APPL db2
+#SYS_APPL db2 1500
 #
 
 # -- RPT_DIR
@@ -3892,7 +3930,7 @@ proc SYS_OTYP { db2 } {
 # -- OBJ_TREE -- отключать ssbsd + контроль Сигнальной системы
 # -- !необходимо! гасить модули elregd, phregd, ?ssbsd? - ! ОТЧЕТЫ - корректировка обьектов в процедурах!
 # #####
-#OBJ_TREE  db2
+# ##OBJ_TREE  db2
 #
 # -- OBJ_EL_PIN
 #OBJ_EL_PIN  db2
@@ -3912,24 +3950,24 @@ proc SYS_OTYP { db2 } {
 # ## SYS_WAVE  db2
 
 
-# -- SYS_TBLLST
-# # SYS_TBLLST_1  db2
+# -- SYS_TBLLST -- выкл dpload
+# # SYS_TBLLST_1  db2 1500
 
 
 # -- SYS_MEAS_TYPES
-# # SYS_MEAS_TYPES  db2
+# # SYS_MEAS_TYPES  db2 0
 
 # -- SYS_PUNIT
-# #  SYS_PUNIT  db2
+# #  SYS_PUNIT  db2  0
 
 # -- SYS_PTYP
-# # SYS_PTYP  db2
+# # SYS_PTYP  db2 1500
 
 # -- SYS_PARAM_TYPES
-# # SYS_PARAM_TYPES  db2
+# # SYS_PARAM_TYPES  db2 1500
 
 # -- SYS_OTYP
-# # SYS_OTYP  db2
+# # SYS_OTYP  db2 1500
 
 # ==============================================================================================================
 
