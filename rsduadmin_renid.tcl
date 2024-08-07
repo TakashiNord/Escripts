@@ -3131,7 +3131,7 @@ proc TAG_LIST { db2 } {
     }
 
     set maxID [ expr int($maxID)+1 ]
-    set strSQL0 "INSERT INTO $TABLE_NAME (ID,DESCRIPTION) VALUES ($maxID,'TEXTRENAMETEXT') "
+    set strSQL0 "INSERT INTO $TABLE_NAME (ID,ID_TYPE,VISIBLE,ID_USER_CREATE,DESCRIPTION) VALUES ($maxID,1,0,1,'TEXTRENAMETEXT') "
     $db2 $strSQL0
     $db2 commit
 
@@ -3145,7 +3145,7 @@ proc TAG_LIST { db2 } {
        LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j ( maxID=$maxID )"
 
        #--  ID_TAG
-       set TABLE_LIST2 [ list TAG_DOCS TAG_POSITION ]
+       set TABLE_LIST2 [ list TAG_DOCS TAG_POSITION RSDUJOB.JOB_MAIN]
 
        changeTable $db2 $maxID $id_old "ID_TAG" $TABLE_LIST2
 
@@ -3272,6 +3272,7 @@ proc SYS_TBLLST_1 { db2 ind1 ind2 } {
 
        #--  ID_SRCTBL
        set TABLE_LIST2 [ list CALC_SRC_CHANNEL_TUNE DA_SRC_CHANNEL_TUNE DG_SRC_CHANNEL_TUNE \
+EA_SRC_CHANNEL_TUNE EA_SSRC_CHANNEL_TUNE \
 DMS_EXTEQUIV_MEAS \
 J_ARC_VAL_CHANGE \
 MEAS_RCV_CHANNEL_TUNE MEAS_SRC_CHANNEL_TUNE MEAS_SSRC_CHANNEL_TUNE \
@@ -3295,6 +3296,7 @@ VP_PARAMS VS_OBJ_TUNE VS_REGIM_TUNE ]
        #--  ID_TBLLST
        set TABLE_LIST2 [ list ARC_HIST_PARTITIONS ARC_INTEGRITY ARC_READ_DEFAULTS ARC_READ_VIEW ARC_STAT ARC_SUBSYST_PROFILE ARC_VIEW_PARTITIONS \
 NTP_EDGE \
+J_USER_AUDIT \
 SYS_APP_TYPE \
 TOPO_EDGE ]
        changeTable $db2 $ind1 $ind2 "ID_TBLLST" $TABLE_LIST2
@@ -3341,13 +3343,13 @@ proc SYS_TBLLST { db2 shift } {
       if {$id_old!=$j_shift} {
 
        LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j_shift ( maxID=$maxID )"
-       
+
        SYS_TBLLST_1 $db2 $maxID $id_old
 
        set strSQL3 "UPDATE $TABLE_NAME SET ID=$j_shift WHERE ID=$id_old"
        $db2 $strSQL3
        $db2 commit
-       
+
        SYS_TBLLST_1 $db2 $j_shift $maxID
 
       }
@@ -3403,7 +3405,7 @@ proc SYS_MEAS_TYPES { db2 shift } {
        LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$j_shift ( maxID=$maxID )"
 
        #--  ID_TYPE
-       set TABLE_LIST2 [ list CALC_LIST DG_LIST NME_PARAM_LIST ]
+       set TABLE_LIST2 [ list CALC_LIST DG_LIST NME_PARAM_LIST EA_CHANNELS ]
        changeTable $db2 $maxID $id_old "ID_TYPE" $TABLE_LIST2
 
        #--  ID_MEAS_TYPE
@@ -3417,7 +3419,7 @@ proc SYS_MEAS_TYPES { db2 shift } {
 
 
        #--  ID_TYPE
-       set TABLE_LIST2 [ list CALC_LIST DG_LIST NME_PARAM_LIST ]
+       set TABLE_LIST2 [ list CALC_LIST DG_LIST NME_PARAM_LIST EA_CHANNELS ]
        changeTable $db2 $j_shift $maxID "ID_TYPE" $TABLE_LIST2
 
        #--  ID_MEAS_TYPE
@@ -3478,7 +3480,7 @@ proc SYS_PUNIT { db2 shift } {
 
         #--  ID_UNIT
         set TABLE_LIST2 [ list DMS_CALC_RESULT_MEAS DMS_EXTEQUIV_MEAS DMS_CALC_INIPARAMS DMS_CALC_INIPARAMS_DEFAULT \
- OBJ_MODEL_PARAM OBJ_PARAM SYS_MEAS_TYPES SYS_OTYP_PARAM SYS_PARAM_TYPES VS_FORM_PARAMTYPE ]
+ OBJ_MODEL_PARAM OBJ_PARAM SYS_MEAS_TYPES SYS_OTYP_PARAM SYS_PARAM_TYPES VS_FORM_PARAMTYPE EA_CHANNELS_DESC EA_RATES_DESC ]
 
         changeTable $db2 $maxID $id_old "ID_UNIT" $TABLE_LIST2
 
@@ -3801,7 +3803,7 @@ proc SYS_OTYP_1 { db2 shift } {
 #SYS_TREE21 db2
 
 # -- SYS_DB_PART
-# # SYS_DB_PART db2 1500
+#SYS_DB_PART db2 1500
 
 
 # -- DG_GROUPS корректировка сервис GROUP_ID
@@ -3943,28 +3945,28 @@ proc SYS_OTYP_1 { db2 shift } {
 
 
 # -- TAG_LIST
-# # TAG_LIST  db2
+#TAG_LIST  db2
 
 
-# -- SYS_WAVE   -- не запускать, может возникнуть коллизия в именах файлов табл - сервер ресурсов
+# -- SYS_WAVE   -- не рекомендуем запускать, может возникнуть коллизия в именах файлов
 # ## SYS_WAVE  db2
-#################
+#
 
 # -- SYS_TBLLST -- выкл dpload
-# # SYS_TBLLST db2 1500
-#######
+# #SYS_TBLLST db2 1500
+
 
 # -- SYS_MEAS_TYPES
-# # SYS_MEAS_TYPES  db2 0
+#SYS_MEAS_TYPES  db2 0
 
 # -- SYS_PUNIT
-# #  SYS_PUNIT  db2  0
+#SYS_PUNIT  db2  0
 
 # -- SYS_PTYP
-# # SYS_PTYP  db2 1500
+#SYS_PTYP  db2 1500
 
 # -- SYS_PARAM_TYPES
-# # SYS_PARAM_TYPES  db2 1500
+#SYS_PARAM_TYPES  db2 1500
 
 # -- SYS_OTYP
 # # SYS_OTYP  db2 1500
