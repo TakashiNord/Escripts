@@ -14,6 +14,7 @@ EMA_LOGS1=(
 /etc/apache2
 /etc/nginx
 /etc/ntp
+/etc/ld.so.conf.d
 /etc/vmware
 /etc/sysconfig
 /etc/nagios
@@ -74,7 +75,7 @@ EMA_LOGS2=(
 /etc/logrotate.d/rabbitmq-server
 /etc/logrotate.d/nginx
 /etc/ld.so.conf
-/etc/ld.so.conf.d/oracle.conf
+#/etc/ld.so.conf.d/oracle.conf
 /etc/security/limits.conf
 /var/log/mail
 /var/log/ntp
