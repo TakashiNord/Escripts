@@ -2715,7 +2715,7 @@ proc OBJ_TREE { db2 } {
     # insert temp record
     set maxID [ expr int($maxID)+1 + $shiftID ]
     set strSQL0 "INSERT INTO $TABLE_NAME (ID,ID_PARENT,ID_MODEL,ID_TYPE,ID_ORG,NAME,ALIAS,ID_FILEWAV,DATE_MOD,GUID) \
-                 VALUES ($maxID,null,null,5,null,'TEXTRENAMETEXT','TEXTRENAMETEXT',null,null,null)"
+                 VALUES ($maxID,null,null,5,null,'TEXTRENAMETEXT','TEXTRENAMETEXT',null,null,'cc258dcf93f843ddac44ab9e595b1568')"
     $db2 $strSQL0
     $db2 commit
 
@@ -2771,7 +2771,7 @@ proc OBJ_EL_PIN { db2 } {
 
     # insert temp record
     set maxID [ expr int($maxID)+1 ]
-    set strSQL0 "INSERT INTO $TABLE_NAME (ID,ID_OBJ,PIN_NUM,ID_CONN_NODE,GUID,NAME) VALUES ($maxID,NULL,0,NULL,'1','TEXTRENAMETEXT') "
+    set strSQL0 "INSERT INTO $TABLE_NAME (ID,ID_OBJ,PIN_NUM,ID_CONN_NODE,GUID,NAME) VALUES ($maxID,NULL,0,NULL,'3513e03b972b4093a3c7006deaae55b0','TEXTRENAMETEXT') "
     $db2 $strSQL0
     $db2 commit
 
@@ -2834,7 +2834,7 @@ proc OBJ_CONN_NODE { db2 } {
 
     # insert temp record
     set maxID [ expr int($maxID)+1 ]
-    set strSQL0 "INSERT INTO $TABLE_NAME (ID,ID_OBJ,GUID,NAME) VALUES ($maxID,NULL,'1','TEXTRENAMETEXT') "
+    set strSQL0 "INSERT INTO $TABLE_NAME (ID,ID_OBJ,GUID,NAME) VALUES ($maxID,NULL,'e650da6cead541f58e50e7c65e7b90d2','TEXTRENAMETEXT') "
     $db2 $strSQL0
     $db2 commit
 
@@ -2887,7 +2887,7 @@ proc OBJ_MODEL { db2 } {
 
     # insert temp record
     set maxID [ expr int($maxID)+1 ]
-    set strSQL0 "INSERT INTO $TABLE_NAME (ID,ID_TYPE,NAME,GUID) VALUES ($maxID,NULL,'TEXTRENAMETEXT','1') "
+    set strSQL0 "INSERT INTO $TABLE_NAME (ID,ID_TYPE,NAME,GUID) VALUES ($maxID,NULL,'TEXTRENAMETEXT','62e7836701744fac8243ac5351bb08a4') "
     $db2 $strSQL0
     $db2 commit
 
