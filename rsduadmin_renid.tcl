@@ -3530,60 +3530,53 @@ proc SYS_DB_PART { db2 shift } {
 
 proc SYS_OTYP_1 { db2 ind1 ind2 } {
 
-       #--  ID_ARCLST
-       set TABLE_LIST2 [ list ARC_READ_VIEW ]
-       changeTable $db2 $ind1 $ind2 "ID_ARCLST" $TABLE_LIST2
+       #--  ID_CHILD_TYPE  ID_PARENT_TYPE
+       set TABLE_LIST2 [ list OBJ_CONSTRAINT ]
+       changeTable $db2 $ind1 $ind2 "ID_CHILD_TYPE"  $TABLE_LIST2
+       changeTable $db2 $ind1 $ind2 "ID_PARENT_TYPE" $TABLE_LIST2
 
-       #--  ID_DIR
-       set TABLE_LIST2 [ list TAG_LIST ]
-       changeTable $db2 $ind1 $ind2 "ID_DIR" $TABLE_LIST2
+       #--  ID_DTYP
+       set TABLE_LIST2 [ list VS_TCOMP ]
+       changeTable $db2 $ind1 $ind2 "ID_DTYP" $TABLE_LIST2
 
-       #--  ID_DSTTBL
-       set TABLE_LIST2 [ list SYS_TBLLNK ]
-       changeTable $db2 $ind1 $ind2 "ID_DSTTBL" $TABLE_LIST2
+       #--  ID_LINK_TYPE
+       set TABLE_LIST2 [ list FEED_ORG_LINK ]
+       changeTable $db2 $ind1 $ind2 "ID_LINK_TYPE" $TABLE_LIST2
 
-       #--  ID_LSTTBL
-       set TABLE_LIST2 [ list AD_SINFO ARC_SERVICES_INFO DA_PC R_MANUAL_PARAMS SYS_APP_SER_LST SYS_FTR SYS_TBLLNK SYS_TREE21 ]
-       changeTable $db2 $ind1 $ind2 "ID_LSTTBL" $TABLE_LIST2
+       #--  ID_PTYP
+       set TABLE_LIST2 [ list AD_PFTR ]
+       changeTable $db2 $ind1 $ind2 "ID_PTYP" $TABLE_LIST2
 
-       #--  ID_OBJTBL
-       set TABLE_LIST2 [ list J_KVIT ]
-       changeTable $db2 $ind1 $ind2 "ID_OBJTBL" $TABLE_LIST2
+       #--  ID_PURPOSE
+       set TABLE_LIST2 [ list RSDUJOB.JOB_MAIN ]
+       changeTable $db2 $ind1 $ind2 "ID_PURPOSE" $TABLE_LIST2
 
-       #--  ID_SRCTBL
-       set TABLE_LIST2 [ list CALC_SRC_CHANNEL_TUNE DA_SRC_CHANNEL_TUNE DG_SRC_CHANNEL_TUNE \
-EA_SRC_CHANNEL_TUNE EA_SSRC_CHANNEL_TUNE \
-DMS_EXTEQUIV_MEAS \
-J_ARC_VAL_CHANGE \
-MEAS_RCV_CHANNEL_TUNE MEAS_SRC_CHANNEL_TUNE MEAS_SSRC_CHANNEL_TUNE \
-R_PSETS \
-SIG_SOURCE SIG_ZONE_TUNE ]
-       changeTable $db2 $ind1 $ind2 "ID_SRCTBL" $TABLE_LIST2
+       #--  ID_STATE_TYPE1  ID_STATE_TYPE2 ID_EDGE_TYPE
+       set TABLE_LIST2 [ list TOPO_PERMIT ]
+       changeTable $db2 $ind1 $ind2 "ID_STATE_TYPE1" $TABLE_LIST2
+       changeTable $db2 $ind1 $ind2 "ID_STATE_TYPE2" $TABLE_LIST2
+       changeTable $db2 $ind1 $ind2 "ID_EDGE_TYPE"   $TABLE_LIST2
 
-       #--  ID_TABLE
-       set TABLE_LIST2 [ list ASENERGY_ARCHS DBE_DESTINATION \
-J_HWSTATE J_KVIT J_USTCH \
-SH_REGIM_TUNE \
-TSSO_MPOFFER_DESTINATION \
-US_LOCK \
-VP_PARAMS VS_OBJ_TUNE VS_REGIM_TUNE ]
-       changeTable $db2 $ind1 $ind2 "ID_TABLE" $TABLE_LIST2
-
-       #--  ID_TBL
-       set TABLE_LIST2 [ list SYS_JRNL SYS_TBLREF WSERV_UMENU ]
-       changeTable $db2 $ind1 $ind2 "ID_TBL" $TABLE_LIST2
-
-       #--  ID_TBLLST
-       set TABLE_LIST2 [ list ARC_HIST_PARTITIONS ARC_INTEGRITY ARC_READ_DEFAULTS ARC_READ_VIEW ARC_STAT ARC_SUBSYST_PROFILE ARC_VIEW_PARTITIONS \
-NTP_EDGE \
-J_USER_AUDIT \
-SYS_APP_TYPE \
-TOPO_EDGE ]
-       changeTable $db2 $ind1 $ind2 "ID_TBLLST" $TABLE_LIST2
-
-       #--  ID_TBLREF
-       set TABLE_LIST2 [ list SYS_TBLREF ]
-       changeTable $db2 $ind1 $ind2 "ID_TBLREF" $TABLE_LIST2
+       #--  ID_TYPE
+       set TABLE_LIST2 [ list AD_LIST AST_CNT_LIST AST_PERSONNEL \
+DA_PARGROUP \
+DG_GROUPS \
+HG_DIR \
+MEAS_FUNCTION_TEMPLATE \
+OBJ_MODEL OBJ_TREE \
+PROFILE_DIR PROFILE_LIST \
+R_GROUP R_KADR \
+RPT_DIR RPT_LST \
+RSDU_USERS \
+S_GROUPS S_USERS \
+SIG_GROUP SIG_ZONE \
+SYS_APD SYS_APPL SYS_APP_SERVICES SYS_APP_TYPE SYS_JRNL SYS_OTYP_MEAS SYS_OTYP_PARAM SYS_OTYP2EQUAL SYS_SIGN SYS_TBLLST \
+TAG_LIST \
+TOPO_EDGE TOPO_NODE \
+VP_PANEL VP_GROUP \
+VS_FORM VS_FORM_DEFPARAMS VS_GROUP \
+WPORTAL_MENU WRPT_CAT WRPT_REP_LIST WRPT_TMPL_CAT WRPT_TMPL_LIST ]
+       changeTable $db2 $ind1 $ind2 "ID_TYPE" $TABLE_LIST2
 
 }
 
