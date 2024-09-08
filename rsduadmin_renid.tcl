@@ -814,13 +814,13 @@ proc SYS_APPL { db2 shift } {
 
 
       changeTable $db2 $id_new $maxID "ID_APPL" $TABLE_LIST2
-	  
-	  # SYS_TBLREF 7 = application
-	  set ap 7
-	  set strSQL3 "UPDATE SYS_TBLREF SET ID_TBLREC=$id_new WHERE ID_TBLREC=$id_old AND ID_TBLREF=$ap"
-      $db2 $strSQL3
+
+      # SYS_TBLREF 7 = application
+      set ap 7
+      set strSQL3 "UPDATE SYS_TBLREF SET ID_TBLREC=$id_new WHERE ID_TBLREC=$id_old AND ID_TBLREF=$ap"
+      set rup [ $db2 $strSQL3 ]
       $db2 commit
-	  LogWrite "$TABLE_NAME update SYS_TBLREF $ap,$id_old  - >  $ap,$id_new "
+      LogWrite "$TABLE_NAME update SYS_TBLREF $ap,$id_old  - >  $ap,$id_new  = $rup"
 
     }
 
@@ -3168,13 +3168,13 @@ proc SYS_TBLLST { db2 shift } {
       SYS_TBLLST_1 $db2 $id_new $maxID
 
 
-	  # SYS_TBLREF 23 = tables rsdu
-	  set ap 23
-	  set strSQL3 "UPDATE SYS_TBLREF SET ID_TBLREC=$id_new WHERE ID_TBLREC=$id_old AND ID_TBLREF=$ap"
-      $db2 $strSQL3
+      # SYS_TBLREF 23 = tables rsdu
+      set ap 23
+      set strSQL3 "UPDATE SYS_TBLREF SET ID_TBLREC=$id_new WHERE ID_TBLREC=$id_old AND ID_TBLREF=$ap"
+      set rup [ $db2 $strSQL3 ]
       $db2 commit
-	  LogWrite "$TABLE_NAME update SYS_TBLREF $ap,$id_old  - >  $ap,$id_new "	  
-	  
+      LogWrite "$TABLE_NAME update SYS_TBLREF $ap,$id_old  - >  $ap,$id_new = $rup"
+
 
     }
 
