@@ -53,6 +53,29 @@ proc LogWrite  { s } {
   puts $rf $s
 }
 
+
+# --
+proc sys_tree21_topname { db2 } {
+# --
+  set idnm ""; set name "" ;
+  set strSQL1 "select id,name as sys_tree21_topname from sys_tree21 where id_parent is null;"
+  set df ""
+  set err ""
+  catch {
+    set df [ $db2 $strSQL1 ]
+    set p ""
+  } err
+  if {$err!=""} { return $name ; }
+  foreach {r1} $df {
+    set idnm [ lindex $r1 0 ]
+    set name [ lindex $r1 1 ]
+    puts "\n(${idnm})${name}\n"
+  }  
+ 
+  return "(${idnm})${name}" ;
+}
+
+
 # --
 proc checkTable { db2 tblname col } {
 # --
@@ -814,6 +837,7 @@ proc SYS_APPL { db2 shift } {
 
 
       changeTable $db2 $id_new $maxID "ID_APPL" $TABLE_LIST2
+
 
       # SYS_TBLREF 7 = application
       set ap 7
@@ -3674,6 +3698,9 @@ proc SYS_OTYP { db2 shift } {
 #
 #
 # ===============================================================
+  set topname [ sys_tree21_topname db2 ]
+  LogWrite "$topname\n"
+# ===============================================================
 
 
 # -- одиночные таблицы
@@ -3827,13 +3854,16 @@ proc SYS_OTYP { db2 shift } {
 # #####
 # ##OBJ_TREE  db2
 #
+
 # -- OBJ_EL_PIN
 #OBJ_EL_PIN  db2
+
 # -- OBJ_CONN_NODE
 #OBJ_CONN_NODE  db2
+
 # -- OBJ_MODEL
 #OBJ_MODEL  db2
-#
+
 
 
 
@@ -3863,7 +3893,7 @@ proc SYS_OTYP { db2 shift } {
 #SYS_PARAM_TYPES  db2 1500
 
 # -- SYS_OTYP
-#!!!!!####SYS_OTYP  db2 1500
+#SYS_OTYP  db2 1500
 #
 
 
