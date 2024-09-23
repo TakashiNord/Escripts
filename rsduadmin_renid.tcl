@@ -6,44 +6,8 @@
 #
 #
 # ===============================================================
-
-
 package require tclodbc
 package require sqlite3
-
-set tns "rsdu2" ; #"rsdu2"  "RSDU_ATEC" "Postrsdu5" "poli24"
-set usr "rsduadmin" ; #  admin  nov_ema rsduadmin
-set pwd "passme" ; # passme  qwertyqaz Password1
-
-global rf
-global db2
-
-set t1 [ clock format [ clock seconds ] -format "%Y%m%d_%H%M%S" ]
-puts "\nstart = $t1\n"
-
-# лог - файл
-set ph [info script]
-if {$ph==""} {
-  set ph rsduadmin_change_id_${t1}.log
-} else {
-  set ph [file rootname $ph ]_${t1}.log
-}
-
-
-set rf [ open $ph "w+"  ]
-
-# Устанавливаем соединение к БД
-database db2 $tns $usr $pwd
-db2 set autocommit off
-
-set owner "RSDUADMIN"
-
-# Устанавливаем РОЛЬ
-# по умолчанию = BASE_EXT_CONNECT_OIK CONNECT => SBOR_STAND_READ
-if {$usr!="rsduadmin"} {
-  db2 "SET ROLE SBOR_STAND_READ , BASE_STAND_READ"
-  db2 "select * from session_roles"
-}
 
 
 proc LogWrite  { s } {
@@ -52,7 +16,6 @@ proc LogWrite  { s } {
   if {$rf==""} { return }
   puts $rf $s
 }
-
 
 # --
 proc sys_tree21_topname { db2 } {
@@ -74,7 +37,6 @@ proc sys_tree21_topname { db2 } {
  
   return "(${idnm})${name}" ;
 }
-
 
 # --
 proc checkTable { db2 tblname col } {
@@ -3689,6 +3651,43 @@ proc SYS_OTYP { db2 shift } {
 }
 
 
+# ===============================================
+proc main { } { 
+# ===============================================
+global tns usr pwd
+set tns "rsdu2" ; #"rsdu2"  "RSDU_ATEC" "Postrsdu5" "poli24"
+set usr "rsduadmin" ; #  admin  nov_ema rsduadmin
+set pwd "passme" ; # passme  qwertyqaz Password1
+
+global rf
+global db2
+
+set t1 [ clock format [ clock seconds ] -format "%Y%m%d_%H%M%S" ]
+puts "\nstart = $t1\n"
+
+# лог - файл
+set ph [info script]
+if {$ph==""} {
+  set ph rsduadmin_change_id_${t1}.log
+} else {
+  set ph [file rootname $ph ]_${t1}.log
+}
+
+
+set rf [ open $ph "w+"  ]
+
+# Устанавливаем соединение к БД
+database db2 $tns $usr $pwd
+db2 set autocommit off
+
+set owner "RSDUADMIN"
+
+# Устанавливаем РОЛЬ
+# по умолчанию = BASE_EXT_CONNECT_OIK CONNECT => SBOR_STAND_READ
+if {$usr!="rsduadmin"} {
+  db2 "SET ROLE SBOR_STAND_READ , BASE_STAND_READ"
+  db2 "select * from session_roles"
+}
 
 # ===============================================================
 #
@@ -3818,10 +3817,10 @@ proc SYS_OTYP { db2 shift } {
 #DBE_ACTION db2
 
 
-
+# не запускать, если используется Cassandra 
 # -- ARC_SUBSYST_PROFILE
 #ARC1 db2
-
+#
 
 # -- журналы -- отключать ssbsd
 # AA2 db2
@@ -3911,11 +3910,16 @@ proc SYS_OTYP { db2 shift } {
 
   puts "-- End --"
 
-# ===============================================================
+# ===============================================
 #
 #
 #
 #
 #
 #
-# ===============================================================
+# ===============================================
+
+}
+
+ main .
+
