@@ -806,8 +806,9 @@ proc SYS_APPL { db2 shift } {
       set strSQL3 "UPDATE SYS_TBLREF SET ID_TBLREC=$id_new WHERE ID_TBLREC=$id_old AND ID_TBLREF=$ap"
       set rup [ $db2 $strSQL3 ]
       $db2 commit
-      LogWrite "$TABLE_NAME update SYS_TBLREF $ap,$id_old  - >  $ap,$id_new  = $rup"
-
+	  if {$rup!=0} {
+        LogWrite "$TABLE_NAME update SYS_TBLREF $ap,$id_old  - >  $ap,$id_new  = $rup"
+      }
     }
 
     $db2 "DELETE FROM $TABLE_NAME WHERE NAME LIKE '%TEXTRENAMETEXT%' "
@@ -3159,8 +3160,9 @@ proc SYS_TBLLST { db2 shift } {
       set strSQL3 "UPDATE SYS_TBLREF SET ID_TBLREC=$id_new WHERE ID_TBLREC=$id_old AND ID_TBLREF=$ap"
       set rup [ $db2 $strSQL3 ]
       $db2 commit
-      LogWrite "$TABLE_NAME update SYS_TBLREF $ap,$id_old  - >  $ap,$id_new = $rup"
-
+	  if {$rup!=0} {
+        LogWrite "$TABLE_NAME update SYS_TBLREF $ap,$id_old  - >  $ap,$id_new = $rup"
+      }
 
     }
 
