@@ -181,6 +181,9 @@ proc  CreateTable { tbname owner } {
     if {$data_type=="DATE"} { append columns1 " text" ; }
     # blob
     if {$data_type=="RAW"} { append columns1 " text" ; set raw 1 ; }
+
+    if {$data_type=="CLOB"} { append columns1 " text" ; set raw 1 ; }
+
     if {$nullable=="N"} { append columns1 " NOT NULL" ; }
     if {$raw==1} {
        append columns2 ", cast(${tbname}.$column  as varchar(256))"
@@ -223,6 +226,7 @@ proc  CreateTable { tbname owner } {
     if {0==[ string compare -nocase "MEAS_SNAPSHOT30" $tbname ]} { return 0 ; }
   }
 
+  #if {0==[ string compare -nocase "MEAS_FUNCTION_TEMPLATE" $tbname ]} { return 0 ; }
 
   set cNum 500000 ;
   set cnt_insert 0 ; # число записей ВСТАВКИ
