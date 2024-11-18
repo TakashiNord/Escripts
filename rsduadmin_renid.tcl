@@ -73,9 +73,16 @@ proc selectParamTable { db2 TABLE_NAME } {
 
     set maxID 0 ; set minID 0 ; set cntID 0 ;
     foreach {r1} [ $db2 $strSQL1 ] {
-      set maxID [ lindex $r1 0 ]
-      set minID [ lindex $r1 1 ]
-      set cntID [ lindex $r1 2 ]
+      set err ""
+	  catch {
+        set maxID [ lindex $r1 0 ]
+        set minID [ lindex $r1 1 ]
+        set cntID [ lindex $r1 2 ]
+        set p ""
+      } err
+      if {$err!=""} {
+        set maxID 0 ; set minID 0 ; set cntID 0 ;
+      }	
       set s1 "\n$TABLE_NAME = max=$maxID min=$minID cnt=$cntID \n"
       puts $s1
     }
@@ -1508,12 +1515,12 @@ proc VS_FORM { db2 ID_TABLE ID_APPL } {
 
 
       #-- ID_FORM
-      set TABLE_LIST2 [ list VS_COMP  VS_OBJ_TUNE  VS_MODUS_NODE VS_FORM_INIPARAMS ]
+      set TABLE_LIST2 [ list VS_COMP  VS_OBJ_TUNE  VS_MODUS_NODE VS_FORM_INIPARAMS NTP_EDGE NTP_NODE ]
       changeTable $db2 $maxID $id_old "ID_FORM" $TABLE_LIST2
 
       #-- ID_SCHEME
-      set TABLE_LIST2 [ list TAG_POSITION  RSDUJOB.JOB_MAIN ]
-      changeTable $db2 $maxID $id_old "ID_SCHEME" $TABLE_LIST2
+      set TABLE_LIST3 [ list TAG_POSITION  RSDUJOB.JOB_MAIN ]
+      changeTable $db2 $maxID $id_old "ID_SCHEME" $TABLE_LIST3
 
 
       #--US_MENU  ID_APPL=1232 - schemeviewer.exe
@@ -1559,12 +1566,10 @@ proc VS_FORM { db2 ID_TABLE ID_APPL } {
 
 
       #-- ID_FORM
-      set TABLE_LIST2 [ list VS_COMP  VS_OBJ_TUNE  VS_MODUS_NODE VS_FORM_INIPARAMS ]
       changeTable $db2 $id_new $maxID "ID_FORM" $TABLE_LIST2
 
       #-- ID_SCHEME
-      set TABLE_LIST2 [ list TAG_POSITION  RSDUJOB.JOB_MAIN ]
-      changeTable $db2 $id_new $maxID "ID_SCHEME" $TABLE_LIST2
+      changeTable $db2 $id_new $maxID "ID_SCHEME" $TABLE_LIST3
 
       #--US_MENU  ID_APPL=1232 - schemeviewer.exe
       $db2 "UPDATE US_MENU SET ID_PARAM=$id_new WHERE ID_PARAM=$maxID AND ID_APPL=$ID_APPL"
@@ -3598,7 +3603,7 @@ proc SYS_OTYP { db2 shift } {
 
     # insert temp record
     set maxID [ expr int($maxID)+1 ]
-    set strSQL0 "INSERT INTO $TABLE_NAME (ID,NAME) VALUES ($maxID,'TEXTRENAMETEXT') "
+    set strSQL0 "INSERT INTO $TABLE_NAME (ID,NAME,ALIAS,DEFINE_ALIAS) VALUES ($maxID,'TEXTRENAMETEXT','TEXTRENAMETEXT','TEXTRENAMETEXT') "
     $db2 $strSQL0
     $db2 commit
 
@@ -3654,7 +3659,7 @@ proc SYS_OTYP { db2 shift } {
 
 
 # ===============================================
-proc main { } { 
+proc main { w } { 
 # ===============================================
 global tns usr pwd
 set tns "rsdu2" ; #"rsdu2"  "RSDU_ATEC" "Postrsdu5" "poli24"
