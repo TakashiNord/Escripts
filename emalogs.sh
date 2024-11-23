@@ -1,12 +1,13 @@
 #!/bin/bash
 
-# ver 07/12/2023
+# ver 12/11/2024
 
 # folders
 EMA_LOGS1=(
 /home/ema
 /home/www-data/www/htdocs/WASUTP/config
 /home/www-data/www/htdocs/WASUTP/public/resource
+/usr/local/tomcat/default/conf
 #/home/cassandra/../conf
 /etc/ema
 /etc/php5
