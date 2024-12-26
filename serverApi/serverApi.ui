@@ -1,4 +1,4 @@
-WidGet file, version 1.1, created:  Sun Jan 22 15:21:32  2023
+WidGet file, version 1.1, created:  Wed Dec 25 13:48:47  2024
 Widget button#10
 	geometry row 6
 	other error {}
@@ -40,7 +40,7 @@ Widget button#1
 	other level {}
 	other help {}
 	other comments {}
-	geometry column 6
+	geometry column 7
 	configure command OKbut
 	other item_name button#1
 	other tabbing {}
@@ -75,7 +75,7 @@ Widget label#6
 	other item_name label#6
 	geometry sticky nesw
 Widget text#1
-	geometry columnspan 6
+	geometry columnspan 7
 	configure cursor {}
 	other error {}
 	other tags {}
@@ -96,6 +96,22 @@ Widget text#1
 	configure width 1
 	geometry column 1
 	other comments {}
+Widget button#12
+	geometry row 3
+	other error {}
+	other type button
+	other master {}
+	configure text {/../state/ ?broken?}
+	other pathname button#12
+	other tags {}
+	other level {}
+	other help {}
+	other comments {}
+	geometry column 6
+	configure command TOPOraw_network_state_broken
+	other tabbing {}
+	other item_name button#12
+	geometry sticky nesw
 Widget button#3
 	geometry row 3
 	other error {}
@@ -160,24 +176,8 @@ Widget button#6
 	other tabbing {}
 	configure command TOPOraw_network_state
 	geometry sticky nesw
-Widget button#7
-	geometry row 3
-	other error {}
-	other type button
-	other master {}
-	configure text {/../state/ ?broken?}
-	other pathname button#7
-	other tags {}
-	other level {}
-	other help {}
-	other comments {}
-	geometry column 6
-	configure command TOPOraw_network_state_broken
-	other item_name button#7
-	other tabbing {}
-	geometry sticky nesw
 Widget f
-	other generic_options {button {
+	other generic_options {button {activebackground SystemButtonFace activeforeground SystemButtonText anchor center background SystemButtonFace bitmap {} borderwidth 2 command {} comments {} cursor {} default disabled disabledforeground SystemDisabledText error {- button configuration -} font {MS Sans Serif,8} foreground SystemButtonText height 0 help {} highlightbackground SystemButtonFace highlightcolor SystemWindowFrame highlightthickness 1 image {} item_name sample_button justify center level {} master {} padx 1 pady 1 pathname sample_button relief raised state normal tabbing {} tags {} takefocus {} text button textvariable {} type button underline -1 width 0 wraplength 0
 		} canvas {
 		} checkbutton {
 		} entry {
@@ -199,16 +199,33 @@ Widget f
 	other min_row {18 30 30 30 636 41}
 	other master {}
 	other pathname f
-	other resize_column {3 3 3 3 3 3 1}
+	other resize_column {3 3 3 3 3 0 3 1}
 	other tags {}
 	other level 0
 	configure background #e9e9e9
-	other min_column {187 70 116 51 113 101 2}
+	other min_column {187 70 116 51 113 30 101 2}
 	other help {}
 	other Colors {black white bisque grey red green blue magenta yellow SystemButtonFace}
 	other comments {}
 	other item_name f
 	other tabbing {}
+Widget button#7
+	other error {}
+	other tags {}
+	other level {}
+	other help {}
+	configure command TOPOraw_network_state_broken_all
+	other focus .widget.form.can.f.button#7,activebackground,entry
+	other master {}
+	other pathname button#7
+	geometry sticky nesw
+	other tabbing {}
+	other item_name button#7
+	geometry row 3
+	other type button
+	configure text {/../state/ ?broken?-all}
+	geometry column 7
+	other comments {}
 Widget button#8
 	geometry row 2
 	other error {}
@@ -252,7 +269,7 @@ Widget scrollbar#1
 	other level {}
 	other help {}
 	other comments {}
-	geometry column 7
+	geometry column 8
 	other tabbing {}
 	other item_name scrolly
 	geometry sticky nesw
