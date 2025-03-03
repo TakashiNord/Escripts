@@ -342,21 +342,21 @@ proc  main { } {
 
   sqlite3 db1 $ph ;# associate the SQLite database with the object
   db1 eval {PRAGMA synchronous=OFF}
-  db1 eval {PRAGMA journal_mode=OFF}
+  #db1 eval {PRAGMA journal_mode=OFF}
 
 
   # ----------------------------- scheme base of objects
   set owner "RSDUADMIN"
   set err1 ""
-  catch {
-     CreateTable_ALL_OBJECTS $owner
-  } err1
-  puts "CreateTable_ALL_OBJECTS - $err1"
+  #catch {
+  #   CreateTable_ALL_OBJECTS $owner
+  #} err1
+  #puts "CreateTable_ALL_OBJECTS - $err1"
   set err2 ""
-  catch {
-    CreateTable DBA_SEGMENTS SYS
-  } err2
-  puts "CreateTable DBA_SEGMENTS SYS - $err2"
+  #catch {
+  #  CreateTable DBA_SEGMENTS SYS
+  #} err2
+  #puts "CreateTable DBA_SEGMENTS SYS - $err2"
 
 
   # ----------------------------- create tables
