@@ -211,19 +211,26 @@ proc pq_2 { } {
       LogWrite "$s3"
     }
     LogWrite "\n--"
-    foreach {x} [ db $str2 ] {
-      incr cnt ;
-      set ID_CURVE    [ lindex $x 0 ]
-      set PERCENT_PU  [ lindex $x 1 ]
-      set XVALUE      [ lindex $x 2 ]
-      set Y1VALUE     [ lindex $x 3 ]
-      set Y2VALUE     [ lindex $x 4 ]
-      set s1 "INSERT INTO OBJ_GENERATOR_PQ (ID,ID_OBJ,PERCENT_PU,P,Q_MIN_BASE,Q_MAX_BASE,Q_MIN_ACT,Q_MAX_ACT ) VALUES "
-      set s2 " ( $cnt , $ID_CURVE , $PERCENT_PU , $XVALUE , $Y1VALUE , $Y2VALUE , $Y1VALUE , $Y2VALUE ) ; "
-      set s3 "${s1}${s2}"
-      # stage 1
-      LogWrite "$s3"
+	
+    set ID_OBJ    "-1"
+	set str11 "SELECT ID_OBJ,ID_PQCURVE,IS_DEFAULT FROM OBJ_PQCURVES WHERE ID_PQCURVE=$ID_CURVEx ;"
+    foreach {x1} [ db $str11 ] {
+      set ID_OBJ  [ lindex $x1 0 ]
+      foreach {x} [ db $str2 ] {
+        incr cnt ;
+        set ID_CURVE    [ lindex $x 0 ]
+        set PERCENT_PU  [ lindex $x 1 ]
+        set XVALUE      [ lindex $x 2 ]
+        set Y1VALUE     [ lindex $x 3 ]
+        set Y2VALUE     [ lindex $x 4 ]
+        set s1 "INSERT INTO OBJ_GENERATOR_PQ (ID,ID_OBJ,PERCENT_PU,P,Q_MIN_BASE,Q_MAX_BASE,Q_MIN_ACT,Q_MAX_ACT ) VALUES "
+        set s2 " ( $cnt , $ID_OBJ , $PERCENT_PU , $XVALUE , $Y1VALUE , $Y2VALUE , $Y1VALUE , $Y2VALUE ) ; "
+        set s3 "${s1}${s2}"
+        # stage 1
+        LogWrite "$s3"
+      }
     }
+
   }
 
   LogWrite "-- -- COMMIT ;"
