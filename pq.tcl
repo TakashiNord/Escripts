@@ -267,7 +267,7 @@ proc main { } {
 
   pq_1
   #
-  set err ""
+  set err2 ""
   catch { pq_2 } err2
   puts "--\n $err2"
 
