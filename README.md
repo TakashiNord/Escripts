@@ -38,9 +38,11 @@ methods: tcl\tk, bash, python, p-sql, php, lua,
 + daDevTcl\ - проект для редактирования DA_DEV_DESC (не завершен)
 + Scada Data GateWay\ - В полуавтоматическом режиме формирует таблицу для файла данных программы "SCADA Data Gateway"
 + pr14-Virtualport\ - создание виртуального прибора(не завершен)
-+ table_trim.cmd \ table_trim.tcl - операция trim(name) для таблиц obj_tree,meas_list,da_dev_desc,da_param,RPT_LST,sys_otyp
-+ ema_trim_da_dev.tcl - операция trim(name) для таблицы da_dev_desc
-+ ema_trim_da_param.tcl - операция trim(name) для таблицы da_param
++ pr39-Trim\ - операция trim(name) для колонок в таблице
+  + table_trim.cmd \ table_trim.tcl - операция trim(name) для таблиц obj_tree,meas_list,da_dev_desc,da_param,RPT_LST,sys_otyp
+  + ema_trim_da_dev.tcl - операция trim(name) для таблицы da_dev_desc
+  + ema_trim_da_param.tcl - операция trim(name) для таблицы da_param
+  + table_trim_obj_tree_fix.tcl
 + ema_autoload_rename.tcl - выравнивание автозагрузки в glob /etc/init.d/rc*/*
 + e_file_to_csv.tcl \ e_file_to_csv.log - ???обход всех папок,и обьединение в 1.???
 + arc_dg_el_(file)_export.tcl - экспорт таблиц схемы DG\EL
