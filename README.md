@@ -27,7 +27,8 @@ methods: tcl\tk, bash, python, p-sql, php, lua,
   + ema_time_v2.sh - fix error bash-script (ver 2)
 + ema_autoload_rename.py (ema_autoload_rename.png) - выравнивание автозагрузки в glob /etc/init.d/rc*/*
 + emasmget.py - получение статуса сервера от sysmon udp:2003 или acrsvd udp:2005
-+ eweather.py ( eweat1.json, eweat2.json, eweather.txt ) - получение погоды для обьектов
++ pr43-weather\ - погода
+  + eweather.py ( eweat1.json, eweat2.json, eweather.txt ) - получение погоды для обьектов
 
 ### **Tcl\Tk**
 
