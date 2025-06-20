@@ -1,0 +1,1255 @@
+#!/bin/bash
+
+EMA_SHARE_DIR=/usr/share/ema
+
+RSDUCONFIG_DEFINES_INC_FILE=${EMA_SHARE_DIR}/bin/rsdu_config_defines.inc
+RSDUUTILS_INC_FILE=${EMA_SHARE_DIR}/bin/rsduutils.inc.sh
+INIPARSER_INC_FILE=${EMA_SHARE_DIR}/bin/ini_parser.inc.sh
+EMA_INITSYSTEM_INC_FILE=${EMA_SHARE_DIR}/bin/ema.initsystem.inc.sh
+
+TEMPLATES_DIR=${EMA_SHARE_DIR}
+
+CONFIG_FILE=/etc/ema/ema.conf
+
+
+serv_list=(
+rsdu-arch-webapi
+gen-dg-service
+gen-sdc-service
+rsdu-auth-server
+rsdu-scada-server
+nginx
+rabbitmq-server
+apache2
+fmon-service
+jwt-auth-service
+);
+
+
+function cmd_checkIt
+{
+  name=$1
+  curstate=`systemctl is-active ${name}`
+
+  red=`tput setaf 1`
+  green=`tput setaf 2`
+  reset=`tput sgr0`
+ 
+  if [ "x$curstate" = "xactive" ]; then 
+	 # echo -e "  ${name} "`tput -Tlinux hpa 25;`" \e[0;31m ${curstate} \e[0m" ;
+	 echo -e "  ${name} "`tput -Tlinux hpa 30;tput setaf 2;`"  ${curstate} "`tput setaf 0;` ;
+  else
+     # echo -e "  ${name} "`tput -Tlinux hpa 25;`" \033[0;33m ${curstate} \033[0m" ;
+	 echo -e "  ${name} "`tput -Tlinux hpa 30;tput setaf 1;`"  ${curstate} "`tput setaf 0;` ;
+  fi
+  tput sgr0 ;
+}
+
+
+
+function cmd_serv_status
+{
+  echo -e "-----------------------------------------------------------------"
+  echo -e " Usage: systemctl (start|stop|restart|reload|try-reload|status) ?servicename?"
+  
+  for serv_name in "${serv_list[@]}"; do
+    cmd_checkIt ${serv_name}
+  done
+  echo -e "-----------------------------------------------------------------"
+  tput sgr0 ; # Reset text attributes to normal without clearing screen
+}
+
+
+
+
+
+modules_list=(
+lsmagentd
+ssbsd
+sbridged
+bridged
+dcsd
+datasrvd
+schitd
+rtarchd
+rdarchd
+acsrvd
+acsrvdl
+phregd
+elregd
+oicdcpd
+hgd
+layoutd
+loadcpd
+enmacsrvd
+ai_rpl
+ai_wostoic
+tmdap
+tmsrvd
+arcread
+arcrestore
+arcwrite
+arcwritelight
+dpload
+automatd
+pwswtd
+calcd
+sakura
+sysmond
+topology
+topologyd
+fdstsrvd
+);
+
+
+if [ -f $RSDUUTILS_INC_FILE ]; then
+. $RSDUUTILS_INC_FILE
+else
+    echo "$RSDUUTILS_INC_FILE was not found!" > /dev/stderr
+    exit 1
+fi
+
+if [ -f ${INIPARSER_INC_FILE} ]; then
+. ${INIPARSER_INC_FILE}
+else
+    echo "${INIPARSER_INC_FILE} was not found!" > /dev/stderr
+    exit 1
+fi
+
+if [ -f ${RSDUCONFIG_DEFINES_INC_FILE} ]; then
+. ${RSDUCONFIG_DEFINES_INC_FILE}
+else
+    echo "${RSDUCONFIG_DEFINES_INC_FILE} was not found!" > /dev/stderr
+fi
+
+if [ -f ${EMA_INITSYSTEM_INC_FILE} ]; then
+. ${EMA_INITSYSTEM_INC_FILE}
+else
+  echo "${EMA_INITSYSTEM_INC_FILE} was not found!" > /dev/stderr
+fi
+
+
+DB_TYPE=MySQL
+SWPLATFORM=`get_platform`
+WAIT_DB_DELAY=60
+ACTION_FORCE=0
+DEFAULT_ALLMODULES_RESTART_TIME=60
+DEFAULT_ONEMODULE_RESTART_TIME=5
+
+
+#echo "Config file : ${CONFIG_FILE}"
+
+if [ ! -s "${CONFIG_FILE}" ]; then
+  echo "Error. Config file not found."
+  exit 1
+fi
+
+#### Disable all modules as default
+for module in "${modules_list[@]}"; do
+  eval iniconfig_${module}_Enable=no
+done
+
+#### Read config
+cfg_parser_as_variables ${CONFIG_FILE}
+
+#### Fill modules list with data from ema.conf (section names)
+modules_list=(${iniconfig_sections[@]})
+
+#### fill list of enabled modules
+for module in "${modules_list[@]}"; do
+  eval module_enable=\${iniconfig_${module}_Enable}
+
+  if [ "x${module_enable}" == "xYes" ] || [ "x${module_enable}" == "xyes" ]; then
+    modules_enabled_list=( ${modules_enabled_list[@]} ${module} )
+  fi
+done
+
+
+#### For very old RedHat 4
+if [ -f /etc/init.d/functions ]; then
+. /etc/init.d/functions
+fi
+
+if [ "x${SWPLATFORM}" = "x${SW_PLATFORM_DEBIAN}" ]; then
+  if [ -f /lib/lsb/init-functions ]; then
+    . /lib/lsb/init-functions
+  fi
+fi
+
+####
+# default
+default_waittimer=60
+
+
+################################
+# List of default backup files
+BACKUP_FILES_LIST=(
+/etc/ema/ema.conf
+/etc/ema/ema_time.cfg
+/etc/ema/host.ini
+/etc/ema/isms_autobackup.conf
+/etc/ema/RSDUENV
+/usr/bin/ema
+/usr/share/ema/bin/ema.systemd.inc.sh
+/usr/share/ema/bin/ema.sysv.inc.sh
+/usr/share/ema/bin/rsduutils.inc.sh
+/usr/share/ema/bin/rsdu_config_defines.inc
+${RCD_TOPDIR}/${RCD_RSDU_CONFIG_FILENAME}
+${RCD_TOPDIR}/configure.Makefile.log
+)
+
+################
+#
+
+function cmd_backup
+{
+  if [ -n "${1}" ]; then
+    backup_file_path=${1}
+  else
+    backup_file_path="ema_conf_"`hostname`"_"`date +%Y_%m_%d`".tar.bz2"
+  fi
+
+  backup_file_path=$(readlink -m ${backup_file_path})
+  echo "Backup filepath = ${backup_file_path}"
+
+  if [ -z "${backup_file_path}" ]; then
+    exit 2
+  fi
+
+  backup_files_list=(${BACKUP_FILES_LIST[@]})
+
+  echo "Backup process has started."
+
+  backup_temp_dir_path=$(mktemp -d /tmp/ema_backup.XXXXXXXX)
+
+  echo "> Backuping config files..."
+
+  for bu_file in "${backup_files_list[@]}"; do
+    if [ -f "${bu_file}" ]; then 
+      echo "Copy file '${bu_file}'"
+      mkdir -p "$(dirname ${backup_temp_dir_path}/${bu_file})"
+      cp -f "/${bu_file}" "${backup_temp_dir_path}/${bu_file}"
+    fi
+  done
+
+  echo "> Backuping server modules..."
+  mkdir -p ${backup_temp_dir_path}/bin
+
+  for module_typename in "${modules_list[@]}"; do
+    modules=(`ls /usr/bin/${module_typename}*`)
+    for module_path in "${modules[@]}"; do
+      if [ -f "${module_path}" ]; then echo "Copy file '${module_path}'"; cp -f ${module_path} ${backup_temp_dir_path}/bin/; fi
+    done
+  done
+
+  ## Generate backup filename
+  if [ -f /usr/bin/isms_backup_config.sh ]; then
+    backup_config_filename="ismsconfig_$(hostname)_$(date +%Y%m%d-%H%M%S).tar.bz2"
+
+    /usr/bin/isms_backup_config.sh ${backup_temp_dir_path}/${backup_config_filename}
+  fi
+
+  echo "> Creating archive..."
+
+#  archive_name="ema_conf_"`hostname`"_"`date +%Y_%m_%d`".tar.bz2"
+  cdir=$(pwd)
+  cd ${backup_temp_dir_path}
+  tar -cjf $(basename ${backup_file_path}).processing --exclude=*.processing ./*
+  mv -f $(basename ${backup_file_path}).processing ${backup_file_path}
+
+  cd ${cdir}
+
+  echo "> Removing temp files..."
+  rm -rf ${backup_temp_dir_path}
+
+  echo "Backup process has finished."
+  echo "Now you can pick up the backup file: '${backup_file_path}'"
+
+  exit 0
+}
+
+################
+#
+
+function cmd_start
+{
+  module_name=$1
+
+  if ! [ -d /var/run/ema ]; then
+    mkdir -p /var/run/ema
+  fi
+
+  if [ -z ${module_name} ]; then
+    module_name=all
+  fi
+
+  processing_modules_list=( )
+
+  if [ "x${module_name}" == "xall" ]; then
+    if [ "x${FN_START_ALL_SERVICES__PRESENTS}" == "xyes" ]; then
+      fn_start_all_services
+    else
+      processing_modules_list=(${modules_enabled_list[@]})
+    fi
+
+  else
+    eval module_enable=\${iniconfig_${module_name}_Enable}
+
+    if [ "x${module_enable}" == "xYes" ] || [ "x${module_enable}" == "xyes" ]; then
+      eval processing_modules_list=(${module_name})
+    else
+      echo "Module ${module_name} not found."
+    fi
+
+  fi
+
+  for module_name in "${processing_modules_list[@]}"; do
+    eval module_Login=\${iniconfig_${module_name}_Login}
+    eval module_Debug=\${iniconfig_${module_name}_Debug}
+    eval module_DelayBefore=\${iniconfig_${module_name}_DelayBefore}
+
+    module_Debug=${module_Debug:=0}
+    module_DelayBefore=${module_DelayBefore:=0.5}
+
+    case ${module_name} in
+      sbridged)
+        eval module_ExtraParams=${iniconfig_sbridged_Network}
+        ;;
+
+      *)
+        eval module_ExtraParams=""
+        ;;
+    esac
+
+    fn_start_service ${module_name} ${module_Login} ${module_Debug} ${module_DelayBefore} ${module_ExtraParams}
+  done
+}
+
+
+################
+#
+
+function cmd_stopforce
+{
+  module_name=$1
+
+  if [ -z ${module_name} ]; then
+    module_name=all
+  fi
+
+  processing_modules_list=( )
+
+  if [ "x${module_name}" == "xall" ]; then
+    if [ "x${FN_STOP_ALL_SERVICES__PRESENTS}" == "xyes" ]; then
+      fn_stop_all_services
+    else
+      processing_modules_list=(`reverse_array modules_enabled_list[@]`)
+    fi
+
+  else
+    eval module_enable=\${iniconfig_${module_name}_Enable}
+
+    if [ "x${module_enable}" == "xYes" ] || [ "x${module_enable}" == "xyes" ]; then
+      eval processing_modules_list=(${module_name})
+    else
+      echo "Module ${module_name} not found."
+    fi
+
+  fi
+
+  for module_name in "${processing_modules_list[@]}"; do
+    eval module_DelayBefore=\${iniconfig_${module_name}_DelayBefore}
+
+    module_DelayBefore=${module_DelayBefore:=0.5}
+
+    fn_stop_service ${module_name} ${module_DelayBefore}
+  done
+}
+
+
+################
+#
+
+function cmd_stop
+{
+  module_name=$1
+
+  curstate=`ltime -a | grep "This slot is" | awk '{print $4}'`
+
+  if [ "x$curstate" = "xMASTER!" ]; then
+    echo -n "WARNING! Server is currently in MASTER state! Do You really want to stop it? [Y/n] "
+    read -t10 isstop
+    if [ "x$isstop" == "xYes" ] || [ "x$isstop" == "xyes" ] || [ "x$isstop" == "xY" ] || [ "x$isstop" == "xy" ] || [ "x$isstop" == "x" ]; then
+      cmd_stopforce ${module_name}
+    fi
+  else
+    cmd_stopforce ${module_name}
+  fi
+
+}
+
+
+################
+#
+
+function cmd_stopwwforce
+{
+  module_name=$1
+
+  if [ -z ${module_name} ]; then
+    module_name=all
+  fi
+
+  processing_modules_list=( )
+
+  if [ "x${module_name}" == "xall" ]; then
+    if [ "x${FN_STOP_ALL_SERVICES__PRESENTS}" == "xyes" ]; then
+      fn_stop_all_services
+    else
+      processing_modules_list=(`reverse_array modules_enabled_list[@]`)
+    fi
+
+  else
+    eval module_enable=\${iniconfig_${module_name}_Enable}
+
+    if [ "x${module_enable}" == "xYes" ] || [ "x${module_enable}" == "xyes" ]; then
+      eval processing_modules_list=(${module_name})
+    else
+      echo "Module ${module_name} not found."
+    fi
+
+  fi
+
+  for module_name in "${processing_modules_list[@]}"; do
+    eval module_DelayBefore=\${iniconfig_${module_name}_DelayBefore}
+
+    module_DelayBefore=${module_DelayBefore:=0.5}
+
+    fn_stop_service ${module_name} ${module_DelayBefore}
+  done
+
+  echo "Waiting for modules stopped."
+  for module_name in "${processing_modules_list[@]}"; do
+    waitmodule ${module_name} 60
+  done
+}
+
+
+################
+#
+
+function cmd_stopww
+{
+  module_name=$1
+
+  curstate=`ltime -a | grep "This slot is" | awk '{print $4}'`
+
+  if [ "x$curstate" = "xMASTER!" ]; then
+    echo -n "WARNING! Server is currently in MASTER state! Do You really want to stop it? [Y/n] "
+    read -t10 isstop
+    if [ "x$isstop" == "xYes" ] || [ "x$isstop" == "xyes" ] || [ "x$isstop" == "xY" ] || [ "x$isstop" == "xy" ] || [ "x$isstop" == "x" ]; then
+      cmd_stopwwforce ${module_name}
+    fi
+  else
+    cmd_stopwwforce ${module_name}
+  fi
+
+
+}
+
+
+################
+#
+
+function cmd_softstopforce
+{
+  module_name=$1
+
+  if [ -z ${module_name} ]; then
+    module_name=all
+  fi
+
+
+  if [ "x${module_name}" == "xall" ]; then
+    processing_modules_list=(${modules_enabled_list[@]})
+  else
+    eval module_enable=\${iniconfig_${module_name}_Enable}
+
+    if [ "x${module_enable}" == "xYes" ] || [ "x${module_enable}" == "xyes" ]; then
+      eval processing_modules_list=(${module_name})
+    else
+      echo "Module ${module_name} not found."
+    fi
+  fi
+
+  for module_name in "${processing_modules_list[@]}"; do
+
+    if [ "x${module_name}" == "xlsmagentd" ] \
+       || [ "x${module_name}" == "xssbsd" ] \
+       || [ "x${module_name}" == "xsysmond" ]; then
+       continue
+    fi
+
+    eval module_DelayBefore=\${iniconfig_${module_name}_DelayBefore}
+
+    module_DelayBefore=${module_DelayBefore:=0.5}
+
+    fn_stop_service ${module_name} ${module_DelayBefore}
+  done
+}
+
+
+################
+#
+
+function cmd_softstop
+{
+  module_name=$1
+
+  curstate=`ltime -a | grep "This slot is" | awk '{print $4}'`
+
+  if [ "x$curstate" = "xMASTER!" ]; then
+    echo -n "WARNING! Server is currently in MASTER state! Do You really want to stop it? [Y/n] "
+    read -t10 isstop
+    if [ "x$isstop" == "xYes" ] || [ "x$isstop" == "xyes" ] || [ "x$isstop" == "xY" ] || [ "x$isstop" == "xy" ] || [ "x$isstop" == "x" ]; then
+      cmd_softstopforce ${module_name}
+    fi
+  else
+    cmd_softstopforce ${module_name}
+  fi
+
+}
+
+
+################
+#
+
+function cmd_softstopwwforce
+{
+  module_name=$1
+
+  if [ -z ${module_name} ]; then
+    module_name=all
+  fi
+
+  if [ "x${module_name}" == "xall" ]; then
+    processing_modules_list=(${modules_enabled_list[@]})
+  else
+    eval module_enable=\${iniconfig_${module_name}_Enable}
+
+    if [ "x${module_enable}" == "xYes" ] || [ "x${module_enable}" == "xyes" ]; then
+      eval processing_modules_list=(${module_name})
+    else
+      echo "Module ${module_name} not found."
+    fi
+  fi
+
+  for module_name in "${processing_modules_list[@]}"; do
+
+    if [ "x${module_name}" == "xlsmagentd" ] \
+       || [ "x${module_name}" == "xssbsd" ] \
+       || [ "x${module_name}" == "xsysmond" ]; then
+       continue
+    fi
+
+    eval module_DelayBefore=\${iniconfig_${module_name}_DelayBefore}
+
+    module_DelayBefore=${module_DelayBefore:=0.5}
+
+    fn_stop_service ${module_name} ${module_DelayBefore}
+  done
+
+  echo "Waiting for modules stopped."
+  for module_name in "${processing_modules_list[@]}"; do
+
+    if [ "x${module_name}" == "xlsmagentd" ] \
+       || [ "x${module_name}" == "xssbsd" ] \
+       || [ "x${module_name}" == "xsysmond" ]; then
+       continue
+    fi
+
+    waitmodule ${module_name} 60
+  done
+
+}
+
+
+################
+#
+
+function cmd_softstopww
+{
+  module_name=$1
+
+  curstate=`ltime -a | grep "This slot is" | awk '{print $4}'`
+
+  if [ "x$curstate" = "xMASTER!" ]; then
+    echo -n "WARNING! Server is currently in MASTER state! Do You really want to stop it? [Y/n] "
+    read -t10 isstop
+    if [ "x$isstop" == "xYes" ] || [ "x$isstop" == "xyes" ] || [ "x$isstop" == "xY" ] || [ "x$isstop" == "xy" ] || [ "x$isstop" == "x" ]; then
+      cmd_softstopwwforce ${module_name}
+    fi
+  else
+    cmd_softstopwwforce ${module_name}
+  fi
+
+}
+
+
+################
+#
+
+function cmd_restartforce
+{
+  module_name=$1
+
+  if [ -z ${module_name} ]; then
+    module_name=all
+  fi
+
+  if [ "x${module_name}" == "xall" ]; then
+    echo "ema stopww"
+    cmd_stopwwforce
+    echo "ema start"
+    cmd_start
+  else
+    eval module_enable=\${iniconfig_${module_name}_Enable}
+    if [ "x${module_enable}" == "xYes" ] || [ "x${module_enable}" == "xyes" ]; then
+      echo "ema stopwwforce ${module_name}"
+      cmd_stopwwforce ${module_name}
+      echo "ema start ${module_name}"
+      cmd_start ${module_name}
+    else
+      echo "Module ${module_name} not found."
+    fi
+  fi
+}
+
+
+################
+#
+
+function cmd_restart
+{
+  module_name=$1
+
+  curstate=`ltime -a | grep "This slot is" | awk '{print $4}'`
+
+  if [ "x$curstate" = "xMASTER!" ]; then
+    echo -n "WARNING! Server is currently in MASTER state! Do You really want to stop it? [Y/n] "
+    read -t10 isstop
+    if [ "x$isstop" == "xYes" ] || [ "x$isstop" == "xyes" ] || [ "x$isstop" == "xY" ] || [ "x$isstop" == "xy" ] || [ "x$isstop" == "x" ]; then
+      cmd_restartforce ${module_name}
+    fi
+  else
+    cmd_restartforce ${module_name}
+  fi
+
+}
+
+
+################
+#
+
+function cmd_softrestartforce
+{
+  module_name=$1
+
+  if [ -z ${module_name} ]; then
+    module_name=all
+  fi
+
+  if [ "x${module_name}" == "xall" ]; then
+    echo "ema stopww"
+    cmd_softstopwwforce
+    echo "ema start"
+    cmd_start
+  else
+    eval module_enable=\${iniconfig_${module_name}_Enable}
+    if [ "x${module_enable}" == "xYes" ] || [ "x${module_enable}" == "xyes" ]; then
+      echo "ema softstopww-force ${module_name}"
+      cmd_softstopwwforce ${module_name}
+      echo "ema start ${module_name}"
+      cmd_start ${module_name}
+    else
+      echo "Module ${module_name} not found."
+    fi
+  fi
+}
+
+
+################
+#
+
+function cmd_softrestart
+{
+  module_name=$1
+
+  curstate=`ltime -a | grep "This slot is" | awk '{print $4}'`
+
+  if [ "x$curstate" = "xMASTER!" ]; then
+    echo -n "WARNING! Server is currently in MASTER state! Do You really want to stop it? [Y/n] "
+    read -t10 isstop
+    if [ "x$isstop" == "xYes" ] || [ "x$isstop" == "xyes" ] || [ "x$isstop" == "xY" ] || [ "x$isstop" == "xy" ] || [ "x$isstop" == "x" ]; then
+      cmd_softrestartforce ${module_name}
+    fi
+  else
+    cmd_softrestartforce ${module_name}
+  fi
+
+}
+
+
+################
+#
+
+function cmd_status
+{
+  module_name=$1
+
+  if [ -z ${module_name} ]; then
+    module_name=all
+  fi
+
+  if [ "x${module_name}" == "xall" ]; then
+    processing_modules_list=(${modules_enabled_list[@]})
+  else
+    eval module_enable=\${iniconfig_${module_name}_Enable}
+
+    if [ "x${module_enable}" == "xYes" ] || [ "x${module_enable}" == "xyes" ]; then
+      eval processing_modules_list=(${module_name})
+    else
+      echo "Module ${module_name} not found."
+    fi
+  fi
+
+  for module_name in "${processing_modules_list[@]}"; do
+
+    fn_get_service_status ${module_name}
+    status=$?
+
+    show_service_status ${module_name} ${status}
+  done
+  
+  cmd_serv_status
+}
+
+
+################
+#
+
+function cmd_config
+{
+  for module_name in "${modules_enabled_list[@]}"; do
+      eval module_Login=\${iniconfig_${module_name}_Login}
+      eval module_Debug=\${iniconfig_${module_name}_Debug}
+      module_Debug=${module_Debug:=0}
+      
+      if [ "x${module_name}" == "xsbridged" ]; then
+        eval module_ExtraParams=${iniconfig_sbridged_Network}
+	  else
+        eval module_ExtraParams=""
+      fi
+      
+      if [ "x${module_name}" == "xlsmagentd" ]; then
+        eval module_Debug=""
+      fi
+      
+      echo ${module_name} ${module_Login} ${module_ExtraParams} ${module_Debug}
+  done
+}
+
+################
+#
+
+function cmd_state
+{
+  echo "=================================="
+  ltime -s | grep "The state is"
+  echo "=================================="
+}
+
+
+################
+#
+
+function cmd_mem
+{
+  resmem="$(mem.sh)"
+
+  for module in "${modules_enabled_list[@]}"; do
+    echo -e -n "${resmem}" | grep -w ${module}
+  done
+}
+
+
+################
+#
+
+function cmd_revision
+{
+  for module in "${modules_enabled_list[@]}"; do
+    echo "${module} "`tput -Tlinux hpa 32; ${module} --version-svn`
+  done
+}
+
+
+################
+#
+
+function cmd_version
+{
+  for module in "${modules_enabled_list[@]}"; do
+    echo "${module} "`tput -Tlinux hpa 32; ${module} --version`
+  done
+}
+
+
+################
+#
+
+function cmd_clearlogs
+{
+    logfiles=`find /var/log/ema/ -type f`
+    for logfile in ${logfiles[@]}; do
+      echo "  Cleaning ${logfile}"
+      cat /dev/null > ${logfile}
+    done
+}
+
+
+function cmd_deletelogs
+{
+  notfinished=0
+
+  for module in "${modules_enabled_list[@]}"; do
+    rsdu_service_status ${module}
+    isactive=$?
+    if [ ${isactive} -eq 0 ]; then
+      notfinished=$((notfinished + 1))
+    fi
+  done
+
+  if ! [ ${notfinished} -eq 0 ]; then
+    echo "  You cannot delete logs while RT modules (${notfinished}) are running!"
+  else
+    rm -rf /var/log/ema/*
+    echo " Done"
+  fi
+}
+
+################
+#
+
+function waitmodule
+{
+  module_name=$1
+  waittimer=$2
+
+  if [ -z ${module_name} ]; then
+    echo "Module name is empty."
+    exit 1
+  fi
+
+  if [ -z ${waittimer} ]; then
+    waittimer=${default_waittimer}
+  fi
+
+  proc_presents=0
+  while [ ${waittimer} -ge 0 ] && [ ${proc_presents} -eq 0 ]; do
+#    systemctl -q is-active ${module_name}
+    if [ "x${module_name}" == "xtopology" ]; then
+#      echo "service topology status"
+      service topology status > /dev/null
+    else
+#      echo "ps -A -o comm | grep -q -x ${module_name}"
+      ps -A -o comm | grep -q -x ${module_name}
+    fi
+
+    proc_presents=$?
+
+    if test ${proc_presents} -eq 0 ; then
+      sleep 1
+
+      echo -n -e "\r${module_name} $(tput -Tlinux hpa 32)(waiting ${waittimer} sec)  "
+    fi
+    waittimer=$((waittimer-1))
+  done
+
+  echo -n -e "\r${module_name} $(tput -Tlinux hpa 32)"
+
+  if test ${proc_presents} -eq 0 ; then
+    echo -n -e "Not Stopped.          "
+  else
+    echo -n -e "Stopped.              "
+  fi
+
+  echo
+}
+
+
+################################
+# reverse array
+function reverse_array
+{
+  declare -a argArray=("${!1}")
+
+  for (( idx=${#argArray[@]}-1 ; idx>=0 ; idx-- )); do
+    echo ${argArray[$idx]}
+  done
+}
+
+#rsdu_show_service_status sbsdd
+#statusres=$?
+#rrr=`status_of_proc /usr/bin/ssbsd`
+#echo "Statusres: ${statusres}"
+#exit 1;
+
+
+#cfg_file="/etc/ema/ema.cfg"
+
+#if [ ! -f $cfg_file ]; then
+#	echo "Config file '$cfg_file' cannot be found!" > /dev/stderr;
+#	exit 1;
+#fi
+
+
+
+if [ "x${SWPLATFORM}" = "x${SW_PLATFORM_REDHAT}" ]
+then
+    if [ -f /users/oracle/.profile ]
+    then
+	. /users/oracle/.profile
+    fi
+    if [ -f /home/oracle/.profile ]
+    then
+	. /home/oracle/.profile
+    fi
+else
+    if [ -f /etc/profile.d/oracle.sh ]
+    then
+	. /etc/profile.d/oracle.sh
+    fi
+fi
+
+if [ -f /etc/ema/RSDUENV ]
+then
+    . /etc/ema/RSDUENV
+fi
+
+if [ "x${DB_TYPE}" = "x${DBTYPE_ORACLE}" ]; then
+    if [ -z "$ORACLE_HOME" ] || [ ! -d $ORACLE_HOME ] || [ -z "$ORACLE_SID" ]; then
+        echo "Cannot be found ORACLE_HOME directory, or ORACLE_SID is not set."
+        echo -n "Environment settings are wrong!? Check /etc/profile.d/oracle.sh"
+#        if [ "x${SWPLATFORM}" = "x${SW_PLATFORM_REDHAT}" ]; then
+#            rc_failed
+#            rc_status -v
+#            rc_exit
+#        fi
+    exit 1
+    fi
+
+    if [ -z $LD_LIBRARY_PATH ]
+    then
+        export LD_LIBRARY_PATH=$ORACLE_HOME/lib
+    fi
+fi
+
+## read ema.cfg
+#admserviceslist=(lsmagentd ssbsd sysmon)
+#serviceslist=(`cat ${cfg_file} | cut -f 1 -d ' ' | grep -v "sleep" | grep -v "^;" | grep -v "^//" | grep -v "^#" | grep -v "lsmagentd" | grep -v "ssbsd" | grep -v "sysmond"`)
+#allserviceslist=(${admserviceslist[@]} ${serviceslist[@]})
+
+#echo ${admserviceslist[@]};
+#echo ${serviceslist[@]};
+#echo ${allserviceslist[@]};
+#exit 1
+
+
+
+emacommand=$1
+
+
+case ${emacommand} in
+  start-autoload)
+    sleep ${WAIT_DB_DELAY}
+    ema start > /dev/null
+    ;;
+
+  start)
+    echo "=================================="
+    echo "       Starting EMA modules       "
+    echo "=================================="
+
+    module_name=$2
+    cmd_start ${module_name}
+    ;;
+
+
+  stop)
+    echo "=================================="
+    echo "       Stopping EMA modules       "
+    echo "=================================="
+
+    module_name=$2
+    cmd_stop ${module_name}
+    ;;
+
+
+  stopww)
+    echo "=================================="
+    echo "       Stopping EMA modules       "
+    echo "=================================="
+
+    module_name=$2
+    cmd_stopww ${module_name}
+    ;;
+
+
+  stop-force)
+    echo "=================================="
+    echo "       Stopping EMA modules       "
+    echo "=================================="
+
+    module_name=$2
+    cmd_stopforce ${module_name}
+    ;;
+
+
+  stopww-force)
+    echo "=================================="
+    echo "       Stopping EMA modules       "
+    echo "=================================="
+
+    module_name=$2
+    cmd_stopwwforce ${module_name}
+    ;;
+
+
+  softstop)
+    echo "=================================="
+    echo "       Stopping EMA modules       "
+    echo "=================================="
+
+    module_name=$2
+    cmd_softstop ${module_name}
+    ;;
+
+  softstop-force)
+    echo "=================================="
+    echo "       Stopping EMA modules       "
+    echo "=================================="
+
+    module_name=$2
+    cmd_softstopforce ${module_name}
+    ;;
+
+  softstopww)
+    echo "=================================="
+    echo "       Stopping EMA modules       "
+    echo "=================================="
+
+    module_name=$2
+    cmd_softstopww ${module_name}
+    ;;
+
+  softstopww-force)
+    echo "=================================="
+    echo "       Stopping EMA modules       "
+    echo "=================================="
+
+    module_name=$2
+    cmd_softstopwwforce ${module_name}
+    ;;
+
+
+  reload | restart)
+    echo "=================================="
+    echo "      Restarting EMA modules      "
+    echo "=================================="
+
+    module_name=$2
+    cmd_restart ${module_name}
+    ;;
+
+  reload-force | restart-force)
+    echo "=================================="
+    echo "      Restarting EMA modules      "
+    echo "=================================="
+
+    module_name=$2
+    cmd_restartforce ${module_name}
+    ;;
+
+
+  softreload | softrestart)
+    echo "=================================="
+    echo "   Soft Restarting EMA modules    "
+    echo "=================================="
+
+    module_name=$2
+    cmd_softrestart ${module_name}
+    ;;
+
+  softreload-force | softrestart-force)
+    echo "=================================="
+    echo "   Soft Restarting EMA modules    "
+    echo "=================================="
+
+    module_name=$2
+    cmd_softrestartforce ${module_name}
+    ;;
+
+
+  status)
+    echo "=================================="
+    echo " Checking for EMA modules status  "
+    echo "=================================="
+
+    module_name=$2
+    cmd_status ${module_name}
+    cmd_state
+    ;;
+
+  config-file | cf)
+    echo "=================================="
+    echo " EMA modules configuration file   "
+    echo "=================================="
+      cat ${CONFIG_FILE}
+    ;;
+
+  config | cfg)
+    echo "=================================="
+    echo " EMA modules default start params "
+    echo "=================================="
+      cmd_config
+    echo "=================================="
+    ;;
+
+  memory | mem)
+    echo "=================================="
+    echo "     EMA modules memory usage     "
+    echo "=================================="
+
+    cmd_mem
+
+    echo "=================================="
+    ;;
+
+  version | ver)
+    echo "=================================="
+    echo "       EMA modules versions       "
+    echo "=================================="
+
+    cmd_version
+
+    echo "=================================="
+    ;;
+
+  revision | rev)
+    echo "=================================="
+    echo "       EMA modules revisions      "
+    echo "=================================="
+
+    cmd_revision
+
+    echo "=================================="
+    ;;
+
+  clearlogs | cl)
+    echo "=================================="
+    echo "        Cleaning ema logs         "
+    echo "=================================="
+
+    cmd_clearlogs
+    ;;
+
+  deletelogs | dl)
+    echo "=================================="
+    echo "        Removing ema logs         "
+    echo "=================================="
+    cmd_deletelogs
+    ;;
+
+  state)
+    cmd_state
+    ;;
+
+  reelreg)
+    echo "=================================="
+    echo "     Rebuilding elreg module      "
+    echo "=================================="
+
+    if ! [ -d "${RCD_RSDU_TOPDIR}" ]; then
+      echo "Source dir '${RCD_RSDU_TOPDIR}' not found."
+    else
+      cdir=`pwd`
+      cd ${RCD_RSDU_TOPDIR}
+      make reelreg
+      cd ${cdir}
+    fi
+    ;;
+
+  rephreg)
+    echo "=================================="
+    echo "     Rebuilding phreg module      "
+    echo "=================================="
+
+    if ! [ -d "${RCD_RSDU_TOPDIR}" ]; then
+      echo "Source dir '${RCD_RSDU_TOPDIR}' not found."
+    else
+      cdir=`pwd`
+      cd ${RCD_RSDU_TOPDIR}
+      make rephreg
+      cd ${cdir}
+    fi
+    ;;
+
+  backup)
+    cmd_backup ${2}
+    ;;
+
+  *)
+    echo -e "Usage: \e[1m $(basename $0)\e[0m  \e[0;32m?command? \e[0m ?service_name? "
+
+    echo "Commands:"
+    echo -en "  \e[0;32mstart\e[0m ?service_name?                 - Start ema module or all modules.\n"
+    echo -en "  \e[0;32mstop\e[0m ?service_name?                  - Stop ema module or all modules.\n"
+    echo -en "  \e[0;32mstop-force\e[0m ?service_name?            - Stop ema module or all modules without confirmation.\n"
+    echo -en "  \e[0;32mstopww\e[0m ?service_name?                - Stop ema module or all modules with waiting for its termination.\n"
+    echo -en "  \e[0;32mstopww-force\e[0m ?service_name?          - Stop ema module or all modules with waiting for its termination, without confirmation.\n"
+    echo -en "  \e[0;32msoftstop \e[0m                            - Stop all modules excepting lsmagentd, ssbsd and sysmond.\n"
+    echo -en "  \e[0;32msoftstopww\e[0m ?service_name?            - Stop all modules with waiting for its termination excepting lsmagentd, ssbsd and sysmond.\n"
+    echo -en "  \e[0;32msoftstopww-force\e[0m ?service_name?      - Stop all modules with waiting for its termination without confirmation excepting lsmagentd, ssbsd and sysmond.\n"
+    echo -en "  \e[0;32mrestart\e[0m ?service_name?               - Restart ema module or all modules.\n"
+    echo -en "  \e[0;32mrestart-force\e[0m ?service_name?         - Restart ema module or all modules, without confirmation.\n"
+    echo -en "  \e[0;32mreload \e[0m ?service_name?               - Same as restart.\n"
+    echo -en "  \e[0;32mreload-force \e[0m ?service_name?         - Same as restart-force.\n"
+    echo -en "  \e[0;32msoftrestart \e[0m ?service_name?          - Restart all modules excepting lsmagentd, ssbsd and sysmond.\n"
+    echo -en "  \e[0;32msoftrestart-force\e[0m ?service_name?     - Restart all modules without confirmation excepting lsmagentd, ssbsd and sysmond.\n"
+    echo -en "  \e[0;32msoftreload\e[0m ?service_name?            - Same as softrestart.\n"
+    echo -en "  \e[0;32msoftreload-force\e[0m ?service_name?      - Same as softrestart-force.\n"
+    echo -en "  \e[0;32mstatus\e[0m                               - Ema modules status.\n"
+    echo -en "  \e[0;32mcfg  \e[0m                                - Show ema config.\n"
+    echo -en "  \e[0;32mconfig \e[0m                              - Show full ema configuration file ema.conf.\n"
+    echo -en "  \e[0;32mclearlogs \e[0m                           - Empty all ema log files.\n"
+    echo -en "  \e[0;32mdeletelogs  \e[0m                         - Delete all ema log files.\n"
+    echo -en "  \e[0;32mstate  \e[0m                              - Show host state.\n"
+    echo -en "  \e[0;32mreelreg  \e[0m                            - To build the module elregd with changed formulas.\n"
+    echo -en "  \e[0;32mrephreg   \e[0m                           - To build the module phregd with changed formulas.\n"
+    echo -en "  \e[0;32mmem   \e[0m                               - Show memory usage.\n"
+    echo -en "  \e[0;32mversion \e[0m                             - Show version for all ema modules.\n"
+    echo -en "  \e[0;32mrevision \e[0m                            - Show revision for all ema modules.\n"
+    echo -en "  \e[0;32mbackup\e[0m [<path_to_output_file>='./ema_conf_<hostname>_<date>'] \n"
+	echo -en "                                           - It makes backup of config files and binary server modules of RSDU.\n"
+
+	echo -en "  \n"
+  ;;
+esac
+
+if [ "x${DB_TYPE}" = "x${DBTYPE_ORACLE}" ]; then
+  export LD_LIBRARY_PATH=${LD_LIBRARY_PATH:+$LD_LIBRARY_PATH:}$ORACLE_HOME/lib:$ORACLE_HOME/ctx/lib
+fi
+
+
+exit 0

@@ -30,6 +30,7 @@ methods: tcl\tk, bash, python, p-sql, php, lua,
 + emasmget.py - получение статуса сервера от sysmon udp:2003 или acrsvd udp:2005
 + pr43-weather\ - погода
   + eweather.py ( eweat1.json, eweat2.json, eweather.txt ) - получение погоды для обьектов
++ scada_info.py - получение состояния сервиса
 
 ### **Tcl\Tk**
 

@@ -1,0 +1,6 @@
+[Unit]
+Description=helpdesk
+
+[Service]
+Type=simple
+ExecStart=/root/emahlpdsk.sh
