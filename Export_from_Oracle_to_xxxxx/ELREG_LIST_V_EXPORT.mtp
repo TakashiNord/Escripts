@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MYTCL>
+  <VERSION value="1.0"/>
+  <CREATION value="07/26/2022 12:06:11"/>
+  <NAME value="ELREG_LIST_V_EXPORT"/>
+  <PROPERTIES>
+    <BUILD>
+      <OUTPUTFILE value="ELREG_LIST_V_EXPORT.exe"/>
+      <LOCATION/>
+      <ICON/>
+      <CLEANTMP/>
+      <ENCODING/>
+      <COPYDEPFILES/>
+    </BUILD>
+    <VFS value="">
+      <lib value="">
+        <tcl8.5 value="">
+          <encoding value=""/>
+        </tcl8.5>
+        <app-mp value=""/>
+      </lib>
+    </VFS>
+    <PACKAGES require="tclodbc 2.5;"/>
+    <RUN>
+      <DEBUGPORTNUMBER/>
+      <ARGS/>
+    </RUN>
+  </PROPERTIES>
+  <TYPE value="Console Application"/>
+  <SOURCES value="ELREG_LIST_V_EXPORT.tcl;" main="ELREG_LIST_V_EXPORT.tcl"/>
+  <BREAKPOINTS value=""/>
+  <BOOKMARKS value=""/>
+  <WATCHVARIABLE/>
+</MYTCL>
