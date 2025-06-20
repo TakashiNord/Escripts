@@ -54,7 +54,8 @@ methods: tcl\tk, bash, python, p-sql, php, lua,
   + rsduadmin_ast_org_cnt_guid.tcl - получение информации FROM AST_CNT, AST_ORG
   + rsdu2_to_sqlite.tcl - вывод схем Oracle в SQLite
 + ersdu2-output-1.tcl \ ersdu2-output-1.log - вывод содержимого from da_cat da_param
-+ rsduadmin_renid.tcl - замена ID в таблицах Oracle
++ pr41-rsduadmin_renid\ - замена ID в таблицах Oracle
+  + rsduadmin_renid.tcl 
 + tclExcelPQ.tcl - чтение 1-го xlsx - файла. для 1ого Листа, создание INSERT для вставки в OBJ_GENERATOR_PQ
 + tclExcel.tcl - чтение 1-го xlsx - файла. получение списка Листов, создание файлов с их именами, в режиме w+
 + e_rsdu2-output_dir-1.tcl - вывод в папку out файлов таблиц из вьюшки elreg_list_v
