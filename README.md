@@ -80,7 +80,7 @@ methods: tcl\tk, bash, python, p-sql, php, lua,
   + emalogs1.tcl - аккумуляция логов и настроек
   + emalogsOracle1.tcl- аккумуляция логов и настроек
   + emalogs.sh - аккумуляция логов и настроек
-
++ Export_PQ.tcl - экспорт значений PQ из одной таблицы в другую.
 
 ### **Lua**
 
@@ -111,7 +111,7 @@ methods: tcl\tk, bash, python, p-sql, php, lua,
 + VS_FORM_double_schema.sql - копирование настроек схемы
 
 --------------------------
-  eОсновной комплекс ENMAC(324).csv
+
 
 --------------------------
 
