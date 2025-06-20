@@ -8,7 +8,6 @@ methods: tcl\tk, bash, python, p-sql, php, lua,
 + edfcheck.sh - проверка размера диска и выдача информации о превышении
 + ema (ema.service, ema.timer) - модернизация скрипта ema добавлением serv_list
 + emahlpdsk.sh - service php-fpm , mysqld , nginx , elasticsearch , supervisord restart
-+ emalogs.sh - аккамуляция логов и настроек
 + emview.sh \ emview.sql - обновление MVIEWS посредством скрипта 
 + sp.sh - получение process+session из БД Oracle
 
@@ -62,8 +61,10 @@ methods: tcl\tk, bash, python, p-sql, php, lua,
 + tclExcel.tcl - чтение 1-го xlsx - файла. получение списка Листов, создание файлов с их именами, в режиме w+
 + e_rsdu2-output_dir-1.tcl - вывод в папку out файлов таблиц из вьюшки elreg_list_v
 + e_rsdu2-output_sqlite-1.tcl - вывод в БД SQLite таблиц из вьюшки elreg_list_v
-+ emalogs1.tcl - аккамуляция логов и настроек
-+ emalogsOracle1.tcl- аккамуляция логов и настроек
++ pr01-emalogs\ - аккумуляция логов и настроек
+  + emalogs1.tcl - аккумуляция логов и настроек
+  + emalogsOracle1.tcl- аккумуляция логов и настроек
+  + emalogs.sh - аккумуляция логов и настроек
 
 ### **Lua**
 
