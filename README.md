@@ -19,7 +19,8 @@ methods: tcl\tk, bash, python, p-sql, php, lua,
 ### **Python**
 
 + pr38-cid2profile\ - конвертация .iid.profile (xml-формат) в json (проект не завершен)
-+ ema_time.sh - Script to check time offset between local system and remote NTP servers
++ pr00-ema_time\ - Script to check time
+  + ema_time.sh - Script to check time offset between local system and remote NTP servers
   + ema_time4.sh - fix version
   + ema_time_p.sh - ver 1
   + ema_time_v1.sh - fix error bash-script (ver 1)
@@ -65,6 +66,7 @@ methods: tcl\tk, bash, python, p-sql, php, lua,
   + emalogs1.tcl - аккумуляция логов и настроек
   + emalogsOracle1.tcl- аккумуляция логов и настроек
   + emalogs.sh - аккумуляция логов и настроек
+
 
 ### **Lua**
 
