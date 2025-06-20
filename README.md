@@ -47,11 +47,12 @@ methods: tcl\tk, bash, python, p-sql, php, lua,
 + arc_dg_export.tcl - merge таблиц схемы DG из 2-х БД
 + arc_elphpsau_export.tcl - экспорт таблиц схемы EL\PH\PS\AU
 + auto1.tcl - вывод в файл ?непонятно чего?
-+ rsduadmin_to_xml.tcl - вывод схемы Oracle rsduadmin в XML-файл.
-+ rsduadmin_to_sqlite-simple.tcl - вывод схемы Oracle rsduadmin в SQLite
-+ rsduadmin_dg_guid.tcl - получение информации FROM DG_LIST, DG_GROUPS
-+ rsduadmin_ast_org_cnt_guid.tcl - получение информации FROM AST_CNT, AST_ORG
-+ rsdu2_to_sqlite.tcl - вывод схем Oracle в SQLite
++ Export_from_Oracle_to_xxxxx\ - различные формы экспорта из Oracle
+  + rsduadmin_to_xml.tcl - вывод схемы Oracle rsduadmin в XML-файл.
+  + rsduadmin_to_sqlite-simple.tcl - вывод схемы Oracle rsduadmin в SQLite
+  + rsduadmin_dg_guid.tcl - получение информации FROM DG_LIST, DG_GROUPS
+  + rsduadmin_ast_org_cnt_guid.tcl - получение информации FROM AST_CNT, AST_ORG
+  + rsdu2_to_sqlite.tcl - вывод схем Oracle в SQLite
 + ersdu2-output-1.tcl \ ersdu2-output-1.log - вывод содержимого from da_cat da_param
 + rsduadmin_renid.tcl - замена ID в таблицах Oracle
 + tclExcelPQ.tcl - чтение 1-го xlsx - файла. для 1ого Листа, создание INSERT для вставки в OBJ_GENERATOR_PQ
