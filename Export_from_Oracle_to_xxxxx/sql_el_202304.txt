@@ -1,0 +1,131 @@
+SET SERVEROUTPUT ON
+declare
+    type rREC2 IS record
+    (
+      id    number(11),
+      name varchar2(255)
+    );
+    tdata2 rREC2;
+    cur cursor_pkg.cursor_type;
+    ret1 number ;
+    ret2 number ;
+    cntSum number :=0 ;
+
+
+ -- вспомогательная функция
+  function GetList (pID number)
+    return number
+  is
+    nCnt    number;
+    vSQL VARCHAR2(1024);
+    vStr VARCHAR2(1024);
+    TABLE_NAME varchar2(255) ;
+    ID_SOURCE number ;
+    rid number ;
+    rname varchar2(255) ;
+    ralias varchar2(255) ;
+    nRetval number := 0;
+  begin
+
+      --
+      rid:=0;
+      EXECUTE IMMEDIATE 'Select count(*) from MEAS_LIST ml , MEAS_SRC_CHANNEL msc where msc.ID_OWNLST=ml.ID and ml.id_meas_type IN (SELECT ID FROM elreg_tlist_v) AND is_exdata = 0 and ml.ID_OBJ='||pID INTO rid;
+      if rid <=0 then
+        return nRetval;
+      end if ;
+
+      FOR recdp in (
+                    Select ml.ID, ml.NAME, ml.ALIAS, msc.id as Canal , msc.ID_SOURCE, msc.ALIAS as ALIASCANAL
+                    from MEAS_LIST ml , MEAS_SRC_CHANNEL msc
+                    where ml.ID_OBJ=pID
+                      and ml.id_meas_type IN (SELECT ID FROM elreg_tlist_v) AND is_exdata = 0
+                      and msc.ID_OWNLST=ml.ID
+                    ORDER BY 1 )
+      LOOP
+
+        vStr := ' ; none' ;
+        ID_SOURCE:=NVL(recdp.ID_SOURCE,0);
+
+        if ID_SOURCE=1 then -- Оператор
+          vStr := ' ; ' ;
+        end if ;
+
+        if ID_SOURCE=2 then -- Дорасчет
+          vStr := ' ; ' ;
+        end if ;
+
+        if ID_SOURCE>2 then
+
+          --
+          rid:=0;
+          EXECUTE IMMEDIATE 'Select count(*) FROM MEAS_SRC_CHANNEL_TUNE msct, sys_tbllst lst where lst.ID=msct.ID_SRCTBL and ID_CHANNEL='||recdp.Canal INTO rid;
+          if rid>0 then
+
+            FOR recs in ( Select msct.ID, msct.ID_SRCTBL, msct.ID_SRCLST, UPPER(lst.TABLE_NAME) as tb
+                        FROM MEAS_SRC_CHANNEL_TUNE msct, sys_tbllst lst
+                        where lst.ID=msct.ID_SRCTBL and ID_CHANNEL=recdp.Canal )
+            LOOP
+              vStr := recs.ID_SRCLST || ';' || 'none' ;
+              if NVL( recs.ID_SRCLST, 0 )!=0 then
+                vSQL:='Select ID,ID_NODE,NAME,ALIAS FROM '||recs.tb||' where ID='||recs.ID_SRCLST;
+                rid:=0;
+                rname:='';
+                ralias:='';
+                EXECUTE IMMEDIATE 'Select count(ID) FROM '||recs.tb||' where ID='||recs.ID_SRCLST INTO rid;
+                if rid>0 then
+                  EXECUTE IMMEDIATE 'Select ID,NAME,ALIAS FROM '||recs.tb||' where ID='||recs.ID_SRCLST INTO rid, rname, ralias ;
+                  vStr := rid || ';' || ralias ;
+                end if ;
+              end if ;
+            END LOOP;
+
+          end if ;
+
+        end if ;
+
+        dbms_output.put_line( ';' || recdp.id || ';' || recdp.alias || ';' || recdp.ALIASCANAL || ';' ||  vStr || ';' );
+
+      END LOOP;
+
+    return nRetval;
+  exception when others then
+    nRetval := SQLCODE;
+end;
+
+ -- вспомогательная функция
+  function GetElem (pID number)
+    return number
+  is
+    cid number ;
+    ret1 number ;
+    ret2 number ;
+    nRetval number := 0;
+  begin
+
+    cid:=0;
+    EXECUTE IMMEDIATE 'Select count(ID) from  OBJ_TREE where ID_PARENT='||pID INTO cid;
+    if cid>0 then
+      FOR recdp in ( Select ID, ID_PARENT ,ID_TYPE, NAME , ALIAS from  OBJ_TREE where ID_PARENT=pID
+                     ORDER BY 1 )
+      LOOP
+        ret1:=GetList (recdp.id) ;
+        ret2:=GetElem (recdp.id) ;
+      END LOOP;
+    end if ;
+
+    return nRetval;
+  exception when others then
+    nRetval := SQLCODE;
+end;
+
+
+begin
+    dbms_output.ENABLE (400000);
+    --
+    FOR rec in ( Select ID, ID_PARENT ,ID_TYPE, NAME, ALIAS FROM OBJ_TREE where ID_PARENT is null ) -- ID_PARENT is null    ID=5020487
+    LOOP
+        ret1:=GetList (rec.id) ;
+        ret2:=GetElem (rec.id) ;
+    END LOOP;
+
+end;

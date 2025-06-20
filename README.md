@@ -48,23 +48,32 @@ methods: tcl\tk, bash, python, p-sql, php, lua,
   + table_trim_obj_tree_fix.tcl
 + ema_autoload_rename.tcl - выравнивание автозагрузки в glob /etc/init.d/rc*/*
 + e_file_to_csv.tcl \ e_file_to_csv.log - ???обход всех папок,и обьединение в 1.???
-+ arc_dg_el_(file)_export.tcl - экспорт таблиц схемы DG\EL
-+ arc_dg_export.tcl - merge таблиц схемы DG из 2-х БД
-+ arc_elphpsau_export.tcl - экспорт таблиц схемы EL\PH\PS\AU
-+ auto1.tcl - вывод в файл ?непонятно чего?
+
 + Export_from_Oracle_to_xxxxx\ - различные формы экспорта из Oracle
   + rsduadmin_to_xml.tcl - вывод схемы Oracle rsduadmin в XML-файл.
   + rsduadmin_to_sqlite-simple.tcl - вывод схемы Oracle rsduadmin в SQLite
   + rsduadmin_dg_guid.tcl - получение информации FROM DG_LIST, DG_GROUPS
   + rsduadmin_ast_org_cnt_guid.tcl - получение информации FROM AST_CNT, AST_ORG
   + rsdu2_to_sqlite.tcl - вывод схем Oracle в SQLite
-+ ersdu2-output-1.tcl \ ersdu2-output-1.log - вывод содержимого from da_cat da_param
+  + rsduadmin_OBJ_EL_PIN.tcl - OBJ_EL_PIN
+  + arc_dg_el_(file)_export.tcl - экспорт таблиц схемы DG\EL
+  + arc_dg_export.tcl - merge таблиц схемы DG из 2-х БД
+  + arc_elphpsau_export.tcl - экспорт таблиц схемы EL\PH\PS\AU
+  + auto1.tcl - вывод в файл ?непонятно чего?
+  + e_rsdu2-output_dir-1.tcl - вывод в папку out файлов таблиц из вьюшки elreg_list_v
+  + e_rsdu2-output_sqlite-1.tcl - вывод в БД SQLite таблиц из вьюшки elreg_list_v
+  + ersdu2-output-1.tcl \ ersdu2-output-1.log - вывод содержимого from da_cat da_param
+  + ELREG_LIST_SOURCE.sql - ....
+  + sql_da_202304.txt - вывод из сборных таблиц в формате = ;Прибор;id;Наименование;Квалификатор;ТИП;НазваниеИсточника;idИсточника;НаименованиеИсточника;
+  + sql_el_202304.txt - вывод из сборных таблиц в формате = ;id;АЛИАС/Наименование;Канал;idИсточника;НаименованиеИсточника;
+  + obj_tree1.tcl \ obj_tree1.sql - цикличный обход Дерева в таблице. 
+
 + pr41-rsduadmin_renid\ - замена ID в таблицах Oracle
   + rsduadmin_renid.tcl 
+
 + tclExcelPQ.tcl - чтение 1-го xlsx - файла. для 1ого Листа, создание INSERT для вставки в OBJ_GENERATOR_PQ
 + tclExcel.tcl - чтение 1-го xlsx - файла. получение списка Листов, создание файлов с их именами, в режиме w+
-+ e_rsdu2-output_dir-1.tcl - вывод в папку out файлов таблиц из вьюшки elreg_list_v
-+ e_rsdu2-output_sqlite-1.tcl - вывод в БД SQLite таблиц из вьюшки elreg_list_v
+
 + pr01-emalogs\ - аккумуляция логов и настроек
   + emalogs1.tcl - аккумуляция логов и настроек
   + emalogsOracle1.tcl- аккумуляция логов и настроек
@@ -96,9 +105,7 @@ methods: tcl\tk, bash, python, p-sql, php, lua,
 + DA_ARC_ADD\  - создание архивного профиля
 + pr37-check\ - диапазон открытия форсунки
 + RsduSql\ - загрузка данных в MS SQL через bat
-+ sql_da_202304.txt - вывод из сборных таблиц в формате = ;Прибор;id;Наименование;Квалификатор;ТИП;НазваниеИсточника;idИсточника;НаименованиеИсточника;
-+ sql_el_202304.txt - вывод из сборных таблиц в формате = ;id;АЛИАС/Наименование;Канал;idИсточника;НаименованиеИсточника;
- 
+
 
 --------------------------
   eОсновной комплекс ENMAC(324).csv

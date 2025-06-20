@@ -1,0 +1,100 @@
+SET SERVEROUTPUT ON
+declare
+    type rREC2 IS record
+    (
+    id    number(11),
+    name varchar2(255)
+    );
+    NUM NUMBER(11);
+    vSQL VARCHAR2(1024);
+    vStr VARCHAR2(1024);
+    vStr2 VARCHAR2(30);
+    cur cursor_pkg.cursor_type;
+    tdata2 rREC2;
+    ID_SRCLST    number(11) ;
+    table_name varchar2(255) ;   
+    
+begin
+    dbms_output.ENABLE (400000);
+    --
+    FOR rec in (
+      SELECT t.id,
+          t.id_parent AS id_node,
+          t.id_type,
+          t.name,
+          t.alias,
+          i.id_dev,
+          i.ip_addr,
+          I.IP_PORT
+      FROM DA_CAT t, da_slave i
+      WHERE i.ID_NODE(+) = t.ID
+          AND t.id_type IN (SELECT id FROM da_type WHERE define_alias LIKE 'DEVICE')
+          AND da_get_dirtbl_f (t.id) IN (SELECT tab.id_dirtbl
+                                         FROM sys_tabl_v tab, sys_tree21 tr
+                                         WHERE tr.id_lsttbl = TAB.ID_LSTTBL
+                                               AND UPPER (r_table) LIKE 'DA_V_LST%')
+    )
+    LOOP
+      -- dbms_output.put_line(' ');
+      -- dbms_output.put_line(' #'||rec.id || ' '||rec.name|| ' '||rec.ip_addr|| ' '||rec.IP_PORT|| ' ');
+      -- dbms_output.put_line(' ');
+
+      FOR recdp in (
+        WITH src AS
+        (
+         SELECT v.id_param, src.alias || '\' || ch.alias AS NAME,
+                ch.id_source, ch.ID AS id_src_channel
+           FROM da_val v JOIN da_src_channel ch
+                ON ch.ID = v.id_cur_channel_src AND ch.id_ownlst = v.id_param
+                JOIN da_source src ON src.ID = ch.id_source
+                )
+          SELECT da.ID, da.id_node, da.NAME, dd.cvalif,
+          (CASE
+              WHEN REGEXP_LIKE (gt.define_alias, 'ANALOG')
+                 THEN 'TI'
+              WHEN REGEXP_LIKE (gt.define_alias, 'TELECONTROL')
+                 THEN 'TU'
+              WHEN REGEXP_LIKE (gt.define_alias, 'BOOL')
+                 THEN 'TS'
+              ELSE '??'
+           END
+          ) AS gtype_name,
+          NVL (src.NAME, 'none') AS source_name ,
+          src.id_src_channel
+          FROM da_param da JOIN da_dev_desc dd ON dd.ID = da.id_point AND da.id_node=rec.id
+          LEFT JOIN sys_gtopt gt ON gt.ID = dd.id_gtopt
+          LEFT JOIN src ON src.id_param = da.ID )
+        LOOP
+        
+        vStr := ';' ;
+        if NVL( recdp.id_src_channel, 0 )!=0 then 
+
+          -- select distinct dsct.ID_SRCLST, st.table_name INTO ID_SRCLST,table_name from da_src_channel_tune  dsct, sys_tbllst st where dsct.id_channel=recdp.id_src_channel and dsct.id_srctbl=st.id ;
+                
+          --vStr := '' ;
+          FOR rec1 IN (select distinct dsct.ID_SRCLST, st.table_name 
+                       from da_src_channel_tune  dsct, sys_tbllst st 
+                       where dsct.id_channel=recdp.id_src_channel and dsct.id_srctbl=st.id )
+          LOOP
+           -- DBMS_OUTPUT.PUT_LINE ('id-table :' || rec1.ID_SRCLST || ' ' || rec1.table_name);
+           
+           vSQL := 'select id, name from ' || rec1.table_name || ' where  id=:1';
+           OPEN cur FOR vSql USING rec1.ID_SRCLST ;
+           LOOP
+             FETCH cur INTO tdata2;
+             EXIT WHEN cur%NOTFOUND;
+             vStr :=   tdata2.id || ';' || tdata2.name  ;
+           END LOOP;
+           CLOSE cur;
+          END LOOP;
+
+        end if ;
+
+        dbms_output.put_line( ';' || rec.name || ';' || recdp.id || ';' || recdp.name || ';' || recdp.cvalif || ';' || recdp.gtype_name || ';' || recdp.source_name || ';' ||  vStr || ';' );
+
+
+        END LOOP;
+
+    END LOOP;
+
+end;
