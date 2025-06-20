@@ -75,7 +75,8 @@ methods: tcl\tk, bash, python, p-sql, php, lua,
 
 ### **Php**
 
-+ wasutp.config.php ( emasm1.py, ewasutp.sh )  - установка сервера в Web-iSMS (конфиг файл, скрипт для cron) 
++ pr42-wasutp.config\
+  + wasutp.config.php ( emasm1.py, ewasutp.sh )  - установка сервера в Web-iSMS (конфиг файл, скрипт для cron) 
 
 ### **SQL**
 
