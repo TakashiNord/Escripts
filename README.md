@@ -36,8 +36,6 @@ methods: tcl\tk, bash, python, p-sql, php, lua,
 
 + zvkdgk\ - экспорт из БД MS Sql 'zvkdgk' в SQLite
 + serverApi\ - получение посредством rest api информации от server
-+ output_ELREG_LIST_V\ - вывод : имя распределительного устройства - имя секции шин - Краткое имя присоединения - Тип параметра - Полное имя типа параметра - Краткое имя типа параметра - Единица измерения - Точность представления - Источник значений - Параметр источника значений.
-+ Export_dg_from_xls_to_bd\ - экспорт из XLS в таблицу DG
 + daDevTcl\ - проект для редактирования DA_DEV_DESC (не завершен)
 + Scada Data GateWay\ - В полуавтоматическом режиме формирует таблицу для файла данных программы "SCADA Data Gateway"
 + pr14-Virtualport\ - создание виртуального прибора(не завершен)
@@ -47,8 +45,8 @@ methods: tcl\tk, bash, python, p-sql, php, lua,
   + ema_trim_da_param.tcl - операция trim(name) для таблицы da_param
   + table_trim_obj_tree_fix.tcl
 + ema_autoload_rename.tcl - выравнивание автозагрузки в glob /etc/init.d/rc*/*
-+ e_file_to_csv.tcl \ e_file_to_csv.log - ???обход всех папок,и обьединение в 1.???
-
++ Export_dg_from_xls_to_bd\ - экспорт из XLS в таблицу DG
+  + dg_export1.tcl , dg_export2.tcl
 + Export_from_Oracle_to_xxxxx\ - различные формы экспорта из Oracle
   + rsduadmin_to_xml.tcl - вывод схемы Oracle rsduadmin в XML-файл.
   + rsduadmin_to_sqlite-simple.tcl - вывод схемы Oracle rsduadmin в SQLite
@@ -63,10 +61,14 @@ methods: tcl\tk, bash, python, p-sql, php, lua,
   + e_rsdu2-output_dir-1.tcl - вывод в папку out файлов таблиц из вьюшки elreg_list_v
   + e_rsdu2-output_sqlite-1.tcl - вывод в БД SQLite таблиц из вьюшки elreg_list_v
   + ersdu2-output-1.tcl \ ersdu2-output-1.log - вывод содержимого from da_cat da_param
+  + e_file_to_csv.tcl \ e_file_to_csv.log - ???обход всех папок,и обьединение в 1.???
   + ELREG_LIST_SOURCE.sql - ....
   + sql_da_202304.txt - вывод из сборных таблиц в формате = ;Прибор;id;Наименование;Квалификатор;ТИП;НазваниеИсточника;idИсточника;НаименованиеИсточника;
   + sql_el_202304.txt - вывод из сборных таблиц в формате = ;id;АЛИАС/Наименование;Канал;idИсточника;НаименованиеИсточника;
   + obj_tree1.tcl \ obj_tree1.sql - цикличный обход Дерева в таблице. 
+
++ output_ELREG_LIST_V\ - вывод : имя распределительного устройства - имя секции шин - Краткое имя присоединения - Тип параметра - Полное имя типа параметра - Краткое имя типа параметра - Единица измерения - Точность представления - Источник значений - Параметр источника значений.
+
 
 + pr41-rsduadmin_renid\ - замена ID в таблицах Oracle
   + rsduadmin_renid.tcl 
@@ -106,7 +108,7 @@ methods: tcl\tk, bash, python, p-sql, php, lua,
 + pr37-check\ - диапазон открытия форсунки
 + RsduSql\ - загрузка данных в MS SQL через bat
 + DBE-сборник\ - скрипты и запросы DBE
-
++ VS_FORM_double_schema.sql - копирование настроек схемы
 
 --------------------------
   eОсновной комплекс ENMAC(324).csv

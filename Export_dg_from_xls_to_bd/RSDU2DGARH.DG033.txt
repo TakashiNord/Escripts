@@ -1,0 +1,191 @@
+
+
+
+----------------------------------------------------------------------------------------------------------------------
+
+CREATE TABLE RSDU2DGARH.DG033_0000230
+(
+  TIME1970  NUMBER(11),
+  VAL       NUMBER(19,5),
+  STATE     NUMBER(11)
+)
+
+----------------------------------------------------------------------------------------------------------------------
+
+SELECT TIME1970, t1.VAL, t2.VAL, t3.VAL
+FROM RSDU2DGARH.DG033_0000230 t1
+JOIN RSDU2DGARH.DG033_0000194 t2 ON t1.TIME1970 = t2.TIME1970
+JOIN RSDU2DGARH.DG033_0000212 t3 ON t2.TIME1970 = t3.TIME1970;
+
+
+SELECT t1.TIME1970, t1.VAL as VAL1, t2.VAL as VAL2, t3.VAL as VAL3
+FROM RSDU2DGARH.DG033_0000230 t1
+JOIN RSDU2DGARH.DG033_0000194 t2 ON t1.TIME1970 = t2.TIME1970
+JOIN RSDU2DGARH.DG033_0000212 t3 ON t2.TIME1970 = t3.TIME1970
+where FROM_DT1970(t1.TIME1970)>(sysdate-7)
+order by t1.TIME1970 desc
+
+----------------------------------------------------------------------------------------------------------------------
+
+-- max
+select TIME1970 
+     , case when ( VAL1>= VAL2 ) and ( VAL1 >= VAL3 ) then VAL1
+            when ( VAL2>= VAL1 ) and ( VAL2 >= VAL3 ) then VAL2
+            else VAL3
+       end as val
+from 
+(
+SELECT t1.TIME1970 as TIME1970, COALESCE(t1.VAL,0) as VAL1, COALESCE(t2.VAL,0) as VAL2, COALESCE(t3.VAL,0) as VAL3
+FROM RSDU2DGARH.DG033_0000230 t1
+JOIN RSDU2DGARH.DG033_0000194 t2 ON t1.TIME1970 = t2.TIME1970
+JOIN RSDU2DGARH.DG033_0000212 t3 ON t2.TIME1970 = t3.TIME1970
+where FROM_DT1970(t1.TIME1970)>=(sysdate-2)
+order by t1.TIME1970 desc
+)
+
+-- min
+select TIME1970 
+     , case when ( VAL1<= VAL2 ) and ( VAL1 <= VAL3 ) and ( VAL1<>0 ) then VAL1
+            when ( VAL2<= VAL1 ) and ( VAL2 <= VAL3 ) and ( VAL2<>0 ) then VAL2
+            when ( VAL3<>0 ) then VAL3
+            else 0
+       end as val
+from 
+(
+SELECT t1.TIME1970 as TIME1970, COALESCE(t1.VAL,0) as VAL1, COALESCE(t2.VAL,0) as VAL2, COALESCE(t3.VAL,0) as VAL3
+FROM RSDU2DGARH.DG033_0000231 t1
+JOIN RSDU2DGARH.DG033_0000195 t2 ON t1.TIME1970 = t2.TIME1970
+JOIN RSDU2DGARH.DG033_0000213 t3 ON t2.TIME1970 = t3.TIME1970
+where FROM_DT1970(t1.TIME1970)>=(sysdate-2)
+order by t1.TIME1970 desc
+)
+
+-- value
+select TIME1970 
+     , (VAL1 + VAL2 + VAL3) as val
+from 
+(
+SELECT t1.TIME1970 as TIME1970, COALESCE(t1.VAL,0) as VAL1, COALESCE(t2.VAL,0) as VAL2, COALESCE(t3.VAL,0) as VAL3
+FROM RSDU2DGARH.DG033_0000229 t1
+JOIN RSDU2DGARH.DG033_0000193 t2 ON t1.TIME1970 = t2.TIME1970
+JOIN RSDU2DGARH.DG033_0000211 t3 ON t2.TIME1970 = t3.TIME1970
+where FROM_DT1970(t1.TIME1970)>=(sysdate-2)
+order by t1.TIME1970 desc
+)
+
+
+----------------------------------------------------------------------------------------------------------------------
+
+
+SET SERVEROUTPUT ON 
+DECLARE 
+-- 
+d NUMBER;
+BEGIN 
+  dbms_output.ENABLE (100000);
+  RSDUADMIN.user_dg_0 ( 0 ) ; 
+  dbms_output.put_line(' ret ');
+END;
+/
+
+
+----------------------------------------------------------------------------------------------------------------------
+
+
+CREATE OR REPLACE PROCEDURE RSDUADMIN.user_dg_0 ( pId NUMBER) AS
+-- AUTHID CURRENT_USER
+  nRetval NUMBER;
+  vSQL VARCHAR2(2000);
+BEGIN
+  nRetval:=0;
+
+  EXECUTE IMMEDIATE 'SET ROLE '||'base_ext_connect_oik, base_stand_read, ARC_STAND_READ, ARC_STAND_ADJ, REGIM_EXT_ARHREAD';
+
+  FOR rec IN (
+-- value
+select TIME1970 
+     , (VAL1 + VAL2 + VAL3) as val
+from 
+(
+SELECT t1.TIME1970 as TIME1970, COALESCE(t1.VAL,0) as VAL1, COALESCE(t2.VAL,0) as VAL2, COALESCE(t3.VAL,0) as VAL3
+FROM RSDU2DGARH.DG033_0000229 t1
+JOIN RSDU2DGARH.DG033_0000193 t2 ON t1.TIME1970 = t2.TIME1970
+JOIN RSDU2DGARH.DG033_0000211 t3 ON t2.TIME1970 = t3.TIME1970
+where FROM_DT1970(t1.TIME1970)>=(sysdate-2)
+order by t1.TIME1970 desc
+)
+   )
+   LOOP
+     vSQL := 'MERGE INTO DG033_0000031 A USING (SELECT :1 as TIME1970, :2 as VAL, 0 as STATE FROM DUAL) B '
+|| ' ON (A.TIME1970 = B.TIME1970) '
+|| ' WHEN NOT MATCHED THEN  INSERT ( TIME1970, VAL, STATE) VALUES ( B.TIME1970, B.VAL, B.STATE) '
+|| ' WHEN MATCHED THEN  UPDATE SET A.VAL = B.VAL, A.STATE = B.STATE ' ;
+     EXECUTE IMMEDIATE vSQL USING rec.TIME1970, rec.val ;
+     COMMIT;
+   END LOOP;
+
+  FOR rec IN (
+-- min
+select TIME1970 
+     , case when ( VAL1<= VAL2 ) and ( VAL1 <= VAL3 ) and ( VAL1<>0 ) then VAL1
+            when ( VAL2<= VAL1 ) and ( VAL2 <= VAL3 ) and ( VAL2<>0 ) then VAL2
+            when ( VAL3<>0 ) then VAL3
+            else 0
+       end as val
+from 
+(
+SELECT t1.TIME1970 as TIME1970, COALESCE(t1.VAL,0) as VAL1, COALESCE(t2.VAL,0) as VAL2, COALESCE(t3.VAL,0) as VAL3
+FROM RSDU2DGARH.DG033_0000231 t1
+JOIN RSDU2DGARH.DG033_0000195 t2 ON t1.TIME1970 = t2.TIME1970
+JOIN RSDU2DGARH.DG033_0000213 t3 ON t2.TIME1970 = t3.TIME1970
+where FROM_DT1970(t1.TIME1970)>=(sysdate-2)
+order by t1.TIME1970 desc
+)
+   )
+   LOOP
+     vSQL := 'MERGE INTO DG033_0000032 A USING (SELECT :1 as TIME1970, :2 as VAL, 0 as STATE FROM DUAL) B '
+|| ' ON (A.TIME1970 = B.TIME1970) '
+|| ' WHEN NOT MATCHED THEN  INSERT ( TIME1970, VAL, STATE) VALUES ( B.TIME1970, B.VAL, B.STATE) '
+|| ' WHEN MATCHED THEN  UPDATE SET A.VAL = B.VAL, A.STATE = B.STATE ' ;
+     EXECUTE IMMEDIATE vSQL USING rec.TIME1970, rec.val ;
+     COMMIT;
+   END LOOP;
+
+
+  FOR rec IN (
+select TIME1970 
+     , case when ( VAL1>= VAL2 ) and ( VAL1 >= VAL3 ) then VAL1
+            when ( VAL2>= VAL1 ) and ( VAL2 >= VAL3 ) then VAL2
+            else VAL3
+       end as val
+from 
+(
+SELECT t1.TIME1970 as TIME1970, COALESCE(t1.VAL,0) as VAL1, COALESCE(t2.VAL,0) as VAL2, COALESCE(t3.VAL,0) as VAL3
+FROM RSDU2DGARH.DG033_0000230 t1
+JOIN RSDU2DGARH.DG033_0000194 t2 ON t1.TIME1970 = t2.TIME1970
+JOIN RSDU2DGARH.DG033_0000212 t3 ON t2.TIME1970 = t3.TIME1970
+where FROM_DT1970(t1.TIME1970)>=(sysdate-2)
+order by t1.TIME1970 desc
+)
+   )
+   LOOP
+     vSQL := 'MERGE INTO DG033_0000033 A USING (SELECT :1 as TIME1970, :2 as VAL, 0 as STATE FROM DUAL) B '
+|| ' ON (A.TIME1970 = B.TIME1970) '
+|| ' WHEN NOT MATCHED THEN  INSERT ( TIME1970, VAL, STATE) VALUES ( B.TIME1970, B.VAL, B.STATE) '
+|| ' WHEN MATCHED THEN  UPDATE SET A.VAL = B.VAL, A.STATE = B.STATE ' ;
+     EXECUTE IMMEDIATE vSQL USING rec.TIME1970, rec.val ;
+     COMMIT;
+   END LOOP;
+
+
+EXCEPTION WHEN OTHERS THEN
+    nRetval := SQLCODE;
+    rsdu_exception_p(1, 'user_dg_0  = '|| SQLCODE);
+    --RETURN nRetval;
+END;
+/
+
+
+----------------------------------------------------------------------------------------------------------------------
+
+
