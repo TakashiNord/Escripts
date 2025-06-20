@@ -3,13 +3,14 @@ methods: tcl\tk, bash, python, p-sql, php, lua,
 
 ### **BASH**
 
-+ esztab.sh - размер табличного пространства БД Oracle (FROM dba_free_space)
-+ eups.sh - получение информации snmpget -Oqv -c public -v 2c и кладем в БД Oracle
-+ edfcheck.sh - проверка размера диска и выдача информации о превышении
++ Oracle-bash\
+  + esztab.sh - размер табличного пространства БД Oracle (FROM dba_free_space)
+  + eups.sh - получение информации snmpget -Oqv -c public -v 2c и кладем в БД Oracle
+  + edfcheck.sh - проверка размера диска и выдача информации о превышении
+  + emview.sh \ emview.sql - обновление MVIEWS посредством скрипта 
+  + sp.sh - получение process+session из БД Oracle
 + ema (ema.service, ema.timer) - модернизация скрипта ema добавлением serv_list
 + emahlpdsk.sh - service php-fpm , mysqld , nginx , elasticsearch , supervisord restart
-+ emview.sh \ emview.sql - обновление MVIEWS посредством скрипта 
-+ sp.sh - получение process+session из БД Oracle
 
 ### **CMD**
 
