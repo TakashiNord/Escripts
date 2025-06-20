@@ -1,0 +1,18 @@
+
+select   top 1
+  dateadd(minute, datediff(minute,0,dateadd(minute, -1, GETUTCDATE())), 0) as DT,
+  VAL,
+  0 as ST
+from (
+ SELECT  avg([VALUE]) as VAL
+ FROM [SBS].[dbo].[SBS_MEASUREMENT_HISTORY]
+ where ID_MEASUREMENT_VALUE=21949
+  and mod_date >= dateadd(minute, datediff(minute,0,dateadd(minute, -1, GETUTCDATE())), 0)
+  and mod_date < dateadd(minute, datediff(minute,0,GETUTCDATE()), 0)
+union
+  SELECT TOP 1 [SBS].[dbo].[EXT_TECHSITE_CURRENT_VALUE].[VALUE] as VAL
+  FROM [SBS].[dbo].[EXT_TECHSITE_CURRENT_VALUE]
+   where [SBS].[dbo].[EXT_TECHSITE_CURRENT_VALUE].[ID_MEASUREMENT_VALUE]=21949
+ ) as T    
+where T.VAL is not null
+
