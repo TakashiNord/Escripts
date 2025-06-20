@@ -1,0 +1,47 @@
+ДорасчетТС
+
+--- промежуточный ТС
+-- data[21038]
+-- data[21037]=t -- время переключения
+-- data[21037]:setValue(0)
+
+-- Если исходный параметр равен единице менее 2 секунд, 
+-- то параметр равен нулю, в противном случае 1
+
+-- source
+math.randomseed(os.clock())
+a =  math.random(0,1)
+data[19909] = a
+info("TC=" .. data[19909]:getValue() .. "=")
+
+Дорасчет ТИ, Дорасчет ТС, АПТС
+
+t=os.time(os.date("!*t"))
+t=tonumber(t)
+
+-- init 1-run
+if not data[Дорасчет ТИ] then
+    data[Дорасчет ТИ]:setValue(t)
+end
+if data[Дорасчет ТИ]:getValue()<=0 then
+    data[Дорасчет ТИ]:setValue(t)
+end
+if not data[Дорасчет ТС] then
+    data[Дорасчет ТС]=OFF
+end
+
+--
+if data[АПТС]~=data[Дорасчет ТС]  then
+  d=math.abs(t-data[Дорасчет ТИ]:getValue())
+  --warning("delta=" .. d .. "=")
+  data[Дорасчет ТИ]:setValue(t)
+  if d < 2 then
+     if data[АПТС]==ON then
+        data[Дорасчет ТС]=OFF
+     else
+        data[Дорасчет ТС]=ON
+     end
+  else
+    data[Дорасчет ТС]=data[АПТС]
+  end
+end

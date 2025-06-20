@@ -71,8 +71,9 @@ methods: tcl\tk, bash, python, p-sql, php, lua,
 
 ### **Lua**
 
-+ ereadfile_to_rsdu.lua \ ereadfile_to_rsdu_out_u_g.txt - чтение файлов посредством Lua (pcall)
-+ lua cgk-3.txt   - ДорасчетТС, количество переключений
++ LUA-сборник\
+  + ereadfile_to_rsdu.lua \ ereadfile_to_rsdu_out_u_g.txt - чтение файлов посредством Lua (pcall)
+  + lua cgk-3.txt   - ДорасчетТС, количество переключений
 
 ### **Php**
 
