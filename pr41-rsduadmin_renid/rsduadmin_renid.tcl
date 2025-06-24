@@ -131,7 +131,7 @@ proc changeSeq { db2 TABLE_NAME } {
 # --
 proc BASE_ID { db2 } {
 
-  set TABLE_LIST [ list AD_ACSRVC AD_SINFO_INI AD_JRNL \
+  set TABLE_LIST0 [ list AD_ACSRVC AD_SINFO_INI AD_JRNL \
  DA_SLAVE DA_MASTER DA_DEV_OPT DA_PC DA_PORT \
  DBE_DESTINATION \
  DG_KDU_JOURNAL \
@@ -155,6 +155,7 @@ proc BASE_ID { db2 } {
 
   set TABLE_LIST_3 [ list ]
   set TABLE_LIST_5 [ list OBJ_MODEL_MEAS OBJ_PARAM ]
+  set TABLE_LIST [ list  ]
 
   foreach TABLE_NAME $TABLE_LIST {
 
@@ -3222,12 +3223,12 @@ proc SYS_MEAS_TYPES { db2 shift } {
       LogWrite "$TABLE_NAME id_old=$id_old  - >  new=$id_new ( maxID=$maxID )"
 
       #--  ID_TYPE
-      set TABLE_LIST2 [ list CALC_LIST DG_LIST NME_PARAM_LIST EA_CHANNELS ]
-      changeTable $db2 $maxID $id_old "ID_TYPE" $TABLE_LIST2
+      set TABLE_LIST_ID_TYPE [ list CALC_LIST DG_LIST NME_PARAM_LIST EA_CHANNELS ]
+      changeTable $db2 $maxID $id_old "ID_TYPE" $TABLE_LIST_ID_TYPE
 
       #--  ID_MEAS_TYPE
-      set TABLE_LIST2 [ list DMS_CALC_RESULT_MEAS DMS_EXTEQUIV_MEAS MEAS_LIST OBJ_MODEL_MEAS SYS_OTYP_MEAS ]
-      changeTable $db2 $maxID $id_old "ID_MEAS_TYPE" $TABLE_LIST2
+      set TABLE_LIST_ID_MEAS_TYPE [ list DMS_CALC_RESULT_MEAS DMS_EXTEQUIV_MEAS MEAS_LIST OBJ_MODEL_MEAS SYS_OTYP_MEAS ]
+      changeTable $db2 $maxID $id_old "ID_MEAS_TYPE" $TABLE_LIST_ID_MEAS_TYPE
 
 
       set strSQL3 "UPDATE $TABLE_NAME SET ID=$id_new WHERE ID=$id_old"
@@ -3236,12 +3237,10 @@ proc SYS_MEAS_TYPES { db2 shift } {
 
 
       #--  ID_TYPE
-      set TABLE_LIST2 [ list CALC_LIST DG_LIST NME_PARAM_LIST EA_CHANNELS ]
-      changeTable $db2 $id_new $maxID "ID_TYPE" $TABLE_LIST2
+      changeTable $db2 $id_new $maxID "ID_TYPE" $TABLE_LIST_ID_TYPE
 
       #--  ID_MEAS_TYPE
-      set TABLE_LIST2 [ list DMS_CALC_RESULT_MEAS DMS_EXTEQUIV_MEAS MEAS_LIST OBJ_MODEL_MEAS SYS_OTYP_MEAS ]
-      changeTable $db2 $id_new $maxID "ID_MEAS_TYPE" $TABLE_LIST2
+      changeTable $db2 $id_new $maxID "ID_MEAS_TYPE" $TABLE_LIST_ID_MEAS_TYPE
 
     }
 
