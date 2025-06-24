@@ -1,4 +1,11 @@
-
+# ===============================================================
+#
+#
+#
+#
+#
+#
+# ===============================================================
 package require tclodbc
 
 #puts "-- Start --"
@@ -49,14 +56,14 @@ proc GetSource { rf fpid level header } {
         set id12 [ lindex $r12 0 ]
         set str [ lindex $r12 1 ]
         #set str "${ALIAS1};\"${str}\";${fpid}"
-		set str "${ALIAS1};\"${str}\";"
+        set str "${ALIAS1};\"${str}\";"
       }
       if {$str==""} {
         ;
         # [string compare -nocase $ALIAS1 "Оператор" ]==0
         #set str "${ALIAS1};0;${fpid}"
-		set str "${ALIAS1};0;"
-		set str "" ; continue ;
+        set str "${ALIAS1};0;"
+        set str "" ; continue ;
       }
     } else {
         set sql45 "Select ID, ID_SRCTBL, ID_SRCLST FROM MEAS_SRC_CHANNEL_TUNE where ID_CHANNEL=$id "
@@ -153,18 +160,18 @@ and id_lsttbl= $ids ";
 
 proc GetElem { fpid header } {
   global db1
-  
+
   set h $header
 
   set sql4 "Select ID,ID_PARENT,ID_TYPE,NAME,ALIAS from OBJ_TREE where ID=$fpid"
 
   foreach {r2} [ db1 $sql4 ] {
     set id [ lindex $r2 0 ]
-	set id_par [ lindex $r2 1 ]
+    set id_par [ lindex $r2 1 ]
     set name [ lindex $r2 3 ]
-    
+
     set str "${name}\\${h}"
-	if {$id_par==""} { break ;}
+    if {$id_par==""} { break ;}
     set h [ GetElem $id_par $str ]
   }
 
@@ -185,26 +192,26 @@ proc pObj { } {
     set node [ lindex $r1 1 ]
     set tp [ lindex $r1 2 ]
     set name [ lindex $r1 3 ]
-    
-	set str ""
+
+    set str ""
     set header [ GetElem $node $str ]
-	#set str "${header};${id};${name}"
+    #set str "${header};${id};${name}"
 
     #ascii cp1251 koi8-u unicode
-	set s1 "\u0433\u0435\u043d\u0435\u0440\u0430\u0446\u0438\u044f" ; #"*генерация*"
-	set s2 $header
-	#set s1 [ encoding convertfrom ascii "*генерация*" ]
-	#set s2 [ encoding convertfrom cp1251 $header ]
+    set s1 "\u0433\u0435\u043d\u0435\u0440\u0430\u0446\u0438\u044f" ; #"*генерация*"
+    set s2 $header
+    #set s1 [ encoding convertfrom ascii "*генерация*" ]
+    #set s2 [ encoding convertfrom cp1251 $header ]
     #set s1 [ encoding convertto cp1251 "*генерация*" ]
-    #set s2 [ encoding convertto cp1251 $header ]	
-	
-	#if {[string match -nocase $s1 $s2 ]==1} { 
-	#  puts $header
-	  GetSource  $rf $id 1 ";${header};${id};${name}"
-	  incr n
-	#}
-	
-	#LogWrite $str
+    #set s2 [ encoding convertto cp1251 $header ]
+
+    #if {[string match -nocase $s1 $s2 ]==1} {
+    #  puts $header
+    GetSource  $rf $id 1 ";${header};${id};${name}"
+    incr n
+    #}
+
+    #LogWrite $str
   }
 
   return $n
@@ -227,7 +234,7 @@ proc  main { } {
   set t1 [ clock format [ clock seconds ] -format "%T" ]
 
   set t11 [ clock format [ clock seconds ] -format "%Y%m%d_%H%M%S" ]
-  
+
   puts "\nstart = $t1"
 
 # Óñòàíàâëèâàåì ñîåäèíåíèå ê ÁÄ
@@ -236,14 +243,15 @@ proc  main { } {
 
   set namefile "obj"
 
-  # ëîã - ôàéë
+  # лог - файл
   set ph [info script]
   set md "a+"
   if {$ph==""} {
-     set ph obj_tree_${t11}.log
+     set ph elreg_obj_tree_${t11}.log
   } else {
-     set p1 [ file dirname $ph ] ; # [file dirname /foo/bar/grill.txt] -> /foo/bar
-     set ph [ file join $p1 ${ph} ]_${t11}.log
+     #set p1 [ file dirname $ph ] ; # [file dirname /foo/bar/grill.txt] -> /foo/bar
+     #set ph [ file join $p1 ${ph} ]_${t11}.log
+     set ph [ file rootname $ph ]_${t1}.log
      set md "w+"
   }
 
@@ -255,9 +263,7 @@ proc  main { } {
 # -------------------------------------------------------------------------------------------------
 
   set nm [ pObj ]
-  
   puts "done . $nm strings."
-
 
 # ===============================================
 # Закрываем соединение к БД
@@ -272,6 +278,6 @@ proc  main { } {
   return 0 ;
 }
 
-  main
 
-  #puts "-- End --"
+main
+
