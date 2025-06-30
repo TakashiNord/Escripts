@@ -41,8 +41,6 @@ methods: tcl\tk, bash, python, p-sql, php, lua,
 + pr14-Virtualport\ - создание виртуального прибора(не завершен)
 + pr39-Trim\ - операция trim(name) для колонок в таблице
   + table_trim.cmd \ table_trim.tcl - операция trim(name) для таблиц obj_tree,meas_list,da_dev_desc,da_param,RPT_LST,sys_otyp
-  + ema_trim_da_dev.tcl - операция trim(name) для таблицы da_dev_desc
-  + ema_trim_da_param.tcl - операция trim(name) для таблицы da_param
   + table_trim_obj_tree_fix.tcl
 + ema_autoload_rename.tcl - выравнивание автозагрузки в glob /etc/init.d/rc*/*
 + Export_dg_from_xls_to_bd\ - экспорт из XLS в таблицу DG
@@ -69,14 +67,14 @@ methods: tcl\tk, bash, python, p-sql, php, lua,
   + sql_da_202304.txt - вывод из сборных таблиц в формате = ;Прибор;id;Наименование;Квалификатор;ТИП;НазваниеИсточника;idИсточника;НаименованиеИсточника;
   + sql_el_202304.txt - вывод из сборных таблиц в формате = ;id;АЛИАС/Наименование;Канал;idИсточника;НаименованиеИсточника;
   + obj_tree1.tcl \ obj_tree1.sql - цикличный обход Дерева в таблице. 
+  + Export_PQ.tcl - экспорт значений PQ из одной таблицы в другую (для 1ого Листа, создание INSERT для вставки в OBJ_GENERATOR_PQ)
+  + Export_PQ_from_Excel.tcl - чтение 1-го xlsx - файла. получение списка Листов, создание файлов с их именами, в режиме w+
 + pr41-rsduadmin_renid\ - замена ID в таблицах Oracle
   + rsduadmin_renid.tcl 
 + pr01-emalogs\ - аккумуляция логов и настроек
   + emalogs1.tcl - аккумуляция логов и настроек
   + emalogsOracle1.tcl- аккумуляция логов и настроек
   + emalogs.sh - аккумуляция логов и настроек
-+ Export_PQ.tcl - экспорт значений PQ из одной таблицы в другую (для 1ого Листа, создание INSERT для вставки в OBJ_GENERATOR_PQ)
-+ Export_PQ_from_Excel.tcl - чтение 1-го xlsx - файла. получение списка Листов, создание файлов с их именами, в режиме w+
 
 ### **Lua**
 
