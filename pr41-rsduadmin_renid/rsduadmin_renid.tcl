@@ -128,10 +128,12 @@ proc changeSeq { db2 TABLE_NAME } {
 #
 # ===============================================================
 
-# --S_RIGHTS
+---------- S_RIGHTS disable triggers
+
+# --
 proc BASE_ID { db2 } {
 
-  set TABLE_LIST [ list AD_ACSRVC AD_SINFO_INI AD_JRNL \
+  set TABLE_LIST0 [ list AD_ACSRVC AD_SINFO_INI AD_JRNL \
  DA_SLAVE DA_MASTER DA_DEV_OPT DA_PC DA_PORT \
  DBE_DESTINATION \
  DG_KDU_JOURNAL \
@@ -144,7 +146,7 @@ proc BASE_ID { db2 } {
  SYS_APP_SERV_LST SYS_APP_SERVICES SYS_APP_SSYST SYS_APP_INI \
  SYS_OTYP_MEAS SYS_OTYP_PARAM \
  SYS_TBLREF SYS_TBLLNK \
- S_U_RGHT S_G_RGHT  \
+ S_U_RGHT S_G_RGHT S_RIGHTS \
  SYS_UNIT \
  SIG_PROP \
  TAG_DOCS \
@@ -155,7 +157,7 @@ proc BASE_ID { db2 } {
 
   set TABLE_LIST_3 [ list ]
   set TABLE_LIST_5 [ list OBJ_MODEL_MEAS OBJ_PARAM ]
- # set TABLE_LIST [ list  ]
+  set TABLE_LIST [ list  ]
 
   foreach TABLE_NAME $TABLE_LIST {
 
@@ -3708,7 +3710,8 @@ if {$usr!="rsduadmin"} {
 # ===============================================================
 
 
-# -- одиночные таблицы
+# -- одиночные таблицы 
+# -- S_RIGHTS disable triggers
 #BASE_ID db2
 #BASE_ID db2
 
