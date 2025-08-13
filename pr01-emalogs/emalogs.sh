@@ -9,6 +9,7 @@ EMA_LOGS1=(
 /home/www-data/www/htdocs/WASUTP/public/resource
 /usr/local/tomcat/default/conf
 #/home/cassandra/../conf
+/etc/cassandra
 /etc/ema
 /etc/php5
 /etc/mysql
@@ -24,6 +25,7 @@ EMA_LOGS1=(
 /etc/sysconfig/network
 /etc/rabbitmq
 /etc/keepalived
+/etc/snmp
 /usr/share/ema
 /usr/bin/isms
 /usr/lib/nagios/plugins
