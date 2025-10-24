@@ -123,41 +123,15 @@ proc changeSeq { db2 TABLE_NAME } {
 #
 #
 # Base
-#
+#   ---------- S_RIGHTS disable triggers
 #
 #
 # ===============================================================
-
----------- S_RIGHTS disable triggers
-
 # --
-proc BASE_ID { db2 } {
+proc BASE_ID { db2 tblist } {
 
-  set TABLE_LIST0 [ list AD_ACSRVC AD_SINFO_INI AD_JRNL \
- DA_SLAVE DA_MASTER DA_DEV_OPT DA_PC DA_PORT \
- DBE_DESTINATION \
- DG_KDU_JOURNAL \
- MEAS_EL_DEPENDENT_SVAL \
- RSDU_ERROR \
- R_PSETS \
- OBJ_GENERATOR_PQ \
- OBJ_MODEL_MEAS OBJ_PARAM OBJ_CONSTRAINT \
- OBJ_AUX_EL_PIN OBJ_LINK OBJ_LOCATION OBJ_MODEL_PARAM OBJ_PARAM \
- SYS_APP_SERV_LST SYS_APP_SERVICES SYS_APP_SSYST SYS_APP_INI \
- SYS_OTYP_MEAS SYS_OTYP_PARAM \
- SYS_TBLREF SYS_TBLLNK \
- S_U_RGHT S_G_RGHT S_RIGHTS \
- SYS_UNIT \
- SIG_PROP \
- TAG_DOCS \
- US_ZONE US_VARS US_SIGN_PROP US_SIGN_GROUP US_SIG US_MSGLOG US_JSWITCH_FILTERS US_MAIL \
- VP_PARAMS \
- VSZ_DICT ]
-
-
-  set TABLE_LIST_3 [ list ]
-  set TABLE_LIST_5 [ list OBJ_MODEL_MEAS OBJ_PARAM ]
   set TABLE_LIST [ list  ]
+  set TABLE_LIST $tblist
 
   foreach TABLE_NAME $TABLE_LIST {
 
@@ -579,9 +553,6 @@ proc S_USERS__DB_S_USERS { db2 } {
   # -- переводим id в последовательность 1....n
   S_USERS $db2
 
-  return ;
-  --------------------------------------------------------
-
  return 0 ;
 }
 
@@ -938,7 +909,10 @@ proc AD_DIR { db2 } {
 }
 
 
-
+# не запускать
+# -- AD_DTYP ------!!!!--ID_TYPE !!!! не запускать.!!!!! sysmon\ssbsd сильно зависят
+# !!!!!####AD_DTYP db2!!!!
+#
 # -- AD_DTYP
 proc AD_DTYP { db2 } {
 
@@ -3712,8 +3686,34 @@ if {$usr!="rsduadmin"} {
 
 # -- одиночные таблицы 
 # -- S_RIGHTS disable triggers
-#BASE_ID db2
-#BASE_ID db2
+  set TABLE_LIST_0 [ list AD_ACSRVC AD_SINFO_INI AD_JRNL \
+ DA_SLAVE DA_MASTER DA_DEV_OPT DA_PC DA_PORT \
+ DBE_DESTINATION \
+ DG_KDU_JOURNAL \
+ MEAS_EL_DEPENDENT_SVAL \
+ RSDU_ERROR \
+ R_PSETS \
+ OBJ_GENERATOR_PQ \
+ OBJ_MODEL_MEAS OBJ_PARAM OBJ_CONSTRAINT \
+ OBJ_AUX_EL_PIN OBJ_LINK OBJ_LOCATION OBJ_MODEL_PARAM OBJ_PARAM \
+ SYS_APP_SERV_LST SYS_APP_SERVICES SYS_APP_SSYST SYS_APP_INI \
+ SYS_OTYP_MEAS SYS_OTYP_PARAM \
+ SYS_TBLREF SYS_TBLLNK \
+ S_U_RGHT S_G_RGHT S_RIGHTS \
+ SIG_PROP \
+ TAG_DOCS \
+ VP_PARAMS \
+ VSZ_DICT ]
+
+  set TABLE_LIST_1 [ list TAG_DOCS \
+ US_ZONE US_VARS US_SIGN_PROP US_SIGN_GROUP US_SIG US_MSGLOG US_JSWITCH_FILTERS US_MAIL ]
+
+  set TABLE_LIST_3 [ list ]
+  set TABLE_LIST_5 [ list OBJ_MODEL_MEAS OBJ_PARAM ]
+
+#BASE_ID db2 $TABLE_LIST_0
+
+
 
 # -- RSDU_UPDATE
 #RSDU_UPDATE db2
@@ -3745,11 +3745,6 @@ if {$usr!="rsduadmin"} {
 
 # -- AD_DIR
 #AD_DIR db2
-
-# не запускать
-# -- AD_DTYP ------!!!!--ID_TYPE !!!! не запускать.!!!!! sysmon\ssbsd сильно зависят
-# !!!!!####AD_DTYP db2!!!!
-#
 
 # -- AD_LIST
 #AD_LIST db2
