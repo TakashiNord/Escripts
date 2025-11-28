@@ -5,7 +5,7 @@ import urllib2
 
 def main() :
     s='SLAVE'
-    with open('/run/ema/hoststate','r') as f
+    with open('/run/ema/hoststate','r') as f:
         s=f.readline()
     s=s.rstrip()
     if s=='SLAVE':
@@ -18,7 +18,7 @@ def main() :
     try:
         res=urllib2.urlopen(r)
         d=res.read()
-    except urllib2.HTTPError as error
+    except urllib2.HTTPError as error:
         d=error.read()
         ou=os.popen("systemctl restart rsdu-scada-server")
         rp=ou.readlines()
