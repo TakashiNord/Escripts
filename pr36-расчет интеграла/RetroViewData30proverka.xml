@@ -1,0 +1,180 @@
+﻿<?xml version="1.0"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:x="urn:schemas-microsoft-com:office:excel"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:html="http://www.w3.org/TR/REC-html40">
+ <DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
+  <Author>Администратор</Author>
+  <LastAuthor>srvtec1</LastAuthor>
+  <Created>2018-06-25T06:48:37Z</Created>
+  <Version>14.00</Version>
+ </DocumentProperties>
+ <OfficeDocumentSettings xmlns="urn:schemas-microsoft-com:office:office">
+  <AllowPNG/>
+ </OfficeDocumentSettings>
+ <ExcelWorkbook xmlns="urn:schemas-microsoft-com:office:excel">
+  <WindowHeight>9375</WindowHeight>
+  <WindowWidth>9705</WindowWidth>
+  <WindowTopX>270</WindowTopX>
+  <WindowTopY>615</WindowTopY>
+  <ProtectStructure>False</ProtectStructure>
+  <ProtectWindows>False</ProtectWindows>
+ </ExcelWorkbook>
+ <Styles>
+  <Style ss:ID="Default" ss:Name="Normal">
+   <Alignment ss:Vertical="Bottom"/>
+   <Borders/>
+   <Font ss:FontName="Calibri" x:CharSet="204" x:Family="Swiss" ss:Size="11"
+    ss:Color="#000000"/>
+   <Interior/>
+   <NumberFormat/>
+   <Protection/>
+  </Style>
+  <Style ss:ID="s62">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous"/>
+   </Borders>
+   <Font ss:FontName="Arial Cyr" x:CharSet="204" ss:Bold="1"/>
+   <Interior ss:Color="#C0C0C0" ss:Pattern="Solid"/>
+   <NumberFormat/>
+   <Protection/>
+  </Style>
+  <Style ss:ID="s63">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous"/>
+   </Borders>
+   <Font ss:FontName="Arial Cyr" x:CharSet="204"/>
+   <Interior ss:Color="#FFFFFF" ss:Pattern="Solid"/>
+   <NumberFormat/>
+   <Protection/>
+  </Style>
+ </Styles>
+ <Worksheet ss:Name="Данные">
+  <Table ss:ExpandedColumnCount="3" ss:ExpandedRowCount="22" x:FullColumns="1"
+   x:FullRows="1" ss:DefaultRowHeight="15">
+   <Column ss:Width="122.25"/>
+   <Column ss:Width="108"/>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s62"><Data ss:Type="String">Дата - Время</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="String">ВЛ С-6 P Интеграл</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s63"><Data ss:Type="String">25.06.18 - 03:00:00</Data></Cell>
+    <Cell ss:StyleID="s63"/>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s63"><Data ss:Type="String">25.06.18 - 03:30:00</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="Number">2.63</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s63"><Data ss:Type="String">25.06.18 - 04:00:00</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="Number">3.96</Data></Cell>
+    <Cell ss:Formula="=SUM(R[-1]C[-1]:RC[-1])"><Data ss:Type="Number">6.59</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s63"><Data ss:Type="String">25.06.18 - 04:30:00</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="Number">3.76</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s63"><Data ss:Type="String">25.06.18 - 05:00:00</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="Number">8.56</Data></Cell>
+    <Cell ss:Formula="=SUM(R[-1]C[-1]:RC[-1])"><Data ss:Type="Number">12.32</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s63"><Data ss:Type="String">25.06.18 - 05:30:00</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="Number">7.14</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s63"><Data ss:Type="String">25.06.18 - 06:00:00</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="Number">8.69</Data></Cell>
+    <Cell ss:Formula="=SUM(R[-1]C[-1]:RC[-1])"><Data ss:Type="Number">15.829999999999998</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s63"><Data ss:Type="String">25.06.18 - 06:30:00</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="Number">8.9700000000000006</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s63"><Data ss:Type="String">25.06.18 - 07:00:00</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="Number">9.4600000000000009</Data></Cell>
+    <Cell ss:Formula="=SUM(R[-1]C[-1]:RC[-1])"><Data ss:Type="Number">18.43</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s63"><Data ss:Type="String">25.06.18 - 07:30:00</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="Number">4.95</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s63"><Data ss:Type="String">25.06.18 - 08:00:00</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="Number">6.45</Data></Cell>
+    <Cell ss:Formula="=SUM(R[-1]C[-1]:RC[-1])"><Data ss:Type="Number">11.4</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s63"><Data ss:Type="String">25.06.18 - 08:30:00</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="Number">6.06</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s63"><Data ss:Type="String">25.06.18 - 09:00:00</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="Number">9.0500000000000007</Data></Cell>
+    <Cell ss:Formula="=SUM(R[-1]C[-1]:RC[-1])"><Data ss:Type="Number">15.11</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s63"><Data ss:Type="String">25.06.18 - 09:30:00</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="Number">12.85</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s63"><Data ss:Type="String">25.06.18 - 10:00:00</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="Number">9.1300000000000008</Data></Cell>
+    <Cell ss:Formula="=SUM(R[-1]C[-1]:RC[-1])"><Data ss:Type="Number">21.98</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s63"><Data ss:Type="String">25.06.18 - 10:30:00</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="Number">5.64</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s63"><Data ss:Type="String">25.06.18 - 11:00:00</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="Number">7.83</Data></Cell>
+    <Cell ss:Formula="=SUM(R[-1]C[-1]:RC[-1])"><Data ss:Type="Number">13.469999999999999</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s63"><Data ss:Type="String">25.06.18 - 11:30:00</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="Number">9.59</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s63"><Data ss:Type="String">25.06.18 - 12:00:00</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="Number">9.98</Data></Cell>
+    <Cell ss:Formula="=SUM(R[-1]C[-1]:RC[-1])"><Data ss:Type="Number">19.57</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s63"><Data ss:Type="String">25.06.18 - 12:30:00</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="Number">14.67</Data></Cell>
+   </Row>
+   <Row ss:AutoFitHeight="0">
+    <Cell ss:StyleID="s63"><Data ss:Type="String">25.06.18 - 13:00:00</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="Number">13.62</Data></Cell>
+    <Cell ss:Formula="=SUM(R[-1]C[-1]:RC[-1])"><Data ss:Type="Number">28.29</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <Unsynced/>
+   <Selected/>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+     <ActiveRow>2</ActiveRow>
+     <ActiveCol>3</ActiveCol>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+</Workbook>

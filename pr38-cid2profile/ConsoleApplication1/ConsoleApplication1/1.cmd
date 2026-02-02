@@ -1,0 +1,1 @@
+"C:\Users\gal\Documents\Visual Studio 2012\Projects\ConsoleApplication1\Debug\ConsoleApplication1.exe" "C:\Users\gal\Documents\Visual Studio 2012\Projects\ConsoleApplication1\ConsoleApplication1\example.profile" "C:\Users\gal\Documents\Visual Studio 2012\Projects\ConsoleApplication1\ConsoleApplication1\example.json"

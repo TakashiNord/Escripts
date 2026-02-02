@@ -1,0 +1,46 @@
+ Установка Oracle 10g на Linux (RedHat, CentOS, SLES)
+
+Создаем пользователей, нужные группы и директории.
+groupadd oinstall
+groupadd dba
+mkdir -p /u01/app/oracle
+useradd -g oinstall -d /u01/app/oracle -G dba oracle
+passwd oracle
+chown -R oracle:oinstall /u01/app/oracle
+chmod -R 775 /u01/app/oracle
+Теперь нужно поменять некоторые настройки ядра Linux, для этого нужно добавить эти строки в файл /etc/sysctl.conf
+kernel.shmall = 2097152
+kernel.shmmax = 2147483648
+kernel.shmmni = 4096
+kernel.sem = 250 32000 100 128
+fs.file-max = 65536
+net.ipv4.ip_local_port_range = 1024 65000
+И запустить:
+# sysctl -p
+Приступим к установке oracle 10g на linux:
+$ su - oracle
+Далее необходимо зайти в Disk1/ и запустить:
+./runInstall -ignoreSysPrereqs
+Ключ -ignoreSysPrereqs задается, чтобы Ваш инсталлятор работал на любом дистрибутиве linux, по умолчанию он поддерживает RedHat, SuSE, UnitedLinux. После включения опции можно будет ставить и на другие дистрибутивы Linux.
+Но чтобы root.sh не вылетал при попытке запуска нужно найти и закомментировать следующие две строчки:
+$LNS $ID/init.cssd $rc/"$RC_START"init.cssd // { $ECHO $?; exit 1; }
+$LNS $ID/init.cssd $rc/"$RC_KILL"init.cssd // { $ECHO $?; exit 1; }
+Теперь:
+# . /root.sh
+Для настройки автоматической загрузки экземпляра базы данных внесем изменения в файл /etc/oratab, в котором определяются, какие базы будут стартовать автоматически при запуске утилиты dbstart
+В последней строке Вы найдете:
+orcl::N
+Необходимо поменять N на Y. Это значит, что инстанцию Oracle нужно загружать.
+Далее внесем изменения в .bash_profile.
+$ export ORACLE_HOME=
+$ export ORACLE_SID=orcl
+$ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$ORACLE_HOME/lib
+$ export PATH=$PATH:$ORACLE_HOME/bin
+Запуск:
+$ dbstart
+$ lsnrctl start
+Для остановки:
+$ dbshut
+$ lsnrctl stop
+Дальнейшая работа с Oracle возможна с помощью любого клиента (например, SqlPlus)
+

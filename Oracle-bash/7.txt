@@ -1,0 +1,76 @@
+$ORACLE_HOME/bin/sqlplus -s /nolog <<EOF
+SET ECHO OFF;
+SET PAGESIZE 1000;
+SET LINESIZE 1000;
+SET WRAP OFF;
+ 
+CONNECT sys AS sysdba;
+ 
+COL "Tablespace" format a13
+COL "Used MB"    format 99999999
+COL "Free MB"    format 99999999
+COL "Total MB"   format 99999999
+COL "Used %"     format 990.00
+COL "Free %"     format 990.00
+ 
+SELECT fs.tablespace_name "Tablespace",
+      (df.totalspace - fs.freespace) "Used MB",
+       fs.freespace "Free MB",
+       df.totalspace "Total MB",
+       round(100 * ((df.totalspace - fs.freespace) / df.totalspace), 2) "Used %",
+       round(100 * (fs.freespace / df.totalspace), 2) "Free %"
+FROM
+   (SELECT tablespace_name,
+           round(sum(bytes) / 1048576) TotalSpace
+      FROM dba_data_files
+     GROUP BY tablespace_name) df,
+   (SELECT tablespace_name,
+           round(sum(bytes) / 1048576) FreeSpace
+      FROM dba_free_space
+     GROUP BY tablespace_name) fs
+WHERE
+   df.tablespace_name = fs.tablespace_name
+ORDER BY ((df.totalspace - fs.freespace) / df.totalspace) desc;
+ 
+COL FILE_ID format 99999;
+COL FILE_NAME format a50;
+COL "Tablespace" format a15;
+COL autoextensible format a14;
+COL "Size MB" format 9999990.00;
+COL "Used MB" format 9999990.00;
+COL "Used %" format 990.00;
+ 
+SELECT prep.*,
+       round(prep."Used MB" * 100 / prep."Size MB", 2) "Used %"
+  FROM (SELECT -- + rule
+               a.file_id,
+               b.tablespace_name "Tablespace",
+               b.file_name,
+               b.autoextensible,
+               b.bytes / 1024 / 1024 "Size MB",
+               SUM (a.bytes) / 1024 / 1024 "Used MB"
+          FROM dba_extents a, dba_data_files b
+         WHERE a.file_id = b.file_id
+      GROUP BY a.file_id,
+               b.tablespace_name,
+               b.file_name,
+               b.autoextensible,
+               b.bytes / 1024 / 1024) prep
+ORDER BY prep.file_name;
+ 
+COL "Username" format a15;
+COL "Quota" format a10;
+COL "Used Space MB" format 9999990.00;
+COL "Quota Used %" format 990.00;
+ 
+SELECT tablespace_name "Tablespace",
+       username "Username",
+       DECODE (MAX_BYTES, -1, 'Unlimited', TO_CHAR(MAX_BYTES / 1024, '999999999')) "Quota",
+       BYTES / 1024 / 1024 "Used Space MB",
+       DECODE (MAX_BYTES, -1, 0, ROUND ((BYTES / MAX_BYTES) * 100, 2)) "Quota Used %"
+  FROM dba_ts_quotas
+ WHERE USERNAME IN (SELECT username FROM dba_users)
+ ORDER BY tablespace_name;
+ 
+QUIT;
+EOF

@@ -1,0 +1,4 @@
+#shutdown												
+#
+ 
+###shutdown -r now

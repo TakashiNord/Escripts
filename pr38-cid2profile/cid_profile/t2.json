@@ -1,0 +1,2940 @@
+{
+  "SCL": {
+    "version": "2007",
+    "revision": "B",
+    "{http://www.w3.org/2001/XMLSchema-instance}schemaLocation": "http://www.iec.ch/61850/2003/SCL SCL.xsd",
+    "Header": {
+      "id": "",
+      "version": "",
+      "revision": "",
+      "toolID": "OMICRON IEDScout",
+      "nameStructure": "IEDName"
+    },
+    "Communication": {
+      "SubNetwork": {
+        "name": "NONE",
+        "type": "8-MMS",
+        "ConnectedAP": {
+          "iedName": "ENIP2BAY",
+          "apName": "P1",
+          "Address": {
+            "P": [
+              {
+                "type": "IP",
+                "{http://www.w3.org/2001/XMLSchema-instance}type": "tP_IP",
+                "#text": "192.168.8.63"
+              },
+              {
+                "type": "OSI-TSEL",
+                "{http://www.w3.org/2001/XMLSchema-instance}type": "tP_OSI-TSEL",
+                "#text": "0001"
+              },
+              {
+                "type": "OSI-SSEL",
+                "{http://www.w3.org/2001/XMLSchema-instance}type": "tP_OSI-SSEL",
+                "#text": "0001"
+              },
+              {
+                "type": "OSI-PSEL",
+                "{http://www.w3.org/2001/XMLSchema-instance}type": "tP_OSI-PSEL",
+                "#text": "00000001"
+              },
+              {
+                "type": "OSI-AP-Title",
+                "#text": "1,1,1,999,1"
+              },
+              {
+                "type": "OSI-AP-Invoke",
+                "{http://www.w3.org/2001/XMLSchema-instance}type": "tP_OSI-AP-Invoke",
+                "#text": "0"
+              },
+              {
+                "type": "OSI-AE-Qualifier",
+                "{http://www.w3.org/2001/XMLSchema-instance}type": "tP_OSI-AE-Qualifier",
+                "#text": "12"
+              },
+              {
+                "type": "OSI-AE-Invoke",
+                "{http://www.w3.org/2001/XMLSchema-instance}type": "tP_OSI-AE-Invoke",
+                "#text": "0"
+              },
+              {
+                "type": "MMS-Port",
+                "{http://www.w3.org/2001/XMLSchema-instance}type": "tP_MMS-Port",
+                "#text": "102"
+              }
+            ]
+          },
+          "GSE": [
+            {
+              "ldInst": "CTRL",
+              "cbName": "GooseMX",
+              "Address": {
+                "P": [
+                  {
+                    "type": "MAC-Address",
+                    "{http://www.w3.org/2001/XMLSchema-instance}type": "tP_MAC-Address",
+                    "#text": "01-0C-CD-01-00-01"
+                  },
+                  {
+                    "type": "APPID",
+                    "{http://www.w3.org/2001/XMLSchema-instance}type": "tP_APPID",
+                    "#text": "0000"
+                  },
+                  {
+                    "type": "VLAN-ID",
+                    "{http://www.w3.org/2001/XMLSchema-instance}type": "tP_VLAN-ID",
+                    "#text": "000"
+                  },
+                  {
+                    "type": "VLAN-PRIORITY",
+                    "{http://www.w3.org/2001/XMLSchema-instance}type": "tP_VLAN-PRIORITY",
+                    "#text": "0"
+                  }
+                ]
+              }
+            },
+            {
+              "ldInst": "CTRL",
+              "cbName": "GooseST",
+              "Address": {
+                "P": [
+                  {
+                    "type": "MAC-Address",
+                    "{http://www.w3.org/2001/XMLSchema-instance}type": "tP_MAC-Address",
+                    "#text": "01-0C-CD-01-00-01"
+                  },
+                  {
+                    "type": "APPID",
+                    "{http://www.w3.org/2001/XMLSchema-instance}type": "tP_APPID",
+                    "#text": "0000"
+                  },
+                  {
+                    "type": "VLAN-ID",
+                    "{http://www.w3.org/2001/XMLSchema-instance}type": "tP_VLAN-ID",
+                    "#text": "000"
+                  },
+                  {
+                    "type": "VLAN-PRIORITY",
+                    "{http://www.w3.org/2001/XMLSchema-instance}type": "tP_VLAN-PRIORITY",
+                    "#text": "0"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    },
+    "IED": {
+      "name": "ENIP2BAY",
+      "Services": {
+        "DynAssociation": null,
+        "GetDirectory": null,
+        "GetDataObjectDefinition": null,
+        "DataObjectDirectory": null,
+        "GetDataSetValue": null,
+        "SetDataSetValue": null,
+        "DataSetDirectory": null,
+        "ConfDataSet": {
+          "max": "3",
+          "modify": "false"
+        },
+        "DynDataSet": {
+          "max": "42"
+        },
+        "ReadWrite": null,
+        "ConfReportControl": {
+          "max": "4",
+          "bufConf": "false"
+        },
+        "GetCBValues": null,
+        "ReportSettings": {
+          "rptID": "Dyn",
+          "optFields": "Dyn",
+          "bufTime": "Dyn",
+          "trgOps": "Dyn",
+          "intgPd": "Dyn"
+        },
+        "ConfLNs": {
+          "fixPrefix": "true",
+          "fixLnInst": "true"
+        },
+        "GOOSE": {
+          "max": "2"
+        },
+        "GSSE": {
+          "max": "0"
+        },
+        "FileHandling": null
+      },
+      "AccessPoint": {
+        "name": "P1",
+        "Server": {
+          "Authentication": {
+            "none": "true"
+          },
+          "LDevice": {
+            "inst": "CTRL",
+            "LN0": {
+              "lnType": "ENIP2BAYCTRL.LLN0",
+              "lnClass": "LLN0",
+              "inst": "",
+              "DataSet": [
+                {
+                  "name": "MainMX",
+                  "FCDA": [
+                    {
+                      "ldInst": "CTRL",
+                      "prefix": "",
+                      "lnClass": "MMXU",
+                      "lnInst": "1",
+                      "doName": "PPV",
+                      "fc": "MX"
+                    },
+                    {
+                      "ldInst": "CTRL",
+                      "prefix": "",
+                      "lnClass": "MMXU",
+                      "lnInst": "1",
+                      "doName": "A",
+                      "fc": "MX"
+                    },
+                    {
+                      "ldInst": "CTRL",
+                      "prefix": "",
+                      "lnClass": "MMXU",
+                      "lnInst": "1",
+                      "doName": "Hz",
+                      "fc": "MX"
+                    },
+                    {
+                      "ldInst": "CTRL",
+                      "prefix": "",
+                      "lnClass": "MMXU",
+                      "lnInst": "1",
+                      "doName": "W",
+                      "fc": "MX"
+                    },
+                    {
+                      "ldInst": "CTRL",
+                      "prefix": "",
+                      "lnClass": "MMXU",
+                      "lnInst": "1",
+                      "doName": "VAr",
+                      "fc": "MX"
+                    },
+                    {
+                      "ldInst": "CTRL",
+                      "prefix": "",
+                      "lnClass": "MMXU",
+                      "lnInst": "1",
+                      "doName": "VA",
+                      "fc": "MX"
+                    },
+                    {
+                      "ldInst": "CTRL",
+                      "prefix": "",
+                      "lnClass": "MMXU",
+                      "lnInst": "1",
+                      "doName": "PF",
+                      "fc": "MX"
+                    },
+                    {
+                      "ldInst": "CTRL",
+                      "prefix": "",
+                      "lnClass": "MMXU",
+                      "lnInst": "1",
+                      "doName": "TotW",
+                      "fc": "MX"
+                    },
+                    {
+                      "ldInst": "CTRL",
+                      "prefix": "",
+                      "lnClass": "MMXU",
+                      "lnInst": "1",
+                      "doName": "TotVAr",
+                      "fc": "MX"
+                    },
+                    {
+                      "ldInst": "CTRL",
+                      "prefix": "",
+                      "lnClass": "MMXU",
+                      "lnInst": "1",
+                      "doName": "TotVA",
+                      "fc": "MX"
+                    },
+                    {
+                      "ldInst": "CTRL",
+                      "prefix": "",
+                      "lnClass": "MMXU",
+                      "lnInst": "1",
+                      "doName": "TotPF",
+                      "fc": "MX"
+                    },
+                    {
+                      "ldInst": "CTRL",
+                      "prefix": "",
+                      "lnClass": "MMXU",
+                      "lnInst": "1",
+                      "doName": "PhV.phsA",
+                      "fc": "MX"
+                    },
+                    {
+                      "ldInst": "CTRL",
+                      "prefix": "",
+                      "lnClass": "MMXU",
+                      "lnInst": "1",
+                      "doName": "PhV.phsB",
+                      "fc": "MX"
+                    },
+                    {
+                      "ldInst": "CTRL",
+                      "prefix": "",
+                      "lnClass": "MMXU",
+                      "lnInst": "1",
+                      "doName": "PhV.phsC",
+                      "fc": "MX"
+                    },
+                    {
+                      "ldInst": "CTRL",
+                      "prefix": "",
+                      "lnClass": "MMXU",
+                      "lnInst": "1",
+                      "doName": "PhV.net",
+                      "fc": "MX"
+                    }
+                  ]
+                },
+                {
+                  "name": "MainST",
+                  "FCDA": [
+                    {
+                      "ldInst": "CTRL",
+                      "prefix": "",
+                      "lnClass": "GGIO",
+                      "lnInst": "1",
+                      "doName": "Ind9",
+                      "fc": "ST"
+                    },
+                    {
+                      "ldInst": "CTRL",
+                      "prefix": "",
+                      "lnClass": "GGIO",
+                      "lnInst": "1",
+                      "doName": "Ind10",
+                      "fc": "ST"
+                    },
+                    {
+                      "ldInst": "CTRL",
+                      "prefix": "",
+                      "lnClass": "GGIO",
+                      "lnInst": "1",
+                      "doName": "Ind11",
+                      "fc": "ST"
+                    },
+                    {
+                      "ldInst": "CTRL",
+                      "prefix": "",
+                      "lnClass": "GGIO",
+                      "lnInst": "1",
+                      "doName": "Ind12",
+                      "fc": "ST"
+                    },
+                    {
+                      "ldInst": "CTRL",
+                      "prefix": "",
+                      "lnClass": "GGIO",
+                      "lnInst": "1",
+                      "doName": "Ind13",
+                      "fc": "ST"
+                    },
+                    {
+                      "ldInst": "CTRL",
+                      "prefix": "",
+                      "lnClass": "GGIO",
+                      "lnInst": "1",
+                      "doName": "Ind14",
+                      "fc": "ST"
+                    },
+                    {
+                      "ldInst": "CTRL",
+                      "prefix": "",
+                      "lnClass": "GGIO",
+                      "lnInst": "1",
+                      "doName": "Ind15",
+                      "fc": "ST"
+                    },
+                    {
+                      "ldInst": "CTRL",
+                      "prefix": "",
+                      "lnClass": "GGIO",
+                      "lnInst": "1",
+                      "doName": "Ind16",
+                      "fc": "ST"
+                    },
+                    {
+                      "ldInst": "CTRL",
+                      "prefix": "",
+                      "lnClass": "GGIO",
+                      "lnInst": "1",
+                      "doName": "Ind17",
+                      "fc": "ST"
+                    }
+                  ]
+                },
+                {
+                  "name": "Static",
+                  "FCDA": [
+                    {
+                      "ldInst": "CTRL",
+                      "prefix": "",
+                      "lnClass": "GGIO",
+                      "lnInst": "1",
+                      "doName": "Ind7",
+                      "fc": "ST"
+                    },
+                    {
+                      "ldInst": "CTRL",
+                      "prefix": "",
+                      "lnClass": "GGIO",
+                      "lnInst": "1",
+                      "doName": "Ind8",
+                      "fc": "ST"
+                    },
+                    {
+                      "ldInst": "CTRL",
+                      "prefix": "",
+                      "lnClass": "GGIO",
+                      "lnInst": "1",
+                      "doName": "Ind9",
+                      "fc": "ST"
+                    },
+                    {
+                      "ldInst": "CTRL",
+                      "prefix": "",
+                      "lnClass": "GGIO",
+                      "lnInst": "1",
+                      "doName": "Ind10",
+                      "fc": "ST"
+                    },
+                    {
+                      "ldInst": "CTRL",
+                      "prefix": "",
+                      "lnClass": "MMXU",
+                      "lnInst": "1",
+                      "doName": "PPV.phsAB",
+                      "fc": "MX"
+                    }
+                  ]
+                }
+              ],
+              "ReportControl": [
+                {
+                  "name": "urcbMX",
+                  "rptID": "ENIP2BAYCTRL/LLN0$RP$urcbMX01",
+                  "buffered": "false",
+                  "bufTime": "0",
+                  "datSet": "MainMX",
+                  "intgPd": "0",
+                  "confRev": "1",
+                  "TrgOps": {
+                    "dchg": "true",
+                    "qchg": "false",
+                    "dupd": "false",
+                    "period": "false",
+                    "gi": "false"
+                  },
+                  "OptFields": {
+                    "seqNum": "false",
+                    "timeStamp": "false",
+                    "dataSet": "false",
+                    "reasonCode": "false",
+                    "dataRef": "false",
+                    "entryID": "false",
+                    "configRef": "false"
+                  },
+                  "RptEnabled": {
+                    "max": "1"
+                  }
+                },
+                {
+                  "name": "rcb3",
+                  "rptID": "ENIP2BAYCTRL/LLN0$RP$rcb301",
+                  "buffered": "true",
+                  "bufTime": "0",
+                  "datSet": "MainMX",
+                  "intgPd": "0",
+                  "confRev": "1",
+                  "TrgOps": {
+                    "dchg": "false",
+                    "qchg": "false",
+                    "dupd": "false",
+                    "period": "false",
+                    "gi": "false"
+                  },
+                  "OptFields": {
+                    "seqNum": "false",
+                    "timeStamp": "false",
+                    "dataSet": "false",
+                    "reasonCode": "false",
+                    "dataRef": "false",
+                    "entryID": "false",
+                    "configRef": "false"
+                  },
+                  "RptEnabled": {
+                    "max": "1"
+                  }
+                },
+                {
+                  "name": "urcbEMA",
+                  "rptID": "ENIP2BAYCTRL/LLN0$RP$urcbEMA01",
+                  "buffered": "false",
+                  "bufTime": "0",
+                  "datSet": "MainMX",
+                  "intgPd": "0",
+                  "confRev": "1",
+                  "TrgOps": {
+                    "dchg": "false",
+                    "qchg": "false",
+                    "dupd": "false",
+                    "period": "false",
+                    "gi": "false"
+                  },
+                  "OptFields": {
+                    "seqNum": "false",
+                    "timeStamp": "false",
+                    "dataSet": "false",
+                    "reasonCode": "false",
+                    "dataRef": "false",
+                    "entryID": "false",
+                    "configRef": "false"
+                  },
+                  "RptEnabled": {
+                    "max": "1"
+                  }
+                },
+                {
+                  "name": "Static",
+                  "rptID": "ENIP2BAYCTRL/LLN0$RP$Static01",
+                  "buffered": "false",
+                  "bufTime": "0",
+                  "datSet": "Static",
+                  "intgPd": "0",
+                  "confRev": "2",
+                  "TrgOps": {
+                    "dchg": "true",
+                    "qchg": "true",
+                    "dupd": "true",
+                    "period": "true",
+                    "gi": "true"
+                  },
+                  "OptFields": {
+                    "seqNum": "false",
+                    "timeStamp": "false",
+                    "dataSet": "false",
+                    "reasonCode": "false",
+                    "dataRef": "false",
+                    "entryID": "false",
+                    "configRef": "false"
+                  },
+                  "RptEnabled": {
+                    "max": "1"
+                  }
+                }
+              ],
+              "DOI": [
+                {
+                  "name": "Mod",
+                  "DAI": {
+                    "name": "ctlModel",
+                    "Val": "direct-with-normal-security"
+                  }
+                },
+                {
+                  "name": "NamPlt",
+                  "DAI": [
+                    {
+                      "name": "vendor",
+                      "Val": "Energoservice"
+                    },
+                    {
+                      "name": "swRev",
+                      "Val": "2.0.0.6"
+                    },
+                    {
+                      "name": "d",
+                      "Val": "ENIP-2 LN"
+                    },
+                    {
+                      "name": "configRev",
+                      "Val": "1"
+                    },
+                    {
+                      "name": "ldNs",
+                      "Val": "IEC 61850-7-4:2003"
+                    }
+                  ]
+                }
+              ],
+              "GSEControl": [
+                {
+                  "name": "GooseMX",
+                  "type": "GOOSE",
+                  "datSet": "MainMX",
+                  "appID": "ENIP2BAYCTRL/LLN0$GO$GooseMX",
+                  "confRev": "1"
+                },
+                {
+                  "name": "GooseST",
+                  "type": "GOOSE",
+                  "datSet": "MainST",
+                  "appID": "ENIP2BAYCTRL/LLN0$GO$GooseST",
+                  "confRev": "1"
+                }
+              ]
+            },
+            "LN": [
+              {
+                "lnType": "ENIP2BAYCTRL.CILO1",
+                "lnClass": "CILO",
+                "inst": "1",
+                "DOI": [
+                  {
+                    "name": "Mod",
+                    "DAI": {
+                      "name": "ctlModel",
+                      "Val": "status-only"
+                    }
+                  },
+                  {
+                    "name": "NamPlt",
+                    "DAI": [
+                      {
+                        "name": "vendor",
+                        "Val": "Energoservice"
+                      },
+                      {
+                        "name": "swRev",
+                        "Val": "2.0.0.6"
+                      },
+                      {
+                        "name": "d",
+                        "Val": "ENIP-2 LN"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "lnType": "ENIP2BAYCTRL.CILO1",
+                "lnClass": "CILO",
+                "inst": "2",
+                "DOI": [
+                  {
+                    "name": "Mod",
+                    "DAI": {
+                      "name": "ctlModel",
+                      "Val": "status-only"
+                    }
+                  },
+                  {
+                    "name": "NamPlt",
+                    "DAI": [
+                      {
+                        "name": "vendor",
+                        "Val": "Energoservice"
+                      },
+                      {
+                        "name": "swRev",
+                        "Val": "2.0.0.6"
+                      },
+                      {
+                        "name": "d",
+                        "Val": "ENIP-2 LN"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "lnType": "ENIP2BAYCTRL.CILO1",
+                "lnClass": "CILO",
+                "inst": "3",
+                "DOI": [
+                  {
+                    "name": "Mod",
+                    "DAI": {
+                      "name": "ctlModel",
+                      "Val": "status-only"
+                    }
+                  },
+                  {
+                    "name": "NamPlt",
+                    "DAI": [
+                      {
+                        "name": "vendor",
+                        "Val": "Energoservice"
+                      },
+                      {
+                        "name": "swRev",
+                        "Val": "2.0.0.6"
+                      },
+                      {
+                        "name": "d",
+                        "Val": "ENIP-2 LN"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "lnType": "ENIP2BAYCTRL.CILO1",
+                "lnClass": "CILO",
+                "inst": "4",
+                "DOI": [
+                  {
+                    "name": "Mod",
+                    "DAI": {
+                      "name": "ctlModel",
+                      "Val": "status-only"
+                    }
+                  },
+                  {
+                    "name": "NamPlt",
+                    "DAI": [
+                      {
+                        "name": "vendor",
+                        "Val": "Energoservice"
+                      },
+                      {
+                        "name": "swRev",
+                        "Val": "2.0.0.6"
+                      },
+                      {
+                        "name": "d",
+                        "Val": "ENIP-2 LN"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "lnType": "ENIP2BAYCTRL.CSWI1",
+                "lnClass": "CSWI",
+                "inst": "1",
+                "DOI": [
+                  {
+                    "name": "Mod",
+                    "DAI": {
+                      "name": "ctlModel",
+                      "Val": "status-only"
+                    }
+                  },
+                  {
+                    "name": "Pos",
+                    "DAI": {
+                      "name": "ctlModel",
+                      "Val": "sbo-with-enhanced-security"
+                    }
+                  },
+                  {
+                    "name": "NamPlt",
+                    "DAI": [
+                      {
+                        "name": "vendor",
+                        "Val": "Energoservice"
+                      },
+                      {
+                        "name": "swRev",
+                        "Val": "2.0.0.6"
+                      },
+                      {
+                        "name": "d",
+                        "Val": "ENIP-2 LN"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "lnType": "ENIP2BAYCTRL.CSWI1",
+                "lnClass": "CSWI",
+                "inst": "2",
+                "DOI": [
+                  {
+                    "name": "Mod",
+                    "DAI": {
+                      "name": "ctlModel",
+                      "Val": "status-only"
+                    }
+                  },
+                  {
+                    "name": "Pos",
+                    "DAI": {
+                      "name": "ctlModel",
+                      "Val": "sbo-with-enhanced-security"
+                    }
+                  },
+                  {
+                    "name": "NamPlt",
+                    "DAI": [
+                      {
+                        "name": "vendor",
+                        "Val": "Energoservice"
+                      },
+                      {
+                        "name": "swRev",
+                        "Val": "2.0.0.6"
+                      },
+                      {
+                        "name": "d",
+                        "Val": "ENIP-2 LN"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "lnType": "ENIP2BAYCTRL.CSWI1",
+                "lnClass": "CSWI",
+                "inst": "3",
+                "DOI": [
+                  {
+                    "name": "Mod",
+                    "DAI": {
+                      "name": "ctlModel",
+                      "Val": "status-only"
+                    }
+                  },
+                  {
+                    "name": "Pos",
+                    "DAI": {
+                      "name": "ctlModel",
+                      "Val": "sbo-with-enhanced-security"
+                    }
+                  },
+                  {
+                    "name": "NamPlt",
+                    "DAI": [
+                      {
+                        "name": "vendor",
+                        "Val": "Energoservice"
+                      },
+                      {
+                        "name": "swRev",
+                        "Val": "2.0.0.6"
+                      },
+                      {
+                        "name": "d",
+                        "Val": "ENIP-2 LN"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "lnType": "ENIP2BAYCTRL.CSWI1",
+                "lnClass": "CSWI",
+                "inst": "4",
+                "DOI": [
+                  {
+                    "name": "Mod",
+                    "DAI": {
+                      "name": "ctlModel",
+                      "Val": "status-only"
+                    }
+                  },
+                  {
+                    "name": "Pos",
+                    "DAI": {
+                      "name": "ctlModel",
+                      "Val": "sbo-with-enhanced-security"
+                    }
+                  },
+                  {
+                    "name": "NamPlt",
+                    "DAI": [
+                      {
+                        "name": "vendor",
+                        "Val": "Energoservice"
+                      },
+                      {
+                        "name": "swRev",
+                        "Val": "2.0.0.6"
+                      },
+                      {
+                        "name": "d",
+                        "Val": "ENIP-2 LN"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "lnType": "ENIP2BAYCTRL.GGIO1",
+                "lnClass": "GGIO",
+                "inst": "1",
+                "DOI": [
+                  {
+                    "name": "Mod",
+                    "DAI": {
+                      "name": "ctlModel",
+                      "Val": "status-only"
+                    }
+                  },
+                  {
+                    "name": "NamPlt",
+                    "DAI": [
+                      {
+                        "name": "vendor",
+                        "Val": "Energoservice"
+                      },
+                      {
+                        "name": "swRev",
+                        "Val": "2.0.0.6"
+                      },
+                      {
+                        "name": "d",
+                        "Val": "ENIP-2 LN"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "lnType": "ENIP2BAYCTRL.LPHD1",
+                "lnClass": "LPHD",
+                "inst": "1",
+                "DOI": {
+                  "name": "PhyNam",
+                  "DAI": {
+                    "name": "vendor",
+                    "Val": "Energoservice"
+                  }
+                }
+              },
+              {
+                "lnType": "ENIP2BAYCTRL.MMTR1",
+                "lnClass": "MMTR",
+                "inst": "1",
+                "DOI": [
+                  {
+                    "name": "Mod",
+                    "DAI": {
+                      "name": "ctlModel",
+                      "Val": "status-only"
+                    }
+                  },
+                  {
+                    "name": "SupWh",
+                    "DAI": {
+                      "name": "pulsQty",
+                      "Val": "0.4"
+                    }
+                  },
+                  {
+                    "name": "SupVArh",
+                    "DAI": {
+                      "name": "pulsQty",
+                      "Val": "0.4"
+                    }
+                  },
+                  {
+                    "name": "DmdWh",
+                    "DAI": {
+                      "name": "pulsQty",
+                      "Val": "0.4"
+                    }
+                  },
+                  {
+                    "name": "DmdVArh",
+                    "DAI": {
+                      "name": "pulsQty",
+                      "Val": "0.4"
+                    }
+                  },
+                  {
+                    "name": "NamPlt",
+                    "DAI": [
+                      {
+                        "name": "vendor",
+                        "Val": "Energoservice"
+                      },
+                      {
+                        "name": "swRev",
+                        "Val": "2.0.0.6"
+                      },
+                      {
+                        "name": "d",
+                        "Val": "ENIP-2 LN"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "lnType": "ENIP2BAYCTRL.MMXU1",
+                "lnClass": "MMXU",
+                "inst": "1",
+                "DOI": [
+                  {
+                    "name": "Mod",
+                    "DAI": {
+                      "name": "ctlModel",
+                      "Val": "status-only"
+                    }
+                  },
+                  {
+                    "name": "TotW",
+                    "DAI": {
+                      "name": "db",
+                      "Val": "1155"
+                    }
+                  },
+                  {
+                    "name": "TotVAr",
+                    "DAI": {
+                      "name": "db",
+                      "Val": "1155"
+                    }
+                  },
+                  {
+                    "name": "TotVA",
+                    "DAI": {
+                      "name": "db",
+                      "Val": "1155"
+                    }
+                  },
+                  {
+                    "name": "TotPF",
+                    "DAI": {
+                      "name": "db",
+                      "Val": "5000"
+                    }
+                  },
+                  {
+                    "name": "Hz",
+                    "DAI": {
+                      "name": "db",
+                      "Val": "500"
+                    }
+                  },
+                  {
+                    "name": "PPV",
+                    "SDI": [
+                      {
+                        "name": "phsAB",
+                        "DAI": {
+                          "name": "db",
+                          "Val": "333"
+                        }
+                      },
+                      {
+                        "name": "phsBC",
+                        "DAI": {
+                          "name": "db",
+                          "Val": "333"
+                        }
+                      },
+                      {
+                        "name": "phsCA",
+                        "DAI": {
+                          "name": "db",
+                          "Val": "333"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "name": "PhV",
+                    "SDI": [
+                      {
+                        "name": "phsA",
+                        "DAI": {
+                          "name": "db",
+                          "Val": "578"
+                        }
+                      },
+                      {
+                        "name": "phsB",
+                        "DAI": {
+                          "name": "db",
+                          "Val": "578"
+                        }
+                      },
+                      {
+                        "name": "phsC",
+                        "DAI": {
+                          "name": "db",
+                          "Val": "578"
+                        }
+                      },
+                      {
+                        "name": "net",
+                        "DAI": {
+                          "name": "db",
+                          "Val": "578"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "name": "A",
+                    "SDI": [
+                      {
+                        "name": "phsA",
+                        "DAI": {
+                          "name": "db",
+                          "Val": "1000"
+                        }
+                      },
+                      {
+                        "name": "phsB",
+                        "DAI": {
+                          "name": "db",
+                          "Val": "1000"
+                        }
+                      },
+                      {
+                        "name": "phsC",
+                        "DAI": {
+                          "name": "db",
+                          "Val": "1000"
+                        }
+                      },
+                      {
+                        "name": "net",
+                        "DAI": {
+                          "name": "db",
+                          "Val": "1000"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "name": "W",
+                    "SDI": [
+                      {
+                        "name": "phsA",
+                        "DAI": {
+                          "name": "db",
+                          "Val": "1155"
+                        }
+                      },
+                      {
+                        "name": "phsB",
+                        "DAI": {
+                          "name": "db",
+                          "Val": "1155"
+                        }
+                      },
+                      {
+                        "name": "phsC",
+                        "DAI": {
+                          "name": "db",
+                          "Val": "1155"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "name": "VAr",
+                    "SDI": [
+                      {
+                        "name": "phsA",
+                        "DAI": {
+                          "name": "db",
+                          "Val": "1155"
+                        }
+                      },
+                      {
+                        "name": "phsB",
+                        "DAI": {
+                          "name": "db",
+                          "Val": "1155"
+                        }
+                      },
+                      {
+                        "name": "phsC",
+                        "DAI": {
+                          "name": "db",
+                          "Val": "1155"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "name": "VA",
+                    "SDI": [
+                      {
+                        "name": "phsA",
+                        "DAI": {
+                          "name": "db",
+                          "Val": "1155"
+                        }
+                      },
+                      {
+                        "name": "phsB",
+                        "DAI": {
+                          "name": "db",
+                          "Val": "1155"
+                        }
+                      },
+                      {
+                        "name": "phsC",
+                        "DAI": {
+                          "name": "db",
+                          "Val": "1155"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "name": "PF",
+                    "SDI": [
+                      {
+                        "name": "phsA",
+                        "DAI": {
+                          "name": "db",
+                          "Val": "5000"
+                        }
+                      },
+                      {
+                        "name": "phsB",
+                        "DAI": {
+                          "name": "db",
+                          "Val": "5000"
+                        }
+                      },
+                      {
+                        "name": "phsC",
+                        "DAI": {
+                          "name": "db",
+                          "Val": "5000"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "name": "NamPlt",
+                    "DAI": [
+                      {
+                        "name": "vendor",
+                        "Val": "Energoservice"
+                      },
+                      {
+                        "name": "swRev",
+                        "Val": "2.0.0.6"
+                      },
+                      {
+                        "name": "d",
+                        "Val": "ENIP-2 LN"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "lnType": "ENIP2BAYCTRL.MSQI1",
+                "lnClass": "MSQI",
+                "inst": "1",
+                "DOI": [
+                  {
+                    "name": "Mod",
+                    "DAI": {
+                      "name": "ctlModel",
+                      "Val": "status-only"
+                    }
+                  },
+                  {
+                    "name": "SeqA",
+                    "SDI": [
+                      {
+                        "name": "c1",
+                        "DAI": {
+                          "name": "db",
+                          "Val": "500"
+                        }
+                      },
+                      {
+                        "name": "c2",
+                        "DAI": {
+                          "name": "db",
+                          "Val": "500"
+                        }
+                      },
+                      {
+                        "name": "c3",
+                        "DAI": {
+                          "name": "db",
+                          "Val": "500"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "name": "SeqV",
+                    "SDI": [
+                      {
+                        "name": "c1",
+                        "DAI": {
+                          "name": "db",
+                          "Val": "12"
+                        }
+                      },
+                      {
+                        "name": "c2",
+                        "DAI": {
+                          "name": "db",
+                          "Val": "12"
+                        }
+                      },
+                      {
+                        "name": "c3",
+                        "DAI": {
+                          "name": "db",
+                          "Val": "12"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "name": "ImbNgA",
+                    "DAI": {
+                      "name": "db",
+                      "Val": "5000"
+                    }
+                  },
+                  {
+                    "name": "ImbNgV",
+                    "DAI": {
+                      "name": "db",
+                      "Val": "100"
+                    }
+                  },
+                  {
+                    "name": "NamPlt",
+                    "DAI": [
+                      {
+                        "name": "vendor",
+                        "Val": "Energoservice"
+                      },
+                      {
+                        "name": "swRev",
+                        "Val": "2.0.0.6"
+                      },
+                      {
+                        "name": "d",
+                        "Val": "ENIP-2 LN"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "lnType": "ENIP2BAYCTRL.XCBR1",
+                "lnClass": "XCBR",
+                "inst": "1",
+                "DOI": [
+                  {
+                    "name": "Mod",
+                    "DAI": {
+                      "name": "ctlModel",
+                      "Val": "status-only"
+                    }
+                  },
+                  {
+                    "name": "Pos",
+                    "DAI": {
+                      "name": "ctlModel",
+                      "Val": "status-only"
+                    }
+                  },
+                  {
+                    "name": "BlkOpn",
+                    "DAI": {
+                      "name": "ctlModel",
+                      "Val": "direct-with-normal-security"
+                    }
+                  },
+                  {
+                    "name": "BlkCls",
+                    "DAI": {
+                      "name": "ctlModel",
+                      "Val": "direct-with-normal-security"
+                    }
+                  },
+                  {
+                    "name": "NamPlt",
+                    "DAI": [
+                      {
+                        "name": "vendor",
+                        "Val": "Energoservice"
+                      },
+                      {
+                        "name": "swRev",
+                        "Val": "2.0.0.6"
+                      },
+                      {
+                        "name": "d",
+                        "Val": "ENIP-2 LN"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "lnType": "ENIP2BAYCTRL.XSWI1",
+                "lnClass": "XSWI",
+                "inst": "1",
+                "DOI": [
+                  {
+                    "name": "Mod",
+                    "DAI": {
+                      "name": "ctlModel",
+                      "Val": "status-only"
+                    }
+                  },
+                  {
+                    "name": "Pos",
+                    "DAI": {
+                      "name": "ctlModel",
+                      "Val": "status-only"
+                    }
+                  },
+                  {
+                    "name": "BlkOpn",
+                    "DAI": {
+                      "name": "ctlModel",
+                      "Val": "direct-with-normal-security"
+                    }
+                  },
+                  {
+                    "name": "BlkCls",
+                    "DAI": {
+                      "name": "ctlModel",
+                      "Val": "direct-with-normal-security"
+                    }
+                  },
+                  {
+                    "name": "NamPlt",
+                    "DAI": [
+                      {
+                        "name": "vendor",
+                        "Val": "Energoservice"
+                      },
+                      {
+                        "name": "swRev",
+                        "Val": "2.0.0.6"
+                      },
+                      {
+                        "name": "d",
+                        "Val": "ENIP-2 LN"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "lnType": "ENIP2BAYCTRL.XSWI1",
+                "lnClass": "XSWI",
+                "inst": "2",
+                "DOI": [
+                  {
+                    "name": "Mod",
+                    "DAI": {
+                      "name": "ctlModel",
+                      "Val": "status-only"
+                    }
+                  },
+                  {
+                    "name": "Pos",
+                    "DAI": {
+                      "name": "ctlModel",
+                      "Val": "status-only"
+                    }
+                  },
+                  {
+                    "name": "BlkOpn",
+                    "DAI": {
+                      "name": "ctlModel",
+                      "Val": "direct-with-normal-security"
+                    }
+                  },
+                  {
+                    "name": "BlkCls",
+                    "DAI": {
+                      "name": "ctlModel",
+                      "Val": "direct-with-normal-security"
+                    }
+                  },
+                  {
+                    "name": "NamPlt",
+                    "DAI": [
+                      {
+                        "name": "vendor",
+                        "Val": "Energoservice"
+                      },
+                      {
+                        "name": "swRev",
+                        "Val": "2.0.0.6"
+                      },
+                      {
+                        "name": "d",
+                        "Val": "ENIP-2 LN"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "lnType": "ENIP2BAYCTRL.XSWI1",
+                "lnClass": "XSWI",
+                "inst": "3",
+                "DOI": [
+                  {
+                    "name": "Mod",
+                    "DAI": {
+                      "name": "ctlModel",
+                      "Val": "status-only"
+                    }
+                  },
+                  {
+                    "name": "Pos",
+                    "DAI": {
+                      "name": "ctlModel",
+                      "Val": "status-only"
+                    }
+                  },
+                  {
+                    "name": "BlkOpn",
+                    "DAI": {
+                      "name": "ctlModel",
+                      "Val": "direct-with-normal-security"
+                    }
+                  },
+                  {
+                    "name": "BlkCls",
+                    "DAI": {
+                      "name": "ctlModel",
+                      "Val": "direct-with-normal-security"
+                    }
+                  },
+                  {
+                    "name": "NamPlt",
+                    "DAI": [
+                      {
+                        "name": "vendor",
+                        "Val": "Energoservice"
+                      },
+                      {
+                        "name": "swRev",
+                        "Val": "2.0.0.6"
+                      },
+                      {
+                        "name": "d",
+                        "Val": "ENIP-2 LN"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    },
+    "DataTypeTemplates": {
+      "LNodeType": [
+        {
+          "id": "ENIP2BAYCTRL.GGIO1",
+          "lnClass": "GGIO",
+          "DO": [
+            {
+              "name": "Mod",
+              "type": "ENIP2BAYCTRL.CILO1.Mod"
+            },
+            {
+              "name": "Beh",
+              "type": "ENIP2BAYCTRL.LLN0.Beh"
+            },
+            {
+              "name": "Health",
+              "type": "ENIP2BAYCTRL.LLN0.Health"
+            },
+            {
+              "name": "Ind1",
+              "type": "ENIP2BAYCTRL.CILO1.EnaOpn"
+            },
+            {
+              "name": "Ind2",
+              "type": "ENIP2BAYCTRL.CILO1.EnaOpn"
+            },
+            {
+              "name": "Ind3",
+              "type": "ENIP2BAYCTRL.CILO1.EnaOpn"
+            },
+            {
+              "name": "Ind4",
+              "type": "ENIP2BAYCTRL.CILO1.EnaOpn"
+            },
+            {
+              "name": "Ind5",
+              "type": "ENIP2BAYCTRL.CILO1.EnaOpn"
+            },
+            {
+              "name": "Ind6",
+              "type": "ENIP2BAYCTRL.CILO1.EnaOpn"
+            },
+            {
+              "name": "Ind7",
+              "type": "ENIP2BAYCTRL.CILO1.EnaOpn"
+            },
+            {
+              "name": "Ind8",
+              "type": "ENIP2BAYCTRL.CILO1.EnaOpn"
+            },
+            {
+              "name": "Ind9",
+              "type": "ENIP2BAYCTRL.CILO1.EnaOpn"
+            },
+            {
+              "name": "Ind10",
+              "type": "ENIP2BAYCTRL.CILO1.EnaOpn"
+            },
+            {
+              "name": "Ind11",
+              "type": "ENIP2BAYCTRL.CILO1.EnaOpn"
+            },
+            {
+              "name": "Ind12",
+              "type": "ENIP2BAYCTRL.CILO1.EnaOpn"
+            },
+            {
+              "name": "Ind13",
+              "type": "ENIP2BAYCTRL.CILO1.EnaOpn"
+            },
+            {
+              "name": "Ind14",
+              "type": "ENIP2BAYCTRL.CILO1.EnaOpn"
+            },
+            {
+              "name": "Ind15",
+              "type": "ENIP2BAYCTRL.CILO1.EnaOpn"
+            },
+            {
+              "name": "Ind16",
+              "type": "ENIP2BAYCTRL.CILO1.EnaOpn"
+            },
+            {
+              "name": "Ind17",
+              "type": "ENIP2BAYCTRL.CILO1.EnaOpn"
+            },
+            {
+              "name": "Ind18",
+              "type": "ENIP2BAYCTRL.CILO1.EnaOpn"
+            },
+            {
+              "name": "Ind19",
+              "type": "ENIP2BAYCTRL.CILO1.EnaOpn"
+            },
+            {
+              "name": "Ind20",
+              "type": "ENIP2BAYCTRL.CILO1.EnaOpn"
+            },
+            {
+              "name": "Ind21",
+              "type": "ENIP2BAYCTRL.CILO1.EnaOpn"
+            },
+            {
+              "name": "Ind22",
+              "type": "ENIP2BAYCTRL.CILO1.EnaOpn"
+            },
+            {
+              "name": "Ind23",
+              "type": "ENIP2BAYCTRL.CILO1.EnaOpn"
+            },
+            {
+              "name": "Ind24",
+              "type": "ENIP2BAYCTRL.CILO1.EnaOpn"
+            },
+            {
+              "name": "Ind25",
+              "type": "ENIP2BAYCTRL.CILO1.EnaOpn"
+            },
+            {
+              "name": "Ind26",
+              "type": "ENIP2BAYCTRL.CILO1.EnaOpn"
+            },
+            {
+              "name": "Ind27",
+              "type": "ENIP2BAYCTRL.CILO1.EnaOpn"
+            },
+            {
+              "name": "Ind28",
+              "type": "ENIP2BAYCTRL.CILO1.EnaOpn"
+            },
+            {
+              "name": "Ind29",
+              "type": "ENIP2BAYCTRL.CILO1.EnaOpn"
+            },
+            {
+              "name": "Ind30",
+              "type": "ENIP2BAYCTRL.CILO1.EnaOpn"
+            },
+            {
+              "name": "Ind31",
+              "type": "ENIP2BAYCTRL.CILO1.EnaOpn"
+            },
+            {
+              "name": "Ind32",
+              "type": "ENIP2BAYCTRL.CILO1.EnaOpn"
+            },
+            {
+              "name": "NamPlt",
+              "type": "ENIP2BAYCTRL.CILO1.NamPlt"
+            }
+          ]
+        },
+        {
+          "id": "ENIP2BAYCTRL.LLN0",
+          "lnClass": "LLN0",
+          "DO": [
+            {
+              "name": "Mod",
+              "type": "ENIP2BAYCTRL.LLN0.Mod"
+            },
+            {
+              "name": "Beh",
+              "type": "ENIP2BAYCTRL.LLN0.Beh"
+            },
+            {
+              "name": "Health",
+              "type": "ENIP2BAYCTRL.LLN0.Health"
+            },
+            {
+              "name": "NamPlt",
+              "type": "ENIP2BAYCTRL.LLN0.NamPlt"
+            }
+          ]
+        },
+        {
+          "id": "ENIP2BAYCTRL.LPHD1",
+          "lnClass": "LPHD",
+          "DO": [
+            {
+              "name": "PhyHealth",
+              "type": "ENIP2BAYCTRL.LPHD1.PhyHealth"
+            },
+            {
+              "name": "Proxy",
+              "type": "ENIP2BAYCTRL.CILO1.EnaOpn"
+            },
+            {
+              "name": "PhyNam",
+              "type": "ENIP2BAYCTRL.LPHD1.PhyNam"
+            }
+          ]
+        },
+        {
+          "id": "ENIP2BAYCTRL.MMTR1",
+          "lnClass": "MMTR",
+          "DO": [
+            {
+              "name": "Mod",
+              "type": "ENIP2BAYCTRL.CILO1.Mod"
+            },
+            {
+              "name": "Beh",
+              "type": "ENIP2BAYCTRL.LLN0.Beh"
+            },
+            {
+              "name": "Health",
+              "type": "ENIP2BAYCTRL.LLN0.Health"
+            },
+            {
+              "name": "SupWh",
+              "type": "ENIP2BAYCTRL.MMTR1.SupWh"
+            },
+            {
+              "name": "SupVArh",
+              "type": "ENIP2BAYCTRL.MMTR1.SupWh"
+            },
+            {
+              "name": "DmdWh",
+              "type": "ENIP2BAYCTRL.MMTR1.SupWh"
+            },
+            {
+              "name": "DmdVArh",
+              "type": "ENIP2BAYCTRL.MMTR1.SupWh"
+            },
+            {
+              "name": "NamPlt",
+              "type": "ENIP2BAYCTRL.CILO1.NamPlt"
+            }
+          ]
+        },
+        {
+          "id": "ENIP2BAYCTRL.MMXU1",
+          "lnClass": "MMXU",
+          "DO": [
+            {
+              "name": "Mod",
+              "type": "ENIP2BAYCTRL.CILO1.Mod"
+            },
+            {
+              "name": "Beh",
+              "type": "ENIP2BAYCTRL.LLN0.Beh"
+            },
+            {
+              "name": "TotW",
+              "type": "ENIP2BAYCTRL.MMXU1.TotW"
+            },
+            {
+              "name": "TotVAr",
+              "type": "ENIP2BAYCTRL.MMXU1.TotW"
+            },
+            {
+              "name": "TotVA",
+              "type": "ENIP2BAYCTRL.MMXU1.TotW"
+            },
+            {
+              "name": "TotPF",
+              "type": "ENIP2BAYCTRL.MMXU1.TotW"
+            },
+            {
+              "name": "Hz",
+              "type": "ENIP2BAYCTRL.MMXU1.TotW"
+            },
+            {
+              "name": "PPV",
+              "type": "ENIP2BAYCTRL.MMXU1.PPV"
+            },
+            {
+              "name": "PhV",
+              "type": "ENIP2BAYCTRL.MMXU1.PhV"
+            },
+            {
+              "name": "A",
+              "type": "ENIP2BAYCTRL.MMXU1.PhV"
+            },
+            {
+              "name": "W",
+              "type": "ENIP2BAYCTRL.MMXU1.W"
+            },
+            {
+              "name": "VAr",
+              "type": "ENIP2BAYCTRL.MMXU1.W"
+            },
+            {
+              "name": "VA",
+              "type": "ENIP2BAYCTRL.MMXU1.W"
+            },
+            {
+              "name": "PF",
+              "type": "ENIP2BAYCTRL.MMXU1.W"
+            },
+            {
+              "name": "Health",
+              "type": "ENIP2BAYCTRL.LLN0.Health"
+            },
+            {
+              "name": "NamPlt",
+              "type": "ENIP2BAYCTRL.CILO1.NamPlt"
+            }
+          ]
+        },
+        {
+          "id": "ENIP2BAYCTRL.MSQI1",
+          "lnClass": "MSQI",
+          "DO": [
+            {
+              "name": "Mod",
+              "type": "ENIP2BAYCTRL.CILO1.Mod"
+            },
+            {
+              "name": "Beh",
+              "type": "ENIP2BAYCTRL.LLN0.Beh"
+            },
+            {
+              "name": "SeqA",
+              "type": "ENIP2BAYCTRL.MSQI1.SeqA"
+            },
+            {
+              "name": "SeqV",
+              "type": "ENIP2BAYCTRL.MSQI1.SeqA"
+            },
+            {
+              "name": "ImbNgA",
+              "type": "ENIP2BAYCTRL.MMXU1.TotW"
+            },
+            {
+              "name": "ImbNgV",
+              "type": "ENIP2BAYCTRL.MMXU1.TotW"
+            },
+            {
+              "name": "Health",
+              "type": "ENIP2BAYCTRL.LLN0.Health"
+            },
+            {
+              "name": "NamPlt",
+              "type": "ENIP2BAYCTRL.CILO1.NamPlt"
+            }
+          ]
+        },
+        {
+          "id": "ENIP2BAYCTRL.XCBR1",
+          "lnClass": "XCBR",
+          "DO": [
+            {
+              "name": "Mod",
+              "type": "ENIP2BAYCTRL.CILO1.Mod"
+            },
+            {
+              "name": "Beh",
+              "type": "ENIP2BAYCTRL.LLN0.Beh"
+            },
+            {
+              "name": "Health",
+              "type": "ENIP2BAYCTRL.LLN0.Health"
+            },
+            {
+              "name": "Loc",
+              "type": "ENIP2BAYCTRL.CILO1.EnaOpn"
+            },
+            {
+              "name": "OpCnt",
+              "type": "ENIP2BAYCTRL.XCBR1.OpCnt"
+            },
+            {
+              "name": "Pos",
+              "type": "ENIP2BAYCTRL.XCBR1.Pos"
+            },
+            {
+              "name": "BlkOpn",
+              "type": "ENIP2BAYCTRL.XCBR1.BlkOpn"
+            },
+            {
+              "name": "BlkCls",
+              "type": "ENIP2BAYCTRL.XCBR1.BlkOpn"
+            },
+            {
+              "name": "CBOpCap",
+              "type": "ENIP2BAYCTRL.XCBR1.CBOpCap"
+            },
+            {
+              "name": "NamPlt",
+              "type": "ENIP2BAYCTRL.CILO1.NamPlt"
+            }
+          ]
+        },
+        {
+          "id": "ENIP2BAYCTRL.XSWI1",
+          "lnClass": "XSWI",
+          "DO": [
+            {
+              "name": "Mod",
+              "type": "ENIP2BAYCTRL.CILO1.Mod"
+            },
+            {
+              "name": "Beh",
+              "type": "ENIP2BAYCTRL.LLN0.Beh"
+            },
+            {
+              "name": "Health",
+              "type": "ENIP2BAYCTRL.LLN0.Health"
+            },
+            {
+              "name": "Loc",
+              "type": "ENIP2BAYCTRL.CILO1.EnaOpn"
+            },
+            {
+              "name": "OpCnt",
+              "type": "ENIP2BAYCTRL.XCBR1.OpCnt"
+            },
+            {
+              "name": "Pos",
+              "type": "ENIP2BAYCTRL.XCBR1.Pos"
+            },
+            {
+              "name": "BlkOpn",
+              "type": "ENIP2BAYCTRL.XCBR1.BlkOpn"
+            },
+            {
+              "name": "BlkCls",
+              "type": "ENIP2BAYCTRL.XCBR1.BlkOpn"
+            },
+            {
+              "name": "SwTyp",
+              "type": "ENIP2BAYCTRL.XSWI1.SwTyp"
+            },
+            {
+              "name": "SwOpCap",
+              "type": "ENIP2BAYCTRL.XSWI1.SwOpCap"
+            },
+            {
+              "name": "NamPlt",
+              "type": "ENIP2BAYCTRL.CILO1.NamPlt"
+            }
+          ]
+        },
+        {
+          "id": "ENIP2BAYCTRL.CILO1",
+          "lnClass": "CILO",
+          "DO": [
+            {
+              "name": "Mod",
+              "type": "ENIP2BAYCTRL.CILO1.Mod"
+            },
+            {
+              "name": "Beh",
+              "type": "ENIP2BAYCTRL.LLN0.Beh"
+            },
+            {
+              "name": "Health",
+              "type": "ENIP2BAYCTRL.LLN0.Health"
+            },
+            {
+              "name": "EnaOpn",
+              "type": "ENIP2BAYCTRL.CILO1.EnaOpn"
+            },
+            {
+              "name": "EnaCls",
+              "type": "ENIP2BAYCTRL.CILO1.EnaOpn"
+            },
+            {
+              "name": "NamPlt",
+              "type": "ENIP2BAYCTRL.CILO1.NamPlt"
+            }
+          ]
+        },
+        {
+          "id": "ENIP2BAYCTRL.CSWI1",
+          "lnClass": "CSWI",
+          "DO": [
+            {
+              "name": "Mod",
+              "type": "ENIP2BAYCTRL.CILO1.Mod"
+            },
+            {
+              "name": "Beh",
+              "type": "ENIP2BAYCTRL.LLN0.Beh"
+            },
+            {
+              "name": "Health",
+              "type": "ENIP2BAYCTRL.LLN0.Health"
+            },
+            {
+              "name": "Pos",
+              "type": "ENIP2BAYCTRL.CSWI1.Pos"
+            },
+            {
+              "name": "NamPlt",
+              "type": "ENIP2BAYCTRL.CILO1.NamPlt"
+            }
+          ]
+        }
+      ],
+      "DOType": [
+        {
+          "id": "ENIP2BAYCTRL.MMTR1.SupWh",
+          "cdc": "BCR",
+          "DA": [
+            {
+              "name": "actVal",
+              "fc": "ST",
+              "bType": "INT32"
+            },
+            {
+              "name": "q",
+              "fc": "ST",
+              "bType": "Quality"
+            },
+            {
+              "name": "t",
+              "fc": "ST",
+              "bType": "Timestamp"
+            },
+            {
+              "name": "pulsQty",
+              "fc": "CF",
+              "bType": "FLOAT32"
+            }
+          ]
+        },
+        {
+          "id": "ENIP2BAYCTRL.MMXU1.PPV.phsAB",
+          "cdc": "CMV",
+          "DA": [
+            {
+              "name": "cVal",
+              "fc": "MX",
+              "bType": "Struct",
+              "type": "ENIP2BAYCTRL.MMXU1.PPV.phsAB.cVal"
+            },
+            {
+              "name": "q",
+              "fc": "MX",
+              "bType": "Quality"
+            },
+            {
+              "name": "t",
+              "fc": "MX",
+              "bType": "Timestamp"
+            },
+            {
+              "name": "db",
+              "fc": "CF",
+              "bType": "INT32U"
+            }
+          ]
+        },
+        {
+          "id": "ENIP2BAYCTRL.MMXU1.PPV",
+          "cdc": "DEL",
+          "SDO": [
+            {
+              "name": "phsAB",
+              "type": "ENIP2BAYCTRL.MMXU1.PPV.phsAB"
+            },
+            {
+              "name": "phsBC",
+              "type": "ENIP2BAYCTRL.MMXU1.PPV.phsAB"
+            },
+            {
+              "name": "phsCA",
+              "type": "ENIP2BAYCTRL.MMXU1.PPV.phsAB"
+            }
+          ]
+        },
+        {
+          "id": "ENIP2BAYCTRL.CSWI1.Pos",
+          "cdc": "DPC",
+          "DA": [
+            {
+              "name": "stVal",
+              "fc": "ST",
+              "bType": "Dbpos"
+            },
+            {
+              "name": "q",
+              "fc": "ST",
+              "bType": "Quality"
+            },
+            {
+              "name": "t",
+              "fc": "ST",
+              "bType": "Timestamp"
+            },
+            {
+              "name": "SBOw",
+              "fc": "CO",
+              "bType": "Struct",
+              "type": "ENIP2BAYCTRL.CSWI1.Pos.SBOw"
+            },
+            {
+              "name": "Oper",
+              "fc": "CO",
+              "bType": "Struct",
+              "type": "ENIP2BAYCTRL.CSWI1.Pos.SBOw"
+            },
+            {
+              "name": "Cancel",
+              "fc": "CO",
+              "bType": "Struct",
+              "type": "ENIP2BAYCTRL.CSWI1.Pos.Cancel"
+            },
+            {
+              "name": "ctlModel",
+              "fc": "CF",
+              "bType": "Enum",
+              "type": "ctlModel"
+            }
+          ]
+        },
+        {
+          "id": "ENIP2BAYCTRL.XCBR1.Pos",
+          "cdc": "DPC",
+          "DA": [
+            {
+              "name": "stVal",
+              "fc": "ST",
+              "bType": "Dbpos"
+            },
+            {
+              "name": "q",
+              "fc": "ST",
+              "bType": "Quality"
+            },
+            {
+              "name": "t",
+              "fc": "ST",
+              "bType": "Timestamp"
+            },
+            {
+              "name": "ctlModel",
+              "fc": "CF",
+              "bType": "Enum",
+              "type": "ctlModel"
+            }
+          ]
+        },
+        {
+          "id": "ENIP2BAYCTRL.LPHD1.PhyNam",
+          "cdc": "DPL",
+          "DA": {
+            "name": "vendor",
+            "fc": "DC",
+            "bType": "VisString255"
+          }
+        },
+        {
+          "id": "ENIP2BAYCTRL.LLN0.Mod",
+          "cdc": "INC",
+          "DA": [
+            {
+              "name": "stVal",
+              "fc": "ST",
+              "bType": "Enum",
+              "type": "Mod"
+            },
+            {
+              "name": "q",
+              "fc": "ST",
+              "bType": "Quality"
+            },
+            {
+              "name": "t",
+              "fc": "ST",
+              "bType": "Timestamp"
+            },
+            {
+              "name": "Oper",
+              "fc": "CO",
+              "bType": "Struct",
+              "type": "ENIP2BAYCTRL.LLN0.Mod.Oper"
+            },
+            {
+              "name": "ctlModel",
+              "fc": "CF",
+              "bType": "Enum",
+              "type": "ctlModel"
+            }
+          ]
+        },
+        {
+          "id": "ENIP2BAYCTRL.CILO1.Mod",
+          "cdc": "INC",
+          "DA": [
+            {
+              "name": "stVal",
+              "fc": "ST",
+              "bType": "Enum",
+              "type": "Mod"
+            },
+            {
+              "name": "q",
+              "fc": "ST",
+              "bType": "Quality"
+            },
+            {
+              "name": "t",
+              "fc": "ST",
+              "bType": "Timestamp"
+            },
+            {
+              "name": "ctlModel",
+              "fc": "CF",
+              "bType": "Enum",
+              "type": "ctlModel"
+            }
+          ]
+        },
+        {
+          "id": "ENIP2BAYCTRL.LLN0.Beh",
+          "cdc": "INS",
+          "DA": [
+            {
+              "name": "stVal",
+              "fc": "ST",
+              "bType": "Enum",
+              "type": "Beh"
+            },
+            {
+              "name": "q",
+              "fc": "ST",
+              "bType": "Quality"
+            },
+            {
+              "name": "t",
+              "fc": "ST",
+              "bType": "Timestamp"
+            }
+          ]
+        },
+        {
+          "id": "ENIP2BAYCTRL.LLN0.Health",
+          "cdc": "INS",
+          "DA": [
+            {
+              "name": "stVal",
+              "fc": "ST",
+              "bType": "Enum",
+              "type": "Health"
+            },
+            {
+              "name": "q",
+              "fc": "ST",
+              "bType": "Quality"
+            },
+            {
+              "name": "t",
+              "fc": "ST",
+              "bType": "Timestamp"
+            }
+          ]
+        },
+        {
+          "id": "ENIP2BAYCTRL.LPHD1.PhyHealth",
+          "cdc": "INS",
+          "DA": [
+            {
+              "name": "stVal",
+              "fc": "ST",
+              "bType": "Enum",
+              "type": "Health"
+            },
+            {
+              "name": "q",
+              "fc": "ST",
+              "bType": "Quality"
+            },
+            {
+              "name": "t",
+              "fc": "ST",
+              "bType": "Timestamp"
+            }
+          ]
+        },
+        {
+          "id": "ENIP2BAYCTRL.XCBR1.OpCnt",
+          "cdc": "INS",
+          "DA": [
+            {
+              "name": "stVal",
+              "fc": "ST",
+              "bType": "INT32"
+            },
+            {
+              "name": "q",
+              "fc": "ST",
+              "bType": "Quality"
+            },
+            {
+              "name": "t",
+              "fc": "ST",
+              "bType": "Timestamp"
+            }
+          ]
+        },
+        {
+          "id": "ENIP2BAYCTRL.XCBR1.CBOpCap",
+          "cdc": "INS",
+          "DA": [
+            {
+              "name": "stVal",
+              "fc": "ST",
+              "bType": "Enum",
+              "type": "CBOpCap"
+            },
+            {
+              "name": "q",
+              "fc": "ST",
+              "bType": "Quality"
+            },
+            {
+              "name": "t",
+              "fc": "ST",
+              "bType": "Timestamp"
+            }
+          ]
+        },
+        {
+          "id": "ENIP2BAYCTRL.XSWI1.SwTyp",
+          "cdc": "INS",
+          "DA": [
+            {
+              "name": "stVal",
+              "fc": "ST",
+              "bType": "Enum",
+              "type": "SwTyp"
+            },
+            {
+              "name": "q",
+              "fc": "ST",
+              "bType": "Quality"
+            },
+            {
+              "name": "t",
+              "fc": "ST",
+              "bType": "Timestamp"
+            }
+          ]
+        },
+        {
+          "id": "ENIP2BAYCTRL.XSWI1.SwOpCap",
+          "cdc": "INS",
+          "DA": [
+            {
+              "name": "stVal",
+              "fc": "ST",
+              "bType": "Enum",
+              "type": "SwOpCap"
+            },
+            {
+              "name": "q",
+              "fc": "ST",
+              "bType": "Quality"
+            },
+            {
+              "name": "t",
+              "fc": "ST",
+              "bType": "Timestamp"
+            }
+          ]
+        },
+        {
+          "id": "ENIP2BAYCTRL.LLN0.NamPlt",
+          "cdc": "LPL",
+          "DA": [
+            {
+              "name": "vendor",
+              "fc": "DC",
+              "bType": "VisString255"
+            },
+            {
+              "name": "swRev",
+              "fc": "DC",
+              "bType": "VisString255"
+            },
+            {
+              "name": "d",
+              "fc": "DC",
+              "bType": "VisString255"
+            },
+            {
+              "name": "configRev",
+              "fc": "DC",
+              "bType": "VisString255"
+            },
+            {
+              "name": "ldNs",
+              "fc": "EX",
+              "bType": "VisString255"
+            }
+          ]
+        },
+        {
+          "id": "ENIP2BAYCTRL.CILO1.NamPlt",
+          "cdc": "LPL",
+          "DA": [
+            {
+              "name": "vendor",
+              "fc": "DC",
+              "bType": "VisString255"
+            },
+            {
+              "name": "swRev",
+              "fc": "DC",
+              "bType": "VisString255"
+            },
+            {
+              "name": "d",
+              "fc": "DC",
+              "bType": "VisString255"
+            }
+          ]
+        },
+        {
+          "id": "ENIP2BAYCTRL.MMXU1.TotW",
+          "cdc": "MV",
+          "DA": [
+            {
+              "name": "mag",
+              "fc": "MX",
+              "bType": "Struct",
+              "type": "ENIP2BAYCTRL.MMXU1.TotW.mag"
+            },
+            {
+              "name": "q",
+              "fc": "MX",
+              "bType": "Quality"
+            },
+            {
+              "name": "t",
+              "fc": "MX",
+              "bType": "Timestamp"
+            },
+            {
+              "name": "db",
+              "fc": "CF",
+              "bType": "INT32U"
+            }
+          ]
+        },
+        {
+          "id": "ENIP2BAYCTRL.MSQI1.SeqA",
+          "cdc": "SEQ",
+          "SDO": [
+            {
+              "name": "c1",
+              "type": "ENIP2BAYCTRL.MMXU1.PPV.phsAB"
+            },
+            {
+              "name": "c2",
+              "type": "ENIP2BAYCTRL.MMXU1.PPV.phsAB"
+            },
+            {
+              "name": "c3",
+              "type": "ENIP2BAYCTRL.MMXU1.PPV.phsAB"
+            }
+          ],
+          "DA": {
+            "name": "seqT",
+            "fc": "MX",
+            "bType": "Enum",
+            "type": "seqT"
+          }
+        },
+        {
+          "id": "ENIP2BAYCTRL.XCBR1.BlkOpn",
+          "cdc": "SPC",
+          "DA": [
+            {
+              "name": "stVal",
+              "fc": "ST",
+              "bType": "BOOLEAN"
+            },
+            {
+              "name": "q",
+              "fc": "ST",
+              "bType": "Quality"
+            },
+            {
+              "name": "t",
+              "fc": "ST",
+              "bType": "Timestamp"
+            },
+            {
+              "name": "Oper",
+              "fc": "CO",
+              "bType": "Struct",
+              "type": "ENIP2BAYCTRL.CSWI1.Pos.SBOw"
+            },
+            {
+              "name": "ctlModel",
+              "fc": "CF",
+              "bType": "Enum",
+              "type": "ctlModel"
+            }
+          ]
+        },
+        {
+          "id": "ENIP2BAYCTRL.CILO1.EnaOpn",
+          "cdc": "SPS",
+          "DA": [
+            {
+              "name": "stVal",
+              "fc": "ST",
+              "bType": "BOOLEAN"
+            },
+            {
+              "name": "q",
+              "fc": "ST",
+              "bType": "Quality"
+            },
+            {
+              "name": "t",
+              "fc": "ST",
+              "bType": "Timestamp"
+            }
+          ]
+        },
+        {
+          "id": "ENIP2BAYCTRL.MMXU1.PhV",
+          "cdc": "WYE",
+          "SDO": [
+            {
+              "name": "phsA",
+              "type": "ENIP2BAYCTRL.MMXU1.PPV.phsAB"
+            },
+            {
+              "name": "phsB",
+              "type": "ENIP2BAYCTRL.MMXU1.PPV.phsAB"
+            },
+            {
+              "name": "phsC",
+              "type": "ENIP2BAYCTRL.MMXU1.PPV.phsAB"
+            },
+            {
+              "name": "net",
+              "type": "ENIP2BAYCTRL.MMXU1.PPV.phsAB"
+            }
+          ]
+        },
+        {
+          "id": "ENIP2BAYCTRL.MMXU1.W",
+          "cdc": "WYE",
+          "SDO": [
+            {
+              "name": "phsA",
+              "type": "ENIP2BAYCTRL.MMXU1.PPV.phsAB"
+            },
+            {
+              "name": "phsB",
+              "type": "ENIP2BAYCTRL.MMXU1.PPV.phsAB"
+            },
+            {
+              "name": "phsC",
+              "type": "ENIP2BAYCTRL.MMXU1.PPV.phsAB"
+            }
+          ]
+        }
+      ],
+      "DAType": [
+        {
+          "id": "ENIP2BAYCTRL.MMXU1.TotW.mag",
+          "BDA": {
+            "name": "f",
+            "bType": "FLOAT32"
+          }
+        },
+        {
+          "id": "ENIP2BAYCTRL.LLN0.Mod.Oper.origin",
+          "BDA": [
+            {
+              "name": "orCat",
+              "bType": "Enum",
+              "type": "orCategory"
+            },
+            {
+              "name": "orIdent",
+              "bType": "Octet64"
+            }
+          ]
+        },
+        {
+          "id": "ENIP2BAYCTRL.MMXU1.PPV.phsAB.cVal",
+          "BDA": {
+            "name": "mag",
+            "bType": "Struct",
+            "type": "ENIP2BAYCTRL.MMXU1.TotW.mag"
+          }
+        },
+        {
+          "id": "ENIP2BAYCTRL.CSWI1.Pos.SBOw",
+          "BDA": [
+            {
+              "name": "ctlVal",
+              "bType": "BOOLEAN"
+            },
+            {
+              "name": "origin",
+              "bType": "Struct",
+              "type": "ENIP2BAYCTRL.LLN0.Mod.Oper.origin"
+            },
+            {
+              "name": "ctlNum",
+              "bType": "INT8U"
+            },
+            {
+              "name": "T",
+              "bType": "Timestamp"
+            },
+            {
+              "name": "Test",
+              "bType": "BOOLEAN"
+            },
+            {
+              "name": "Check",
+              "bType": "Check"
+            }
+          ]
+        },
+        {
+          "id": "ENIP2BAYCTRL.CSWI1.Pos.Cancel",
+          "BDA": [
+            {
+              "name": "ctlVal",
+              "bType": "BOOLEAN"
+            },
+            {
+              "name": "origin",
+              "bType": "Struct",
+              "type": "ENIP2BAYCTRL.LLN0.Mod.Oper.origin"
+            },
+            {
+              "name": "ctlNum",
+              "bType": "INT8U"
+            },
+            {
+              "name": "T",
+              "bType": "Timestamp"
+            },
+            {
+              "name": "Test",
+              "bType": "BOOLEAN"
+            }
+          ]
+        },
+        {
+          "id": "ENIP2BAYCTRL.LLN0.Mod.Oper",
+          "BDA": [
+            {
+              "name": "ctlVal",
+              "bType": "Enum",
+              "type": "Mod"
+            },
+            {
+              "name": "origin",
+              "bType": "Struct",
+              "type": "ENIP2BAYCTRL.LLN0.Mod.Oper.origin"
+            },
+            {
+              "name": "ctlNum",
+              "bType": "INT8U"
+            },
+            {
+              "name": "T",
+              "bType": "Timestamp"
+            },
+            {
+              "name": "Test",
+              "bType": "BOOLEAN"
+            },
+            {
+              "name": "Check",
+              "bType": "Check"
+            }
+          ]
+        }
+      ],
+      "EnumType": [
+        {
+          "id": "ctlModel",
+          "EnumVal": [
+            {
+              "ord": "0",
+              "#text": "status-only"
+            },
+            {
+              "ord": "1",
+              "#text": "direct-with-normal-security"
+            },
+            {
+              "ord": "2",
+              "#text": "sbo-with-normal-security"
+            },
+            {
+              "ord": "3",
+              "#text": "direct-with-enhanced-security"
+            },
+            {
+              "ord": "4",
+              "#text": "sbo-with-enhanced-security"
+            }
+          ]
+        },
+        {
+          "id": "orCategory",
+          "EnumVal": [
+            {
+              "ord": "0",
+              "#text": "not-supported"
+            },
+            {
+              "ord": "1",
+              "#text": "bay-control"
+            },
+            {
+              "ord": "2",
+              "#text": "station-control"
+            },
+            {
+              "ord": "3",
+              "#text": "remote-control"
+            },
+            {
+              "ord": "4",
+              "#text": "automatic-bay"
+            },
+            {
+              "ord": "5",
+              "#text": "automatic-station"
+            },
+            {
+              "ord": "6",
+              "#text": "automatic-remote"
+            },
+            {
+              "ord": "7",
+              "#text": "maintenance"
+            },
+            {
+              "ord": "8",
+              "#text": "process"
+            }
+          ]
+        },
+        {
+          "id": "seqT",
+          "EnumVal": [
+            {
+              "ord": "0",
+              "#text": "pos-neg-zero"
+            },
+            {
+              "ord": "1",
+              "#text": "dir-quad-zero"
+            }
+          ]
+        },
+        {
+          "id": "Beh",
+          "EnumVal": [
+            {
+              "ord": "1",
+              "#text": "on"
+            },
+            {
+              "ord": "2",
+              "#text": "blocked"
+            },
+            {
+              "ord": "3",
+              "#text": "test"
+            },
+            {
+              "ord": "4",
+              "#text": "test/blocked"
+            },
+            {
+              "ord": "5",
+              "#text": "off"
+            }
+          ]
+        },
+        {
+          "id": "CBOpCap",
+          "EnumVal": [
+            {
+              "ord": "1",
+              "#text": "None"
+            },
+            {
+              "ord": "2",
+              "#text": "Open"
+            },
+            {
+              "ord": "3",
+              "#text": "Close-Open"
+            },
+            {
+              "ord": "4",
+              "#text": "Open-Close-Open"
+            },
+            {
+              "ord": "5",
+              "#text": "Close-Open-Close-Open"
+            }
+          ]
+        },
+        {
+          "id": "Health",
+          "EnumVal": [
+            {
+              "ord": "1",
+              "#text": "Ok"
+            },
+            {
+              "ord": "2",
+              "#text": "Warning"
+            },
+            {
+              "ord": "3",
+              "#text": "Alarm"
+            }
+          ]
+        },
+        {
+          "id": "Mod",
+          "EnumVal": [
+            {
+              "ord": "1",
+              "#text": "on"
+            },
+            {
+              "ord": "2",
+              "#text": "blocked"
+            },
+            {
+              "ord": "3",
+              "#text": "test"
+            },
+            {
+              "ord": "4",
+              "#text": "test/blocked"
+            },
+            {
+              "ord": "5",
+              "#text": "off"
+            }
+          ]
+        },
+        {
+          "id": "SwOpCap",
+          "EnumVal": [
+            {
+              "ord": "1",
+              "#text": "None"
+            },
+            {
+              "ord": "2",
+              "#text": "Open"
+            },
+            {
+              "ord": "3",
+              "#text": "Close"
+            },
+            {
+              "ord": "4",
+              "#text": "Open and Close"
+            }
+          ]
+        },
+        {
+          "id": "SwTyp",
+          "EnumVal": [
+            {
+              "ord": "1",
+              "#text": "Load Break"
+            },
+            {
+              "ord": "2",
+              "#text": "Disconnector"
+            },
+            {
+              "ord": "3",
+              "#text": "Earthing Switch"
+            },
+            {
+              "ord": "4",
+              "#text": "High Speed Earthing Switch"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

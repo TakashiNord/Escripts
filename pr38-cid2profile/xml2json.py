@@ -60,7 +60,7 @@ def elem_to_internal(elem, strip_ns=1, strip=1):
     if strip_ns:
         elem_tag = strip_tag(elem.tag)
     for key, value in list(elem.attrib.items()):
-        d['' + key] = value
+        d['@' + key] = value
 
     # loop over subelements to merge them
     for subelem in elem:
@@ -111,7 +111,7 @@ def elem2json(elem, options, strip_ns=1, strip=1):
         elem = elem.getroot()
     pretty=1
     if pretty:
-        return json.dumps(elem_to_internal(elem, strip_ns=strip_ns, strip=strip), indent=2)
+        return json.dumps(elem_to_internal(elem, strip_ns=strip_ns, strip=strip), indent=4, separators=(',', ': '))
     else:
         return json.dumps(elem_to_internal(elem, strip_ns=strip_ns, strip=strip))
 
@@ -129,7 +129,7 @@ def main():
     #options={"out":"","strip_text":"0","pretty":"0","strip_ns":"1","strip_nl":"1"}
     options=("","0","0","1","1")
 
-    inputstream = open("e:\\pr38-cid2profile\\cid2profile\\example.cid",encoding ="utf8")
+    inputstream = open("H:\\my\\cid2profile\\ENMV1.iid")
     input = inputstream.read()
 
     strip = 0
@@ -142,7 +142,7 @@ def main():
     out = xml2json(input, options, 1, 1)
 
     #if (options.out):
-    file = open("e:\\pr38-cid2profile\\t.json", 'w')
+    file = open("H:\\t.json", 'w')
     file.write(out)
     file.close()
     #else:

@@ -1,0 +1,33 @@
+ Смена UNDO TABLESPACE
+
+Во-первых, необходимо узнать текущие UNDO параметры:
+
+SQL> show parameter undo;
+
+NAME TYPE VALUE
+------------------------------------ ----------- ------------------------------
+undo_management string AUTO
+undo_retention integer 900
+undo_tablespace string UNDOTBS1
+
+Текущее табличное пространство UNDO в нашем случае UNDOTBS1. Вторым действием создаем табличное пространство ему на смену, выбирая размер и шаг увеличения в зависимости от потребностей базы:
+
+CREATE UNDO TABLESPACE undotbs2
+DATAFILE '/u01/app/oracle/oradata/orcl/undotbs2.dbf'
+SIZE 500M AUTOEXTEND ON NEXT 50M;
+
+Устанавливаем вновь созданное табличное пространство пространством по умолчанию:
+
+ALTER SYSTEM SET UNDO_TABLESPACE=UNDOTBS2 SCOPE=BOTH;
+
+Пытаемся удалить старое табличное пространство:
+
+SQL> DROP TABLESPACE undotbs1 INCLUDING CONTENTS AND DATAFILES
+
+ORA-30013: undo tablespace 'UNDOTBS1' is currently in use
+
+Появившаяся ошибка говорит нам о том, что UNDOTBS1 все еще используется и будет использоваться в течение времени, указанного в параметре UNDO_RETENTION — в нашем случае, 900 секунд, или 15 минут. Выполняем попытку удаления спустя 15 минут:
+
+SQL> DROP TABLESPACE undotbs1 INCLUDING CONTENTS AND DATAFILES;
+
+Tablespace dropped.

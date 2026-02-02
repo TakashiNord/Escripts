@@ -1,0 +1,1044 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Created by admin with OMICRON IEDScout 4.20 licensed to Energetika, Microelectronika, Automatika, LLC-->
+<!--SCL Schema Version 3.1 (2012/10/22)-->
+<SCL version="2007" revision="B" xmlns="http://www.iec.ch/61850/2003/SCL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.iec.ch/61850/2003/SCL SCL.xsd">
+	<Header id="" version="" revision="" toolID="OMICRON IEDScout" nameStructure="IEDName" />
+	<Communication>
+		<SubNetwork name="NONE" type="8-MMS">
+			<ConnectedAP iedName="Demo" apName="P1">
+				<Address>
+					<P type="IP" xsi:type="tP_IP">192.168.20.102</P>
+					<P type="OSI-TSEL" xsi:type="tP_OSI-TSEL">0001</P>
+					<P type="OSI-SSEL" xsi:type="tP_OSI-SSEL">0001</P>
+					<P type="OSI-PSEL" xsi:type="tP_OSI-PSEL">00000001</P>
+					<P type="OSI-AP-Title">1,1,1,999,1</P>
+					<P type="OSI-AP-Invoke" xsi:type="tP_OSI-AP-Invoke">0</P>
+					<P type="OSI-AE-Qualifier" xsi:type="tP_OSI-AE-Qualifier">12</P>
+					<P type="OSI-AE-Invoke" xsi:type="tP_OSI-AE-Invoke">0</P>
+					<P type="MMS-Port" xsi:type="tP_MMS-Port">105</P>
+				</Address>
+				<GSE ldInst="ProtCtrl" cbName="gcb1">
+					<Address>
+						<P type="MAC-Address" xsi:type="tP_MAC-Address">01-0C-CD-01-00-00</P>
+						<P type="APPID" xsi:type="tP_APPID">0001</P>
+						<P type="VLAN-ID" xsi:type="tP_VLAN-ID">000</P>
+						<P type="VLAN-PRIORITY" xsi:type="tP_VLAN-PRIORITY">4</P>
+					</Address>
+				</GSE>
+				<GSE ldInst="ProtCtrl" cbName="gcb2">
+					<Address>
+						<P type="MAC-Address" xsi:type="tP_MAC-Address">01-0C-CD-01-00-01</P>
+						<P type="APPID" xsi:type="tP_APPID">0002</P>
+						<P type="VLAN-ID" xsi:type="tP_VLAN-ID">000</P>
+						<P type="VLAN-PRIORITY" xsi:type="tP_VLAN-PRIORITY">4</P>
+					</Address>
+				</GSE>
+			</ConnectedAP>
+		</SubNetwork>
+	</Communication>
+	<IED name="Demo">
+		<Services>
+			<DynAssociation />
+			<GetDirectory />
+			<GetDataObjectDefinition />
+			<DataObjectDirectory />
+			<GetDataSetValue />
+			<SetDataSetValue />
+			<DataSetDirectory />
+			<ConfDataSet max="7" modify="false" />
+			<DynDataSet max="42" />
+			<ReadWrite />
+			<SettingGroups>
+				<SGEdit />
+				<ConfSG />
+			</SettingGroups>
+			<ConfReportControl max="8" bufConf="false" />
+			<GetCBValues />
+			<ReportSettings rptID="Dyn" optFields="Dyn" bufTime="Dyn" trgOps="Dyn" intgPd="Dyn" />
+			<ConfLNs fixPrefix="true" fixLnInst="true" />
+			<GOOSE max="2" />
+			<GSSE max="0" />
+			<FileHandling />
+		</Services>
+		<AccessPoint name="P1">
+			<Server>
+				<Authentication none="true" />
+				<LDevice inst="Measurement">
+					<LN0 lnType="DemoMeasurement.LLN0" lnClass="LLN0" inst="">
+						<DataSet name="DS1_Measurement">
+							<FCDA ldInst="Measurement" prefix="I3p" lnClass="MHAI" lnInst="1" doName="HA" fc="MX" />
+							<FCDA ldInst="Measurement" prefix="I3p" lnClass="MMXU" lnInst="1" doName="A.phsA" fc="MX" />
+							<FCDA ldInst="Measurement" prefix="I3p" lnClass="MMXU" lnInst="1" doName="A.phsB" fc="MX" />
+							<FCDA ldInst="Measurement" prefix="I3p" lnClass="MMXU" lnInst="1" doName="A.phsC" fc="MX" />
+							<FCDA ldInst="Measurement" prefix="U3p" lnClass="MMXU" lnInst="2" doName="PhV.phsA" fc="MX" />
+							<FCDA ldInst="Measurement" prefix="U3p" lnClass="MMXU" lnInst="2" doName="PhV.phsB" fc="MX" />
+							<FCDA ldInst="Measurement" prefix="U3p" lnClass="MMXU" lnInst="2" doName="PhV.phsC" fc="MX" />
+						</DataSet>
+						<DataSet name="DS2_All">
+							<FCDA ldInst="Measurement" prefix="I3p" lnClass="MMXU" lnInst="1" doName="A" fc="MX" />
+							<FCDA ldInst="Measurement" prefix="U3p" lnClass="MMXU" lnInst="2" doName="PhV" fc="MX" />
+							<FCDA ldInst="ProtCtrl" prefix="Obj1" lnClass="CSWI" lnInst="1" doName="Pos" fc="ST" />
+							<FCDA ldInst="ProtCtrl" prefix="Obj3" lnClass="CSWI" lnInst="2" doName="Pos" fc="ST" />
+						</DataSet>
+						<DataSet name="DSGW_LLN0RPurcb01">
+							<FCDA ldInst="Measurement" prefix="I3p" lnClass="MMXU" lnInst="1" doName="A.phsA" fc="MX" />
+							<FCDA ldInst="Measurement" prefix="I3p" lnClass="MMXU" lnInst="1" doName="A.phsB" fc="MX" />
+						</DataSet>
+						<ReportControl name="urcb" buffered="false" bufTime="1000" datSet="DS1_Measurement" intgPd="0" confRev="1">
+							<TrgOps dchg="true" qchg="true" dupd="false" period="false" gi="true" />
+							<OptFields seqNum="true" timeStamp="true" dataSet="true" reasonCode="true" dataRef="true" entryID="false" configRef="true" />
+							<RptEnabled max="2" />
+						</ReportControl>
+						<ReportControl name="brcb" buffered="true" bufTime="1000" datSet="DS1_Measurement" intgPd="0" confRev="1">
+							<TrgOps dchg="true" qchg="true" dupd="false" period="false" gi="true" />
+							<OptFields seqNum="false" timeStamp="false" dataSet="false" reasonCode="false" dataRef="false" entryID="true" configRef="false" />
+							<RptEnabled max="2" />
+						</ReportControl>
+						<DOI name="Mod">
+							<DAI name="ctlModel">
+								<Val>status-only</Val>
+							</DAI>
+						</DOI>
+						<DOI name="Health">
+							<DAI name="d">
+								<Val>OK</Val>
+							</DAI>
+						</DOI>
+						<DOI name="NamPlt">
+							<DAI name="vendor">
+								<Val>INFO TECH</Val>
+							</DAI>
+							<DAI name="swRev">
+								<Val>1.0</Val>
+							</DAI>
+							<DAI name="d">
+								<Val>Overcurrent protection I&gt;</Val>
+							</DAI>
+							<DAI name="configRev">
+								<Val>1.0</Val>
+							</DAI>
+							<DAI name="ldNs">
+								<Val>IEC61850-7-4: 2003</Val>
+							</DAI>
+						</DOI>
+					</LN0>
+					<LN lnType="DemoMeasurement.I3pMHAI1" prefix="I3p" lnClass="MHAI" inst="1">
+						<DOI name="Mod">
+							<DAI name="ctlModel">
+								<Val>status-only</Val>
+							</DAI>
+						</DOI>
+						<DOI name="HA">
+							<DAI name="numHar">
+								<Val>15</Val>
+							</DAI>
+							<DAI name="numCyc">
+								<Val>1</Val>
+							</DAI>
+							<DAI name="evalTm">
+								<Val>0</Val>
+							</DAI>
+							<DAI name="frequency">
+								<Val>50.0</Val>
+							</DAI>
+						</DOI>
+						<DOI name="NamPlt">
+							<DAI name="vendor">
+								<Val>INFO TECH</Val>
+							</DAI>
+							<DAI name="swRev">
+								<Val>1.0</Val>
+							</DAI>
+							<DAI name="d">
+								<Val>Current harmonics measurement</Val>
+							</DAI>
+						</DOI>
+					</LN>
+					<LN lnType="DemoMeasurement.I3pMMXU1" prefix="I3p" lnClass="MMXU" inst="1">
+						<DOI name="Mod">
+							<DAI name="ctlModel">
+								<Val>status-only</Val>
+							</DAI>
+						</DOI>
+						<DOI name="NamPlt">
+							<DAI name="vendor">
+								<Val>INFO TECH</Val>
+							</DAI>
+							<DAI name="swRev">
+								<Val>1.0</Val>
+							</DAI>
+							<DAI name="d">
+								<Val>Current measurement</Val>
+							</DAI>
+						</DOI>
+						<DOI name="A">
+							<SDI name="phsA">
+								<SDI name="units">
+									<DAI name="SIUnit">
+										<Val>A</Val>
+									</DAI>
+								</SDI>
+								<DAI name="d">
+									<Val>Phase A current</Val>
+								</DAI>
+							</SDI>
+							<SDI name="phsB">
+								<SDI name="units">
+									<DAI name="SIUnit">
+										<Val>A</Val>
+									</DAI>
+								</SDI>
+								<DAI name="d">
+									<Val>Phase B current</Val>
+								</DAI>
+							</SDI>
+							<SDI name="phsC">
+								<SDI name="units">
+									<DAI name="SIUnit">
+										<Val>A</Val>
+									</DAI>
+								</SDI>
+								<DAI name="d">
+									<Val>Phase C current</Val>
+								</DAI>
+							</SDI>
+							<DAI name="d">
+								<Val>3 phase current</Val>
+							</DAI>
+						</DOI>
+					</LN>
+					<LN lnType="DemoMeasurement.LPHD1" lnClass="LPHD" inst="1">
+						<DOI name="PhyNam">
+							<DAI name="vendor">
+								<Val>INFO TECH</Val>
+							</DAI>
+							<DAI name="hwRev">
+								<Val>HW/2008/1</Val>
+							</DAI>
+							<DAI name="swRev">
+								<Val>SW/2008/1</Val>
+							</DAI>
+							<DAI name="serNum">
+								<Val>0001/2008</Val>
+							</DAI>
+						</DOI>
+						<DOI name="PhyHealth">
+							<DAI name="d">
+								<Val>OK</Val>
+							</DAI>
+						</DOI>
+					</LN>
+					<LN lnType="DemoMeasurement.U3pMMXU2" prefix="U3p" lnClass="MMXU" inst="2">
+						<DOI name="Mod">
+							<DAI name="ctlModel">
+								<Val>status-only</Val>
+							</DAI>
+						</DOI>
+						<DOI name="NamPlt">
+							<DAI name="vendor">
+								<Val>INFO TECH</Val>
+							</DAI>
+							<DAI name="swRev">
+								<Val>1.0</Val>
+							</DAI>
+							<DAI name="d">
+								<Val>Voltage measurement</Val>
+							</DAI>
+						</DOI>
+						<DOI name="PhV">
+							<SDI name="phsA">
+								<SDI name="units">
+									<DAI name="SIUnit">
+										<Val>V</Val>
+									</DAI>
+								</SDI>
+								<DAI name="d">
+									<Val>Phase A voltage</Val>
+								</DAI>
+							</SDI>
+							<SDI name="phsB">
+								<SDI name="units">
+									<DAI name="SIUnit">
+										<Val>V</Val>
+									</DAI>
+								</SDI>
+								<DAI name="d">
+									<Val>Phase B voltage</Val>
+								</DAI>
+							</SDI>
+							<SDI name="phsC">
+								<SDI name="units">
+									<DAI name="SIUnit">
+										<Val>V</Val>
+									</DAI>
+								</SDI>
+								<DAI name="d">
+									<Val>Phase C voltage</Val>
+								</DAI>
+							</SDI>
+							<DAI name="d">
+								<Val>3 phase voltage</Val>
+							</DAI>
+						</DOI>
+					</LN>
+				</LDevice>
+				<LDevice inst="ProtCtrl">
+					<LN0 lnType="DemoProtCtrl.LLN0" lnClass="LLN0" inst="">
+						<DataSet name="DS1_Disconnector">
+							<FCDA ldInst="ProtCtrl" prefix="Obj2" lnClass="XSWI" lnInst="1" doName="Pos" fc="ST" />
+						</DataSet>
+						<DataSet name="DS2_Protection">
+							<FCDA ldInst="ProtCtrl" prefix="Obj1" lnClass="CSWI" lnInst="1" doName="Pos" fc="ST" />
+							<FCDA ldInst="ProtCtrl" prefix="Obj3" lnClass="CSWI" lnInst="2" doName="Pos" fc="ST" />
+							<FCDA ldInst="ProtCtrl" prefix="" lnClass="LLN0" doName="Loc" daName="stVal" fc="ST" />
+							<FCDA ldInst="ProtCtrl" prefix="I3Gt" lnClass="PTOC" lnInst="1" doName="Str" fc="ST" />
+							<FCDA ldInst="ProtCtrl" prefix="I3Gt" lnClass="PTOC" lnInst="1" doName="Op" fc="ST" />
+							<FCDA ldInst="ProtCtrl" prefix="I3Gt" lnClass="PTRC" lnInst="1" doName="Tr" fc="ST" />
+							<FCDA ldInst="ProtCtrl" prefix="Obj1" lnClass="XCBR" lnInst="1" doName="Pos" fc="ST" />
+							<FCDA ldInst="ProtCtrl" prefix="Obj3" lnClass="XCBR" lnInst="2" doName="Pos" fc="ST" />
+						</DataSet>
+						<DataSet name="DS3_GOOSE">
+							<FCDA ldInst="ProtCtrl" prefix="I3Gt" lnClass="PTOC" lnInst="1" doName="Op" daName="general" fc="ST" />
+						</DataSet>
+						<DataSet name="DS4_GOOSE">
+							<FCDA ldInst="ProtCtrl" prefix="DI" lnClass="GGIO" lnInst="1" doName="Ind1" daName="stVal" fc="ST" />
+							<FCDA ldInst="ProtCtrl" prefix="DI" lnClass="GGIO" lnInst="1" doName="Ind2" daName="stVal" fc="ST" />
+							<FCDA ldInst="ProtCtrl" prefix="DI" lnClass="GGIO" lnInst="1" doName="Ind3" daName="stVal" fc="ST" />
+							<FCDA ldInst="ProtCtrl" prefix="DI" lnClass="GGIO" lnInst="1" doName="Ind4" daName="stVal" fc="ST" />
+							<FCDA ldInst="ProtCtrl" prefix="DI" lnClass="GGIO" lnInst="1" doName="Ind5" daName="stVal" fc="ST" />
+						</DataSet>
+						<ReportControl name="urcb" buffered="false" bufTime="1000" datSet="DS2_Protection" intgPd="0" confRev="1">
+							<TrgOps dchg="true" qchg="true" dupd="false" period="false" gi="true" />
+							<OptFields seqNum="true" timeStamp="true" dataSet="true" reasonCode="true" dataRef="true" entryID="false" configRef="true" />
+							<RptEnabled max="2" />
+						</ReportControl>
+						<ReportControl name="brcb" buffered="true" bufTime="1000" intgPd="0" confRev="1">
+							<TrgOps dchg="true" qchg="true" dupd="false" period="false" gi="true" />
+							<OptFields seqNum="false" timeStamp="false" dataSet="false" reasonCode="false" dataRef="false" entryID="true" configRef="false" />
+							<RptEnabled max="2" />
+						</ReportControl>
+						<DOI name="Mod">
+							<DAI name="ctlModel">
+								<Val>status-only</Val>
+							</DAI>
+						</DOI>
+						<DOI name="Health">
+							<DAI name="d">
+								<Val>OK</Val>
+							</DAI>
+						</DOI>
+						<DOI name="NamPlt">
+							<DAI name="vendor">
+								<Val>INFO TECH</Val>
+							</DAI>
+							<DAI name="swRev">
+								<Val>1.0</Val>
+							</DAI>
+							<DAI name="d">
+								<Val>Overcurrent protection I&gt;</Val>
+							</DAI>
+							<DAI name="configRev">
+								<Val>1.0</Val>
+							</DAI>
+							<DAI name="ldNs">
+								<Val>IEC61850-7-4: 2003</Val>
+							</DAI>
+						</DOI>
+						<GSEControl name="gcb1" type="GOOSE" datSet="DS3_GOOSE" appID="G1" confRev="1" />
+						<GSEControl name="gcb2" type="GOOSE" datSet="DS4_GOOSE" appID="G2" confRev="1" />
+						<SettingControl numOfSGs="4" actSG="1" />
+					</LN0>
+					<LN lnType="DemoProtCtrl.DIGGIO1" prefix="DI" lnClass="GGIO" inst="1">
+						<DOI name="Mod">
+							<DAI name="ctlModel">
+								<Val>status-only</Val>
+							</DAI>
+						</DOI>
+						<DOI name="NamPlt">
+							<DAI name="vendor">
+								<Val>INFO TECH</Val>
+							</DAI>
+							<DAI name="swRev">
+								<Val>1.0</Val>
+							</DAI>
+							<DAI name="d">
+								<Val>Digital inputs</Val>
+							</DAI>
+						</DOI>
+					</LN>
+					<LN lnType="DemoProtCtrl.I3GtPTOC1" prefix="I3Gt" lnClass="PTOC" inst="1">
+						<DOI name="Mod">
+							<DAI name="ctlModel">
+								<Val>status-only</Val>
+							</DAI>
+						</DOI>
+						<DOI name="TmACrv">
+							<DAI name="setCharact" />
+						</DOI>
+						<DOI name="StrVal">
+							<SDI name="units">
+								<DAI name="SIUnit">
+									<Val>A</Val>
+								</DAI>
+							</SDI>
+							<SDI name="setMag">
+								<DAI name="f" />
+							</SDI>
+						</DOI>
+						<DOI name="NamPlt">
+							<DAI name="vendor">
+								<Val>INFO TECH</Val>
+							</DAI>
+							<DAI name="swRev">
+								<Val>1.0</Val>
+							</DAI>
+							<DAI name="d">
+								<Val>Overcurrent protection I&gt;</Val>
+							</DAI>
+						</DOI>
+					</LN>
+					<LN lnType="DemoProtCtrl.I3GtPTRC1" prefix="I3Gt" lnClass="PTRC" inst="1">
+						<DOI name="Mod">
+							<DAI name="ctlModel">
+								<Val>status-only</Val>
+							</DAI>
+						</DOI>
+						<DOI name="NamPlt">
+							<DAI name="vendor">
+								<Val>INFO TECH</Val>
+							</DAI>
+							<DAI name="swRev">
+								<Val>1.0</Val>
+							</DAI>
+							<DAI name="d">
+								<Val>Trip pulse</Val>
+							</DAI>
+						</DOI>
+					</LN>
+					<LN lnType="DemoMeasurement.LPHD1" lnClass="LPHD" inst="1">
+						<DOI name="PhyNam">
+							<DAI name="vendor">
+								<Val>INFO TECH</Val>
+							</DAI>
+							<DAI name="hwRev">
+								<Val>HW/2008/1</Val>
+							</DAI>
+							<DAI name="swRev">
+								<Val>SW/2008/1</Val>
+							</DAI>
+							<DAI name="serNum">
+								<Val>0001/2008</Val>
+							</DAI>
+						</DOI>
+						<DOI name="PhyHealth">
+							<DAI name="d">
+								<Val>OK</Val>
+							</DAI>
+						</DOI>
+					</LN>
+					<LN lnType="DemoProtCtrl.Obj1CSWI1" prefix="Obj1" lnClass="CSWI" inst="1">
+						<DOI name="Mod">
+							<DAI name="ctlModel">
+								<Val>status-only</Val>
+							</DAI>
+						</DOI>
+						<DOI name="Health">
+							<DAI name="d">
+								<Val></Val>
+							</DAI>
+						</DOI>
+						<DOI name="NamPlt">
+							<DAI name="vendor">
+								<Val>INFO TECH</Val>
+							</DAI>
+							<DAI name="swRev">
+								<Val>1.0</Val>
+							</DAI>
+							<DAI name="d">
+								<Val>Remote control of the circuit breaker</Val>
+							</DAI>
+						</DOI>
+						<DOI name="OpCntRs">
+							<DAI name="ctlModel">
+								<Val>status-only</Val>
+							</DAI>
+						</DOI>
+						<DOI name="Pos">
+							<DAI name="ctlModel">
+								<Val>direct-with-enhanced-security</Val>
+							</DAI>
+						</DOI>
+					</LN>
+					<LN lnType="DemoProtCtrl.Obj1XCBR1" prefix="Obj1" lnClass="XCBR" inst="1">
+						<DOI name="Mod">
+							<DAI name="ctlModel">
+								<Val>status-only</Val>
+							</DAI>
+						</DOI>
+						<DOI name="Pos">
+							<DAI name="ctlModel">
+								<Val>status-only</Val>
+							</DAI>
+						</DOI>
+						<DOI name="BlkOpn">
+							<DAI name="ctlModel">
+								<Val>status-only</Val>
+							</DAI>
+						</DOI>
+						<DOI name="BlkCls">
+							<DAI name="ctlModel">
+								<Val>status-only</Val>
+							</DAI>
+						</DOI>
+						<DOI name="NamPlt">
+							<DAI name="vendor">
+								<Val>INFO TECH</Val>
+							</DAI>
+							<DAI name="swRev">
+								<Val>1.0</Val>
+							</DAI>
+							<DAI name="d">
+								<Val>Circuit breaker</Val>
+							</DAI>
+						</DOI>
+					</LN>
+					<LN lnType="DemoProtCtrl.Obj2XSWI1" prefix="Obj2" lnClass="XSWI" inst="1">
+						<DOI name="Mod">
+							<DAI name="ctlModel">
+								<Val>status-only</Val>
+							</DAI>
+						</DOI>
+						<DOI name="Pos">
+							<DAI name="ctlModel">
+								<Val>status-only</Val>
+							</DAI>
+						</DOI>
+						<DOI name="BlkOpn">
+							<DAI name="ctlModel">
+								<Val>status-only</Val>
+							</DAI>
+						</DOI>
+						<DOI name="BlkCls">
+							<DAI name="ctlModel">
+								<Val>status-only</Val>
+							</DAI>
+						</DOI>
+						<DOI name="NamPlt">
+							<DAI name="vendor">
+								<Val>INFO TECH</Val>
+							</DAI>
+							<DAI name="swRev">
+								<Val>1.0</Val>
+							</DAI>
+							<DAI name="d">
+								<Val>Disconnector</Val>
+							</DAI>
+						</DOI>
+					</LN>
+					<LN lnType="DemoProtCtrl.Obj3CSWI2" prefix="Obj3" lnClass="CSWI" inst="2">
+						<DOI name="Mod">
+							<DAI name="ctlModel">
+								<Val>status-only</Val>
+							</DAI>
+						</DOI>
+						<DOI name="Health">
+							<DAI name="d">
+								<Val></Val>
+							</DAI>
+						</DOI>
+						<DOI name="NamPlt">
+							<DAI name="vendor">
+								<Val>INFO TECH</Val>
+							</DAI>
+							<DAI name="swRev">
+								<Val>1.0</Val>
+							</DAI>
+							<DAI name="d">
+								<Val>Remote control of the circuit breaker (SBO)</Val>
+							</DAI>
+						</DOI>
+						<DOI name="OpCntRs">
+							<DAI name="ctlModel">
+								<Val>status-only</Val>
+							</DAI>
+						</DOI>
+						<DOI name="Pos">
+							<DAI name="ctlModel">
+								<Val>sbo-with-enhanced-security</Val>
+							</DAI>
+						</DOI>
+					</LN>
+					<LN lnType="DemoProtCtrl.Obj1XCBR1" prefix="Obj3" lnClass="XCBR" inst="2">
+						<DOI name="Mod">
+							<DAI name="ctlModel">
+								<Val>status-only</Val>
+							</DAI>
+						</DOI>
+						<DOI name="Pos">
+							<DAI name="ctlModel">
+								<Val>status-only</Val>
+							</DAI>
+						</DOI>
+						<DOI name="BlkOpn">
+							<DAI name="ctlModel">
+								<Val>status-only</Val>
+							</DAI>
+						</DOI>
+						<DOI name="BlkCls">
+							<DAI name="ctlModel">
+								<Val>status-only</Val>
+							</DAI>
+						</DOI>
+						<DOI name="NamPlt">
+							<DAI name="vendor">
+								<Val>INFO TECH</Val>
+							</DAI>
+							<DAI name="swRev">
+								<Val>1.0</Val>
+							</DAI>
+							<DAI name="d">
+								<Val>Circuit breaker 2</Val>
+							</DAI>
+						</DOI>
+					</LN>
+				</LDevice>
+			</Server>
+		</AccessPoint>
+	</IED>
+	<DataTypeTemplates>
+		<LNodeType id="DemoProtCtrl.DIGGIO1" lnClass="GGIO">
+			<DO name="Mod" type="DemoMeasurement.LLN0.Mod" />
+			<DO name="Beh" type="DemoMeasurement.LLN0.Beh" />
+			<DO name="Health" type="DemoMeasurement.I3pMHAI1.Health" />
+			<DO name="Ind1" type="DemoMeasurement.LPHD1.Proxy" />
+			<DO name="Ind2" type="DemoMeasurement.LPHD1.Proxy" />
+			<DO name="Ind3" type="DemoMeasurement.LPHD1.Proxy" />
+			<DO name="Ind4" type="DemoMeasurement.LPHD1.Proxy" />
+			<DO name="Ind5" type="DemoMeasurement.LPHD1.Proxy" />
+			<DO name="NamPlt" type="DemoMeasurement.I3pMHAI1.NamPlt" />
+		</LNodeType>
+		<LNodeType id="DemoMeasurement.LLN0" lnClass="LLN0">
+			<DO name="Mod" type="DemoMeasurement.LLN0.Mod" />
+			<DO name="Beh" type="DemoMeasurement.LLN0.Beh" />
+			<DO name="Health" type="DemoMeasurement.LLN0.Health" />
+			<DO name="NamPlt" type="DemoMeasurement.LLN0.NamPlt" />
+		</LNodeType>
+		<LNodeType id="DemoProtCtrl.LLN0" lnClass="LLN0">
+			<DO name="Mod" type="DemoMeasurement.LLN0.Mod" />
+			<DO name="Beh" type="DemoMeasurement.LLN0.Beh" />
+			<DO name="Health" type="DemoMeasurement.LLN0.Health" />
+			<DO name="Loc" type="DemoMeasurement.LPHD1.Proxy" />
+			<DO name="NamPlt" type="DemoMeasurement.LLN0.NamPlt" />
+		</LNodeType>
+		<LNodeType id="DemoMeasurement.LPHD1" lnClass="LPHD">
+			<DO name="PhyNam" type="DemoMeasurement.LPHD1.PhyNam" />
+			<DO name="PhyHealth" type="DemoMeasurement.LLN0.Health" />
+			<DO name="Proxy" type="DemoMeasurement.LPHD1.Proxy" />
+		</LNodeType>
+		<LNodeType id="DemoMeasurement.I3pMHAI1" lnClass="MHAI">
+			<DO name="Mod" type="DemoMeasurement.LLN0.Mod" />
+			<DO name="Beh" type="DemoMeasurement.LLN0.Beh" />
+			<DO name="HA" type="DemoMeasurement.I3pMHAI1.HA" />
+			<DO name="Health" type="DemoMeasurement.I3pMHAI1.Health" />
+			<DO name="NamPlt" type="DemoMeasurement.I3pMHAI1.NamPlt" />
+		</LNodeType>
+		<LNodeType id="DemoMeasurement.I3pMMXU1" lnClass="MMXU">
+			<DO name="Mod" type="DemoMeasurement.LLN0.Mod" />
+			<DO name="Beh" type="DemoMeasurement.LLN0.Beh" />
+			<DO name="Health" type="DemoMeasurement.I3pMHAI1.Health" />
+			<DO name="NamPlt" type="DemoMeasurement.I3pMHAI1.NamPlt" />
+			<DO name="A" type="DemoMeasurement.I3pMMXU1.A" />
+		</LNodeType>
+		<LNodeType id="DemoMeasurement.U3pMMXU2" lnClass="MMXU">
+			<DO name="Mod" type="DemoMeasurement.LLN0.Mod" />
+			<DO name="Beh" type="DemoMeasurement.LLN0.Beh" />
+			<DO name="Health" type="DemoMeasurement.I3pMHAI1.Health" />
+			<DO name="NamPlt" type="DemoMeasurement.I3pMHAI1.NamPlt" />
+			<DO name="PhV" type="DemoMeasurement.I3pMMXU1.A" />
+		</LNodeType>
+		<LNodeType id="DemoProtCtrl.I3GtPTOC1" lnClass="PTOC">
+			<DO name="Mod" type="DemoMeasurement.LLN0.Mod" />
+			<DO name="Beh" type="DemoMeasurement.LLN0.Beh" />
+			<DO name="Health" type="DemoMeasurement.I3pMHAI1.Health" />
+			<DO name="Str" type="DemoProtCtrl.I3GtPTOC1.Str" />
+			<DO name="Op" type="DemoProtCtrl.I3GtPTOC1.Op" />
+			<DO name="TmACrv" type="DemoProtCtrl.I3GtPTOC1.TmACrv" />
+			<DO name="StrVal" type="DemoProtCtrl.I3GtPTOC1.StrVal" />
+			<DO name="NamPlt" type="DemoMeasurement.I3pMHAI1.NamPlt" />
+		</LNodeType>
+		<LNodeType id="DemoProtCtrl.I3GtPTRC1" lnClass="PTRC">
+			<DO name="Mod" type="DemoMeasurement.LLN0.Mod" />
+			<DO name="Beh" type="DemoMeasurement.LLN0.Beh" />
+			<DO name="Health" type="DemoMeasurement.I3pMHAI1.Health" />
+			<DO name="Tr" type="DemoProtCtrl.I3GtPTOC1.Op" />
+			<DO name="NamPlt" type="DemoMeasurement.I3pMHAI1.NamPlt" />
+		</LNodeType>
+		<LNodeType id="DemoProtCtrl.Obj1XCBR1" lnClass="XCBR">
+			<DO name="Mod" type="DemoMeasurement.LLN0.Mod" />
+			<DO name="Beh" type="DemoMeasurement.LLN0.Beh" />
+			<DO name="Health" type="DemoMeasurement.I3pMHAI1.Health" />
+			<DO name="Loc" type="DemoMeasurement.LPHD1.Proxy" />
+			<DO name="OpCnt" type="DemoProtCtrl.Obj1XCBR1.OpCnt" />
+			<DO name="Pos" type="DemoProtCtrl.Obj1XCBR1.Pos" />
+			<DO name="BlkOpn" type="DemoProtCtrl.Obj1XCBR1.BlkOpn" />
+			<DO name="BlkCls" type="DemoProtCtrl.Obj1XCBR1.BlkOpn" />
+			<DO name="CBOpCap" type="DemoProtCtrl.Obj1XCBR1.CBOpCap" />
+			<DO name="NamPlt" type="DemoMeasurement.I3pMHAI1.NamPlt" />
+		</LNodeType>
+		<LNodeType id="DemoProtCtrl.Obj2XSWI1" lnClass="XSWI">
+			<DO name="Mod" type="DemoMeasurement.LLN0.Mod" />
+			<DO name="Beh" type="DemoMeasurement.LLN0.Beh" />
+			<DO name="Health" type="DemoMeasurement.I3pMHAI1.Health" />
+			<DO name="Loc" type="DemoMeasurement.LPHD1.Proxy" />
+			<DO name="OpCnt" type="DemoProtCtrl.Obj1XCBR1.OpCnt" />
+			<DO name="Pos" type="DemoProtCtrl.Obj1XCBR1.Pos" />
+			<DO name="BlkOpn" type="DemoProtCtrl.Obj1XCBR1.BlkOpn" />
+			<DO name="BlkCls" type="DemoProtCtrl.Obj1XCBR1.BlkOpn" />
+			<DO name="SwTyp" type="DemoProtCtrl.Obj2XSWI1.SwTyp" />
+			<DO name="SwOpCap" type="DemoProtCtrl.Obj2XSWI1.SwOpCap" />
+			<DO name="NamPlt" type="DemoMeasurement.I3pMHAI1.NamPlt" />
+		</LNodeType>
+		<LNodeType id="DemoProtCtrl.Obj1CSWI1" lnClass="CSWI">
+			<DO name="Mod" type="DemoMeasurement.LLN0.Mod" />
+			<DO name="Beh" type="DemoMeasurement.LLN0.Beh" />
+			<DO name="Health" type="DemoMeasurement.LLN0.Health" />
+			<DO name="NamPlt" type="DemoMeasurement.I3pMHAI1.NamPlt" />
+			<DO name="Loc" type="DemoMeasurement.LPHD1.Proxy" />
+			<DO name="OpCntRs" type="DemoProtCtrl.Obj1CSWI1.OpCntRs" />
+			<DO name="Pos" type="DemoProtCtrl.Obj1CSWI1.Pos" />
+		</LNodeType>
+		<LNodeType id="DemoProtCtrl.Obj3CSWI2" lnClass="CSWI">
+			<DO name="Mod" type="DemoMeasurement.LLN0.Mod" />
+			<DO name="Beh" type="DemoMeasurement.LLN0.Beh" />
+			<DO name="Health" type="DemoMeasurement.LLN0.Health" />
+			<DO name="NamPlt" type="DemoMeasurement.I3pMHAI1.NamPlt" />
+			<DO name="Loc" type="DemoMeasurement.LPHD1.Proxy" />
+			<DO name="OpCntRs" type="DemoProtCtrl.Obj1CSWI1.OpCntRs" />
+			<DO name="Pos" type="DemoProtCtrl.Obj3CSWI2.Pos" />
+		</LNodeType>
+		<DOType id="DemoProtCtrl.I3GtPTOC1.Str" cdc="ACD">
+			<DA name="general" fc="ST" bType="BOOLEAN" />
+			<DA name="dirGeneral" fc="ST" bType="Enum" type="dir" />
+			<DA name="q" fc="ST" bType="Quality" />
+			<DA name="t" fc="ST" bType="Timestamp" />
+		</DOType>
+		<DOType id="DemoProtCtrl.I3GtPTOC1.Op" cdc="ACT">
+			<DA name="general" fc="ST" bType="BOOLEAN" />
+			<DA name="q" fc="ST" bType="Quality" />
+			<DA name="t" fc="ST" bType="Timestamp" />
+		</DOType>
+		<DOType id="DemoProtCtrl.I3GtPTOC1.StrVal" cdc="ASG">
+			<DA name="units" fc="CF" bType="Struct" type="DemoMeasurement.I3pMMXU1.A.phsA.units" />
+			<DA name="setMag" fc="SE" bType="Struct" type="DemoProtCtrl.I3GtPTOC1.StrVal.setMag" />
+		</DOType>
+		<DOType id="DemoMeasurement.I3pMMXU1.A.phsA" cdc="CMV">
+			<DA name="cVal" fc="MX" bType="Struct" type="DemoMeasurement.I3pMHAI1.HA.phsAHar(0)" />
+			<DA name="q" fc="MX" bType="Quality" />
+			<DA name="t" fc="MX" bType="Timestamp" />
+			<DA name="units" fc="CF" bType="Struct" type="DemoMeasurement.I3pMMXU1.A.phsA.units" />
+			<DA name="d" fc="DC" bType="VisString255" />
+		</DOType>
+		<DOType id="DemoProtCtrl.I3GtPTOC1.TmACrv" cdc="CURVE">
+			<DA name="setCharact" fc="SE" bType="Enum" type="setCharact" />
+		</DOType>
+		<DOType id="DemoProtCtrl.Obj1CSWI1.Pos" cdc="DPC">
+			<DA name="stVal" fc="ST" bType="Dbpos" />
+			<DA name="q" fc="ST" bType="Quality" />
+			<DA name="t" fc="ST" bType="Timestamp" />
+			<DA name="Oper" fc="CO" bType="Struct" type="DemoProtCtrl.Obj1CSWI1.Pos.Oper" />
+			<DA name="ctlModel" fc="CF" bType="Enum" type="ctlModel" />
+		</DOType>
+		<DOType id="DemoProtCtrl.Obj1XCBR1.Pos" cdc="DPC">
+			<DA name="stVal" fc="ST" bType="Dbpos" />
+			<DA name="q" fc="ST" bType="Quality" />
+			<DA name="t" fc="ST" bType="Timestamp" />
+			<DA name="ctlModel" fc="CF" bType="Enum" type="ctlModel" />
+		</DOType>
+		<DOType id="DemoProtCtrl.Obj3CSWI2.Pos" cdc="DPC">
+			<DA name="stVal" fc="ST" bType="Dbpos" />
+			<DA name="q" fc="ST" bType="Quality" />
+			<DA name="t" fc="ST" bType="Timestamp" />
+			<DA name="SBOw" fc="CO" bType="Struct" type="DemoProtCtrl.Obj1CSWI1.Pos.Oper" />
+			<DA name="Oper" fc="CO" bType="Struct" type="DemoProtCtrl.Obj1CSWI1.Pos.Oper" />
+			<DA name="Cancel" fc="CO" bType="Struct" type="DemoProtCtrl.Obj3CSWI2.Pos.Cancel" />
+			<DA name="ctlModel" fc="CF" bType="Enum" type="ctlModel" />
+		</DOType>
+		<DOType id="DemoMeasurement.LPHD1.PhyNam" cdc="DPL">
+			<DA name="vendor" fc="DC" bType="VisString255" />
+			<DA name="hwRev" fc="DC" bType="VisString255" />
+			<DA name="swRev" fc="DC" bType="VisString255" />
+			<DA name="serNum" fc="DC" bType="VisString255" />
+		</DOType>
+		<DOType id="DemoMeasurement.I3pMHAI1.HA" cdc="HWYE">
+			<DA name="q" fc="MX" bType="Quality" />
+			<DA name="t" fc="MX" bType="Timestamp" />
+			<DA name="phsAHar" fc="MX" bType="Struct" type="DemoMeasurement.I3pMHAI1.HA.phsAHar(0)" count="16" />
+			<DA name="phsBHar" fc="MX" bType="Struct" type="DemoMeasurement.I3pMHAI1.HA.phsAHar(0)" count="16" />
+			<DA name="phsCHar" fc="MX" bType="Struct" type="DemoMeasurement.I3pMHAI1.HA.phsAHar(0)" count="16" />
+			<DA name="numHar" fc="CF" bType="INT16U" />
+			<DA name="numCyc" fc="CF" bType="INT16U" />
+			<DA name="evalTm" fc="CF" bType="INT16U" />
+			<DA name="frequency" fc="CF" bType="FLOAT32" />
+		</DOType>
+		<DOType id="DemoMeasurement.LLN0.Mod" cdc="INC">
+			<DA name="stVal" fc="ST" bType="Enum" type="Mod" />
+			<DA name="q" fc="ST" bType="Quality" />
+			<DA name="t" fc="ST" bType="Timestamp" />
+			<DA name="ctlModel" fc="CF" bType="Enum" type="ctlModel" />
+		</DOType>
+		<DOType id="DemoProtCtrl.Obj1CSWI1.OpCntRs" cdc="INC">
+			<DA name="stVal" fc="ST" bType="INT32" />
+			<DA name="q" fc="ST" bType="Quality" />
+			<DA name="t" fc="ST" bType="Timestamp" />
+			<DA name="ctlModel" fc="CF" bType="Enum" type="ctlModel" />
+		</DOType>
+		<DOType id="DemoMeasurement.LLN0.Beh" cdc="INS">
+			<DA name="stVal" fc="ST" bType="Enum" type="Beh" />
+			<DA name="q" fc="ST" bType="Quality" />
+			<DA name="t" fc="ST" bType="Timestamp" />
+		</DOType>
+		<DOType id="DemoMeasurement.LLN0.Health" cdc="INS">
+			<DA name="stVal" fc="ST" bType="Enum" type="Health" />
+			<DA name="q" fc="ST" bType="Quality" />
+			<DA name="t" fc="ST" bType="Timestamp" />
+			<DA name="d" fc="DC" bType="VisString255" />
+		</DOType>
+		<DOType id="DemoMeasurement.I3pMHAI1.Health" cdc="INS">
+			<DA name="stVal" fc="ST" bType="Enum" type="Health" />
+			<DA name="q" fc="ST" bType="Quality" />
+			<DA name="t" fc="ST" bType="Timestamp" />
+		</DOType>
+		<DOType id="DemoProtCtrl.Obj1XCBR1.OpCnt" cdc="INS">
+			<DA name="stVal" fc="ST" bType="INT32" />
+			<DA name="q" fc="ST" bType="Quality" />
+			<DA name="t" fc="ST" bType="Timestamp" />
+		</DOType>
+		<DOType id="DemoProtCtrl.Obj1XCBR1.CBOpCap" cdc="INS">
+			<DA name="stVal" fc="ST" bType="Enum" type="CBOpCap" />
+			<DA name="q" fc="ST" bType="Quality" />
+			<DA name="t" fc="ST" bType="Timestamp" />
+		</DOType>
+		<DOType id="DemoProtCtrl.Obj2XSWI1.SwTyp" cdc="INS">
+			<DA name="stVal" fc="ST" bType="Enum" type="SwTyp" />
+			<DA name="q" fc="ST" bType="Quality" />
+			<DA name="t" fc="ST" bType="Timestamp" />
+		</DOType>
+		<DOType id="DemoProtCtrl.Obj2XSWI1.SwOpCap" cdc="INS">
+			<DA name="stVal" fc="ST" bType="Enum" type="SwOpCap" />
+			<DA name="q" fc="ST" bType="Quality" />
+			<DA name="t" fc="ST" bType="Timestamp" />
+		</DOType>
+		<DOType id="DemoMeasurement.LLN0.NamPlt" cdc="LPL">
+			<DA name="vendor" fc="DC" bType="VisString255" />
+			<DA name="swRev" fc="DC" bType="VisString255" />
+			<DA name="d" fc="DC" bType="VisString255" />
+			<DA name="configRev" fc="DC" bType="VisString255" />
+			<DA name="ldNs" fc="EX" bType="VisString255" />
+		</DOType>
+		<DOType id="DemoMeasurement.I3pMHAI1.NamPlt" cdc="LPL">
+			<DA name="vendor" fc="DC" bType="VisString255" />
+			<DA name="swRev" fc="DC" bType="VisString255" />
+			<DA name="d" fc="DC" bType="VisString255" />
+		</DOType>
+		<DOType id="DemoProtCtrl.Obj1XCBR1.BlkOpn" cdc="SPC">
+			<DA name="stVal" fc="ST" bType="BOOLEAN" />
+			<DA name="q" fc="ST" bType="Quality" />
+			<DA name="t" fc="ST" bType="Timestamp" />
+			<DA name="ctlModel" fc="CF" bType="Enum" type="ctlModel" />
+		</DOType>
+		<DOType id="DemoMeasurement.LPHD1.Proxy" cdc="SPS">
+			<DA name="stVal" fc="ST" bType="BOOLEAN" />
+			<DA name="q" fc="ST" bType="Quality" />
+			<DA name="t" fc="ST" bType="Timestamp" />
+		</DOType>
+		<DOType id="DemoMeasurement.I3pMMXU1.A" cdc="WYE">
+			<SDO name="phsA" type="DemoMeasurement.I3pMMXU1.A.phsA" />
+			<SDO name="phsB" type="DemoMeasurement.I3pMMXU1.A.phsA" />
+			<SDO name="phsC" type="DemoMeasurement.I3pMMXU1.A.phsA" />
+			<DA name="d" fc="DC" bType="VisString255" />
+		</DOType>
+		<DAType id="DemoMeasurement.I3pMHAI1.HA.phsAHar(0).mag">
+			<BDA name="f" bType="FLOAT32" />
+		</DAType>
+		<DAType id="DemoProtCtrl.I3GtPTOC1.StrVal.setMag">
+			<BDA name="f" bType="FLOAT32" />
+		</DAType>
+		<DAType id="DemoProtCtrl.Obj1CSWI1.Pos.Oper.origin">
+			<BDA name="orCat" bType="Enum" type="orCategory" />
+			<BDA name="orIdent" bType="Octet64" />
+		</DAType>
+		<DAType id="DemoMeasurement.I3pMMXU1.A.phsA.units">
+			<BDA name="SIUnit" bType="Enum" type="SIUnit" />
+		</DAType>
+		<DAType id="DemoMeasurement.I3pMHAI1.HA.phsAHar(0)">
+			<BDA name="mag" bType="Struct" type="DemoMeasurement.I3pMHAI1.HA.phsAHar(0).mag" />
+		</DAType>
+		<DAType id="DemoProtCtrl.Obj1CSWI1.Pos.Oper">
+			<BDA name="ctlVal" bType="BOOLEAN" />
+			<BDA name="origin" bType="Struct" type="DemoProtCtrl.Obj1CSWI1.Pos.Oper.origin" />
+			<BDA name="ctlNum" bType="INT8U" />
+			<BDA name="T" bType="Timestamp" />
+			<BDA name="Test" bType="BOOLEAN" />
+			<BDA name="Check" bType="Check" />
+		</DAType>
+		<DAType id="DemoProtCtrl.Obj3CSWI2.Pos.Cancel">
+			<BDA name="ctlVal" bType="BOOLEAN" />
+			<BDA name="origin" bType="Struct" type="DemoProtCtrl.Obj1CSWI1.Pos.Oper.origin" />
+			<BDA name="ctlNum" bType="INT8U" />
+			<BDA name="T" bType="Timestamp" />
+			<BDA name="Test" bType="BOOLEAN" />
+		</DAType>
+		<EnumType id="ctlModel">
+			<!--Source: IEC 61850-7-3:2003-->
+			<EnumVal ord="0">status-only</EnumVal>
+			<EnumVal ord="1">direct-with-normal-security</EnumVal>
+			<EnumVal ord="2">sbo-with-normal-security</EnumVal>
+			<EnumVal ord="3">direct-with-enhanced-security</EnumVal>
+			<EnumVal ord="4">sbo-with-enhanced-security</EnumVal>
+		</EnumType>
+		<EnumType id="orCategory">
+			<!--Source: IEC 61850-7-3:2003-->
+			<EnumVal ord="0">not-supported</EnumVal>
+			<EnumVal ord="1">bay-control</EnumVal>
+			<EnumVal ord="2">station-control</EnumVal>
+			<EnumVal ord="3">remote-control</EnumVal>
+			<EnumVal ord="4">automatic-bay</EnumVal>
+			<EnumVal ord="5">automatic-station</EnumVal>
+			<EnumVal ord="6">automatic-remote</EnumVal>
+			<EnumVal ord="7">maintenance</EnumVal>
+			<EnumVal ord="8">process</EnumVal>
+		</EnumType>
+		<EnumType id="SIUnit">
+			<!--Source: IEC 61850-7-3:2003-->
+			<EnumVal ord="1"></EnumVal>
+			<EnumVal ord="2">m</EnumVal>
+			<EnumVal ord="3">kg</EnumVal>
+			<EnumVal ord="4">s</EnumVal>
+			<EnumVal ord="5">A</EnumVal>
+			<EnumVal ord="6">K</EnumVal>
+			<EnumVal ord="7">mol</EnumVal>
+			<EnumVal ord="8">cd</EnumVal>
+			<EnumVal ord="9">deg</EnumVal>
+			<EnumVal ord="10">rad</EnumVal>
+			<EnumVal ord="11">sr</EnumVal>
+			<EnumVal ord="21">Gy</EnumVal>
+			<EnumVal ord="22">q</EnumVal>
+			<EnumVal ord="23">°C</EnumVal>
+			<EnumVal ord="24">Sv</EnumVal>
+			<EnumVal ord="25">F</EnumVal>
+			<EnumVal ord="26">C</EnumVal>
+			<EnumVal ord="27">S</EnumVal>
+			<EnumVal ord="28">H</EnumVal>
+			<EnumVal ord="29">V</EnumVal>
+			<EnumVal ord="30">ohm</EnumVal>
+			<EnumVal ord="31">J</EnumVal>
+			<EnumVal ord="32">N</EnumVal>
+			<EnumVal ord="33">Hz</EnumVal>
+			<EnumVal ord="34">lx</EnumVal>
+			<EnumVal ord="35">Lm</EnumVal>
+			<EnumVal ord="36">Wb</EnumVal>
+			<EnumVal ord="37">T</EnumVal>
+			<EnumVal ord="38">W</EnumVal>
+			<EnumVal ord="39">Pa</EnumVal>
+			<EnumVal ord="41">m²</EnumVal>
+			<EnumVal ord="42">m³</EnumVal>
+			<EnumVal ord="43">m/s</EnumVal>
+			<EnumVal ord="44">m/s²</EnumVal>
+			<EnumVal ord="45">m³/s</EnumVal>
+			<EnumVal ord="46">m/m³</EnumVal>
+			<EnumVal ord="47">M</EnumVal>
+			<EnumVal ord="48">kg/m³</EnumVal>
+			<EnumVal ord="49">m²/s</EnumVal>
+			<EnumVal ord="50">W/m K</EnumVal>
+			<EnumVal ord="51">J/K</EnumVal>
+			<EnumVal ord="52">ppm</EnumVal>
+			<EnumVal ord="53">1/s</EnumVal>
+			<EnumVal ord="54">rad/s</EnumVal>
+			<EnumVal ord="61">VA</EnumVal>
+			<EnumVal ord="62">Watts</EnumVal>
+			<EnumVal ord="63">VAr</EnumVal>
+			<EnumVal ord="64">phi</EnumVal>
+			<EnumVal ord="65">cos(phi)</EnumVal>
+			<EnumVal ord="66">Vs</EnumVal>
+			<EnumVal ord="67">V²</EnumVal>
+			<EnumVal ord="68">As</EnumVal>
+			<EnumVal ord="69">A²</EnumVal>
+			<EnumVal ord="70">A²t</EnumVal>
+			<EnumVal ord="71">VAh</EnumVal>
+			<EnumVal ord="72">Wh</EnumVal>
+			<EnumVal ord="73">VArh</EnumVal>
+			<EnumVal ord="74">V/Hz</EnumVal>
+		</EnumType>
+		<EnumType id="dir">
+			<!--Source: IEC 61850-7-3:2003-->
+			<EnumVal ord="0">unknown</EnumVal>
+			<EnumVal ord="1">forward</EnumVal>
+			<EnumVal ord="2">backward</EnumVal>
+			<EnumVal ord="3">both</EnumVal>
+		</EnumType>
+		<EnumType id="setCharact">
+			<!--Source: IEC 61850-7-3:2003-->
+			<EnumVal ord="0"></EnumVal>
+			<EnumVal ord="1">ANSI Extremly Inverse</EnumVal>
+			<EnumVal ord="2">ANSI Very Inverse</EnumVal>
+			<EnumVal ord="3">ANSI Normal Inverse</EnumVal>
+			<EnumVal ord="4">ANSI Moderate Inverse</EnumVal>
+			<EnumVal ord="5">ANSI Definite Time</EnumVal>
+			<EnumVal ord="6">Long-Time Extremely Inverse</EnumVal>
+			<EnumVal ord="7">Long-Time Very Inverse</EnumVal>
+			<EnumVal ord="8">Long-Time Inverse</EnumVal>
+			<EnumVal ord="9">IEC Normal Inverse</EnumVal>
+			<EnumVal ord="10">IEC Very Inverse</EnumVal>
+			<EnumVal ord="11">IEC Inverse</EnumVal>
+			<EnumVal ord="12">IEC Extremely Inverse</EnumVal>
+			<EnumVal ord="13">IEC Short-Time Inverse</EnumVal>
+			<EnumVal ord="14">IEC Long-Time Inverse</EnumVal>
+			<EnumVal ord="15">IEC Definite Time</EnumVal>
+			<EnumVal ord="16">Reserved</EnumVal>
+		</EnumType>
+		<EnumType id="Beh">
+			<!--Source: IEC 61850-7-4:2003-->
+			<EnumVal ord="1">on</EnumVal>
+			<EnumVal ord="2">blocked</EnumVal>
+			<EnumVal ord="3">test</EnumVal>
+			<EnumVal ord="4">test/blocked</EnumVal>
+			<EnumVal ord="5">off</EnumVal>
+		</EnumType>
+		<EnumType id="CBOpCap">
+			<!--Source: IEC 61850-7-4:2003-->
+			<EnumVal ord="1">None</EnumVal>
+			<EnumVal ord="2">Open</EnumVal>
+			<EnumVal ord="3">Close-Open</EnumVal>
+			<EnumVal ord="4">Open-Close-Open</EnumVal>
+			<EnumVal ord="5">Close-Open-Close-Open</EnumVal>
+		</EnumType>
+		<EnumType id="Health">
+			<!--Source: IEC 61850-7-4:2003-->
+			<EnumVal ord="1">Ok</EnumVal>
+			<EnumVal ord="2">Warning</EnumVal>
+			<EnumVal ord="3">Alarm</EnumVal>
+		</EnumType>
+		<EnumType id="Mod">
+			<!--Source: IEC 61850-7-4:2003-->
+			<EnumVal ord="1">on</EnumVal>
+			<EnumVal ord="2">blocked</EnumVal>
+			<EnumVal ord="3">test</EnumVal>
+			<EnumVal ord="4">test/blocked</EnumVal>
+			<EnumVal ord="5">off</EnumVal>
+		</EnumType>
+		<EnumType id="SwOpCap">
+			<!--Source: IEC 61850-7-4:2003-->
+			<EnumVal ord="1">None</EnumVal>
+			<EnumVal ord="2">Open</EnumVal>
+			<EnumVal ord="3">Close</EnumVal>
+			<EnumVal ord="4">Open and Close</EnumVal>
+		</EnumType>
+		<EnumType id="SwTyp">
+			<!--Source: IEC 61850-7-4:2003-->
+			<EnumVal ord="1">Load Break</EnumVal>
+			<EnumVal ord="2">Disconnector</EnumVal>
+			<EnumVal ord="3">Earthing Switch</EnumVal>
+			<EnumVal ord="4">High Speed Earthing Switch</EnumVal>
+		</EnumType>
+	</DataTypeTemplates>
+</SCL>

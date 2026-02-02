@@ -1,0 +1,8 @@
+[hsodbc] 
+Driver = TDS 
+Description = GL_NTEC5 
+Trace = Yes 
+Servername = hsodbc
+Database = GL_NTEC5
+UID = emaloud
+PWD = emapass

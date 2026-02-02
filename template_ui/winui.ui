@@ -1,0 +1,62 @@
+WidGet file, version 1.1, created:  Fri Dec 02 11:36:11  2022
+Widget button#1
+	geometry row 2
+	other type button
+	other master {}
+	configure text ok
+	other pathname button#1
+	other tags {}
+	other level {}
+	other help {}
+	other comments {}
+	geometry column 2
+	other tabbing {}
+	other item_name button#1
+Widget text#1
+	other tags {}
+	other level {}
+	other help {}
+	configure height 1
+	other master {}
+	other pathname text#1
+	geometry sticky nesw
+	other tabbing {}
+	other item_name text#1
+	geometry row 1
+	other type text
+	configure width 1
+	geometry column 2
+	other comments {}
+Widget f
+	other generic_options {button {
+		} canvas {
+		} checkbutton {
+		} entry {
+		} frame {
+		} label {
+		} listbox {
+		} menubutton {
+		} message {
+		} radiobutton {
+		} scale {
+		} scrollbar {
+		} text {
+		}
+	}
+	other panel {}
+	other resize_row {3 0}
+	other type frame
+	other min_row {188 30}
+	other master {}
+	other pathname f
+	other resize_column {0 3 0}
+	other tags {}
+	other level 0
+	configure background #e9e9e9
+	other min_column {30 382 30}
+	other help {}
+	other Colors {black white bisque grey red green blue magenta yellow SystemButtonFace}
+	other comments {}
+	other item_name f
+	other tabbing {}
+
