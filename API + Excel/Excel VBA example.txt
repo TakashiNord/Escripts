@@ -1,0 +1,237 @@
+
+baseURL = Cells(2, 7).Value
+MAPI_Key = Cells(3, 7).Value
+
+
+Date() — возвращает текущую системную дату. Установить ее можно при помощи одноименного оператора, например, так:
+    Date = #5/12/2006#
+Time() — возвращает текущее системное время
+Now() — возвращает дату и время вместе.
+DateAdd() — возможность добавить к дате указанное количество лет, кварталов, месяцев и так далее — вплоть до секунд. Интервалы(год, месяц и т.д.) указываются в текстовом формате. Список допустимых значений:
+«yyyy» Год
+«q» Квартал
+«m» Месяц
+«y» День года
+«d» День
+«w» День недели
+«ww» Неделя
+«h» Час
+«n» Минута
+«s» Секунда
+
+DatePart() — функция возвращает указанную часть даты (например, только год, только месяц или только день недели), на основании заданной даты. Часто применяется для получения номера недели для даты.
+Первый аргумент — период времени. Принимаемые значения те же, что и для функции DateDiff(годы, месяцы, недели и т.д.)
+Второй аргумент — непосредственно дата, часть которой необходимо получить:
+MsgBox "Номер недели года: " & DatePart("ww", Now)
+DateSerial() — возможность создать значение даты, задавая месяц, год и день числовыми значениями:
+MsgBox DateSerial(2012, 6, 7)
+DateValue()— делает то же, что и DateSerial(). Отличия — в формате принимаемых значений. Эта функция в качестве аргумента принимает дату в текстовом формате и преобразует её в формат даты:
+    MsgBox DateValue("07.06.12")
+Аналогичным образом (для времени) работают TimeSerial() и TimeValue()
+
+Day(), Year(), Month(), Weekday(), Hour(), Minute(), Second() — специализированные заменители функции DatePart(), которые возвращают нужную часть даты/времени (которую именно — видно из названия).
+MonthName() — возвращает имя месяца словами по его номеру. Возвращаемое значение зависит от региональных настроек. Если они русские, то вернется русское название месяца.
+Timer() — возвращает количество секунд, прошедших с полуночи.
+
+Dim oRequest As Object
+Set oRequest = CreateObject("WinHttp.WinHttpRequest.5.1")
+oRequest.Open "POST", "http://www.cboden.de/misc/posttest.php"
+oRequest.SetRequestHeader "Content-Typ", "application/x-www-form-urlencoded"
+oRequest.Send "var1=123&anothervar=test"
+MsgBox oRequest.ResponseText
+if you put it into a function then you can use it in you worksheet:
+
+Sub test_internet()
+    addr = "https://superakb.ru/catalogue/varta-sd-77-ach-l-e44_4361/"
+    t = 6
+    Set xmlhttp = CreateObject("WinHttp.WinHttpRequest.5.1")
+    xmlhttp.Open "GET", addr, True
+    xmlhttp.SetRequestHeader "User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:65.0) Gecko/20100101 Firefox/65.0"
+    xmlhttp.Send
+     
+    If Not xmlhttp.WaitForResponse(t) Then
+        MsgBox "timeout", URL: Exit Sub
+    End If
+  
+    txt = xmlhttp.ResponseText
+    With GetObject("New:{1C3B4210-F441-11CE-B9EA-00AA006B1A69}")
+        .SetText txt
+        .PutInClipboard
+    End With
+End Sub
+
+
+Function getCustomHyperlink(ByVal pURL As String) As String
+    Dim oRequest As Object
+    Set oRequest = CreateObject("WinHttp.WinHttpRequest.5.1")
+    oRequest.Open "GET", pURL
+    oRequest.Send
+    getCustomHyperlink = oRequest.ResponseText
+End Function
+
+' Define your credentials and target URL
+    username = "your_username"
+    password = "your_password"
+    targetURL = "https://api.example.com/resource"
+    
+    ' Combine credentials and encode
+    authHeaderValue = "Basic " & Base64Encode(username & ":" & password)
+    
+    ' Initialize the request object
+    Set httpRequest = New MSXML2.XMLHTTP60
+    
+    With httpRequest
+        .Open "GET", targetURL, False
+        ' Set the Authorization header
+        .setRequestHeader "Authorization", authHeaderValue
+        .Send
+
+
+
+
+Sub СМС()
+ 
+Dim xmlhtp As Object
+Dim Txt$, Url$
+ 
+Url = "https://fos.smedservice.ru/efrapi/auth/v1/login"
+ 
+  Set xmlhtp = CreateObject("MSXML2.XMLHTTP")
+  With xmlhtp
+   .Open "POST", Url, False
+   .setRequestHeader "Content-type", "application/json"
+   .setRequestHeader "User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.77 YaBrowser/20.11.0.821 Yowser/2.5 Safari/537.36"
+   .send "{""login"":""*******"",""passwd"":""*******""}"
+    Debug.Print .Status; .statusText
+ 
+Url = "https://fos.smedservice.ru/efrapi/insurance-service/v2/contracts/extract/?startDate=01.01.2021&endDate=29.01.2021&kind="
+     
+   .Open "GET", Url, False
+   .setRequestHeader "Content-type", "application/json"
+   .setRequestHeader "User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.77 YaBrowser/20.11.0.821 Yowser/2.5 Safari/537.36"
+   .send "startDate=01.01.2021&endDate=29.01.2021&kind="
+    Debug.Print .Status; .statusText
+     
+      
+  End With
+ 
+End Sub
+
+
+
+Option Explicit
+
+Sub Test()
+
+    Dim sJSONString As String
+    Dim vJSON
+    Dim sState As String
+    Dim aData()
+    Dim aHeader()
+
+    ' Retrieve JSON content
+    With CreateObject("MSXML2.XMLHTTP")
+        .Open "GET", "https://pastebin.com/raw/hA2UEDXy", True
+        .send
+        Do Until .readyState = 4: DoEvents: Loop
+        sJSONString = .responseText
+    End With
+    ' Parse JSON sample
+    JSON.Parse sJSONString, vJSON, sState
+    If sState = "Error" Then MsgBox "Invalid JSON": End
+    ' Convert JSON to 2D Array
+    JSON.ToArray vJSON("AppointmentList"), aData, aHeader
+    ' Output to worksheet #1
+    Output aHeader, aData, ThisWorkbook.Sheets(1)
+    MsgBox "Completed"
+
+End Sub
+
+Sub Output(aHeader, aData, oDestWorksheet As Worksheet)
+
+    With oDestWorksheet
+        .Activate
+        .Cells.Delete
+        With .Cells(1, 1)
+            .Resize(1, UBound(aHeader) - LBound(aHeader) + 1).Value = aHeader
+            .Offset(1, 0).Resize( _
+                    UBound(aData, 1) - LBound(aData, 1) + 1, _
+                    UBound(aData, 2) - LBound(aData, 2) + 1 _
+                ).Value = aData
+        End With
+        .Columns.AutoFit
+    End With
+
+End Sub
+
+
+
+
+Sub JSONtoCSV()
+Dim JsonText As String
+Dim JsonObject As Object
+Dim FSO As Object
+Dim JsonFile As Object
+Dim key As Variant
+Dim item As Object
+Dim row As Long
+Dim col As Long
+Dim headers As New Collection
+Dim header As Variant
+Dim ws As Worksheet
+
+' Set the worksheet where data will be written
+Set ws = ThisWorkbook.Sheets("Sheet1") ' Change to your sheet name
+
+' Read JSON file
+Set FSO = CreateObject("Scripting.FileSystemObject")
+Set JsonFile = FSO.OpenTextFile("C:\path\to\your\file.json", 1) ' 1 = ForReading
+JsonText = JsonFile.ReadAll
+JsonFile.Close
+
+' Parse JSON
+Set JsonObject = JsonConverter.ParseJson(JsonText)
+
+' Initialize row and column counters
+row = 1
+col = 1
+
+
+' Get headers from the first JSON object
+For Each item In JsonObject
+    For Each key In item.Keys
+        On Error Resume Next
+        headers.Add key, key
+        On Error GoTo 0
+    Next key
+Next item
+
+' Write headers to Excel sheet
+For Each header In headers
+    ws.Cells(row, col).Value = header
+    col = col + 1
+Next header
+
+' Reset column counter and increment row counter
+col = 1
+row = row + 1
+
+' Write data to Excel sheet
+For Each item In JsonObject
+    For Each header In headers
+        If item.Exists(header) Then
+            ws.Cells(row, col).Value = item(header)
+        Else
+            ws.Cells(row, col).Value = ""
+        End If
+        col = col + 1
+    Next header
+    col = 1
+    row = row + 1
+Next item
+
+' Autofit columns for better visibility
+ws.Columns.AutoFit
+
+MsgBox "JSON data has been imported to Excel."
+
