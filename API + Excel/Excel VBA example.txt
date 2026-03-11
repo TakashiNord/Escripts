@@ -1,3 +1,63 @@
+﻿
+
+id 5215909
+Д_Pэр ПС 110кВ Качуг
+  Мгновенные на границе 1 сек (30 дней)  GLT_ANALOG_OPT_CUR1S
+  Усред на границе 5 мин (5 лет)         GLT_ANALOG_OPT_AVG5MIN
+
+
+(К-0 - 5215987, К-1 - 5215989, К-2 - 5216007, ... К-23 - 5216005 )
+
+
+
+JSON conversion and parsing for VBA (Windows and Mac Excel, Access, and other Office applications).
+It grew out of the excellent project [vba-json](https://code.google.com/p/vba-json/),
+with additions and improvements made to resolve bugs and improve performance (as part of [VBA-Web](https://github.com/VBA-tools/VBA-Web)).
+
+Tested in Windows Excel 2013 and Excel for Mac 2011, but should apply to 2007+.
+
+- For Windows-only support, include a reference to "Microsoft Scripting Runtime"
+- For Mac and Windows support, include [VBA-Dictionary](https://github.com/VBA-tools/VBA-Dictionary)
+
+
+
+
+http://172.12.0.112:8080/rsdu/archives/swagger/index.html
+
+
+
+curl -X GET "http://172.12.0.112:8080/rsdu/archives/api/v1.0/Values?tableId=29&paramId=5215909&typeAlias=GLT_ANALOG_OPT_AVG5MIN&dtBegin=2026-02-17%2000%3A00%3A00&dtEnd=2026-02-17%2023%3A59%3A59" -H  "accept: text/plain" -H  "Authorization: Basic YWRtaW46cGFzc21l"
+
+
+http://172.12.0.112:8080/rsdu/archives/api/v1.0/Values?tableId=29&paramId=5215909&typeAlias=GLT_ANALOG_OPT_AVG5MIN&dtBegin=2026-02-17%2000%3A00%3A00&dtEnd=2026-02-17%2023%3A59%3A59
+
+
+
+[
+  {
+    "time": "2026-02-18T21:05:00Z",
+    "value": 134.6281394958496,
+    "status": 0
+  },
+  {
+    "time": "2026-02-18T21:10:00Z",
+    "value": 133.45178985595703,
+    "status": 0
+  },
+  {
+    "time": "2026-02-18T21:15:00Z",
+    "value": 134.6647720336914,
+    "status": 0
+  },
+
+
+
+
+
+
+
+
+
 
 baseURL = Cells(2, 7).Value
 MAPI_Key = Cells(3, 7).Value
@@ -234,4 +294,210 @@ Next item
 ws.Columns.AutoFit
 
 MsgBox "JSON data has been imported to Excel."
+
+
+
+
+
+Shell(путь, [тип_окна]). 
+learn.microsoft.com
+Аргументы: 
+learn.microsoft.com
+путь — обязательный элемент, Variant (String). Имя программы, которую требуется выполнить, и все требуемые аргументы или параметры командной строки. Может включать в себя каталог или папку и диск.
+тип_окна — необязательный элемент, значение типа Variant (Integer). Определяет тип окна, в котором будет запущена программа. Некоторые значения:
+vbHide — окно скрыто, фокус переходит к скрытому окну (не действует в macOS);
+vbNormalFocus — окно получает фокус и восстанавливает своё исходное положение и размер;
+vbMinimizedFocus — окно отображается в виде значка и получает фокус;
+vbMaximizedFocus — окно разворачивается во весь экран и получает фокус.
+
+
+Dim RetVal  
+RetVal = Shell("C:\WINDOWS\NOTEPAD.EXE", 1)  ' Открыть Notepad  
+``` [6](https://learn.microsoft.com/ru-ru/office/vba/language/reference/user-interface-help/shell-function)  
+
+**Примечание**: если файл exe находится не в папке, которая находится в системном пути, нужно указать полный путь к файлу. [1](https://www.excelforum.com/excel-programming-vba-macros/396096-how-do-i-execute-other-application-exe-from-vba-excel.html)
+
+
+
+Option Explicit
+Dim oShell As Object
+ 
+Private Declare Function ShellExecute& Lib "shell32.dll" _
+Alias "ShellExecuteA" (ByVal hWnd As Long, _
+ByVal lpOperation As String, ByVal lpFile As String, _
+ByVal lpParameters As String, ByVal lpDirectory As String, _
+ByVal nShowCmd As Long)
+ 
+Const SW_SHOWNORMAL = 1
+ 
+Sub Help_Run()
+    Dim sHelpPath As String
+    sHelpPath = "C:Program FilesBalanceBalance.chm"
+    ShellExecute 0&, "open", sHelpPath, _
+                  vbNullString, vbNullString, SW_SHOWNORMAL
+End Sub
+
+
+
+Sub OpenClose()
+    Dim vPID As Variant
+    'Открыть файл
+    vPID = Shell("notepad.exe ""C:\Desktop\VBA\Открой меня.txt""", vbNormalFocus)
+
+    'Закрыть файл
+    Call Shell("TaskKill /F /PID " & CStr(vPID), vbHide)
+End Sub
+
+This works for me (Excel 2013):
+
+Public Sub StartExeWithArgument()
+    Dim strProgramName As String
+    Dim strArgument As String
+
+    strProgramName = "C:\Program Files\Test\foobar.exe"
+    strArgument = "/G"
+
+    Call Shell("""" & strProgramName & """ """ & strArgument & """", vbNormalFocus)
+End Sub
+
+
+
+To open a file using a specific application, use the WshShell.Run methood to run that application and pass the file name as a parameter.
+
+Here's an example that opens the same text file in Notepad, Internet Explorer and Microsoft Word:
+
+strFileName = "c:\myfile.txt"
+Set oShell = CreateObject("WScript.Shell")
+
+oShell.Run "notepad "  & strFileName
+oShell.Run "iexplore " & strFileName
+oShell.Run "winword "  & strFileName
+Note that if the file name includes spaces, you need to enslose it in quotes, like this:
+
+oShell.Run "winword ""c:\my file.txt"""
+
+
+
+
+
+
+
+
+Dim shell As Object
+Set shell = CreateObject("WScript.Shell")
+
+Dim curlCommand As String
+curlCommand = "curl -X GET 'https://api.weatherapi.com/v1/current.json?key=YOUR_API_KEY&q=London'"
+
+Dim response As String
+response = shell.Exec(curlCommand).StdOut.ReadAll()
+
+
+
+
+
+
+
+While WshExec.Status = 0
+ 
+Wend
+Set OutStream = WshExec.StdErr
+Strr = vbNullString
+While Not OutStream.AtEndOfStream
+    Strr = Strr & Trim(OutStream.ReadLine())
+Wend
+Debug.Print Strr
+
+
+Sub PUT_Request()
+
+Dim i As Integer
+Dim j As Integer
+Dim objHTTP As Object
+Dim Json As String
+Dim result As String
+Dim URL As String
+Dim Token As String
+a = Timer
+
+    i = 1
+        Do While Not IsEmpty(Cells(i, 1))
+        i = i + 1
+        Loop
+    i = i - 1
+    'MsgBox i
+
+    For j = 2 To i
+        Json = Range("D" & j)
+        URL = Range("I" & j)
+        Token = Range("H1")
+
+        Set objHTTP = CreateObject("Msxml2.XMLHTTP.6.0")
+            objHTTP.Open "PUT", URL, False
+            objHTTP.setRequestHeader "Content-type", "application/json"
+            objHTTP.setRequestHeader "Accept", "application/json"
+            objHTTP.setRequestHeader "Authorization", "Bearer " + Token
+            objHTTP.Send (Json)
+            result = objHTTP.responseText
+            Range("J" & j).Value = result
+        Set objHTTP = Nothing
+        'Application.Wait (Now + TimeValue("0:00:01"))
+    Next j
+
+MsgBox Timer - a
+
+End Sub
+
+
+
+Private Sub Stick_WB_AB(sKey As String)
+   Const stline As Integer = 6   ' строка начала записи на лист
+   Dim WLine As String
+   WLine = " -o ""#T#\outfile.txt"" -X POST ""https://suppliers-api.wildberries.ru/api/v2/orders/stickers"" -H ""accept: application/json"" -H ""Authorization: " & sKey & """ -H ""Content-Type: application/json"" -d ""{\""orderIds\"":[#D#]}"""
+ 
+   Dim waitOnReturn As Boolean: waitOnReturn = True   ' Wait till end
+   Dim windowStyle As Integer: windowStyle = 0        ' Hide window
+   Dim sCURL As String, i As Long, iLastRow As Long, strS As String, strRun As String, WSH As Object, tStart As Single, errLine As String
+ 
+   With ThisWorkbook.Sheets(shFBS)
+      sCURL = .Cells(4, "C")
+      If sCURL = "" Then
+         MsgBox "Не задано расположение файла cURL.exe", vbCritical + vbOKOnly, "Внимание"
+         Exit Sub
+      End If
+      If Dir(sCURL) = "" Then
+         MsgBox "Не найден файл cURL.exe", vbCritical + vbOKOnly, "Внимание"
+         Exit Sub
+      End If
+ 
+      iLastRow = .Cells.Find("*", SearchOrder:=xlByRows, SearchDirection:=xlPrevious).Row
+      If iLastRow < stline Then Exit Sub  ' No data to process
+ 
+      strS = ""
+      For i = stline To iLastRow
+         strS = strS & "," & .Cells(i, "B")  ' Collect Order IDs
+      Next
+      strS = Mid(strS, 2)
+ 
+      strRun = Chr(34) & sCURL & Chr(34) & Replace(Replace(WLine, "#T#", ThisWorkbook.Path), "#D#", strS)
+ 
+      Set WSH = VBA.CreateObject("WScript.Shell")
+ 
+      Application.StatusBar = "Соединение с сайтом..."
+      tStart = Timer
+      WSH.Run strRun, windowStyle, waitOnReturn
+      Set WSH = Nothing
+      Application.StatusBar = "Время " & Timer - tStart
+ 
+      errLine = "{""error"":false,""errorText"":"""",""additionalErrors"":null"
+      Call Accelerate_Excel(True)
+      If ParseJSON_Stickers(ThisWorkbook.Path & "\outfile.txt", False, shPage, errLine) Then
+         Call PutStick(shPage, shFBS, stline)
+         ThisWorkbook.Sheets(shPage).Delete  ' delete temp page
+      End If
+      Kill ThisWorkbook.Path & "\outfile.txt"
+      Call Accelerate_Excel(False)
+      Application.StatusBar = ""
+   End With
+End Sub
 
