@@ -1,0 +1,29 @@
+Function GetUtcNow() As Date
+    Dim dt As Object
+    Set dt = CreateObject("WbemScripting.SWbemDateTime")
+    dt.SetVarDate Now ' Sets local time
+    GetUtcNow = dt.GetVarDate(False) ' Returns as UTC (False = UTC, True = Local)
+End Function
+
+
+Function GetUtcNow() As Date
+    Dim dt As Object
+    Set dt = CreateObject("WbemScripting.SWbemDateTime")
+    
+    ' Set current local time
+    dt.SetVarDate Now
+    
+    ' Get the UTC equivalent
+    ' The parameter False tells the object to return UTC
+    GetUtcNow = dt.GetVarDate(False)
+End Function
+
+Sub TestUTC()
+    Debug.Print "Local: " & Now
+    Debug.Print "UTC:   " & GetUtcNow()
+End Sub
+
+
+Example for EST (UTC-5): UtcDate = LocalDate + TimeSerial(5, 0, 0)
+Example for CEST (UTC+2): UtcDate = LocalDate - TimeSerial(2, 0, 0) 
+
