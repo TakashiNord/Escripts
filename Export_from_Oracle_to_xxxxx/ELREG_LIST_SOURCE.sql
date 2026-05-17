@@ -244,7 +244,7 @@ end;
 
 
 begin
-    dbms_output.ENABLE (400000);
+    dbms_output.ENABLE (null);
     --  -- and ID_TYPE in (select ID from SYS_OTYP where like '%OTYP_BUS_NETWORK%' )
     FOR rec in ( Select ID,ID_PARENT,ID_TYPE,NAME,ALIAS FROM OBJ_TREE where ID=3 )
     LOOP
