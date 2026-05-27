@@ -17,7 +17,7 @@ declare
 begin
     dbms_output.ENABLE (null);
     
-    dbms_output.put_line( ';' || 'Прибор' || ';' || 'id' || ';' || 'Name' || ';' || 'cvalif' || ';' || 'type' || ';' || 'ATTR_NAME'  || ';' || 'source_name' || ';' ||  'id source' || ';' || 'id name' || ';' );
+    dbms_output.put_line( '; Прибор ; id ; Name ; type ; cvalif  ; param_name  ;  source ;  id source  ;  id source name ;  ;  ; ');
 
     --
     FOR rec in (
@@ -39,7 +39,7 @@ begin
     )
     LOOP
       -- dbms_output.put_line(' ');
-      -- dbms_output.put_line(' #'||rec.id || ' '||rec.name|| ' '||rec.ip_addr|| ' '||rec.IP_PORT|| ' ');
+      -- dbms_output.put_line(' #'||rec.id || ' '||rec.name|| ' '||rec.ip_addr|| ' '||rec.IP_PORT|| ';;;;;;;;;;;;;;;;;;;');
       -- dbms_output.put_line(' ');
 
       FOR recdp in (
@@ -51,7 +51,7 @@ begin
                 ON ch.ID = v.id_cur_channel_src AND ch.id_ownlst = v.id_param
                 JOIN da_source src ON src.ID = ch.id_source
                 )
-          SELECT da.ID, da.id_node, da.NAME, dd.cvalif, dd.name, dd.ATTR_NAME,
+          SELECT da.ID, da.id_node, da.NAME, dd.cvalif, dd.name as ddnm, dd.ATTR_NAME,
           (CASE
               WHEN REGEXP_LIKE (gt.define_alias, 'ANALOG')
                  THEN 'TI'
@@ -93,7 +93,9 @@ begin
 
         end if ;
 
-        dbms_output.put_line( ';' || rec.name || ';' || recdp.id || ';' || recdp.name || ';' || recdp.cvalif || ';' || recdp.gtype_name || ';' || recdp.name  || ';' || recdp.source_name || ';' ||  vStr || ';' );
+        -- dbms_output.put_line( '; Прибор ; id ; Name ; type ; cvalif  ; param_name  ;  source ;  id source  ;  id source name ;  ;  ;');
+
+        dbms_output.put_line( ';' || rec.name || ';' || recdp.id || ';' || recdp.name || ';' || recdp.gtype_name || ';' || recdp.cvalif || ';' || recdp.ddnm || ';' || recdp.source_name || ';' ||  vStr || ';' );
 
 
         END LOOP;
